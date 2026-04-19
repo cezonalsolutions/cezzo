@@ -1,0 +1,8015 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CEZOO</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Spectral+SC:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  overflow-y:auto; 
+  background:#ffffff;
+  font-family:'Outfit',sans-serif;
+  color:#fff;
+}
+html, body{
+  touch-action: manipulation;   /* 🔥 stops double tap zoom */
+}
+.mainText{
+  animation:fadeUp 0.6s ease;
+}
+
+.subText{
+  animation:fade 1s ease;
+}
+/* SPLASH (UNCHANGED) */
+#splash{
+  position:fixed;
+  width:100%;
+  height:100vh;
+
+  background:#90caf9;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  overflow:hidden;
+}
+/* TAGLINE */
+.tagline{
+  font-family:'Outfit', sans-serif;
+  font-size:15px;
+  font-weight:500;
+  color:#333;
+
+  margin-top:6px;
+}
+.miniRow{
+  display:flex;
+  align-items:center;
+  padding:10px;
+  border-bottom:1px solid #eee;
+
+  position:relative;   /* 🔥 THIS IS THE REAL FIX */
+}
+/* HIGHLIGHT "10 min" */
+.tagline span{
+  font-weight:700;
+  font-size:18px;
+
+  background:linear-gradient(135deg,#ff6a00,#ffb347);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  margin-right:4px;
+}
+/* soft light glow */
+#splash::before{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+
+  background:radial-gradient(circle,rgba(255,255,255,0.5),transparent);
+  filter:blur(70px);
+
+  top:20%;
+  left:50%;
+  transform:translateX(-50%);
+}
+.sideHeading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0a50f3;
+  margin-bottom: 10px;
+  margin-left: 10px; /* move right */
+}
+/* LOGO */
+.logo{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+
+  font-size:52px;
+  font-weight:700;
+  font-family:'Poppins', sans-serif;
+  line-height:1;
+
+  opacity:0;
+  transform:scale(0.9);
+  animation:logoEntry 0.8s ease forwards;
+}
+
+.logo span{
+  display:inline-block;
+}
+
+/* 🔵 C */
+.logo .c{
+  background:linear-gradient(135deg,#42a5f5,#1e88e5);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* 🟢 e */
+.logo .e{
+  background:linear-gradient(135deg,#66bb6a,#2e7d32);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* 🟠 z */
+.logo .z{
+  background:linear-gradient(135deg,#ffb74d,#ef6c00);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* 🟠 first o */
+.logo .o{
+  background:linear-gradient(135deg,#ffa726,#f4511e);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* 🔥 LAST O (SPECIAL) */
+.logo .o2{
+  background:linear-gradient(135deg,#7c4dff,#00e5ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:colorShift 3s ease infinite;
+}
+
+/* ENTRY */
+@keyframes logoEntry{
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* FLOAT (SOFT) */
+.logo span{
+  animation:float 3s ease-in-out infinite;
+}
+
+.logo span:nth-child(2){animation-delay:0.1s;}
+.logo span:nth-child(3){animation-delay:0.2s;}
+.logo span:nth-child(4){animation-delay:0.3s;}
+.logo span:nth-child(5){animation-delay:0.4s;}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-4px);} /* softer */
+}
+
+/* 🔥 GRADIENT SHIFT FOR LAST O */
+@keyframes colorShift{
+  0%{filter:hue-rotate(0deg);}
+  100%{filter:hue-rotate(360deg);}
+}
+/* logo splahs */
+
+.tagline{
+  margin-top:12px;
+  font-family:'Inter';
+  font-size:15px;
+  color:#aaa;
+  opacity:0;
+  animation:fade 1s forwards;
+  animation-delay:0.5s;
+}
+
+.tagline span{color:#fff;font-weight:600;}
+
+.loader{
+  position:absolute;bottom:70px;width:140px;height:2px;background:#222;overflow:hidden;
+}
+.loader::after{
+  content:"";position:absolute;width:40%;height:100%;background:#fff;
+  animation:loading 1.2s infinite;
+}
+
+#main{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+
+  background:#000;   /* ✅ BLACK */
+  color:#fff;        /* ✅ WHITE TEXT */
+}
+
+/* 🔍 */
+.searchBox{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:12px;
+}
+.searchIcon{
+  position:relative;   /* ❌ remove absolute */
+  top:auto;
+  left:auto;
+
+  font-size:45px;
+
+  transform:none;      /* ❌ remove translate */
+
+  animation:searchCircle 2.5s infinite linear;
+}
+
+/* TEXT */
+.detectText{display:flex;flex-direction:column;gap:4px;align-items:center}
+.mainText{font-size:15px;font-weight:500}
+.subText{font-size:12px;color:#777}
+
+#home{
+  display:none;
+ min-height:100vh;
+  padding:15px;
+  background:#ffffff;   /* ✅ white background */
+  color:#111;           /* ✅ dark text */
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.location{
+  max-width:70%;
+}
+.city{
+  font-size:18px;
+  font-weight:600;
+  color:#111;
+}
+
+.address{
+  font-size:12px;
+  color:#666;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.profile{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  overflow:hidden;        /* keeps image inside circle */
+}
+
+.profile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;       /* prevents stretching */
+}
+
+/* SEARCH BAR */
+.searchBar{
+  margin-top:15px;
+  display:flex;
+  align-items:center;
+   background:#f1f1f1; 
+  border-radius:10px;
+  padding:10px;
+}
+
+.searchBar input{
+  flex:1;
+  background:none;
+  border:none;
+  color:#111;
+  outline:none;
+  font-size:12px; 
+}
+input, textarea{
+  font-size:12px !important;
+}
+.searchBar span{
+  font-size:18px;
+}
+
+/* ANIMATIONS */
+@keyframes searchCircle{
+  0%{transform:translate(-50%,-50%) translate(0,0)}
+  25%{transform:translate(-50%,-50%) translate(15px,0)}
+  50%{transform:translate(-50%,-50%) translate(0,15px)}
+  75%{transform:translate(-50%,-50%) translate(-15px,0)}
+  100%{transform:translate(-50%,-50%) translate(0,0)}
+}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fade{to{opacity:1}}
+@keyframes loading{0%{left:-40%}100%{left:100%}}
+
+/* CATEGORY ROW */
+.categories{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  gap:7px;                /* slightly tighter */
+
+  padding:14px 8px 14px 0; /* ✅ left gap removed */
+
+  max-width:100%;
+
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+/* ITEM */
+.catItem{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-width:60px;
+  flex-shrink:0;
+  cursor:pointer;
+}
+.catItem{
+  transition:all 0.25s ease;
+}
+
+/* active zoom + highlight */
+.catItem.active{
+  transform:scale(1.15);
+}
+
+/* make icon pop */
+.catItem.active .catIcon img{
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+}
+
+/* text highlight */
+.catItem.active .catText{
+  font-weight:600;
+  color:#000;
+}
+/* ICON (NO BACKGROUND) */
+.catIcon{
+  width:30px;              /* slightly bigger for visibility */
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* IMAGE */
+.catIcon img{
+  width:96%;
+  height:96%;
+  object-fit:contain;
+}
+
+/* TEXT */
+.catText{
+  font-size:11px;
+  margin-top:5px;
+  color:#444;
+  text-align:center;
+  white-space:nowrap;
+}
+#topSection{
+  background:#fff;
+  transition:0.4s;
+
+  margin: -15px;     /* ✅ remove side gaps */
+  padding: 15px;     /* keep spacing inside */
+
+  padding-bottom:10px;
+
+  border-radius:0;   /* ❌ remove rounded corners */
+}
+#success{
+  animation:slideDown 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+@keyframes slideDown{
+  0%{
+    opacity:0;
+    transform:translateY(-60px) scale(0.95);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+#contentSection{
+  display:none;
+  position:relative;
+  overflow:hidden;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  /* ✅ REDUCE HEIGHT */
+  padding:10px 15px;   /* was 20px → now smaller */
+
+  min-height:100px;    /* control height */
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background: linear-gradient(
+    to bottom,
+    #E3F2FD 0%,
+    #E3F2FD 60%,
+    #ffffff 100%
+  );
+}
+
+/* LEFT TEXT */
+.contentLeft{
+  width:55%;
+}
+
+.contentLeft h2{
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.contentLeft p{
+  font-size:12px;
+  color:#444;
+}
+
+/* RIGHT IMAGE */
+.contentRight{
+  width:40%;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.contentRight img{
+  width:100px;
+  height:auto;
+}
+.leaves{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:2;
+}
+/* keep text above */
+.contentLeft,
+.contentRight{
+  position:relative;
+  z-index:3;
+}
+
+.leaves span{
+  position:absolute;
+  display:block;
+
+  width:16px;
+  height:16px;
+
+  background:
+    radial-gradient(circle, #FFD1DC 30%, transparent 31%),
+    radial-gradient(circle, #FF80AB 30%, transparent 31%),
+    radial-gradient(circle, #FF80AB 30%, transparent 31%),
+    radial-gradient(circle, #FF80AB 30%, transparent 31%),
+    radial-gradient(circle, #FF80AB 30%, transparent 31%);
+
+  background-size:50% 50%;
+  background-position:
+    50% 50%,
+    0% 50%,
+    100% 50%,
+    50% 0%,
+    50% 100%;
+
+  background-repeat:no-repeat;
+
+  /* ✅ KEY FIX */
+  animation: fall linear infinite;
+}
+.leaves span:nth-child(odd){
+  filter:hue-rotate(20deg);
+}
+
+.leaves span:nth-child(even){
+  filter:hue-rotate(-20deg);
+}
+.leaves span:nth-child(1){ left:5%;  animation-duration:6s; animation-delay:-1s; }
+.leaves span:nth-child(2){ left:15%; animation-duration:8s; animation-delay:-2s; }
+.leaves span:nth-child(3){ left:25%; animation-duration:7s; animation-delay:-3s; }
+.leaves span:nth-child(4){ left:35%; animation-duration:9s; animation-delay:-4s; }
+.leaves span:nth-child(5){ left:45%; animation-duration:6s; animation-delay:-2s; }
+.leaves span:nth-child(6){ left:55%; animation-duration:10s;animation-delay:-5s; }
+.leaves span:nth-child(7){ left:65%; animation-duration:7s; animation-delay:-3s; }
+.leaves span:nth-child(8){ left:75%; animation-duration:9s; animation-delay:-4s; }
+.leaves span:nth-child(9){ left:85%; animation-duration:6s; animation-delay:-2s; }
+.leaves span:nth-child(10){ left:95%;animation-duration:8s; animation-delay:-3s; }
+@keyframes fall{
+  0%{
+    transform:translateY(-80px) translateX(0px) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(600px) translateX(40px) rotate(360deg);
+    opacity:0;
+  }
+}
+/* side sway (natural wind) */
+@keyframes sway{
+  0%{ margin-left:0px; }
+  50%{ margin-left:25px; }
+  100%{ margin-left:0px; }
+}
+#freshSection{
+  display:none;
+  position:relative;
+  overflow:hidden;
+
+  height:80px;   /* 🔽 reduced from 120px */
+
+  background: linear-gradient(
+    to bottom,
+    #D4F8D4 0%,
+    #EAFCEA 50%,
+    #ffffff 100%
+  );
+}
+
+.fruitRain{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+#freshSection{
+  margin-left:-15px;
+  margin-right:-15px;
+  padding:0 15px;   /* keep inner spacing */
+}
+
+/* fruit style */
+.fruit{
+  position:absolute;
+  top:-40px;
+  font-size:20px;
+  animation:fruitFall linear infinite;
+}
+
+/* more spread */
+.fruit:nth-child(1){ left:5%;  animation-duration:2.8s; }
+.fruit:nth-child(2){ left:10%; animation-duration:3.2s; }
+.fruit:nth-child(3){ left:15%; animation-duration:2.6s; }
+.fruit:nth-child(4){ left:20%; animation-duration:3s; }
+.fruit:nth-child(5){ left:30%; animation-duration:2.9s; }
+.fruit:nth-child(6){ left:40%; animation-duration:3.3s; }
+.fruit:nth-child(7){ left:50%; animation-duration:2.7s; }
+.fruit:nth-child(8){ left:60%; animation-duration:3.1s; }
+.fruit:nth-child(9){ left:70%; animation-duration:2.8s; }
+.fruit:nth-child(10){ left:80%; animation-duration:3.4s; }
+.fruit:nth-child(11){ left:90%; animation-duration:3s; }
+.fruit:nth-child(12){ left:50%; animation-duration:2.9s; }
+
+@keyframes fruitFall{
+  0%{
+    transform:translateY(-40px) rotate(0deg);
+    opacity:0;
+  }
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{
+    transform:translateY(200px) rotate(180deg);
+    opacity:0;
+  }
+}
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  pointer-events:none;
+  animation:sparkleFade 0.6s ease-out forwards;
+}
+
+@keyframes sparkleFade{
+  0%{
+    transform:scale(0.5);
+    opacity:1;
+  }
+  100%{
+    transform:scale(1.5);
+    opacity:0;
+  }
+}
+#offerSection{
+  display:none;
+  height:100px;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+  overflow:hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #FFE5CC,
+    #ffffff
+  );
+}
+
+/* 🎯 MAIN TEXT (blast effect) */
+.offerText{
+  font-size:22px;
+  font-weight:700;
+  text-align:center;
+  color:#ff6a00;
+
+  text-shadow:
+    1px 1px 0 #fff,
+    2px 2px 0 #ffb366,
+    3px 3px 0 #ff944d,
+    4px 4px 0 #ff751a;
+
+  animation:blast 0.6s ease-out;
+}
+
+.offerText span{
+  font-size:26px;
+  color:#ff3d00;
+}
+
+/* 💥 blast animation */
+@keyframes blast{
+  0%{
+    transform:scale(0.5);
+    opacity:0;
+  }
+  70%{
+    transform:scale(1.2);
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* 🎀 RIBBON BASE */
+.ribbon{
+  position:absolute;
+  top:20px;
+
+  padding:6px 14px;
+  font-size:12px;
+  font-weight:600;
+  color:white;
+
+  background:#ff3d00;
+
+  border-radius:4px;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* LEFT ribbon */
+.ribbon.left{
+  left:-120px;
+  transform:rotate(-20deg);
+  animation:slideLeft 0.8s ease forwards;
+}
+
+/* RIGHT ribbon */
+.ribbon.right{
+  right:-120px;
+  transform:rotate(20deg);
+  animation:slideRight 0.8s ease forwards;
+}
+
+/* slide animations */
+@keyframes slideLeft{
+  to{
+    left:10px;
+  }
+}
+
+@keyframes slideRight{
+  to{
+    right:10px;
+  }
+}
+.confettiContainer{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* confetti piece */
+.confetti{
+  position:absolute;
+  width:6px;
+  height:10px;
+
+  opacity:0.9;
+
+  animation:confettiFall linear forwards;
+}
+
+/* falling animation */
+@keyframes confettiFall{
+  0%{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(120px) rotate(360deg);
+    opacity:0;
+  }
+}
+
+
+#coolSection{
+  display:none;
+  height:100px;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  position:relative;
+  overflow:hidden;
+
+ background: linear-gradient(
+  to bottom,
+  #CCF2F7 0%,
+  #EAFBFD 60%,
+  #ffffff 100%
+);
+}
+
+.cloud{
+  position:absolute;
+  top:22px;
+
+  width:70px;
+  height:35px;
+
+  background:#fff;
+  border-radius:40px;
+
+  opacity:0.95;
+
+  box-shadow:
+    0 6px 12px rgba(0,0,0,0.08),
+    0 0 15px rgba(255,255,255,0.6);
+}
+
+/* make real fluffy cloud */
+.cloud::before,
+.cloud::after{
+  content:"";
+  position:absolute;
+  background:#fff;
+  border-radius:50%;
+}
+
+/* left big puff */
+.cloud::before{
+  width:35px;
+  height:35px;
+  top:-12px;
+  left:8px;
+}
+
+/* right big puff */
+.cloud::after{
+  width:40px;
+  height:40px;
+  top:-16px;
+  right:8px;
+}
+.c1{ left:0%;   }
+.c2{ left:14%;  }
+.c3{ left:28%;  }
+.c4{ left:42%;  }
+.c5{ left:56%;  }
+.c6{ left:70%;  }
+.c7{ left:84%;  }
+/* 🌧️ RAIN */
+.rain{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+/* drops */
+.drop{
+  position:absolute;
+  width:2px;
+  height:10px;
+  background:#4fc3f7;
+  opacity:0.7;
+
+  top:35px; /* 👈 start BELOW clouds */
+
+  animation:rainFall linear infinite;
+}
+
+@keyframes rainFall{
+  0%{
+    transform:translateY(0);
+    opacity:0;
+  }
+  20%{opacity:1;}
+  100%{
+    transform:translateY(90px);
+    opacity:0;
+  }
+}
+.lightning{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:white;
+  opacity:0;
+  pointer-events:none;
+}
+#skinSection{
+  display:none;
+  height:100px;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  position:relative;
+  overflow:hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #FFD6E7,
+    #fff
+  );
+}
+
+/* glow particles */
+.glow{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.8);
+
+  box-shadow:0 0 10px rgba(255,255,255,0.8);
+
+  animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(120px) scale(0.5);
+    opacity:0;
+  }
+  20%{opacity:1;}
+  100%{
+    transform:translateY(-20px) scale(1.2);
+    opacity:0;
+  }
+}
+.banners{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  pointer-events:none;
+}
+
+.bannerWrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  transform:translateY(-80px);
+  animation:drop 0.8s ease forwards, swing 3s ease-in-out infinite;
+  transform-origin:top center; /* 👈 VERY IMPORTANT */
+}
+
+/* stick (rod) */
+.stick{
+  width:2px;
+  height:25px;
+  background:#999;
+}
+
+/* board */
+.board{
+  margin-top:2px;
+
+  padding:4px 6px;
+
+  background:linear-gradient(
+    to bottom,
+    #ff9ecb,
+    #ff6fa5
+  );
+
+  color:#fff;
+  font-size:10px;
+  font-weight:600;
+
+  border-radius:6px;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* drop animation */
+@keyframes drop{
+  0%{
+    transform:translateY(-80px);
+    opacity:0;
+  }
+  100%{
+    transform:translateY(10px);
+    opacity:1;
+  }
+}
+.bannerWrap:nth-child(1){ animation-delay:0.1s, 0s; }
+.bannerWrap:nth-child(2){ animation-delay:0.2s, 0.5s; }
+.bannerWrap:nth-child(3){ animation-delay:0.3s, 1s; }
+.bannerWrap:nth-child(4){ animation-delay:0.4s, 1.5s; }
+@keyframes swing{
+  0%{ transform:rotate(0deg); }
+  25%{ transform:rotate(3deg); }
+  50%{ transform:rotate(0deg); }
+  75%{ transform:rotate(-3deg); }
+  100%{ transform:rotate(0deg); }
+}
+#homeSection{
+  display:none;
+  height:100px;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  position:relative;
+  overflow:hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #E6DCD5,
+    #ffffff
+  );
+}
+
+/* container */
+.homeFloat{
+  position:absolute;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+/* icons */
+.homeFloat span{
+  position:absolute;
+  font-size:34px;   /* 🔼 bigger */
+
+  animation:floatHome linear infinite;
+  animation-delay:0s !important;
+}
+.homeFloat span:nth-child(odd){
+  font-size:28px;
+}
+
+.homeFloat span:nth-child(even){
+  font-size:24px;
+}
+/* positions + speed */
+.homeFloat span:nth-child(1){ left:10%; animation-duration:6s; }
+.homeFloat span:nth-child(2){ left:20%; animation-duration:7s; }
+.homeFloat span:nth-child(3){ left:30%; animation-duration:5.5s; }
+.homeFloat span:nth-child(4){ left:40%; animation-duration:6.5s; }
+.homeFloat span:nth-child(5){ left:50%; animation-duration:5.8s; }
+.homeFloat span:nth-child(6){ left:60%; animation-duration:7.2s; }
+.homeFloat span:nth-child(7){ left:70%; animation-duration:6.3s; }
+.homeFloat span:nth-child(8){ left:85%; animation-duration:5.9s; }
+.homeFloat span:nth-child(9){ left:12%; animation-duration:6.2s; }
+.homeFloat span:nth-child(10){ left:22%; animation-duration:7s; }
+.homeFloat span:nth-child(11){ left:32%; animation-duration:5.7s; }
+.homeFloat span:nth-child(12){ left:42%; animation-duration:6.8s; }
+.homeFloat span:nth-child(13){ left:52%; animation-duration:5.9s; }
+.homeFloat span:nth-child(14){ left:62%; animation-duration:7.3s; }
+.homeFloat span:nth-child(15){ left:75%; animation-duration:6.4s; }
+.homeFloat span:nth-child(16){ left:88%; animation-duration:5.8s; }
+/* floating animation */
+@keyframes floatHome{
+  0%{
+    transform:translateY(40px);   /* 👈 already visible */
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-20px);
+    opacity:0;
+  }
+}
+#chocoSection{
+  display:none;
+  height:100px;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  position:relative;
+  overflow:hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #EAD6F5,
+    #ffffff
+  );
+}
+
+/* container */
+.balloonContainer{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
+/* balloon */
+/* 🎈 3D + glow */
+.balloonContainer span{
+  position:absolute;
+
+  width:26px;
+  height:32px;
+
+  border-radius:50%;
+
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  top:40px;
+
+  /* 🎨 3D gradient */
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffffaa,
+    currentColor 40%,
+    rgba(0,0,0,0.2) 100%
+  );
+
+  /* ✨ glow aura */
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.2),
+    0 0 10px rgba(255,255,255,0.6),
+    0 0 20px currentColor;
+
+  animation:
+    dropBalloon 0.6s ease-out forwards,
+    floatBalloon 3s ease-in-out infinite 0.6s;
+}
+
+/* 🎨 colors + positions */
+.balloonContainer span:nth-child(1){ background:#ff6b6b; left:5%; }
+.balloonContainer span:nth-child(2){ background:#feca57; left:12%; }
+.balloonContainer span:nth-child(3){ background:#48dbfb; left:20%; }
+.balloonContainer span:nth-child(4){ background:#1dd1a1; left:28%; }
+.balloonContainer span:nth-child(5){ background:#5f27cd; left:36%; }
+.balloonContainer span:nth-child(6){ background:#ff9ff3; left:44%; }
+.balloonContainer span:nth-child(7){ background:#00d2d3; left:52%; }
+.balloonContainer span:nth-child(8){ background:#ff9f43; left:60%; }
+.balloonContainer span:nth-child(9){ background:#10ac84; left:70%; }
+.balloonContainer span:nth-child(10){ background:#ee5253; left:82%; }
+
+/* 🪢 curved string */
+/* ✨ shine highlight */
+.balloonContainer span::before{
+  content:"";
+  position:absolute;
+
+  top:6px;
+  left:6px;
+
+  width:8px;
+  height:10px;
+
+  background:rgba(255,255,255,0.7);
+  border-radius:50%;
+
+  filter:blur(1px);
+}
+
+/* ⬇️ drop ONLY vertical */
+@keyframes dropBalloon{
+  0%{
+    transform:translateY(-80px);
+    opacity:0;
+  }
+  100%{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* ↔️ float ONLY horizontal */
+@keyframes floatBalloon{
+  0%{
+    transform:translateX(0px);
+  }
+  50%{
+    transform:translateX(6px);
+  }
+  100%{
+    transform:translateX(-6px);
+  }
+}
+/* section */
+#grocerySection{
+  display:none;
+  height:100px;
+
+  margin-left:-15px;
+  margin-right:-15px;
+
+  position:relative;
+  overflow:hidden;
+
+  background: linear-gradient(
+    to bottom,
+    #D6DBF5,
+    #ffffff
+  );
+}
+
+.gBuy{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
+  font-size:28px;
+  font-weight:900;
+
+  color:#ff0000;
+
+  /* 🔥 3D + glow */
+  text-shadow:
+    1px 1px 0 #fff,
+    2px 2px 0 #ff9999,
+    3px 3px 0 #ff6666,
+    4px 4px 0 #ff3333,
+    5px 5px 8px rgba(0,0,0,0.3),
+    0 0 10px rgba(255,0,0,0.6),
+    0 0 20px rgba(255,0,0,0.5),
+    0 0 30px rgba(255,0,0,0.4);
+
+  animation:
+    bounceBuy 1s ease infinite,
+    glowPulse 1.5s ease-in-out infinite;
+}
+/* 🎯 bounce */
+@keyframes bounceBuy{
+  0%,100%{
+    transform:translate(-50%,-50%);
+  }
+  50%{
+    transform:translate(-50%,-60%);
+  }
+}
+
+/* 💥 glow pulse */
+@keyframes glowPulse{
+  0%,100%{
+    text-shadow:
+      1px 1px 0 #fff,
+      2px 2px 0 #ff9999,
+      3px 3px 0 #ff6666,
+      4px 4px 0 #ff3333,
+      5px 5px 8px rgba(0,0,0,0.3),
+      0 0 10px rgba(255,0,0,0.6),
+      0 0 20px rgba(255,0,0,0.5);
+  }
+  50%{
+    text-shadow:
+      1px 1px 0 #fff,
+      2px 2px 0 #ff9999,
+      3px 3px 0 #ff6666,
+      4px 4px 0 #ff3333,
+      5px 5px 8px rgba(0,0,0,0.3),
+      0 0 20px rgba(255,0,0,0.9),
+      0 0 40px rgba(255,0,0,0.7);
+  }
+}
+/* 🪧 STICK BANNER WRAP */
+.gStick{
+  position:absolute;
+  top:0;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  animation:dropStick 0.6s ease forwards,
+             swingStick 3s ease-in-out infinite 0.6s;
+
+  transform-origin:top center;
+}
+
+/* positions */
+.gLeft{ left:15px; }
+.gRight{ right:15px; }
+
+/* 🪵 rod */
+.gRod{
+  width:2px;
+  height:25px;
+  background:#777;
+}
+
+/* 📦 board */
+.gBoard{
+  margin-top:3px;
+
+  padding:4px 8px;
+
+  background:linear-gradient(
+    to bottom,
+    #ff9f43,
+    #ff6f00
+  );
+
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+
+  border-radius:6px;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ⬇️ drop */
+@keyframes dropStick{
+  0%{
+    transform:translateY(-60px);
+    opacity:0;
+  }
+  100%{
+    transform:translateY(10px);
+    opacity:1;
+  }
+}
+
+/* 🌬️ swing */
+@keyframes swingStick{
+  0%{ transform:rotate(0deg); }
+  50%{ transform:rotate(3deg); }
+  100%{ transform:rotate(0deg); }
+}
+/* 🔻 BOTTOM NAV */
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:65px;
+
+  background:#fff;
+  border-top:1px solid #eee;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+
+  z-index:9999;
+}
+
+/* 🔹 each item */
+.navItem{
+  flex:1; /* equal spacing */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
+  color:#777;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+/* 🔹 icon image */
+.navItem img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+}
+
+/* video item special */
+.videoNav{
+  justify-content:center;
+}
+
+/* video icon */
+.videoNav video{
+  width:46px;
+  height:30px;
+  object-fit:cover;
+  border-radius:6px;
+  display:block;
+}
+
+/* OPTIONAL: make it slightly bigger than others */
+.videoNav{
+  transform:translateY(-2px);
+}
+/* 🔹 text */
+.navItem p{
+  margin-top:4px;
+  font-size:11px;
+}
+
+/* 🔹 active state */
+.navItem.active{
+  color:#000;
+  font-weight:600;
+}
+
+/* 🔹 press effect */
+.navItem:active{
+  transform:scale(0.9);
+}
+/* hide animation */
+.bottomNav.hide{
+  transform:translateY(100%);
+}
+
+/* smooth movement */
+.bottomNav{
+  transition:transform 0.3s ease;
+}
+
+/* productcare */
+/* GRID */
+/* HORIZONTAL SCROLL */
+.productGrid{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  padding:12px 10px;
+  scroll-behavior:smooth;
+}
+
+.productGrid::-webkit-scrollbar{
+  display:none;
+}
+/* REMOVE CARD LOOK */
+/* CARD */
+.productCard{
+  width:80px;         /* 🔥 reduced from 110 */
+  min-width:95px;
+  max-width:95px;
+  flex-shrink:0;
+}
+
+#productSection{
+  background:transparent !important;
+}
+
+.productGrid{
+  background:transparent !important;
+}
+
+.imgWrap{
+  position:relative;
+  background:#ffffff;
+  border-radius:12px;
+  overflow:hidden;
+
+  height:80px;              /* ✅ FIXED CONTAINER HEIGHT */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.imgWrap img{
+  width:70px;               /* ✅ FIXED IMAGE SIZE */
+  height:70px;
+  object-fit:contain;       /* keep full image visible */
+}
+
+.addBtn{
+  position:absolute;
+  top:4px;
+  right:4px;
+
+  width:24px;
+  height:24px;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+
+  font-size:18px;     /* 🔥 slightly bigger */
+  line-height:1;      /* ✅ fix vertical shift */
+  padding:0;          /* ✅ remove any default spacing */
+}
+
+/* TEXT */
+.pName{
+  font-size:12px;
+  margin-top:6px;
+  line-height:1.2;
+  font-weight:600;
+}
+
+/* QTY */
+.pQty{
+  font-size:10px;
+  padding:2px 6px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  margin-top:4px;
+  display:inline-block;
+}
+
+/* PRICE */
+.pPrice{
+  font-size:13px;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.pPrice span{
+  font-size:10px;
+  color:#999;
+  margin-left:4px;
+
+  text-decoration: line-through;   /* ✅ ADD THIS */
+}
+/* POPUP FULL SCREEN */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#fff;
+
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+
+  z-index:99999;
+  color:#111;
+
+  /* 🔥 animation base */
+  opacity:0;
+  transform:translateY(40px) scale(0.96);
+  transition:all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  pointer-events:none;
+}
+
+.popup.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
+.imageSlider{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  position:relative;
+}
+
+.imageSlider img{
+  width:100%;
+  height:260px;
+  object-fit:contain;      /* 🔥 full fill */
+  flex-shrink:0;
+  scroll-snap-align:start;
+  border-radius:0 0 16px 16px; 
+}
+.topIcons{
+  position:absolute;
+  top:10px;
+  left:10px;
+  z-index:20;
+}
+
+.iconBtn{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+
+  background:linear-gradient(145deg,#2a2a2a,#000);
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    2px 2px 6px rgba(0,0,0,0.6),
+    -2px -2px 6px rgba(255,255,255,0.1);
+
+  backdrop-filter:blur(4px);
+}
+
+/* ICON SIZE FIX */
+.iconBtn i{
+  font-size:16px;
+}
+
+
+.dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+}
+
+.dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#ccc;
+}
+
+.dot.active{
+  background:#000;
+}
+
+/* PRODUCT NAME */
+.popupContent h2{
+  font-size:18px;
+  font-weight:700;
+  margin:12px 15px 4px;
+  color:#111;
+  line-height:1.3;
+}
+
+/* BRAND */
+.brandText{
+  font-size:13px;
+  color:#777;
+  margin:0 15px 6px;
+  font-weight:500;
+}
+
+/* TOP ROW */
+.nameTopRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:12px 15px 6px;
+}
+
+/* LEFT SIDE */
+.nameRow{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+}
+
+/* NAME */
+.nameRow h2{
+  font-size:18px;
+  font-weight:700;
+  margin:0;
+  color:#111;
+  line-height:1.2;
+}
+
+/* BRAND */
+.brandInline{
+  font-size:13px;
+  color:#777;
+  font-weight:500;
+}
+
+/* RATING */
+.ratingBox{
+  font-size:12px;
+  font-weight:600;
+  color:#0f9d58;
+
+  display:flex;
+  align-items:center;
+  gap:3px;
+}
+
+.ratingBox i{
+  font-size:12px;
+}
+
+
+/* IMPORTANT FIX */
+.nameRow h2{
+  font-size:18px;
+  font-weight:700;
+  margin:0;
+  color:#111;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+
+  max-width:unset;   /* ❌ remove 70% limit */
+}
+
+.brandInline{
+  font-size:13px;
+  color:#777;
+  font-weight:500;
+
+  position:relative;
+  top:-1px;   /* 🔥 fine alignment tweak */
+}
+
+/* SHORT DESC */
+.shortDesc{
+  font-size:13px;
+  color:#555;
+  margin:0 15px 8px;
+  line-height:1.4;
+}
+.topRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 15px;
+}
+
+.addBigBtn{
+  background:#0f5c5c;
+  color:#fff;
+  padding:8px 18px;
+  border:none;
+  border-radius:10px;
+  font-size:13px;
+}
+.box{
+  margin:10px 15px;
+  padding:10px;
+  border-radius:10px;
+  background:#f7f7f7;
+  font-size:13px;
+}
+.imageSlider{
+  scrollbar-width:none;
+}
+.imageSlider::-webkit-scrollbar{
+  display:none;
+}
+
+.qtyText{
+  font-size:13px;
+  color:#666;
+  margin:6px 15px 2px;
+}
+
+/* PRICE */
+.priceRow{
+  font-size:18px;
+  font-weight:700;
+  color:#000;
+}
+
+/* STRIKE PRICE */
+.strike{
+  text-decoration:line-through;
+  color:#999;
+  font-size:14px;
+  font-weight:400;
+  margin-left:6px;
+}
+.infoBox{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+
+  margin:10px 15px;
+  padding:10px;
+
+  background:#f7f7f7;
+  border-radius:12px;
+}
+
+/* ITEM */
+.infoItem{
+  flex:1;
+  text-align:center;
+}
+
+/* EMOJI TOP */
+.emoji{
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+/* TEXT */
+.infoText{
+  font-size:11px;
+  font-weight:600;
+  color:#111;
+  line-height:1.2;
+}
+
+.infoText span{
+  display:block;
+  font-size:10px;
+  color:#777;
+  font-weight:400;
+}
+/* LINE BETWEEN ITEMS */
+.infoItem:not(:last-child){
+  border-right:1px solid #e5e5e5;
+}
+.ingTable{
+  width:100%;
+  margin-top:8px;
+  border-collapse:collapse;
+  border:1px solid #ddd;   /* outer border */
+}
+
+/* ROW */
+.ingTable tr{
+  border-bottom:1px solid #ddd;
+}
+
+/* CELLS */
+.ingTable td{
+  border:1px solid #ddd;   /* 🔥 inner lines */
+  padding:8px;
+  font-size:13px;
+}
+
+/* LEFT COLUMN */
+.ingTable td:first-child{
+  color:#555;
+  width:40%;
+}
+
+/* RIGHT COLUMN */
+.ingTable td:last-child{
+  color:#111;
+  font-weight:500;
+}
+/* POINT LIST */
+.pointList{
+  margin-top:8px;
+  padding-left:18px;
+}
+
+/* EACH POINT */
+.pointList li{
+  font-size:13px;
+  color:#444;
+  margin-bottom:6px;
+  line-height:1.4;
+}
+.pointList li::marker{
+  color:#0f5c5c;
+}
+/* BENEFIT LIST */
+.benefitList{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* EACH ITEM */
+.benefitItem{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+
+  background:#fff;
+  padding:8px 10px;
+  border-radius:8px;
+
+  border:1px solid #eee;
+}
+
+/* TICK ICON */
+.tick{
+  color:#0f9d58;
+  font-weight:700;
+  font-size:14px;
+}
+/* PANEL */
+.infoPanel{
+  margin:12px 15px;
+  padding:12px;
+
+  background:#eef6ff;
+  border-radius:12px;
+}
+
+/* LIST */
+.infoList{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* ROW */
+.infoRow{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+
+/* ICON */
+.infoIcon{
+  font-size:16px;
+}
+
+/* KEY */
+.infoKey{
+  font-size:12px;
+  color:#555;
+  font-weight:600;
+}
+
+/* VALUE */
+.infoVal{
+  font-size:13px;
+  color:#111;
+}
+/* WRAPPER */
+.buyNowWrap{
+  margin:15px;
+}
+
+/* BUTTON */
+.buyNowBtn{
+  width:100%;
+  background:#0f5c5c;
+  color:#fff;
+
+  padding:14px 0;
+  border:none;
+  border-radius:12px;
+
+  font-size:15px;
+  font-weight:600;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+}
+
+/* STRIKE */
+.buyNowBtn span{
+  text-decoration:line-through;
+  font-size:13px;
+  color:#cfcfcf;
+}
+/* NEW PANEL */
+.infoPanelNew{
+  margin:12px 15px;
+}
+
+/* LIST */
+.infoListNew{
+  margin-top:8px;
+  border-left:3px solid #0f5c5c;   /* 🔥 accent line */
+  padding-left:10px;
+}
+
+/* ROW */
+.infoRowNew{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+}
+
+/* REMOVE LAST BORDER */
+.infoRowNew:last-child{
+  border-bottom:none;
+}
+
+/* KEY */
+.infoKeyNew{
+  font-size:13px;
+  color:#555;
+}
+
+/* VALUE */
+.infoValNew{
+  font-size:13px;
+  color:#111;
+  font-weight:600;
+}
+/* SECOND ROW STYLE */
+.productCard2{
+  width:95px;
+  min-width:95px;
+  flex-shrink:0;
+}
+
+.imgWrap2{
+  position:relative;
+  background:#fff;
+  border-radius:12px;
+  height:80px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  margin-bottom:14px;   /* 🔥 ADD THIS (push text down) */
+}
+
+.imgWrap2 img{
+  width:70px;
+  height:70px;
+  object-fit:contain;
+}
+
+.addBtn2{
+  position:absolute;
+  top:4px;
+  right:4px;
+
+  width:24px;
+  height:24px;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+  font-size:18px;
+}
+
+
+
+/* TEXT */
+.pName2{
+  font-size:12px;
+  margin-top:2px;   /* 🔥 reduce gap */
+  font-weight:600;
+}
+
+/* 🔥 BLUE RATING */
+.ratingBlue{
+  font-size:11px;
+  color:#007bff;
+  margin-top:3px;
+}
+
+
+/* ✅ Bottom shading effect */
+.bottomShade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+
+  background: linear-gradient(
+    to top,
+    rgba(71, 152, 199, 0.6),
+    rgba(107, 96, 96, 0)
+  );
+
+  pointer-events: none;
+}
+/* PRICE */
+.pPrice2{
+  font-size:13px;
+  font-weight:700;
+}
+
+.pPrice2 span{
+  font-size:10px;
+  color:#999;
+  text-decoration:line-through;
+}
+/* PRICE + RATING ROW */
+.priceRow2{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:4px;
+}
+
+/* PRICE */
+.pPrice2{
+  font-size:14px;
+  font-weight:700;
+}
+
+/* STRIKE */
+.pPrice2 span{
+  font-size:10px;
+  color:#999;
+  text-decoration:line-through;
+  margin-left:4px;
+}
+
+/* 🔥 GREEN RATING */
+.ratingGreen{
+  font-size:11px;
+  color:#0f9d58;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+
+.ratingGreen i{
+  font-size:11px;
+}
+/* BRAND BELOW NAME */
+.brand2{
+  font-size:11px;
+  color:#777;
+  margin-top:2px;
+  line-height:1.2;
+}
+/* SECTION */
+.midCategory{
+  margin:10px 10px 5px;
+}
+
+/* HEADER */
+.midHeader h3{
+  font-size:15px;
+  font-weight:700;
+  color:#111;
+  margin-bottom:8px;
+}
+
+/* GRID */
+.midGrid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr); /* ✅ ALWAYS 4 per row */
+  gap:10px;
+}
+.midCategory{
+  margin:14px 10px 8px;  /* little more space */
+}
+/* ITEM */
+.midItem{
+  width:100%;        /* ❌ remove 23% */
+  text-align:center;
+}
+/* IMAGE */
+.midItem img{
+  width:100%;
+  height:60px;
+  object-fit:contain;
+  background:#f5f5f5;
+  border-radius:10px;
+  padding:6px;
+}
+
+/* TEXT */
+.midItem p{
+  font-size:11px;
+  margin-top:4px;
+  color:#333;
+
+  white-space:nowrap;      /* ✅ keep in one line */
+  overflow:hidden;
+  text-overflow:ellipsis;  /* ✅ add ... if long */
+}
+.simpleFooter{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:15px 10px 80px; /* space for bottom nav */
+  font-size:12px;
+}
+
+.simpleFooter p{
+  margin:4px 0;
+  color:#ccc;
+}
+.instaFooter{
+  background:#f3f3f3;
+
+  margin-left:-15px;
+  margin-right:-15px;
+  margin-bottom:-15px;   /* 🔥 REMOVE BOTTOM GAP */
+
+  padding:20px 15px 65px; /* keep space for bottom nav */
+}
+
+/* TEXT FIX */
+.instaFooter h2{
+  font-size:30px;
+  font-weight:700;
+  color:#bbb;
+  margin:0;
+}
+
+.instaFooter p{
+  font-size:14px;
+  color:#888;
+  margin:4px 0 0;
+}
+.fLocation{
+  font-size:12px;
+  color:#8ab9b9;
+  margin-top:2px;
+}
+/* MAIN TEXT */
+/* MAIN TEXT */
+.mainText{
+  font-family:'Spectral SC', serif;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:1px;   /* 🔥 important for this font */
+  color:#ffffff;
+}
+
+/* SUB TEXT */
+.subText{
+  font-family:'Cinzel', serif;
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:0.8px;
+  color:#d0d0d0;
+  margin-top:6px;
+}
+/* LOCATION CONTAINER */
+.location{
+  opacity:0;
+  transform:translateY(-30px);
+  animation:locationDrop 0.6s ease forwards;
+}
+
+/* CITY (main) */
+.city{
+  opacity:0;
+  transform:translateY(-10px);
+  animation:fadeUp 0.5s ease 0.3s forwards;
+}
+
+/* ADDRESS (sub) */
+.address{
+  opacity:0;
+  transform:translateY(-10px);
+  animation:fadeUp 0.5s ease 0.5s forwards;
+}
+
+/* KEYFRAMES */
+@keyframes locationDrop{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+/* Cool Drinks Popup Grid - Two Cards Per Row */
+#coolDrinksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Exactly 2 cards per row */
+  gap: 12px;
+  padding: 15px;
+}
+
+/* Ensure cards take full width inside the grid */
+#coolDrinksGrid .productCard2 {
+  width: 100%;
+  min-width: 0; /* Override previous min-width:95px */
+}
+/* Cool Drinks Popup */
+#coolDrinksPopup {
+  z-index: 10000;
+}
+
+/* Product Details Popup */
+#productPopup {
+  z-index: 11000;
+}
+/* Popup grid: exactly 2 products per row */
+#categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Two equal columns */
+  gap: 12px;
+  padding: 15px;
+}
+
+/* Ensure cards fill the grid cell */
+#categoryGrid .productCard2 {
+  width: 100%;
+  min-width: 0; /* Override previous min-width:95px */
+}
+/* Category popup */
+#categoryPopup {
+  z-index: 10000;
+}
+
+/* Product details popup - must be higher */
+#productPopup {
+  z-index: 11000;
+}
+/* 🔒 Prevent background scrolling when popup is open */
+body.popup-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+ /* Edge-to-edge horizontal scrolling container */
+        .brand-container {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 0 16px 10px 6px; /* top | right | bottom | left */
+    scroll-behavior: smooth;
+
+    /* Hide scrollbar for all browsers */
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+        .brand-container::-webkit-scrollbar {
+            display: none;             /* Chrome, Safari, Opera */
+        }
+
+        /* Brand card */
+        .brand-card {
+            flex: 0 0 auto;
+            width: clamp(60px, 12vw, 90px); /* Auto-adjusting size */
+            text-align: center;
+        }
+
+        /* Square brand image */
+        .brand-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 6px;        /* Slightly rounded corners */
+            border: 1px solid #e0e0e0;
+            background-color: #fff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .brand-card img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Brand name below image */
+        .brand-name {
+            margin-top: 6px;
+            font-size: clamp(10px, 1.6vw, 13px);
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Optional: subtle fade effect at edges */
+        .brand-section {
+            position: relative;
+        }
+
+        .brand-section::before,
+        .brand-section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 30px;
+            pointer-events: none;
+        }
+
+        .brand-section::before {
+            left: 0;
+            background: linear-gradient(to right, #f7f7f7, transparent);
+        }
+
+        .brand-section::after {
+            right: 0;
+            background: linear-gradient(to left, #f7f7f7, transparent);
+        }
+        /* CLICKABLE TEXT AREA */
+.infoArea{
+  cursor:pointer;
+}
+
+/* OPTIONAL: better UX */
+.infoArea:active{
+  opacity:0.6;
+}
+
+/* 🔥 CART CONTROL */
+.cartControl{
+  position:absolute;
+  top:0px;
+  right:4px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:4px;
+
+  height:24px;
+  min-width:28px;
+  border-radius:8px;
+
+  /* ❌ hidden initially */
+  background:transparent;
+  padding:0 4px; 
+
+}
+
+/* ✅ SHOW BOX ONLY WHEN ACTIVE */
+.cartControl.active{
+  background:#0f5c5c;
+  padding:0 6px;
+}
+
+/* ➕ ADD BUTTON */
+.cartControl .addBtn2{
+  width:24px;
+  height:24px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:18px;
+  font-weight:700;
+
+  color:#fff;
+  background:#0f5c5c;
+  border-radius:8px;
+
+  cursor:pointer;
+}
+
+/* ➖ / ➕ BUTTONS */
+.cartControl .minus,
+.cartControl .plus{
+  width:20px;
+  height:20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:16px;
+  font-weight:700;
+
+  color:#fff;
+  cursor:pointer;
+
+  line-height:1;        /* ✅ FIX alignment */
+}
+
+/* 🔥 EXTRA FIX (for minus only) */
+.cartControl .minus{
+  transform:translateY(-1px); /* 👈 adjust if needed */
+}
+
+/* COUNT */
+.cartControl .count{
+  color:#fff;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* CLICK EFFECT */
+.cartControl div{
+  transition:transform 0.15s ease;
+}
+
+.cartControl div:active{
+  transform:none;  
+}
+
+/* REMOVE STRIP */
+.qtyInside{
+  position:absolute;
+  bottom:-10px;           /* 🔥 push OUTSIDE image */
+  left:0;
+  width:100%;
+
+  background:#e8e3e3;     /* light background */
+  color:#333;
+
+  font-size:11px;
+  font-weight:600;
+
+  text-align:center;
+  padding:4px 0;
+
+  border-radius:0 0 12px 12px;
+
+  z-index:2;
+}
+.cartControl,
+.cartControl div{
+  -webkit-tap-highlight-color: transparent;
+}
+/* 🔥 BASE (NO GREY BACKGROUND AT ALL) */
+.popupCartControl {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: inline-block;
+}
+
+/* 🔥 ACTIVE (+ - STATE) */
+.popupCartControl.active {
+  display: inline-flex;
+  align-items: center;       /* vertical center */
+  justify-content: center;   /* horizontal center */
+
+  background: #0f5c5c;
+  color: #fff;
+
+  border-radius: 10px;
+  padding: 6px 12px;
+  min-width: 90px;
+  height: 36px;
+
+  gap: 8px;                  /* equal spacing */
+  font-size: 13px;
+}
+
+/* ➖ MINUS */
+.popupCartControl .minus {
+  width: 24px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* 🔢 COUNT */
+.popupCartControl .count {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ➕ PLUS */
+.popupCartControl .plus {
+  width: 24px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ✨ CLICK EFFECT */
+.popupCartControl .plus:active,
+.popupCartControl .minus:active {
+  transform: scale(0.9);
+}
+.cartBar{
+  position:fixed;
+
+  bottom:75px; /* 🔥 above bottom nav (65px nav + gap) */
+  left:12px;
+  right:12px;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  border-radius:14px;
+  padding:12px 14px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+
+  z-index:9998;
+
+  transition:all 0.3s ease;
+}
+
+/* hide */
+.cartBar.hidden{
+  opacity:0;
+  transform:translateY(100%);
+  pointer-events:none;
+}
+
+/* left */
+.cartLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.cartIcon{
+  font-size:20px;
+  background:rgba(255,255,255,0.2);
+  padding:6px;
+  border-radius:8px;
+}
+
+.cartText{
+  display:flex;
+  flex-direction:column;
+}
+
+#cartCount{
+  font-size:13px;
+}
+
+#cartTotal{
+  font-size:15px;
+  font-weight:700;
+}
+
+/* button */
+#viewCartBtn{
+  background:#fff;
+  color:#0f5c5c;
+
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
+
+  font-weight:600;
+  cursor:pointer;
+}
+.cartImages{
+  display:flex;
+}
+
+.cartImages img{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  margin-left:-8px;
+}
+
+.cartImages img:first-child{
+  margin-left:0;
+}
+
+.cartImages .more{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#eee;
+  color:#333;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:-8px;
+}
+.miniCart{
+  position:fixed;
+  left:12px;
+  right:12px;
+
+  bottom:140px; /* 🔥 increase this */
+
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+
+  max-height:180px;
+  overflow-y:auto;
+
+  transform:translateY(100%);
+  opacity:0;
+
+  transition:all 0.3s ease;
+
+  z-index:9997;
+  scrollbar-width:none;
+}
+.miniCart::-webkit-scrollbar{
+  display:none;
+}
+
+/* show */
+.miniCart.show{
+  transform:translateY(-10px);
+  opacity:1;
+}
+
+.miniRow{
+  display:flex;
+  align-items:center;
+
+  padding:12px;
+  border-bottom:1px solid #eee;
+}
+.miniInfo div:first-child{
+  font-size:14px;
+  font-weight:600;
+  color:#111;
+  font-family:'Inter', sans-serif;
+}
+
+.miniInfo div:last-child{
+  font-size:13px;
+  font-weight:500;
+  color:#666;
+  font-family:'Inter', sans-serif;
+}
+.miniRow .cartControl{
+  font-family:'Inter', sans-serif;
+  letter-spacing:0.3px;
+}
+/* image */
+.miniImg{
+  width:40px;
+  height:40px;
+  border-radius:6px;
+}
+
+/* center text */
+.miniInfo{
+  flex:1;
+  margin-left:10px;
+}
+
+.miniRow .cartControl{
+  margin-left:auto;
+
+  position:static;          /* 🔥 important */
+  display:flex;
+  align-items:center;
+}
+
+/* 🔥 ACTIVE STYLE (pill like cart bar) */
+.miniRow .cartControl.active{
+  background:#0f5c5c;
+  border-radius:999px;
+
+  padding:4px 10px;
+  height:28px;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-family:'Inter', 'Poppins', sans-serif;
+}
+/* ➖ ➕ buttons (mini cart only) */
+.miniRow .cartControl .minus,
+.miniRow .cartControl .plus{
+  width:18px;
+  height:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:14px;
+  font-weight:600;
+
+  color:#fff;
+}
+
+/* 🔢 count */
+.miniRow .cartControl .count{
+  font-size:13px;
+  font-weight:600;
+  color:#fff;
+}
+
+/* click effect */
+.miniRow .cartControl .plus:active,
+.miniRow .cartControl .minus:active{
+  transform:scale(0.9);
+  opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+ <div class="logo">
+  <span class="c">C</span>
+  <span class="e">e</span>
+  <span class="z">z</span>
+  <span class="o">o</span>
+  <span class="o2">o</span>  <!-- 🔥 last o -->
+</div>
+  <div class="tagline"><span>10 minutes</span>Delivery</div>
+  <div class="loader"></div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <div id="detecting">
+    <div class="searchBox">
+      <div class="searchIcon">🔍</div>
+    </div>
+    <div class="detectText">
+      <div class="mainText">Fetching your location</div>
+      <div class="subText">Getting nearby address details</div>
+    </div>
+  </div>
+
+  <div id="success" style="display:none;">
+    <h2>Your Address</h2>
+    <p id="addressText" style="margin-top:10px;color:#aaa;white-space:pre-line;"></p>
+  </div>
+
+</div>
+
+<!-- HOME -->
+<div id="home">
+    <div id="topSection">  <!-- ✅ ADD THIS -->
+  <div class="header">
+    <div class="location">
+      <div class="city" id="cityName"></div>
+      <div class="address" id="shortAddress"></div>
+    </div>
+    <div class="profile">
+  <img src="profile.webp" alt="profile">
+</div>
+  </div>
+
+  <div class="searchBar">
+    <input placeholder="Search for groceries">
+    <span>🔍</span>
+  </div>
+  <div class="categories">
+
+ <div class="catItem" data-color="#E3F2FD"> <!-- All (soft blue) -->
+    <div class="catIcon">
+      <img src="cat/all groceries.webp">
+    </div>
+    <div class="catText">All</div>
+  </div>
+
+  <div class="catItem" data-color="#D4F8D4"> <!-- Fresh -->
+    <div class="catIcon">
+      <img src="cat/fresh.webp">
+    </div>
+    <div class="catText">Fresh</div>
+  </div>
+
+  <div class="catItem" data-color="#FFE5CC"> <!-- 50% -->
+    <div class="catIcon">
+      <img src="cat/summer.webp">
+    </div>
+    <div class="catText">Summer</div>
+  </div>
+
+  <div class="catItem" data-color="#CCF2F7"> <!-- Cool -->
+    <div class="catIcon">
+      <img src="cat/ice creams.webp">
+    </div>
+    <div class="catText">Cool</div>
+  </div>
+
+  <div class="catItem" data-color="#FFD6E7"> <!-- Skin Care -->
+    <div class="catIcon">
+      <img src="skincare.webp">
+    </div>
+    <div class="catText">Skin Care</div>
+  </div>
+
+  <div class="catItem" data-color="#E6DCD5"> <!-- Home -->
+    <div class="catIcon">
+      <img src="home.webp">
+    </div>
+    <div class="catText">Home</div>
+  </div>
+
+  <div class="catItem" data-color="#EAD6F5"> <!-- Chocolates -->
+    <div class="catIcon">
+      <img src="cat/chocolates.webp">
+    </div>
+    <div class="catText">Chocolates</div>
+  </div>
+
+  <div class="catItem" data-color="#D6DBF5"> <!-- Groceries -->
+    <div class="catIcon">
+      <img src="cat/Groceries.webp">
+    </div>
+    <div class="catText">Groceries</div>
+  </div>
+
+</div>
+</div>
+<div id="contentSection">
+  <div class="leaves"></div>
+  <div class="contentLeft">
+    <h2>Fresh Groceries</h2>
+    <p>Get farm fresh items delivered in minutes</p>
+  </div>
+
+  <div class="contentRight">
+    <img src="cat/image1.webp" alt="fresh">
+  </div>
+</div>
+
+<div id="productSection">
+  <div class="productGrid" id="productGrid"></div>
+</div>
+<div class="midCategory" id="freshItems">
+
+  <div class="midHeader" >
+    <h3>Fresh Items</h3>
+  </div>
+
+  <div class="midGrid">
+
+    <div class="midItem">
+      <img src="baners/vegitables.webp">
+      <p>Vegetables</p>
+    </div>
+
+    <div class="midItem">
+      <img src="baners/fruits vegtabes.webp">
+      <p>Fruits</p>
+    </div>
+
+    <div class="midItem">
+      <img src="baners/dairy.webp">
+      <p>Dairy</p>
+    </div>
+
+    <div class="midItem">
+      <img src="baners/meat.webp">
+      <p>Meat & Seafood</p>
+    </div>
+
+  </div>
+
+</div>
+<div class="midCategory" id="dailyItems">
+  <div class="midHeader">
+    <h3>Daily Essentials</h3>
+  </div>
+
+  <div class="midGrid">
+
+  <!-- Row 1 -->
+  <div class="midItem"><img src="baners/oils.webp"><p>Oil's</p></div>
+  <div class="midItem"><img src="baners/rice.webp"><p>Rice</p></div>
+  <div class="midItem"><img src="baners/atta.webp"><p>Atta</p></div>
+  <div class="midItem"><img src="baners/masala.webp"><p>Masalas</p></div>
+
+  <!-- Row 2 -->
+  <div class="midItem"><img src="baners/snacks.webp"><p>Snacks</p></div>
+  <div class="midItem"><img src="baners/salt.webp"><p>Salt</p></div>
+  <div class="midItem"><img src="baners/nuts.webp"><p>Nuts</p></div>
+  <div class="midItem"><img src="baners/powders.webp"><p>Powders</p></div>
+
+</div>
+  
+  
+
+</div>
+
+
+
+<div id="productSection2" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Popular
+  </div>
+
+  <div class="productGrid" id="productGrid2"></div>
+
+</div>
+
+<div class="midCategory" id="beautyItems">
+
+  <div class="midHeader">
+    <h3>Beauty & Wellness</h3>
+  </div>
+
+  <div class="midGrid">
+
+    <!-- Row 1 -->
+    <div class="midItem"><img src="baners/bathandbody.webp"><p>Body Care</p></div>
+    <div class="midItem"><img src="baners/haircare.webp"><p>Hair Care</p></div>
+    <div class="midItem"><img src="baners/skincare.webp"><p>Skincare</p></div>
+    <div class="midItem"><img src="baners/makeup.webp"><p>Makeup</p></div>
+
+    <!-- Row 2 -->
+    <div class="midItem"><img src="baners/oralcare.webp"><p>Oral Care</p></div>
+    <div class="midItem"><img src="baners/grooming.webp"><p>Gromming</p></div>
+    <div class="midItem"><img src="baners/babycare.webp"><p>Baby Care</p></div>
+    <div class="midItem"><img src="baners/fragneses.webp"><p>Fragrances</p></div>
+
+  </div>
+
+</div>
+
+<!--trail-->
+
+<div class="midCategory" id="wholesalebrand">
+
+  <div class="midHeader">
+    <h3>Brand</h3>
+  </div>
+
+   <div class="brand-container">
+        <div class="brand-card">
+            <img src="head/amul.webp" alt="Nike">
+            <div class="brand-name">Amul</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/britana.webp" alt="Adidas">
+            <div class="brand-name">Britannia</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/cococla.webp" alt="Puma">
+            <div class="brand-name">Coca Cola</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/dabur.webp" alt="Reebok">
+            <div class="brand-name">Dabur</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/haldrams.webp" alt="Fila">
+            <div class="brand-name">Haldrams</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/harpic.webp" alt="Asics">
+            <div class="brand-name">Harpic</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/tata.webp" alt="New+Balance">
+            <div class="brand-name">TaTa</div>
+        </div>
+        
+    </div>
+
+</div>
+
+<div class="midCategory" id="houseItems">
+
+
+  <div class="midHeader">
+    <h3>Household & Lifestyle</h3>
+  </div>
+
+  <div class="midGrid">
+
+    <!-- Row 1 -->
+    <div class="midItem"><img src="baners/furniture.webp"><p>Furnishing</p></div>
+    <div class="midItem"><img src="baners/kitchen.webp"><p>Kitchen</p></div>
+    <div class="midItem"><img src="baners/cleaning.webp"><p>Cleaning</p></div>
+    <div class="midItem"><img src="baners/clothing.webp"><p>Clothing</p></div>
+
+    <!-- Row 2 -->
+    <div class="midItem"><img src="baners/appliances.webp"><p>Appliances</p></div>
+    <div class="midItem"><img src="baners/stationary.webp"><p>Stationary</p></div>
+    <div class="midItem"><img src="baners/puja.webp"><p>Puja</p></div>
+    <div class="midItem"><img src="baners/toys.webp"><p>Toys</p></div>
+
+  </div>
+
+</div>
+<div id="productSection3" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Trending
+  </div>
+
+  <div class="productGrid" id="productGrid3"></div>
+
+</div>
+
+<div class="midCategory" id="wholesaleItems">
+
+  <div class="midHeader">
+    <h3>Wholesale Deals</h3>
+  </div>
+
+  <div class="midGrid">
+
+    <div class="midItem"><img src="baners/softydrinks.webp"><p>Soft Drinks</p></div>
+    <div class="midItem"><img src="baners/galssplates.webp"><p>Plastic</p></div>
+    <div class="midItem"><img src="baners/groceriessale.webp"><p>Groceries</p></div>
+    <div class="midItem"><img src="baners/special offer.webp"><p>Special Deals</p></div>
+
+    
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="productSection4" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Deals
+  </div>
+
+  <div class="productGrid" id="productGrid4"></div>
+
+</div>
+
+<div id="productSection5" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Recommended
+  </div>
+
+  <div class="productGrid" id="productGrid5"></div>
+
+</div>
+
+
+
+<div id="freshSection">
+
+  <div class="fruitRain">
+    <span class="fruit">🍎</span>
+    <span class="fruit">🍌</span>
+    <span class="fruit">🍊</span>
+    <span class="fruit">🍓</span>
+    <span class="fruit">🥝</span>
+    <span class="fruit">🍍</span>
+    <span class="fruit">🍇</span>
+    <span class="fruit">🍉</span>
+    <span class="fruit">🍒</span>
+    <span class="fruit">🍑</span>
+    <span class="fruit">🥭</span>
+    <span class="fruit">🍏</span>
+  </div>
+<div class="sparkleContainer"></div>
+</div>
+
+<div id="productSection6">
+  <div class="productGrid" id="productGrid6"></div>
+</div>
+<div id="productSection7" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Top Picks
+  </div>
+
+  <div class="productGrid" id="productGrid7"></div>
+
+</div>
+
+<div class="midCategory" id="wholesaleFruits">
+
+  <div class="midHeader">
+    <h3>Shop By Category</h3>
+  </div>
+
+  <div class="midGrid">
+
+    <div class="midItem"><img src="baners/fresh fruits.webp"><p>Fresh Fruits</p></div>
+    <div class="midItem"><img src="baners/vegitables.webp"><p>Vegetables</p></div>
+    <div class="midItem"><img src="baners/daily essential.webp"><p>Daily Essentials</p></div>
+    <div class="midItem"><img src="baners/brd and eggs.webp"><p>Breads & Egg</p></div>
+
+     <div class="midItem"><img src="baners/meat and chiken.webp"><p>Chiken & Meat</p></div>
+    <div class="midItem"><img src="baners/breakfast neds.webp"><p>Breakfast Needs</p></div>
+    <div class="midItem"><img src="baners/milkshakes .webp"><p>Milk Shakes</p></div>
+    <div class="midItem"><img src="baners/juices and salads.webp"><p>Juices & Salads</p></div>
+
+    
+  </div>
+
+</div>
+<div id="productSection8" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    New Arrivals
+  </div>
+
+  <div class="productGrid" id="productGrid8"></div>
+
+</div>
+
+<div id="productSection9" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Best Sellers
+  </div>
+
+  <div class="productGrid" id="productGrid9"></div>
+
+</div>
+
+
+<div id="offerSection">
+<div class="confettiContainer"></div>
+  <!-- LEFT RIBBON -->
+  <div class="ribbon left">🔥 SALE</div>
+
+  <!-- MAIN TEXT -->
+  <div class="offerText">
+    BUY NOW <br>
+    <span>50% OFF</span>
+  </div>
+
+  <!-- RIGHT RIBBON -->
+  <div class="ribbon right">🔥 DEAL</div>
+
+</div>
+
+
+
+<div id="coolSection">
+<div class="lightning"></div>
+ <div class="cloud c1"><span></span></div>
+<div class="cloud c2"><span></span></div>
+<div class="cloud c3"><span></span></div>
+<div class="cloud c4"><span></span></div>
+<div class="cloud c5"><span></span></div>
+<div class="cloud c6"><span></span></div>
+<div class="cloud c7"><span></span></div>
+  <div class="rain"></div>
+
+</div>
+
+<div id="productSection10" class="productSectionWithHeading">
+  
+ 
+
+  <div class="productGrid" id="productGrid10"></div>
+
+</div>
+
+<!-- 250ml-->
+<div id="productSection11" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Instant Fresh
+  </div>
+
+  <div class="productGrid" id="productGrid11"></div>
+
+</div>
+<div class="midCategory" id="colldrinksec">
+
+  <div class="midHeader">
+    <h3>Shop By Quantity</h3>
+  </div>
+
+  <div class="midGrid">
+
+   <div class="midItem" data-category="cool_drinks">
+  <img src="head/2 lit.webp">
+  <p>2 Litre</p>
+</div>
+
+<div class="midItem" data-category="instant">
+  <img src="head/fruites.webp">
+  <p>Instant</p>
+</div>
+
+<div class="midItem" data-category="juices">
+  <img src="head/juices.webp">
+  <p>Juices</p>
+</div>
+
+<div class="midItem" data-category="boost_energy">
+  <img src="head/tinss.webp">
+  <p>Boost Energy</p>
+</div>
+
+     <div class="midItem" data-category="under_20">
+      <img src="head/uder 20.webp">
+      <p>Under 20</p>
+    </div>
+
+    <div class="midItem" data-category="Water_Bottles">
+      <img src="head/waterbottle.webp"><p>Water Bottles</p></div>
+
+    <div class="midItem" data-category="Dairy">
+      <img src="head/dairy.webp" ><p>Dairy</p></div>
+
+    <div class="midItem" data-category="one_Litre">
+      <img src="head/1 lit.webp"><p>1 Litre</p></div>
+
+    
+  </div>
+
+</div>
+<!--12th-->
+
+<div id="productSection12" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Refreshment
+  </div>
+
+  <div class="productGrid" id="productGrid12"></div>
+
+</div>
+
+<div id="productSection13" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Sip The Chill
+  </div>
+
+  <div class="productGrid" id="productGrid13"></div>
+
+</div>
+
+<div id="productSection14" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Drink Picks
+  </div>
+
+  <div class="productGrid" id="productGrid14"></div>
+
+</div>
+
+<div id="productSection15" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Drink Menu
+  </div>
+
+  <div class="productGrid" id="productGrid15"></div>
+
+</div>
+<!--DRINKS BRNAD-->
+
+<div class="midCategory" id="wholesalecools">
+
+  <div class="midHeader">
+    <h3>BrandS</h3>
+  </div>
+
+   <div class="brand-container">
+        <div class="brand-card">
+            <img src="head/pepsi.webp" alt="Nike">
+            <div class="brand-name">Pepsi</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/coccola2.webp" alt="Adidas">
+            <div class="brand-name">Coca-Cola</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/bislerri.webp" alt="Puma">
+            <div class="brand-name">Bisleri</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/redbull.webp" alt="Reebok">
+            <div class="brand-name">Red Bull</div>
+        </div>
+        <div class="brand-card">
+            <img src="head/reall.webp" alt="Fila">
+            <div class="brand-name">Real</div>
+        </div>
+       
+        
+    </div>
+
+</div>
+
+<div id="productSection16" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+   Hydration Station
+  </div>
+
+  <div class="productGrid" id="productGrid16"></div>
+
+</div>
+
+<div id="productSection17" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Crafted Coolers
+  </div>
+
+  <div class="productGrid" id="productGrid17"></div>
+
+</div>
+<div id="productSection18" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Cool Down
+  </div>
+
+  <div class="productGrid" id="productGrid18"></div>
+
+</div>
+
+<div id="productSection19" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Stay Cool
+  </div>
+
+  <div class="productGrid" id="productGrid19"></div>
+
+</div>
+
+<div id="productSection20" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Chill Zone
+  </div>
+
+  <div class="productGrid" id="productGrid20"></div>
+
+</div>
+
+<div id="productSection23" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Milk And Dairy
+  </div>
+
+  <div class="productGrid" id="productGrid23"></div>
+
+</div>
+
+
+
+<div id="skinSection">
+
+  <div class="glowContainer"></div>
+
+ <div class="banners">
+
+  <div class="bannerWrap">
+    <div class="stick"></div>
+    <div class="board">Glow</div>
+  </div>
+
+  <div class="bannerWrap">
+    <div class="stick"></div>
+    <div class="board">Care</div>
+  </div>
+
+  <div class="bannerWrap">
+    <div class="stick"></div>
+    <div class="board">Fresh</div>
+  </div>
+
+  <div class="bannerWrap">
+    <div class="stick"></div>
+    <div class="board">Soft</div>
+  </div>
+
+</div>
+
+</div>
+
+<div id="homeSection">
+
+ <div class="homeFloat">
+  <span>🛋️</span>
+  <span>🪴</span>
+  <span>🛏️</span>
+  <span>🕯️</span>
+  <span>🍽️</span>
+  <span>🪑</span>
+  <span>🚪</span>
+  <span>🧸</span>
+
+  <!-- NEW ITEMS -->
+  <span>🪞</span>
+  <span>🧺</span>
+  <span>🧼</span>
+  <span>🪟</span>
+  <span>🛒</span>
+  <span>🧹</span>
+  <span>🪠</span>
+  <span>🧯</span>
+</div>
+
+</div>
+
+
+
+<div id="chocoSection">
+
+  <div class="balloonContainer">
+    <span>C</span>
+    <span>H</span>
+    <span>O</span>
+    <span>C</span>
+    <span>O</span>
+    <span>L</span>
+    <span>A</span>
+    <span>T</span>
+    <span>E</span>
+    <span>S</span>
+  </div>
+
+</div>
+
+<div id="productSection21" class="productSectionWithHeading">
+  
+
+  <div class="productGrid" id="productGrid21"></div>
+
+</div>
+
+<div id="productSection22" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Delights
+  </div>
+
+  <div class="productGrid" id="productGrid22"></div>
+
+</div>
+
+<div id="productSection24" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+   Freshnes
+  </div>
+
+  <div class="productGrid" id="productGrid24"></div>
+
+</div>
+<div id="grocerySection">
+
+  <!-- LEFT BANNER -->
+  <div class="gStick gLeft">
+    <div class="gRod"></div>
+    <div class="gBoard">OFFERS</div>
+  </div>
+
+  <!-- RIGHT BANNER -->
+  <div class="gStick gRight">
+    <div class="gRod"></div>
+    <div class="gBoard">DEALS</div>
+  </div>
+
+  <!-- CENTER TEXT -->
+  <div class="gBuy">BUY NOW</div>
+
+</div>
+<div id="productSection25" class="productSectionWithHeading">
+  
+  
+
+  <div class="productGrid" id="productGrid25"></div>
+
+</div>
+
+
+<div id="productSection26" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+   Home Needs
+  </div>
+
+  <div class="productGrid" id="productGrid26"></div>
+
+</div>
+
+<div id="productSection27" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    High Demand
+  </div>
+
+  <div class="productGrid" id="productGrid27"></div>
+
+</div>
+
+
+<div id="productSection28" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Trending Now
+  </div>
+
+  <div class="productGrid" id="productGrid28"></div>
+
+</div>
+<div id="productSection29" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+   Just Arrived
+  </div>
+
+  <div class="productGrid" id="productGrid29"></div>
+
+</div>
+<div id="productSection30" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Smart Savings
+  </div>
+
+  <div class="productGrid" id="productGrid30"></div>
+
+</div>
+<div id="productSection31" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Healthy Choices
+  </div>
+
+  <div class="productGrid" id="productGrid31"></div>
+
+</div>
+<div id="productSection32" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Your Favorites
+  </div>
+
+  <div class="productGrid" id="productGrid32"></div>
+
+</div>
+
+<div id="miniCart" class="miniCart"></div>   <!-- ✅ HERE -->
+
+<div id="cartBar" class="cartBar hidden">
+
+  <div class="cartLeft">
+
+    <!-- 🖼 images -->
+    <div id="cartImages" class="cartImages"></div>
+
+    <div class="cartText">
+      <div id="cartCount">0 items</div>
+      <div id="cartTotal">₹0</div>
+    </div>
+
+  </div>
+
+  <button id="viewCartBtn">View Cart</button>
+
+</div>
+
+<div class="instaFooter">
+  <h2>Cizoo</h2>
+  <p>Crafted with 💙 in India</p>
+  <p class="fLocation">Tanuku, Andhra Pradesh, India</p>
+</div>
+
+<div class="bottomNav">
+
+  <div class="navItem active">
+    <img src="homie.webp">
+    <p>Home</p>
+  </div>
+
+  <div class="navItem">
+    <img src="catergrois.webp">
+    <p>Categories</p>
+  </div>
+
+  <div class="navItem">
+    <img src="custeer.webp">
+    <p>Help</p>
+  </div>
+
+  <div class="navItem videoNav">
+    <video 
+  src="offer.mp4" 
+  autoplay 
+  muted 
+  loop 
+  playsinline 
+  preload="auto">
+</video>
+  </div>
+
+</div>
+
+
+</div>
+<div class="popup" id="popup">
+  <div class="popupContent" id="popupContent">
+  
+    <div id="popupData"></div>
+  </div>
+</div>
+<!-- Reusable Category Popup -->
+<div id="categoryPopup" class="popup">
+  <div style="
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 15px;
+      border-bottom:1px solid #eee;
+      font-family:'Poppins', sans-serif;
+  ">
+    
+    <!-- Back Arrow Button -->
+    <button id="closePopupBtn" style="
+        width:36px;
+        height:36px;
+        background:#f5f5f5;
+        border:none;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        box-shadow:0 2px 6px rgba(0,0,0,0.1);
+        transition:all 0.2s ease;
+    ">
+      <i class="fa-solid fa-chevron-left" style="font-size:16px; color:#333;"></i>
+    </button>
+
+    <!-- Title on the Right Edge -->
+    <h2 id="categoryTitle" style="
+        margin:0;
+        font-size:20px;
+        font-weight:600;
+        letter-spacing:0.3px;
+        color:#111;
+        text-align:right;
+        flex:1;
+        font-family:'Playfair Display SC', serif;
+        color:#e53935;
+    ">
+      Category
+    </h2>
+  </div>
+
+  <div id="categoryGrid" class="productGrid"></div>
+</div>
+
+<!-- Product Details Popup -->
+<div id="productPopup" class="popup">
+  <!-- Existing product detail content -->
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var supabase = window.supabase.createClient(
+  "https://izoipzriynkcjtwuzrfu.supabase.co",
+  "sb_publishable_7ZRL1Y4JAppLTJonepuTIw_UQyGjVVw"
+);
+setTimeout(()=>{
+
+  // SHOW MAIN FIRST (behind splash)
+  main.style.display = "flex";
+  showOnly("detecting");
+
+  // THEN FADE SPLASH
+  splash.style.opacity = "0";
+  splash.style.transition = "0.6s";
+
+  setTimeout(()=>{
+    splash.style.display = "none";
+    getLocation();   // start location AFTER
+  },600);
+
+},2600);
+
+function getLocation(){
+  navigator.geolocation.getCurrentPosition(async(pos)=>{
+    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
+    const data = await res.json();
+    const a = data.address;
+
+    let line1 = [a.road, a.suburb || a.village].filter(Boolean).join(", ");
+    let line2 = [a.city || a.town, a.state].filter(Boolean).join(", ");
+    let full = [line1,line2].filter(Boolean).join(", ");
+
+    let city = a.city || a.town || a.village || "Your Location";
+
+    addressText.innerText = full;
+
+    showOnly("success");
+
+    setTimeout(()=>{
+      main.style.display="none";
+      home.style.display="block";
+
+      cityName.innerText = city;
+      shortAddress.innerText = full;
+
+    },3000);
+
+  });
+}
+
+function showOnly(id){
+  ["detecting","success"].forEach(sec=>{
+    document.getElementById(sec).style.display="none";
+  });
+  document.getElementById(id).style.display="block";
+}
+const categories = document.querySelectorAll(".catItem");
+
+categories.forEach(cat => {
+  cat.addEventListener("click", () => {
+    const color = cat.getAttribute("data-color");
+
+    document.getElementById("topSection").style.background = color;
+
+    categories.forEach(c => c.classList.remove("active"));
+    cat.classList.add("active");
+
+    const text = cat.innerText.trim();
+
+  const content = document.getElementById("contentSection");
+  const productSection = document.getElementById("productSection");
+  const productSection2 = document.getElementById("productSection2"); 
+  const productSection3 = document.getElementById("productSection3");
+const productSection4 = document.getElementById("productSection4");
+const productSection5 = document.getElementById("productSection5");// ALL
+const fresh = document.getElementById("freshSection");     // FRESH
+const offer = document.getElementById("offerSection");     // 50%
+const cool = document.getElementById("coolSection");
+const skin = document.getElementById("skinSection");
+const homeSec = document.getElementById("homeSection");
+const choco = document.getElementById("chocoSection");
+const grocery = document.getElementById("grocerySection");
+const freshItems = document.getElementById("freshItems");
+const dailyItems = document.getElementById("dailyItems");
+const beautyItems = document.getElementById("beautyItems");
+const houseItems = document.getElementById("houseItems");
+const wholesaleItems = document.getElementById("wholesaleItems");
+const wholesaleFruits = document.getElementById("wholesaleFruits");
+const productSection6 = document.getElementById("productSection6");
+const productSection7 = document.getElementById("productSection7");
+const productSection8 = document.getElementById("productSection8");
+const productSection9 = document.getElementById("productSection9");
+const productSection10 = document.getElementById("productSection10");
+const productSection11 = document.getElementById("productSection11");
+const colldrinksec = document.getElementById("colldrinksec");
+const productSection12 = document.getElementById("productSection12");
+const productSection13 = document.getElementById("productSection13");
+const productSection14 = document.getElementById("productSection14");
+const wholesalebrand = document.getElementById("wholesalebrand");
+
+const productSection15 = document.getElementById("productSection15");
+const productSection16 = document.getElementById("productSection16");
+const productSection17 = document.getElementById("productSection17");
+const productSection18 = document.getElementById("productSection18");
+const productSection19 = document.getElementById("productSection19");
+const productSection21 = document.getElementById("productSection21");
+const productSection22 = document.getElementById("productSection22");
+const wholesalecools = document.getElementById("wholesalecools");
+const productSection23 = document.getElementById("productSection23");
+const productSection24 = document.getElementById("productSection24");
+const productSection25 = document.getElementById("productSection25");
+const productSection26 = document.getElementById("productSection26");
+const productSection27 = document.getElementById("productSection27");
+
+const productSection28 = document.getElementById("productSection28");
+
+const productSection29 = document.getElementById("productSection29");
+
+const productSection30 = document.getElementById("productSection30");
+
+const productSection31 = document.getElementById("productSection31");
+
+const productSection32 = document.getElementById("productSection32");
+
+
+if(text === "All"){
+  content.style.display = "flex";
+   productSection.style.display = "block";   // ✅ SHOW PRODUCTS
+productSection2.style.display = "block";   // ✅ SHOW 2nd row
+  fresh.style.display = "none";
+  offer.style.display = "none";
+  cool.style.display = "none";
+  homeSec.style.display = "none";
+  skin.style.display = "none"; 
+  choco.style.display = "none";grocery.style.display = "none";
+  freshItems.style.display = "block";
+dailyItems.style.display = "block";
+productSection6.style.display = "none";
+wholesalebrand.style.display = "block";
+productSection7.style.display = "none";
+productSection8.style.display = "none";
+productSection9.style.display = "none";
+productSection15.style.display = "none";
+productSection23.style.display = "none";
+productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+
+beautyItems.style.display = "block";
+houseItems.style.display = "block";
+productSection3.style.display = "block";
+ productSection10.style.display = "none";
+  productSection12.style.display = "none";
+productSection4.style.display = "block";
+productSection5.style.display = "block";
+wholesaleItems.style.display = "block"; 
+wholesaleFruits.style.display = "none";
+productSection11.style.display = "none";
+productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+colldrinksec.style.display = "none";
+productSection13.style.display = "none";  // ✅ FIX
+productSection14.style.display = "none"; 
+wholesalecools.style.display = "none";
+productSection24.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+
+}
+
+else if(text === "Fresh"){
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  content.style.display = "none";
+  fresh.style.display = "flex";
+  wholesalebrand.style.display = "none";
+
+   productSection6.style.display = "block";
+productSection7.style.display = "block";
+productSection8.style.display = "block";
+productSection9.style.display = "block";
+wholesaleFruits.style.display = "block";
+  offer.style.display = "none";
+  cool.style.display = "none";
+  productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+  skin.style.display = "none"; 
+  productSection3.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+ productSection10.style.display = "none";
+ productSection13.style.display = "none";
+  freshItems.style.display = "none";
+dailyItems.style.display = "none";
+productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+beautyItems.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+  homeSec.style.display = "none";
+  choco.style.display = "none";grocery.style.display = "none";
+  productSection11.style.display = "none";
+  colldrinksec.style.display = "none";
+    productSection12.style.display = "none";// ✅ FIX
+    productSection14.style.display = "none";
+    wholesalecools.style.display = "none"; 
+    productSection23.style.display = "none";
+    productSection24.style.display = "none";
+    productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+
+else if(text === "Summer"){
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  content.style.display = "none";
+  fresh.style.display = "none";
+  offer.style.display = "flex";
+  productSection6.style.display = "none";
+  productSection7.style.display = "none";
+  productSection8.style.display = "none";
+  wholesaleFruits.style.display = "none";
+productSection9.style.display = "none";
+productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+  freshItems.style.display = "none";
+   wholesalebrand.style.display = "none";
+
+dailyItems.style.display = "none";
+productSection3.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+beautyItems.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+  cool.style.display = "none";
+  skin.style.display = "none";
+  homeSec.style.display = "none"; 
+  choco.style.display = "none"; grocery.style.display = "none"; // ✅ FIX
+ productSection10.style.display = "none";
+ productSection11.style.display = "none";
+ colldrinksec.style.display = "none";
+ productSection12.style.display = "none";
+ productSection13.style.display = "none";
+ productSection14.style.display = "none"; 
+ productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+  wholesalecools.style.display = "none";
+  productSection23.style.display = "none";
+  productSection24.style.display = "none";
+  productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+
+else if(text === "Cool"){
+  content.style.display = "none";
+  fresh.style.display = "none";
+  productSection6.style.display = "none";
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  offer.style.display = "none";
+   wholesalebrand.style.display = "none";
+productSection15.style.display = "block";
+productSection16.style.display = "block";
+productSection17.style.display = "block";
+productSection18.style.display = "block";
+productSection19.style.display = "block";
+productSection20.style.display = "block";
+  freshItems.style.display = "none";
+  productSection7.style.display = "none";
+  wholesaleFruits.style.display = "none";
+  productSection8.style.display = "none";
+    productSection10.style.display = "block";
+    productSection11.style.display = "block";
+productSection9.style.display = "none";
+productSection12.style.display = "block";
+dailyItems.style.display = "none";
+colldrinksec.style.display = "block";
+productSection3.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+beautyItems.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+  cool.style.display = "block";
+  skin.style.display = "none";
+  homeSec.style.display = "none"; 
+  choco.style.display = "none"; 
+  grocery.style.display = "none"; 
+  productSection13.style.display = "block";
+  productSection14.style.display = "block"; 
+  productSection21.style.display = "none";
+  productSection22.style.display = "none";
+  productSection23.style.display = "block";
+  wholesalecools.style.display = "block"; 
+  productSection24.style.display = "none";
+  productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+
+else if(text === "Skin Care"){
+  content.style.display = "none";
+  fresh.style.display = "none";
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  offer.style.display = "none";
+  productSection6.style.display = "none";
+  wholesaleFruits.style.display = "none";
+   productSection10.style.display = "none";
+  productSection7.style.display = "none";
+  productSection12.style.display = "none";
+  productSection8.style.display = "none";
+productSection9.style.display = "none";
+  cool.style.display = "none";
+  skin.style.display = "block"; 
+   wholesalebrand.style.display = "none";
+productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+  productSection3.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+  homeSec.style.display = "none";
+  freshItems.style.display = "none";
+dailyItems.style.display = "none";
+beautyItems.style.display = "none";
+colldrinksec.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+  choco.style.display = "none";
+  grocery.style.display = "none"; // ✅ only here visible
+  productSection11.style.display = "none"; 
+  productSection13.style.display = "none";
+  productSection14.style.display = "none"; 
+  productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+  wholesalecools.style.display = "none";
+  productSection23.style.display = "none";
+  productSection24.style.display = "none";
+  productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+
+else if(text === "Home"){
+  content.style.display = "none";
+  fresh.style.display = "none";
+  productSection6.style.display = "none";
+  offer.style.display = "none";
+  productSection12.style.display = "none";
+  productSection3.style.display = "none";
+  productSection7.style.display = "none";
+  wholesaleFruits.style.display = "none";
+   productSection10.style.display = "none";
+  productSection8.style.display = "none";
+  colldrinksec.style.display = "none";
+productSection9.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+  cool.style.display = "none";
+   wholesalebrand.style.display = "none";
+productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+  freshItems.style.display = "none";
+dailyItems.style.display = "none";
+beautyItems.style.display = "none";
+houseItems.style.display = "none";
+productSection13.style.display = "none";
+wholesaleItems.style.display = "none";
+  skin.style.display = "none";
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  homeSec.style.display = "block";
+  choco.style.display = "none";
+  grocery.style.display = "none";
+  productSection11.style.display = "none"; 
+  productSection14.style.display = "none"; 
+  productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+  wholesalecools.style.display = "none";
+  productSection23.style.display = "none";
+  productSection24.style.display = "none";
+  productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+else if(text === "Chocolates"){
+  content.style.display = "none";
+  fresh.style.display = "none";
+  productSection12.style.display = "none";
+  productSection7.style.display = "none";
+   productSection10.style.display = "none";
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  offer.style.display = "none";
+  productSection21.style.display = "block";
+  productSection22.style.display = "block"; 
+  wholesaleFruits.style.display = "none";
+  cool.style.display = "none";
+   wholesalebrand.style.display = "none";
+productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+  colldrinksec.style.display = "none";
+  productSection6.style.display = "none";
+  productSection3.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+  skin.style.display = "none";
+  homeSec.style.display = "none";
+  choco.style.display = "block";
+  grocery.style.display = "none";
+  freshItems.style.display = "none";
+dailyItems.style.display = "none";
+beautyItems.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+productSection11.style.display = "none"; 
+productSection13.style.display = "none";
+productSection14.style.display = "none"; 
+wholesalecools.style.display = "none";
+productSection8.style.display = "none";
+productSection9.style.display = "none";
+productSection23.style.display = "none";
+productSection24.style.display = "block";
+productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+else if(text === "Groceries"){
+  content.style.display = "none";
+  fresh.style.display = "none";
+  productSection12.style.display = "none";
+  productSection7.style.display = "none";
+  offer.style.display = "none";
+  productSection21.style.display = "none";
+  productSection22.style.display = "none"; 
+   wholesalebrand.style.display = "none";
+productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+   productSection10.style.display = "none";
+  productSection3.style.display = "none";
+productSection4.style.display = "none";
+colldrinksec.style.display = "none";
+wholesaleFruits.style.display = "none";
+productSection5.style.display = "none";
+  cool.style.display = "none";
+  productSection8.style.display = "none";
+productSection9.style.display = "none";
+  productSection6.style.display = "none";
+  productSection13.style.display = "none";
+  skin.style.display = "none";
+  homeSec.style.display = "none";
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+productSection2.style.display = "none";   // ❌ HIDE 2nd row
+  choco.style.display = "none";
+  grocery.style.display = "block";
+  freshItems.style.display = "none";
+dailyItems.style.display = "none";
+beautyItems.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+productSection11.style.display = "none"; 
+productSection14.style.display = "none"; 
+wholesalecools.style.display = "none";
+productSection23.style.display = "none";
+productSection24.style.display = "none";
+productSection25.style.display = "block";
+productSection26.style.display = "block";
+productSection27.style.display = "block";
+
+productSection28.style.display = "block";
+productSection29.style.display = "block";
+productSection30.style.display = "block";
+productSection31.style.display = "block";
+productSection32.style.display = "block";
+}
+else{
+  content.style.display = "none";
+   wholesalebrand.style.display = "none";
+productSection15.style.display = "none";
+productSection16.style.display = "none";
+productSection17.style.display = "none";
+productSection18.style.display = "none";
+productSection19.style.display = "none";
+productSection20.style.display = "none";
+  fresh.style.display = "none";
+  offer.style.display = "none";
+  productSection12.style.display = "none";
+  colldrinksec.style.display = "none";
+   productSection10.style.display = "none";
+  wholesaleFruits.style.display = "none";
+  productSection7.style.display = "none";
+  freshItems.style.display = "none";
+dailyItems.style.display = "none";
+beautyItems.style.display = "none";
+productSection8.style.display = "none";
+productSection9.style.display = "none";
+productSection6.style.display = "none";
+productSection3.style.display = "none";
+productSection13.style.display = "none";
+productSection4.style.display = "none";
+productSection5.style.display = "none";
+houseItems.style.display = "none";
+wholesaleItems.style.display = "none";
+  cool.style.display = "none";
+  skin.style.display = "none";
+    productSection.style.display = "none";   // ❌ HIDE PRODUCTS
+  grocery.style.display = "none";
+  homeSec.style.display = "none";  
+  choco.style.display = "none"; 
+  productSection11.style.display = "none"; 
+  productSection10.style.display = "none";
+  productSection14.style.display = "none";  
+  productSection21.style.display = "none";
+  wholesalecools.style.display = "none";
+  productSection22.style.display = "none"; 
+  productSection23.style.display = "none";
+  productSection24.style.display = "none";
+  productSection25.style.display = "none";
+productSection26.style.display = "none";
+productSection27.style.display = "none";
+productSection28.style.display = "none";
+productSection29.style.display = "none";
+productSection30.style.display = "none";
+productSection31.style.display = "none";
+productSection32.style.display = "none";
+}
+  });
+});
+const leafContainer = document.querySelector(".leaves");
+
+for(let i=0; i<25; i++){
+  const leaf = document.createElement("span");
+
+  leaf.style.left = Math.random() * 100 + "%";
+  leaf.style.animationDuration = (6 + Math.random()*6) + "s";
+  leaf.style.animationDelay = "0s"; // ✅ start immediately
+
+  leafContainer.appendChild(leaf);
+}
+// default load
+document.querySelector(".catItem").click();
+
+const fruits = document.querySelectorAll(".fruit");
+const sparkleContainer = document.querySelector(".sparkleContainer");
+const freshSection = document.getElementById("freshSection");
+
+setInterval(() => {
+
+  const sectionRect = freshSection.getBoundingClientRect();
+
+  fruits.forEach(fruit => {
+
+    const rect = fruit.getBoundingClientRect();
+
+    // ✅ correct bottom detection
+    if(rect.bottom > sectionRect.bottom - 10){
+
+      const sparkle = document.createElement("span");
+      sparkle.className = "sparkle";
+      sparkle.innerText = ["✨","⭐","💫"][Math.floor(Math.random()*3)];
+
+      sparkle.style.left = (rect.left - sectionRect.left) + "px";
+      sparkle.style.top = (rect.bottom - sectionRect.top - 20) + "px";
+
+      sparkleContainer.appendChild(sparkle);
+
+      setTimeout(()=> sparkle.remove(), 600);
+    }
+
+  });
+
+}, 200);
+const confettiContainer = document.querySelector(".confettiContainer");
+
+function createConfetti(){
+
+  for(let i=0;i<40;i++){
+
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+
+    // random position
+    conf.style.left = Math.random()*100 + "%";
+
+    // random color
+    conf.style.background = [
+      "#ff3d00","#ff6a00","#ffb300","#ffd54f","#ff4081","#7c4dff"
+    ][Math.floor(Math.random()*6)];
+
+    // random size
+    conf.style.width = (4 + Math.random()*6) + "px";
+    conf.style.height = (6 + Math.random()*8) + "px";
+
+    // random speed
+    conf.style.animationDuration = (1 + Math.random()*1.5) + "s";
+
+    confettiContainer.appendChild(conf);
+
+    setTimeout(()=> conf.remove(), 1500);
+  }
+}
+
+/* 🔁 LOOP (continuous explosion) */
+setInterval(()=>{
+  createConfetti();
+  if(Math.random() < 0.5) createConfetti(); // double burst sometimes
+},700);
+
+const rainContainer = document.querySelector(".rain");
+
+function createRain(){
+
+  for(let i=0;i<20;i++){
+
+    const drop = document.createElement("div");
+    drop.className = "drop";
+
+   drop.style.left = Math.random()*100 + "%";
+    drop.style.animationDuration = (0.8 + Math.random()*0.7) + "s";
+
+    rainContainer.appendChild(drop);
+
+    setTimeout(()=> drop.remove(), 1500);
+  }
+}
+
+/* continuous rain */
+setInterval(createRain, 200);
+const lightning = document.querySelector(".lightning");
+
+function triggerLightning(){
+
+  lightning.style.opacity = "0.8";
+
+  setTimeout(()=>{
+    lightning.style.opacity = "0";
+  },100);
+
+}
+function thunder(){
+
+  triggerLightning();
+
+  setTimeout(triggerLightning, 150); // second flash
+  setTimeout(triggerLightning, 300); // third flash
+
+}
+
+/* random thunder */
+setInterval(()=>{
+  thunder();
+}, 3000);
+
+const glowContainer = document.querySelector(".glowContainer");
+
+function createGlow(){
+
+  for(let i=0;i<15;i++){
+
+    const g = document.createElement("div");
+    g.className = "glow";
+
+    g.style.left = Math.random()*100 + "%";
+
+    g.style.animationDuration = (2 + Math.random()*2) + "s";
+
+    g.style.width = (6 + Math.random()*6) + "px";
+    g.style.height = g.style.width;
+
+    glowContainer.appendChild(g);
+
+    setTimeout(()=> g.remove(), 3000);
+  }
+}
+
+/* continuous glow */
+setInterval(createGlow, 800);
+const navItems = document.querySelectorAll(".navItem");
+
+navItems.forEach(item=>{
+  item.addEventListener("click",()=>{
+
+    navItems.forEach(i=>i.classList.remove("active"));
+    item.classList.add("active");
+
+    const text = item.innerText.trim();
+
+    if(text.includes("Home")){
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    if(text.includes("Categories")){
+      document.querySelector(".categories").scrollIntoView({
+        behavior:"smooth"
+      });
+    }
+
+    if(text.includes("Help")){
+      alert("Help & Support coming soon 🚀");
+    }
+
+    if(text.includes("Video")){
+      alert("Video banner coming soon 🎬");
+    }
+
+  });
+});
+let lastScroll = 0;
+const bottomNav = document.querySelector(".bottomNav");
+
+window.addEventListener("scroll", () => {
+
+  let currentScroll = window.pageYOffset;
+
+  if(currentScroll > lastScroll){
+    // 🔻 scrolling DOWN → hide
+    bottomNav.classList.add("hide");
+  } else {
+    // 🔺 scrolling UP → show
+    bottomNav.classList.remove("hide");
+  }
+
+  lastScroll = currentScroll;
+});
+const navVideo = document.querySelector(".videoNav video");
+
+if(navVideo){
+  navVideo.play().catch(()=>{
+    // fallback if autoplay blocked
+    navVideo.muted = true;
+    navVideo.play();
+  });
+}
+async function loadProducts(){
+
+  const { data, error } = await supabase
+    .from("all_products")
+    .select("*")
+    .in("id", [2,3,4,5,6,7]);
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  const grid = document.getElementById("productGrid");
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["all_products_" + item.id] = item;    
+
+    const card = document.createElement("div");
+    card.className = "productCard";
+
+    card.innerHTML = `
+  <div class="imgWrap">
+    <img src="${item.image1}">
+
+    <!-- ✅ SAME AS loadProducts2 -->
+    <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="all_products">
+      <div class="addBtn2">+</div>
+    </div>
+
+  </div>
+
+  <div class="pName">${item.name}</div>
+
+  <div class="pQty">${item.quantity} ${item.unit}</div>
+
+  <div class="pPrice">
+    ₹${item.discount_price}
+    <span>₹${item.original_price}</span>
+  </div>
+`;
+
+
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "all_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+
+}
+function openPopup(item){
+  const table = item.table || "all_products";
+
+  const popup = document.getElementById("popup");
+  const dataDiv = document.getElementById("popupData");
+
+  const images = [item.image1, item.image2, item.image3].filter(Boolean);
+
+  dataDiv.innerHTML = `
+    <!-- TOP ICONS -->
+<div class="topIcons">
+  <div class="iconBtn" onclick="closePopup()">
+  <i class="fa-solid fa-chevron-down"></i>
+</div>
+</div>
+    <!-- IMAGE -->
+    <div class="imageSlider" id="slider">
+
+      
+      ${images.map(img => `<img src="${img}">`).join("")}
+
+    </div>
+
+    <!-- DOTS -->
+    <div class="dots">
+      ${images.map((_,i)=> `<div class="dot ${i===0?"active":""}"></div>`).join("")}
+    </div>
+
+    <div class="popupContent">
+
+   <div class="nameTopRow">
+
+  <div class="nameRow">
+    <h2>${item.name}</h2>
+    <span class="brandInline">${item.brand || ""}</span>
+  </div>
+
+  <div class="ratingBox">
+    <i class="fa-solid fa-star"></i> ${item.rating || "0"}
+  </div>
+
+</div>
+<div class="shortDesc">${item.short_desc || ""}</div>
+
+      <!-- PRICE + ADD -->
+    <!-- QUANTITY -->
+<div class="qtyText">
+  ${item.quantity} ${item.unit}
+</div>
+
+<!-- PRICE + ADD -->
+<div class="topRow">
+  <div class="priceRow">
+    ₹${item.discount_price}
+    <span class="strike">₹${item.original_price}</span>
+  </div>
+
+  <div class="popupCartControl" 
+     data-id="${item.id}" 
+     data-table="${table}">
+  <button class="addBigBtn">ADD</button>
+</div>
+</div>
+
+<div class="infoBox">
+
+  <div class="infoItem">
+    <div class="emoji">⏱️</div>
+    <div class="infoText">72 hrs<br><span>Easy Return</span></div>
+  </div>
+
+  <div class="infoItem">
+    <div class="emoji">🚀</div>
+    <div class="infoText">Fast Delivery<br><span>Quick</span></div>
+  </div>
+
+  <div class="infoItem">
+    <div class="emoji">📞</div>
+    <div class="infoText">24/7 Support<br><span>Help Anytime</span></div>
+  </div>
+
+</div>
+      <!-- RATING -->
+      
+     
+
+      <!-- INGREDIENTS -->
+     <div class="box">
+  <b>Ingredients</b>
+
+  <table class="ingTable">
+    ${
+      (() => {
+        let arr = [];
+
+        try {
+          arr = JSON.parse(item.ingredients || "[]");
+        } catch(e) {
+          return "<tr><td>-</td></tr>";
+        }
+
+        let rows = "";
+
+        for(let i = 0; i < arr.length; i += 2){
+          rows += `
+            <tr>
+              <td>${arr[i] || ""}</td>
+              <td>${arr[i+1] || ""}</td>
+            </tr>
+          `;
+        }
+
+        return rows;
+      })()
+    }
+  </table>
+
+</div>
+ <!-- LONG DESC -->
+      <div class="box">
+        <b>Description</b><br>
+        ${item.long_desc || "-"}
+      </div>
+
+      <!-- HOW TO USE -->
+     <div class="box">
+  <b>How to Use</b>
+
+  <ul class="pointList">
+    ${
+      (item.how_to_use || "")
+        .split(",")
+        .map(i => `<li>${i.trim()}</li>`)
+        .join("")
+    }
+  </ul>
+</div>
+
+      <!-- BENEFITS -->
+     <div class="box">
+  <b>Benefits</b>
+
+  <div class="benefitList">
+    ${
+      (item.benefits || "")
+        .split(",")
+        .map(i => `
+          <div class="benefitItem">
+            <span class="tick">✔</span>
+            <span>${i.trim()}</span>
+          </div>
+        `).join("")
+    }
+  </div>
+
+</div>
+
+      <!-- ADDITIONAL -->
+     <div class="infoPanelNew">
+  <b>Additional Info</b>
+
+  <div class="infoListNew">
+    ${
+      (item.additional_info || "")
+        .split(",")
+        .map(i => {
+          const parts = i.split(":");
+          return `
+            <div class="infoRowNew">
+              <div class="infoKeyNew">${parts[0] || ""}</div>
+              <div class="infoValNew">${parts[1] || ""}</div>
+            </div>
+          `;
+        }).join("")
+    }
+  </div>
+</div>
+<div class="buyNowWrap">
+  <button class="buyNowBtn">
+    Buy Now • ₹${item.discount_price}
+    <span>₹${item.original_price}</span>
+  </button>
+</div>
+    </div>
+
+  `;
+
+  popup.style.display = "flex";
+
+requestAnimationFrame(()=>{
+  popup.classList.add("show");
+});
+initAllUI();
+  // 🔥 DOTS WORKING
+  setTimeout(()=>{
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dot");
+
+    slider.addEventListener("scroll", () => {
+
+      const index = Math.round(slider.scrollLeft / slider.clientWidth);
+
+      dots.forEach(d => d.classList.remove("active"));
+
+      if(dots[index]){
+        dots[index].classList.add("active");
+      }
+
+    });
+
+  },100);
+}
+function closePopup(){
+  popup.classList.remove("show");
+
+  setTimeout(()=>{
+    popup.style.display = "none";
+  },300);
+  
+}
+loadProducts();
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    updateCartBar();   // 🔥 FORCE LOAD AFTER EVERYTHING READY
+  }, 300);
+});
+
+async function loadProducts2(){
+
+  const { data } = await supabase
+    .from("all_products")
+    .select("*")
+    .in("id", [8,9,10,11,14,15]);
+
+  const grid = document.getElementById("productGrid2");
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["all_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="all_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+<div class="brand2">${item.brand || ""}</div>
+      <div class="priceRow2">
+
+  <div class="pPrice2">
+    ₹${item.discount_price}
+    <span>₹${item.original_price}</span>
+  </div>
+
+  <div class="ratingGreen">
+    <i class="fa-solid fa-star"></i>
+    ${item.rating || "0"}
+  </div>
+
+</div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+  // ❌ block + button
+  if(e.target.closest(".cartControl")){
+    return;
+  }
+
+  const img = card.querySelector(".imgWrap2");
+  const rect = img.getBoundingClientRect();
+
+  const clickY = e.clientY - rect.top;
+
+  // 🎯 EXACT HALF of image
+  const half = rect.height / 2;
+
+  // 🔴 TOP HALF → NO popup
+  if(clickY < half){
+    return;
+  }
+
+  // 🟡 BOTTOM HALF → popup
+  openPopup({
+    ...item,
+    table: item.table || "all_products"
+  });
+
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+loadProducts2();
+
+
+
+
+async function loadProducts3(){
+
+  const { data } = await supabase
+    .from("all_products")
+    .select("*")
+    .in("id", [16,17,18,19,20,21]);
+
+  const grid = document.getElementById("productGrid3");
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["all_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+
+        <div class="cartControl" 
+          data-id="${item.id}" 
+          data-table="all_products">
+          <div class="addBtn2">+</div>
+        </div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    // ✅ NEW CLICK LOGIC
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+      // 🟡 bottom half + text → popup
+      openPopup({
+        ...item,
+        table: item.table || "all_products"
+      });
+
+    });
+
+    grid.appendChild(card);
+  });
+
+  initAllUI();
+}
+
+loadProducts3();
+async function loadProducts4(){
+
+  const { data } = await supabase
+    .from("all_products")
+    .select("*")
+    .in("id", [22,23,24,25,26,27]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid4"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["all_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="all_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "all_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts4(); // ✅ call function
+
+async function loadProducts5(){
+
+  const { data } = await supabase
+    .from("all_products")
+    .select("*")
+    .in("id", [28,29,30,31,32,33]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid5"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["all_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+    data-table="all_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+    const addBtn = card.querySelector(".addBtn2");
+
+// ✅ button always clickable
+// ✅ button always clickable
+// addBtn.addEventListener("click", function(e){
+  // e.stopPropagation();
+  // console.log("✅ PLUS CLICKED");
+// });
+
+// 🔥 FIXED HALF AREA BLOCK
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  // ✅ VERY IMPORTANT → allow + click
+  if(e.target === addBtn){
+    return;
+  }
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ block only top half
+  if(clickY < half){
+    e.stopPropagation();
+  }
+
+});
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "all_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts5(); 
+
+
+// ✅ fresh Section
+
+
+async function loadProducts6(){
+
+  const { data } = await supabase
+    .from("fresh_products")
+    .select("*")
+    .in("id", [3,4,5,6,7,8]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid6"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["fresh_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+    data-table="fresh_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "fresh_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts6(); 
+
+async function loadProducts7(){
+
+  const { data } = await supabase
+    .from("fresh_products")
+    .select("*")
+    .in("id", [10,11,12,13,14]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid7"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["fresh_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+        <div class="bottomShade"></div>
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="fresh_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "fresh_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts7(); 
+
+async function loadProducts8(){
+
+  const { data } = await supabase
+    .from("fresh_products")
+    .select("*")
+    .in("id", [15,16,17,18,19]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid8"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["fresh_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="fresh_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "fresh_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts8(); 
+
+async function loadProducts9(){
+
+  const { data } = await supabase
+    .from("fresh_products")
+    .select("*")
+    .in("id", [20,21,22,9,2]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid9"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["fresh_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="fresh_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "fresh_products"
+  
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts9(); 
+// ✅ cool starts here 
+
+
+async function loadProducts10(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    
+    .select("*")
+    .in("id", [7,8,9,10,11,12]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid10"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+// 🔥 FIXED HALF AREA BLOCK
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  // ✅ VERY IMPORTANT → allow + click
+  if(e.target === addBtn){
+    return;
+  }
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ block only top half
+  if(clickY < half){
+    e.stopPropagation();
+  }
+
+});
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+  
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts10(); 
+
+async function loadProducts11(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [18,19,20,21,22,23,79,80]); // ✅ new IDs
+
+  const grid = document.getElementById("productGrid11"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts11(); 
+
+
+async function loadProducts12(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [13,14,15,16,37,24]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid12"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts12(); 
+
+async function loadProducts13(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [25,26,27,28,29,30,31]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid13"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts13(); 
+
+async function loadProducts14(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [32,33,34,35,36,39]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid14"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts14(); 
+
+
+async function loadProducts15(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [40,41,42,43,44,46,47]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid15"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts15(); 
+
+
+async function loadProducts16(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [48,49,50,51,52,53,54]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid16"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts16(); 
+
+
+async function loadProducts17(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [55,56,57,58,59,60,61]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid17"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts17();
+
+
+async function loadProducts18(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [62,63,64,65,66,67,68]);  // ✅ new IDs
+
+  const grid = document.getElementById("productGrid18"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts18();
+
+
+
+
+
+
+async function loadProducts19(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [3,5,8,9,10,14,16,67]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid19"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts19(); 
+
+
+async function loadProducts20(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [22,23,24,25,26,69,70,71]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid20"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+    data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts20(); 
+
+
+
+async function loadProducts21(){
+
+  const { data } = await supabase
+    .from("chocolate_products")
+    .select("*")
+    .in("id", [9,10,11,12,13,14,23]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid21"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["chocolate_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="chocolate_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "chocolate_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts21(); 
+
+
+async function loadProducts22(){
+
+  const { data } = await supabase
+    .from("chocolate_products")
+    .select("*")
+    .in("id", [15,16,17,18,19,20,21,22,24]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid22"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["chocolate_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="chocolate_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "chocolate_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts22(); 
+
+
+async function loadProducts23(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [72,73,74,75,76,77,78,81,82]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid23"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["chocolate_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts23(); 
+
+
+
+
+
+async function loadProducts24(){
+
+  const { data } = await supabase
+    .from("chocolate_products")
+    .select("*")
+    .in("id", [25,26,27,28,29,30,31]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid24"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["chocolate_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="chocolate_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "chocolate_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts24(); 
+
+
+
+async function loadProducts25(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [20,21,22,23,24,25,26,27,28]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid25"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts25(); 
+
+
+async function loadProducts26(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [29,30,31,32,33,34,35,36,37]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid26"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+// 🔥 FIXED HALF AREA BLOCK
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  // ✅ VERY IMPORTANT → allow + click
+  if(e.target === addBtn){
+    return;
+  }
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ block only top half
+  if(clickY < half){
+    e.stopPropagation();
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+  
+}
+
+loadProducts26(); 
+
+
+
+
+async function loadProducts27(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [3,4,5,38,39,40,41,42,43,44]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid27"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+// 🔥 FIXED HALF AREA BLOCK
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  // ✅ VERY IMPORTANT → allow + click
+  if(e.target === addBtn){
+    return;
+  }
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ block only top half
+  if(clickY < half){
+    e.stopPropagation();
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts27(); 
+
+
+async function loadProducts28(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [45,46,47,48,49,50,51,52,53]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid28"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts28(); 
+
+async function loadProducts29(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [54,55,56,57,58,59,60,61,63]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid29"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+// 🔥 FIXED HALF AREA BLOCK
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  // ✅ VERY IMPORTANT → allow + click
+  if(e.target === addBtn){
+    return;
+  }
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ block only top half
+  if(clickY < half){
+    e.stopPropagation();
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts29(); 
+
+async function loadProducts30(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [64,65,66,67,68,69,70,71]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid30"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts30(); 
+
+
+async function loadProducts31(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [72,73,74,75,76,77,78,79]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid31"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts31(); 
+
+async function loadProducts32(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [80,81,82,83,84,85,86,87]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid32"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts32();
+
+
+// Mapping of categories to Supabase tables and product IDs
+const categoryConfig = {
+  cool_drinks: {
+    table: "cool_drinks_products",
+    ids: [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,4,2],
+    title: "2 Litre Cool Drinks"
+  },
+  instant: {
+    table: "cool_drinks_products",
+    ids: [11,12,13,14,15,16,31,32,33,34,35,36,37,38,39,8],
+    title: "Instant"
+  },
+  juices: {
+    table: "cool_drinks_products",
+    ids: [18,19,17,20,21,22,23,2,3,4,5,6,8,9,35,31],
+    title: "Juices"
+  },
+  boost_energy: {
+    table: "cool_drinks_products",
+    ids: [24,25,26,27,28,29,30,10,11,12,13,14,15,20,21],
+    title: "Boost Energy"
+  },
+  under_20 : {
+    table: "cool_drinks_products",
+    ids: [2,18,19,20,21,22,23,24,25,26,62,63,64,65,70,71],
+    title: "Under 20"
+  },
+  Water_Bottles: {
+    table: "cool_drinks_products",
+    ids: [63,64,65,66,67,68,69,70,8,9,10,11,12,19,22],
+    title: "Water_Bottles"
+  },
+  Dairy: {
+    table: "cool_drinks_products",
+    ids: [24,25,26,27,28,29,30,10,11,12,13,14,15,20,21],
+    title: "Dairy"
+  },
+  one_Litre: {
+    table: "cool_drinks_products",
+    ids: [7,27,28,29,30,31,32,33,34,35,36,37,58,43,44],
+    title: "One Litre"
+  }
+};
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("categoryPopup");
+  const titleElement = document.getElementById("categoryTitle");
+  const grid = document.getElementById("categoryGrid");
+  const closeBtn = document.getElementById("closePopupBtn");
+
+  // Add click listeners to all midItem elements
+  document.querySelectorAll(".midItem").forEach(item => {
+    item.addEventListener("click", () => {
+      const categoryKey = item.dataset.category;
+      const config = categoryConfig[categoryKey];
+
+      if (!config) {
+        console.error(`No configuration found for category: ${categoryKey}`);
+        return;
+      }
+
+      // Set popup title
+      titleElement.textContent = config.title;
+
+      // Show popup
+      popup.classList.add("show");
+
+      // Load products from Supabase
+      loadCategoryProducts(config.table, config.ids);
+    });
+  });
+
+  // Close popup
+  closeBtn.addEventListener("click", () => {
+    popup.classList.remove("show");
+  });
+});
+async function loadCategoryProducts(tableName, ids) {
+  const grid = document.getElementById("categoryGrid");
+ grid.innerHTML = `
+  <div style="
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    width: 100%;
+    text-align: center;
+  ">
+    <p style="margin: 0; font-size: 16px; color: #555;">Loading...</p>
+  </div>
+`;
+  const { data, error } = await supabase
+    .from(tableName)
+    .select("*")
+    .in("id", ids);
+
+  if (error) {
+    console.error(`Error loading ${tableName}:`, error);
+    grid.innerHTML = "<p style='padding:20px; text-align:center;'>Failed to load products.</p>";
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["all_products_" + item.id] = item;    const card = document.createElement("div");
+    card.className = "productCard2";
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}" alt="${item.name}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="${tableName}">
+  <div class="addBtn2">+</div>
+</div>
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    // Open your existing product details popup
+    card.addEventListener("click", (e) => {
+
+  if(e.target.closest(".cartControl")){
+    return;
+  }
+
+  openPopup({
+    ...item,
+    table: tableName   // ✅ CRITICAL FIX
+  });
+
+});
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+let scrollPosition = 0;
+
+// 🔒 Disable background scrolling
+function lockBodyScroll() {
+  scrollPosition = window.pageYOffset;
+  document.body.classList.add("popup-open");
+  document.body.style.top = `-${scrollPosition}px`;
+}
+
+// 🔓 Restore scrolling and previous position
+function unlockBodyScroll() {
+  document.body.classList.remove("popup-open");
+  document.body.style.top = "";
+  window.scrollTo(0, scrollPosition);
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("cartBar").addEventListener("click", toggleMiniCart);
+
+
+
+  function getCart(){
+    return JSON.parse(localStorage.getItem("cart") || "{}");
+  }
+
+  function setCart(cart){
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function updateBoxes(id, table, count){
+    document.querySelectorAll(`.cartControl[data-id="${id}"][data-table="${table}"]`)
+      .forEach(box => {
+
+        if(count > 0){
+          box.classList.add("active");
+          box.innerHTML = `
+            <div class="minus">-</div>
+            <div class="count">${count}</div>
+            <div class="plus">+</div>
+          `;
+        } else {
+          box.classList.remove("active");
+          box.innerHTML = `<div class="addBtn2">+</div>`;
+        }
+
+      });
+  }
+
+  function updatePopupBox(id, table, count){
+    document.querySelectorAll(`.popupCartControl[data-id="${id}"][data-table="${table}"]`)
+      .forEach(box => {
+
+        if(count > 0){
+          box.classList.add("active");
+
+          box.innerHTML = `
+            <div class="minus">-</div>
+            <div class="count">${count}</div>
+            <div class="plus">+</div>
+          `;
+        } else {
+          box.classList.remove("active");
+          box.innerHTML = `<button class="addBigBtn">ADD</button>`;
+        }
+
+      });
+  }
+
+  window.initAllUI = function(){
+    const cart = getCart();
+
+    document.querySelectorAll(".cartControl").forEach(box => {
+      const id = box.dataset.id;
+      const table = box.dataset.table;
+      const key = table + "_" + id;
+
+      const count = cart[key] || 0;
+      updateBoxes(id, table, count);
+    });
+
+    document.querySelectorAll(".popupCartControl").forEach(box => {
+      const id = box.dataset.id;
+      const table = box.dataset.table;
+      const key = table + "_" + id;
+
+      const count = cart[key] || 0;
+      updatePopupBox(id, table, count);
+    });
+  }
+
+  document.body.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".addBtn2, .plus, .minus, .addBigBtn");
+    if(!btn) return;
+
+    const box = btn.closest(".cartControl") || btn.closest(".popupCartControl");
+    if(!box) return;
+
+    const id = box.dataset.id;
+    const table = box.dataset.table;
+    const key = table + "_" + id;
+
+    let cart = getCart();   // ✅ FIXED
+    let count = cart[key] || 0;   // ✅ FIXED
+
+    if(
+      btn.classList.contains("addBtn2") ||
+      btn.classList.contains("plus") ||
+      btn.classList.contains("addBigBtn")
+    ){
+      count++;
+    } 
+    else if(btn.classList.contains("minus")){
+      count--;
+    }
+
+    if(count <= 0){
+      delete cart[key];   // ✅ FIXED
+      count = 0;
+    } else {
+      cart[key] = count;  // ✅ FIXED
+    }
+
+    setCart(cart);
+    updateCartBar();
+
+    updateBoxes(id, table, count);        // ✅ FIXED
+    updatePopupBox(id, table, count);   
+      // 🔥 ADD HERE (THIS EXACT PLACE)
+const mini = document.getElementById("miniCart");
+
+if(mini.classList.contains("show")){
+  renderMiniCart();
+}
+  });
+
+});
+function updateCartBar(){
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+  const keys = Object.keys(cart);
+
+  const bar = document.getElementById("cartBar");
+  const imgBox = document.getElementById("cartImages");
+  const mini = document.getElementById("miniCart");
+
+  imgBox.innerHTML = "";
+
+  if(keys.length === 0){
+    bar.classList.add("hidden");
+    mini.classList.remove("show");
+    mini.innerHTML = "";
+    return;
+  }
+
+  // 🔥 WAIT UNTIL productMap READY (MAIN FIX)
+  if(!window.productMap || Object.keys(window.productMap).length === 0){
+    setTimeout(updateCartBar, 100);   // retry after 100ms
+    return;
+  }
+
+  bar.classList.remove("hidden");
+
+ calculateTotal(keys, cart);   // 🔥 NEW
+loadCartImages(keys);         // 🔥 OUTSIDE LOOP
+
+  const lastKeys = keys.slice(-3);
+
+ function loadCartImages(keys, attempt = 0){
+
+  imgBox.innerHTML = "";
+
+  let loaded = 0;
+
+  keys.slice(-3).forEach(key => {
+
+    const item = getProduct(key);
+
+    if(item && item.image1){
+      const img = document.createElement("img");
+      img.src = item.image1;
+      img.onerror = () => img.remove();
+      imgBox.appendChild(img);
+      loaded++;
+    }
+
+  });
+
+  // 🔥 retry if not all images loaded
+  if(loaded < Math.min(3, keys.length) && attempt < 5){
+    setTimeout(() => loadCartImages(keys, attempt + 1), 100);
+  }
+}
+
+// 🔥 call it
+loadCartImages(keys);
+
+  if(keys.length > 3){
+    const more = document.createElement("div");
+    more.className = "more";
+    more.textContent = "+" + (keys.length - 3);
+    imgBox.appendChild(more);
+  }
+}
+function toggleMiniCart(){
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+  const keys = Object.keys(cart);
+
+  const box = document.getElementById("miniCart");
+
+ if(keys.length === 0){
+  box.classList.remove("show");
+  box.innerHTML = "";   // 🔥 IMPORTANT (clear old items)
+  return;
+}
+
+  // toggle
+  if(box.classList.contains("show")){
+    box.classList.remove("show");
+    return;
+  }
+
+  box.innerHTML = "";
+
+  keys.forEach(key => {
+
+    const item = getProduct(key);
+if(!item) return;
+
+    // ✅ SPLIT KEY
+    const parts = key.split("_");
+const id = parts.pop();                 // last part = id
+const table = parts.join("_");          // rest = table
+
+    const div = document.createElement("div");
+    div.className = "miniRow";
+
+    div.innerHTML = `
+      <img src="${item.image1}" class="miniImg">
+
+      <div class="miniInfo">
+        <div>${item.name}</div>
+        <div>₹${item.discount_price}</div>
+      </div>
+
+      <!-- ✅ FIXED TABLE + ID -->
+      <div class="cartControl"
+        data-id="${id}"
+        data-table="${table}">
+      </div>
+    `;
+
+    box.appendChild(div);
+  });
+
+  box.classList.add("show");
+
+  initAllUI(); // 🔥 important for + -
+}
+
+function calculateTotal(keys, cart, attempt = 0){
+
+  let totalItems = 0;
+  let totalPrice = 0;
+  let ready = true;
+
+  keys.forEach(k => {
+
+    const item = getProduct(k);
+    const qty = cart[k] || 0;
+
+    totalItems += qty;
+
+    if(!item){
+      ready = false;
+      return;
+    }
+
+    totalPrice += item.discount_price * qty;
+
+  });
+
+  // retry if products not ready
+  if(!ready && attempt < 5){
+    setTimeout(() => calculateTotal(keys, cart, attempt + 1), 100);
+    return;
+  }
+
+  document.getElementById("cartCount").textContent =
+    totalItems === 1 ? "1 item" : totalItems + " items";
+
+  document.getElementById("cartTotal").textContent =
+    "₹" + totalPrice;
+}
+function getProduct(key){
+
+  // ✅ ONLY exact match
+  if(window.productMap && window.productMap[key]){
+    return window.productMap[key];
+  }
+
+  return null; // ❌ no fallback
+}
+function renderMiniCart(){
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+  const keys = Object.keys(cart);
+
+  const box = document.getElementById("miniCart");
+
+  box.innerHTML = "";
+
+  // 🔥 auto hide if empty
+  if(keys.length === 0){
+    box.classList.remove("show");
+    return;
+  }
+
+  keys.forEach(key => {
+
+   const item = getProduct(key);
+if(!item) return;
+
+    const parts = key.split("_");
+const id = parts.pop();                 // last part = id
+const table = parts.join("_");          // rest = table
+    const count = cart[key];   // 🔥 get correct quantity
+
+    const div = document.createElement("div");
+    div.className = "miniRow";
+
+    div.innerHTML = `
+      <img src="${item.image1}" class="miniImg">
+
+      <div class="miniInfo">
+        <div>${item.name}</div>
+        <div>₹${item.discount_price}</div>
+      </div>
+
+      <!-- 🔥 FORCE SHOW QUANTITY -->
+      <div class="cartControl active"
+        data-id="${id}"
+        data-table="${table}">
+
+        <div class="minus">-</div>
+        <div class="count">${count}</div>
+        <div class="plus">+</div>
+
+      </div>
+    `;
+
+    box.appendChild(div);
+  });
+
+  initAllUI(); // keep sync
+}
+function waitAndLoadCart(){
+  if(window.productMap && Object.keys(window.productMap).length > 0){
+    updateCartBar();
+    initAllUI();
+  } else {
+    setTimeout(waitAndLoadCart, 100);
+  }
+}
+
+waitAndLoadCart();
+</script>
+</body>
+</html>
