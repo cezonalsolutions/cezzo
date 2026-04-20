@@ -8559,8 +8559,13 @@ keys.forEach(key => {
   itemsTotal += item.discount_price * qty;
 });
 
-// charges
-let handlingFee = 5;
+// 🔥 handling fee logic
+let handlingFee = 0;
+
+if(totalItems > 10){
+  handlingFee = Math.floor((totalItems - 1) / 10) * 10;
+}
+
 let deliveryFee = 20;
 
 let total = itemsTotal + handlingFee + deliveryFee;
@@ -8572,10 +8577,19 @@ const billDelivery = document.getElementById("billDelivery");
 const billTotal = document.getElementById("billTotal");
 
 if(billItems) billItems.innerText = `₹${itemsTotal}`;
-if(billHandling) billHandling.innerText = `₹${handlingFee}`;
+
+if(billHandling){
+  if(handlingFee === 0){
+    billHandling.innerHTML = `<span style="text-decoration:line-through;color:#999;">₹10</span>`;
+  }else{
+    billHandling.innerText = `₹${handlingFee}`;
+  }
+}
+
 if(billDelivery) billDelivery.innerText = `₹${deliveryFee}`;
 if(billTotal) billTotal.innerText = `₹${total}`;
-  initAllUI();
+
+initAllUI();
 }
 async function loadCartRecommendations(){
 
