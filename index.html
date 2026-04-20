@@ -3349,6 +3349,53 @@ body.popup-open {
   0%,100%{ transform:translateX(-50%) scale(1); }
   50%{ transform:translateX(-50%) scale(1.15); }
 }
+/* Best Offers */
+.cartRecoHeader {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f5c5c;
+}
+
+/* Your Items title */
+#cartTitle {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1f2937;
+}
+/* COUPON BLAST INSIDE POPUP */
+.couponBlast {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  display: none;
+  z-index: 9999;
+}
+
+.blastParticle {
+  position: absolute;
+  font-size: 22px;
+  animation: blastMove 1s linear forwards;
+}
+
+@keyframes blastMove {
+
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--x), var(--y)) scale(1.3);
+    opacity: 0;
+  }
+
+}
 </style>
 </head>
 
@@ -4328,13 +4375,6 @@ body.popup-open {
       <div id="cartAddress"></div>
     </div>
   </div>
-
-  <!-- 🔥 NEW SECTION (ADD HERE) -->
-  <div class="cartRecoSection">
-    <div class="cartRecoHeader">Best Offers</div>
-    <div id="cartRecoGrid" class="productGrid"></div>
-  </div>
-</div>
 <div class="deliveryPromise">
 
   <div class="promiseLeft">
@@ -4362,6 +4402,13 @@ body.popup-open {
   </div>
 
 </div>
+  <!-- 🔥 NEW SECTION (ADD HERE) -->
+  <div class="cartRecoSection">
+    <div class="cartRecoHeader">Best Offers</div>
+    <div id="cartRecoGrid" class="productGrid"></div>
+  </div>
+</div>
+
 
   <!-- 🛒 TITLE -->
   <div class="cartTitle" id="cartTitle">
@@ -4416,6 +4463,10 @@ body.popup-open {
     <span>Delivery Partner Fee</span>
     <span id="billDelivery">₹0</span>
   </div>
+  <div id="billGiftRow" class="billRow" style="display:none;">
+  <span>Gift Wrap</span>
+  <span id="billGift">₹12</span>
+</div>
   <div id="billCouponRow" class="billRow" style="display:none;">
   <span id="billCouponText"></span>
   <span id="billDiscount">-₹0</span>
@@ -4437,6 +4488,8 @@ body.popup-open {
 
   <button id="placeOrderBtn">Place Order</button>
 </div>
+<!-- COUPON BLAST -->
+<div id="couponBlast" class="couponBlast"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -8818,6 +8871,33 @@ function renderCartItems(attempt = 0) {
 
   // 🔴 EMPTY CART
   if(keys.length === 0){
+  // ✅ RESET BILL VALUES WHEN CART EMPTY
+itemsTotal = 0;
+total = 0;
+discount = 0;
+
+// reset bill UI
+const billItems = document.getElementById("billItemsTotal");
+const billHandling = document.getElementById("billHandling");
+const billDelivery = document.getElementById("billDelivery");
+const billTotal = document.getElementById("billTotal");
+const checkoutPrice = document.getElementById("checkoutPrice");
+
+if(billItems) billItems.innerText = "₹0";
+if(billHandling) billHandling.innerText = "₹0";
+if(billDelivery) billDelivery.innerText = "₹0";
+if(billTotal) billTotal.innerText = "₹0";
+if(checkoutPrice) checkoutPrice.innerText = "₹0";
+
+// hide gift row
+const giftRow = document.getElementById("billGiftRow");
+if(giftRow) giftRow.style.display = "none";
+
+// reset gift button
+const giftBtn = document.getElementById("giftBtn");
+if(giftBtn) giftBtn.innerText = "ADD";
+
+giftAdded = false;
 
     title.style.display = "none"; // 🔥 HIDE "Your Items"
 
@@ -8925,6 +9005,10 @@ if(totalItems > 10){
 let deliveryFee = 20;
 
 total = itemsTotal + handlingFee + deliveryFee;
+
+if(giftAdded){
+  total += GIFT_PRICE;
+}
 
 // 🔥 SAFE UPDATE (no crash)
 const billItems = document.getElementById("billItemsTotal");
@@ -9053,18 +9137,28 @@ document.addEventListener("click", function(e){
 
   if(e.target.id === "applyPromoBtn"){
 
-    const code = document.getElementById("promoInput").value.trim().toUpperCase();
+    const code = document.getElementById("promoInput").value.trim();
     const msg = document.getElementById("couponMsg");
 
     const billRow = document.getElementById("billCouponRow");
     const billText = document.getElementById("billCouponText");
     const billDiscount = document.getElementById("billDiscount");
 
-    if(code !== "FIRST100"){
-      msg.innerText = "Invalid coupon";
-      if(billRow) billRow.style.display = "none";
-      return;
-    }
+    if(code === "FIRST100"){
+  // OK — continue
+}
+
+else if(code.toUpperCase() === "FIRST100"){
+  msg.innerText = "Please enter coupon in CAPITAL letters";
+  if(billRow) billRow.style.display = "none";
+  return;
+}
+
+else{
+  msg.innerText = "Invalid coupon";
+  if(billRow) billRow.style.display = "none";
+  return;
+}
 
     if(itemsTotal < 100){
       msg.innerText = "Shop above ₹100 to apply this coupon";
@@ -9078,6 +9172,7 @@ document.addEventListener("click", function(e){
     if(discount > 50) discount = 50;
 
     msg.innerText = "Coupon Applied ✅";
+    playCouponBlast();
 
     // 🔥 SHOW in bill
     if(billRow) billRow.style.display = "flex";
@@ -9099,6 +9194,99 @@ if(checkoutPrice){
   }
 
 });
+let giftAdded = false;
+const GIFT_PRICE = 12;
+document.getElementById("giftBtn").addEventListener("click", function(){
+
+  const btn = this;
+
+  const giftRow = document.getElementById("billGiftRow");
+
+  if(!giftAdded){
+
+    // ADD gift
+    giftAdded = true;
+
+    btn.innerText = "REMOVE";
+
+    if(giftRow){
+      giftRow.style.display = "flex";
+    }
+
+  } else {
+
+    // REMOVE gift
+    giftAdded = false;
+
+    btn.innerText = "ADD";
+
+    if(giftRow){
+      giftRow.style.display = "none";
+    }
+
+  }
+
+  // recalculate bill
+  renderCartItems();
+
+});
+function playCouponBlast(){
+
+  const container = document.getElementById("couponBlast");
+  if(!container) return;
+
+  container.style.display = "block";
+
+  const emojis = ["🎉","🎊","✨","💥","🎈","🎀"];
+
+  let interval = setInterval(() => {
+
+    for(let i = 0; i < 14; i++){
+
+      const particle = document.createElement("div");
+      particle.className = "blastParticle";
+
+      particle.innerText =
+        emojis[Math.floor(Math.random() * emojis.length)];
+
+      const fromLeft = Math.random() > 0.5;
+
+      particle.style.top =
+        Math.random() * container.clientHeight + "px";
+
+      if(fromLeft){
+        particle.style.left = "0px";
+      } else {
+        particle.style.right = "0px";
+      }
+
+      const x =
+        (Math.random() * 350 + 150) *
+        (fromLeft ? 1 : -1);
+
+      const y =
+        (Math.random() * 200 - 100);
+
+      particle.style.setProperty("--x", x + "px");
+      particle.style.setProperty("--y", y + "px");
+
+      container.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 1000);
+
+    }
+
+  }, 120);
+
+  // STOP after 3 seconds
+  setTimeout(() => {
+    clearInterval(interval);
+    container.style.display = "none";
+  }, 3000);
+
+}
 </script>
 </body>
 </html>
