@@ -2760,6 +2760,148 @@ body.popup-open {
   transform:scale(0.9);
   opacity:0.8;
 }
+/* 🔥 FULL POPUP FIX */
+#cartPopup{
+  z-index:200000;              /* always on top */
+  background:#fff;
+}
+
+/* HEADER */
+.cartHeader{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 15px;
+  border-bottom:1px solid #eee;
+
+  position:sticky;             /* 🔥 stays at top while scrolling */
+  top:0;
+  background:#fff;
+  z-index:10;
+}
+
+/* BACK BUTTON */
+.backBtn{
+  font-size:18px;
+  color:#000;
+  cursor:pointer;
+}
+
+/* LOCATION */
+.cartLocation{
+  display:flex;
+  flex-direction:column;
+}
+
+#cartCity{
+  font-size:15px;
+  font-weight:600;
+  color:#000;
+}
+
+#cartAddress{
+  font-size:12px;
+  color:#666;
+}
+
+/* TITLE */
+.cartTitle{
+  font-size:16px;
+  font-weight:700;
+  padding:12px 15px;
+
+  position:sticky;            /* 🔥 stays below header */
+  top:50px;
+  background:#fff;
+  z-index:9;
+}
+
+/* ITEMS LIST */
+#cartItemsList{
+  padding:0 15px 20px;        /* bottom space */
+}
+
+/* EACH ITEM */
+.cartItemRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+
+  animation:fadeUp 0.3s ease; /* 🔥 smooth entry */
+}
+
+/* IMAGE */
+.cartItemRow img{
+  width:48px;
+  height:48px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* INFO */
+.cartItemInfo{
+  flex:1;
+}
+
+/* NAME */
+.cartItemName{
+  font-size:13px;
+  font-weight:600;
+  color:#111;
+}
+
+/* QTY */
+.cartItemQty{
+  font-size:11px;
+  color:#777;
+  margin-top:2px;
+}
+
+/* PRICE */
+.cartItemPrice{
+  font-size:14px;
+  font-weight:700;
+  color:#000;
+}
+
+/* ✨ small animation */
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+/* 🔥 RECOMMENDATION SECTION */
+.cartRecoSection{
+  padding-top:5px;
+}
+
+/* HEADER TEXT */
+.cartRecoHeader{
+  font-size:15px;
+  font-weight:700;
+  padding:10px 15px 5px;
+  color:#111;
+}
+
+/* HORIZONTAL SCROLL */
+#cartRecoGrid{
+  display:flex;
+  gap:12px;
+  padding:10px 15px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+}
+
+#cartRecoGrid::-webkit-scrollbar{
+  display:none;
+}
 </style>
 </head>
 
@@ -3725,11 +3867,33 @@ body.popup-open {
   <div id="categoryGrid" class="productGrid"></div>
 </div>
 
-<!-- Product Details Popup -->
-<div id="productPopup" class="popup">
-  <!-- Existing product detail content -->
-</div>
+<div id="cartPopup" class="popup">
 
+  <!-- 🔝 TOP BAR -->
+  <div class="cartHeader">
+    <div class="backBtn">
+      <i class="fa fa-arrow-left"></i>
+    </div>
+
+    <div class="cartLocation">
+      <div id="cartCity"></div>
+      <div id="cartAddress"></div>
+    </div>
+  </div>
+
+  <!-- 🔥 NEW SECTION (ADD HERE) -->
+  <div class="cartRecoSection">
+    <div class="cartRecoHeader">Best Offers</div>
+    <div id="cartRecoGrid" class="productGrid"></div>
+  </div>
+
+  <!-- 🛒 TITLE -->
+  <div class="cartTitle">Your Items</div>
+
+  <!-- 📦 ITEMS -->
+  <div id="cartItemsList"></div>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -8030,10 +8194,148 @@ function waitAndLoadCart(){
 
 waitAndLoadCart();
 const viewBtn = document.getElementById("viewCartBtn");
+const cartPopup = document.getElementById("cartPopup");
 
 viewBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // 🔥 stops miniCart trigger
+  e.stopPropagation();
+
+  cartPopup.classList.add("show");
+  document.body.classList.add("popup-open");
+
+  document.getElementById("cartCity").innerText =
+    document.getElementById("cityName").innerText;
+
+  document.getElementById("cartAddress").innerText =
+    document.getElementById("shortAddress").innerText;
+
+  // 🔥 LOAD BOTH
+  loadCartRecommendations();   // 👈 NEW
+  setTimeout(() => {
+    renderCartItems();
+  }, 100);
 });
+document.querySelector(".backBtn").onclick = () => {
+  cartPopup.classList.remove("show");
+  document.body.classList.remove("popup-open");
+};
+function renderCartItems(attempt = 0) {
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+  const keys = Object.keys(cart);
+
+  const list = document.getElementById("cartItemsList");
+  list.innerHTML = "";
+
+  if(keys.length === 0){
+    list.innerHTML = "<p style='text-align:center;padding:20px;'>Cart is empty</p>";
+    return;
+  }
+
+  // 🔥 WAIT for productMap
+  if(!window.productMap || Object.keys(window.productMap).length === 0){
+    if(attempt < 5){
+      setTimeout(() => renderCartItems(attempt + 1), 100);
+    }
+    return;
+  }
+
+  keys.forEach(key => {
+
+    const item = getProduct(key);
+    if(!item) return;
+
+    const qty = cart[key];
+
+    list.innerHTML += `
+      <div class="cartItemRow">
+        <img src="${item.image1}">
+        
+        <div class="cartItemInfo">
+          <div class="cartItemName">${item.name}</div>
+          <div class="cartItemQty">${qty} pcs</div>
+        </div>
+
+        <div class="cartItemPrice">
+          ₹${item.discount_price * qty}
+        </div>
+      </div>
+    `;
+  });
+}
+async function loadCartRecommendations(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [4,5,6,7,8,9,10,11]);
+
+  const grid = document.getElementById("cartRecoGrid");
+  grid.innerHTML = "";
+
+  if(!data || data.length === 0){
+    grid.innerHTML = "<p style='padding:10px'>No offers</p>";
+    return;
+  }
+
+  data.forEach(item => {
+
+    // 🔥 sync with cart system
+    window.productMap = window.productMap || {};
+    window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+
+        <div class="cartControl" 
+          data-id="${item.id}" 
+          data-table="grocery_products">
+          <div class="addBtn2">+</div>
+        </div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+
+    // 🔥 click logic (same as your app)
+    card.addEventListener("click", function(e){
+
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      openPopup({
+        ...item,
+        table: "grocery_products"
+      });
+
+    });
+
+    grid.appendChild(card);
+  });
+
+  initAllUI(); // 🔥 VERY IMPORTANT
+}
 
 </script>
 </body>
