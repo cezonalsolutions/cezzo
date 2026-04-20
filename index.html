@@ -2776,9 +2776,10 @@ body.popup-open {
 
   position:sticky;             /* 🔥 stays at top while scrolling */
   top:0;
-  background:#fff;
+  background:transparent;
   z-index:10;
 }
+
 
 /* BACK BUTTON */
 .backBtn{
@@ -2818,7 +2819,7 @@ body.popup-open {
 
 /* ITEMS LIST */
 #cartItemsList{
-  padding:0 15px 20px;        /* bottom space */
+  padding:0 15px 8px;        /* bottom space */
 }
 
 /* EACH ITEM */
@@ -2940,6 +2941,129 @@ body.popup-open {
   font-size:12px;
   color:#666;
   margin-top:2px;
+}
+#cartItemCount{
+  font-size:13px;
+  color:#666;
+  font-weight:500;
+  margin-left:5px;
+}
+.cartTopSection{
+  background: linear-gradient(
+    to bottom,
+    #e0f7fa,
+    #ffffff
+  );
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.promoSection{
+  display:flex;
+  gap:10px;
+  padding:12px 15px;
+  border-top:1px solid #eee;
+  background:#fff;
+
+  position:static;   /* 🔥 IMPORTANT (no sticky) */
+}
+.promoSection{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin:4px 15px 10px;
+  padding:12px;
+
+  background:#fff;
+  border-radius:14px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* INPUT */
+#promoInput{
+  flex:1;
+
+  padding:10px 12px;
+  border:1px solid #e0e0e0;
+  border-radius:10px;
+
+  font-size:16px;              /* 🔥 prevents zoom */
+  outline:none;
+
+  transition:all 0.2s ease;
+}
+
+/* focus effect */
+#promoInput:focus{
+  border-color:#0f5c5c;
+  box-shadow:0 0 0 2px rgba(15,92,92,0.1);
+}
+
+/* BUTTON */
+#applyPromoBtn{
+  background:#0f5c5c;
+  color:#fff;
+
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+
+/* hover */
+#applyPromoBtn:hover{
+  background:#0c4a4a;
+}
+
+/* click effect */
+#applyPromoBtn:active{
+  transform:scale(0.95);
+}
+.billSection{
+  margin:6px 15px 15px;
+  padding:14px;
+
+  background:#fff;
+  border-radius:14px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* title */
+.billTitle{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:10px;
+  color:#111;
+}
+
+/* rows */
+.billRow{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:#444;
+  margin:6px 0;
+}
+
+/* divider */
+.billDivider{
+  height:1px;
+  background:#eee;
+  margin:10px 0;
+}
+
+/* total */
+.billRow.total{
+  font-weight:700;
+  font-size:15px;
+  color:#000;
 }
 </style>
 </head>
@@ -3907,6 +4031,7 @@ body.popup-open {
 </div>
 
 <div id="cartPopup" class="popup">
+<div class="cartTopSection">
 
   <!-- 🔝 TOP BAR -->
   <div class="cartHeader">
@@ -3925,13 +4050,51 @@ body.popup-open {
     <div class="cartRecoHeader">Best Offers</div>
     <div id="cartRecoGrid" class="productGrid"></div>
   </div>
+</div>
 
   <!-- 🛒 TITLE -->
-  <div class="cartTitle" id="cartTitle">Your Items</div>
+  <div class="cartTitle" id="cartTitle">
+  Your Items <span id="cartItemCount"></span>
+</div>
 
   <!-- 📦 ITEMS -->
   <div id="cartItemsList"></div>
+  <!-- ✅ SEPARATE SECTION -->
+<div class="promoSection">
+  <input 
+    type="text" 
+    id="promoInput" 
+    placeholder="Enter promo code"
+  />
+  <button id="applyPromoBtn">Apply</button>
+</div>
+<div class="billSection">
 
+  <div class="billTitle">Bill Details</div>
+
+  <div class="billRow">
+    <span>Items Total</span>
+    <span id="billItemsTotal">₹0</span>
+  </div>
+
+  <div class="billRow">
+    <span>Handling Fee</span>
+    <span id="billHandling">₹0</span>
+  </div>
+
+  <div class="billRow">
+    <span>Delivery Partner Fee</span>
+    <span id="billDelivery">₹0</span>
+  </div>
+
+  <div class="billDivider"></div>
+
+  <div class="billRow total">
+    <span>To Pay</span>
+    <span id="billTotal">₹0</span>
+  </div>
+
+</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -8284,8 +8447,18 @@ function renderCartItems(attempt = 0) {
 
   const list = document.getElementById("cartItemsList");
   const title = document.getElementById("cartTitle"); // 🔥 get title
+  const countEl = document.getElementById("cartItemCount");
 
   list.innerHTML = "";
+// 🔥 ADD COUNT LOGIC HERE (BEFORE empty check)
+  let totalItems = 0;
+  keys.forEach(k => {
+    totalItems += cart[k];
+  });
+
+  countEl.textContent = totalItems > 0
+    ? `(${totalItems} ${totalItems === 1 ? "item" : "items"})`
+    : "";
 
   // 🔴 EMPTY CART
   if(keys.length === 0){
@@ -8375,7 +8548,33 @@ function renderCartItems(attempt = 0) {
       </div>
     `;
   });
+// 🔥 BILL CALCULATION
+let itemsTotal = 0;
 
+keys.forEach(key => {
+  const item = getProduct(key);
+  if(!item) return;
+
+  const qty = cart[key];
+  itemsTotal += item.discount_price * qty;
+});
+
+// charges
+let handlingFee = 5;
+let deliveryFee = 20;
+
+let total = itemsTotal + handlingFee + deliveryFee;
+
+// 🔥 SAFE UPDATE (no crash)
+const billItems = document.getElementById("billItemsTotal");
+const billHandling = document.getElementById("billHandling");
+const billDelivery = document.getElementById("billDelivery");
+const billTotal = document.getElementById("billTotal");
+
+if(billItems) billItems.innerText = `₹${itemsTotal}`;
+if(billHandling) billHandling.innerText = `₹${handlingFee}`;
+if(billDelivery) billDelivery.innerText = `₹${deliveryFee}`;
+if(billTotal) billTotal.innerText = `₹${total}`;
   initAllUI();
 }
 async function loadCartRecommendations(){
