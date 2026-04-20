@@ -2558,7 +2558,7 @@ body.popup-open {
 
   box-shadow:0 6px 18px rgba(0,0,0,0.25);
 
-  z-index:9998;
+ z-index: 100000; 
 
   transition:all 0.3s ease;
 }
@@ -2660,6 +2660,7 @@ body.popup-open {
 
   z-index:9997;
   scrollbar-width:none;
+  
 }
 .miniCart::-webkit-scrollbar{
   display:none;
@@ -4507,19 +4508,37 @@ navItems.forEach(item=>{
 
   });
 });
+
+
 let lastScroll = 0;
+
 const bottomNav = document.querySelector(".bottomNav");
+const cartBar = document.querySelector(".cartBar");
+const miniCart = document.querySelector(".miniCart"); // 🔥 ADD THIS
 
 window.addEventListener("scroll", () => {
 
   let currentScroll = window.pageYOffset;
 
   if(currentScroll > lastScroll){
-    // 🔻 scrolling DOWN → hide
+    // 🔻 scrolling DOWN → hide nav
     bottomNav.classList.add("hide");
+
+    // ✅ move cart down
+    cartBar.style.bottom = "10px";
+
+    // ✅ move mini cart down with it
+    miniCart.style.bottom = "70px";
+
   } else {
-    // 🔺 scrolling UP → show
+    // 🔺 scrolling UP → show nav
     bottomNav.classList.remove("hide");
+
+    // ✅ move cart above nav
+    cartBar.style.bottom = "75px";
+
+    // ✅ move mini cart above cart bar
+    miniCart.style.bottom = "140px";
   }
 
   lastScroll = currentScroll;
@@ -4589,7 +4608,7 @@ async function loadProducts(){
         return;
       }
 
-      const img = card.querySelector(".imgWrap2");
+      const img = card.querySelector(".imgWrap");
       const rect = img.getBoundingClientRect();
 
       const clickY = e.clientY - rect.top;
@@ -8010,6 +8029,12 @@ function waitAndLoadCart(){
 }
 
 waitAndLoadCart();
+const viewBtn = document.getElementById("viewCartBtn");
+
+viewBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // 🔥 stops miniCart trigger
+});
+
 </script>
 </body>
 </html>
