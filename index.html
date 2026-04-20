@@ -3124,6 +3124,191 @@ body.popup-open {
 
   cursor:pointer;
 }
+.deliveryBanner{
+  display:flex;
+  align-items:center;
+  gap:16px;
+
+  margin:10px 15px;
+  padding:18px 20px;
+
+  border-radius:28px;
+
+  background:linear-gradient(135deg,#0b4f4f,#1f8a8a);
+
+  color:#fff;
+
+  position:relative;
+  overflow:hidden;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ✨ hover lift */
+.deliveryBanner:hover{
+  transform:translateY(-3px) scale(1.01);
+  box-shadow:0 16px 40px rgba(0,0,0,0.25);
+}
+
+/* 🌟 gradient shine sweep */
+.deliveryBanner::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:60%;
+  height:100%;
+
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+
+  animation:shine 4s infinite;
+}
+
+@keyframes shine{
+  0%{ left:-100%; }
+  100%{ left:120%; }
+}
+
+/* ✨ floating particles */
+.deliveryBanner::after{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  top:-50%;
+  left:-50%;
+
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.08) 2px, transparent 3px);
+
+  background-size:40px 40px;
+
+  animation:floatBg 12s linear infinite;
+}
+
+@keyframes floatBg{
+  from{ transform:translate(0,0); }
+  to{ transform:translate(-40px,-40px); }
+}
+
+/* 🚀 SCOOTER */
+.scooter{
+  position:relative;
+  width:65px;
+  height:30px;
+
+  animation:ride 1.2s infinite ease-in-out;
+}
+
+/* base */
+.base{
+  position:absolute;
+  width:42px;
+  height:10px;
+  background:#fff;
+  border-radius:6px;
+  bottom:8px;
+  left:10px;
+}
+
+/* seat */
+.seat{
+  position:absolute;
+  width:16px;
+  height:6px;
+  background:#e5e5e5;
+  border-radius:4px;
+  top:3px;
+  left:22px;
+}
+
+/* handle */
+.handle{
+  position:absolute;
+  width:3px;
+  height:13px;
+  background:#fff;
+  top:-1px;
+  left:44px;
+  transform:rotate(-18deg);
+  border-radius:2px;
+}
+
+/* wheels */
+.wheel{
+  position:absolute;
+  width:13px;
+  height:13px;
+  background:#111;
+  border-radius:50%;
+  bottom:0;
+
+  box-shadow:
+    inset 0 0 0 2px #666,
+    0 0 6px rgba(0,0,0,0.5);
+
+  animation:spin 0.5s linear infinite;
+}
+
+.front{ right:6px; }
+.back{ left:8px; }
+
+@keyframes spin{
+  from{ transform:rotate(0); }
+  to{ transform:rotate(360deg); }
+}
+
+/* 🚀 smoother bounce */
+@keyframes ride{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-3px); }
+}
+
+/* 💨 motion trail upgraded */
+.scooter::after{
+  content:"";
+  position:absolute;
+  left:-25px;
+  top:10px;
+  width:25px;
+  height:5px;
+
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,0.5),
+    transparent
+  );
+
+  border-radius:3px;
+
+  filter:blur(1px);
+
+  animation:speed 0.6s linear infinite;
+}
+
+@keyframes speed{
+  from{ transform:translateX(0); opacity:0.7; }
+  to{ transform:translateX(-25px); opacity:0; }
+}
+
+/* ✨ TEXT */
+.deliveryMain{
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:0.4px;
+}
+
+.deliverySub{
+  font-size:12px;
+  opacity:0.85;
+}
 
 </style>
 </head>
@@ -4111,7 +4296,23 @@ body.popup-open {
     <div id="cartRecoGrid" class="productGrid"></div>
   </div>
 </div>
+<div class="deliveryBanner">
 
+  <div class="scooter">
+    <div class="handle"></div>
+    <div class="seat"></div>
+    <div class="base"></div>
+
+    <div class="wheel front"></div>
+    <div class="wheel back"></div>
+  </div>
+
+  <div class="deliveryText">
+    <div class="deliveryMain">Delivery in 10–15 mins</div>
+    <div class="deliverySub">Fast & fresh groceries</div>
+  </div>
+
+</div>
   <!-- 🛒 TITLE -->
   <div class="cartTitle" id="cartTitle">
   Your Items <span id="cartItemCount"></span>
