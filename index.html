@@ -2902,6 +2902,45 @@ body.popup-open {
 #cartRecoGrid::-webkit-scrollbar{
   display:none;
 }
+.cartItemTop{
+  font-size:13px;
+  font-weight:700;
+  color:#000;
+  margin-bottom:2px;
+}
+
+/* FIX RIGHT CONTROL POSITION */
+.cartItemRow .cartControl{
+  position:static;
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  border-radius:999px;
+  padding:4px 10px;
+  height:28px;
+}
+
+/* BUTTONS */
+.cartItemRow .minus,
+.cartItemRow .plus{
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* COUNT */
+.cartItemRow .count{
+  font-size:13px;
+  font-weight:600;
+}
+.cartItemQty{
+  font-size:12px;
+  color:#666;
+  margin-top:2px;
+}
 </style>
 </head>
 
@@ -3888,7 +3927,7 @@ body.popup-open {
   </div>
 
   <!-- 🛒 TITLE -->
-  <div class="cartTitle">Your Items</div>
+  <div class="cartTitle" id="cartTitle">Your Items</div>
 
   <!-- 📦 ITEMS -->
   <div id="cartItemsList"></div>
@@ -7917,6 +7956,21 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 
   document.body.addEventListener("click", function(e){
+    // 🔥 CHECK IF CART EMPTY
+const updatedCart = JSON.parse(localStorage.getItem("cart") || "{}");
+
+if(Object.keys(updatedCart).length === 0){
+
+  // hide popup
+  const cartPopup = document.getElementById("cartPopup");
+  cartPopup.classList.remove("show");
+
+  document.body.classList.remove("popup-open");
+
+  // also hide mini cart
+  const mini = document.getElementById("miniCart");
+  mini.classList.remove("show");
+}
 
     const btn = e.target.closest(".addBtn2, .plus, .minus, .addBigBtn");
     if(!btn) return;
@@ -7953,7 +8007,12 @@ document.addEventListener("DOMContentLoaded", function(){
     updateCartBar();
 
     updateBoxes(id, table, count);        // ✅ FIXED
-    updatePopupBox(id, table, count);   
+    updatePopupBox(id, table, count);  
+    // 🔥 refresh popup list if open
+const cartPopup = document.getElementById("cartPopup");
+if(cartPopup.classList.contains("show")){
+  renderCartItems();
+} 
       // 🔥 ADD HERE (THIS EXACT PLACE)
 const mini = document.getElementById("miniCart");
 
@@ -8224,12 +8283,47 @@ function renderCartItems(attempt = 0) {
   const keys = Object.keys(cart);
 
   const list = document.getElementById("cartItemsList");
+  const title = document.getElementById("cartTitle"); // 🔥 get title
+
   list.innerHTML = "";
 
+  // 🔴 EMPTY CART
   if(keys.length === 0){
-    list.innerHTML = "<p style='text-align:center;padding:20px;'>Cart is empty</p>";
+
+    title.style.display = "none"; // 🔥 HIDE "Your Items"
+
+    list.innerHTML = `
+      <div style="text-align:center; padding:30px 15px;">
+
+        <p style="font-size:14px; color:#666; margin-bottom:12px;">
+          Your cart is empty
+        </p>
+
+        <button id="shopNowBtn" style="
+          background:#0f5c5c;
+          color:#fff;
+          border:none;
+          padding:10px 18px;
+          border-radius:10px;
+          font-size:14px;
+          font-weight:600;
+        ">
+          Shop Now
+        </button>
+
+      </div>
+    `;
+
+    document.getElementById("shopNowBtn").onclick = () => {
+      document.getElementById("cartPopup").classList.remove("show");
+      document.body.classList.remove("popup-open");
+    };
+
     return;
   }
+
+  // 🟢 HAS ITEMS
+  title.style.display = "block"; // 🔥 SHOW "Your Items" again
 
   // 🔥 WAIT for productMap
   if(!window.productMap || Object.keys(window.productMap).length === 0){
@@ -8246,21 +8340,43 @@ function renderCartItems(attempt = 0) {
 
     const qty = cart[key];
 
+    const parts = key.split("_");
+    const id = parts.pop();
+    const table = parts.join("_");
+
     list.innerHTML += `
       <div class="cartItemRow">
         <img src="${item.image1}">
         
         <div class="cartItemInfo">
-          <div class="cartItemName">${item.name}</div>
-          <div class="cartItemQty">${qty} pcs</div>
-        </div>
 
-        <div class="cartItemPrice">
-          ₹${item.discount_price * qty}
+  <!-- PRICE -->
+  <div class="cartItemTop">
+    ₹${item.discount_price * qty}
+  </div>
+
+  <!-- NAME -->
+  <div class="cartItemName">${item.name}</div>
+
+  <!-- 🔥 SMART QUANTITY -->
+ <div class="cartItemQty">
+  Qty: ${formatQuantity(item, qty)}
+</div>
+
+</div>
+
+        <div class="cartControl active"
+          data-id="${id}"
+          data-table="${table}">
+          <div class="minus">-</div>
+          <div class="count">${qty}</div>
+          <div class="plus">+</div>
         </div>
       </div>
     `;
   });
+
+  initAllUI();
 }
 async function loadCartRecommendations(){
 
@@ -8336,7 +8452,26 @@ async function loadCartRecommendations(){
 
   initAllUI(); // 🔥 VERY IMPORTANT
 }
+function formatQuantity(item, qty){
 
+  let baseQty = parseFloat(item.quantity); // e.g. 500
+  let unit = item.unit.toLowerCase();      // g, kg, ml, l, pcs
+
+  let total = baseQty * qty;
+
+  // 🔥 grams → kg
+  if(unit === "g" && total >= 1000){
+    return (total / 1000) + " kg";
+  }
+
+  // 🔥 ml → litre
+  if(unit === "ml" && total >= 1000){
+    return (total / 1000) + " L";
+  }
+
+  // 🔥 normal cases
+  return total + " " + item.unit;
+}
 </script>
 </body>
 </html>
