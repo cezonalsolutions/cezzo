@@ -2959,12 +2959,22 @@ body.popup-open {
 }
 .promoSection{
   display:flex;
+    flex-wrap:wrap;        /* 🔥 ADD THIS */
+
   gap:10px;
   padding:12px 15px;
   border-top:1px solid #eee;
   background:#fff;
 
   position:static;   /* 🔥 IMPORTANT (no sticky) */
+}
+#couponMsg{
+  flex-basis:100%;   /* 🔥 full width → next line */
+  margin-top:4px;
+
+  font-size:13px;
+  font-weight:600;
+  color:red;
 }
 .promoSection{
   display:flex;
@@ -3065,6 +3075,56 @@ body.popup-open {
   font-size:15px;
   color:#000;
 }
+#checkoutBar{
+  position:sticky;
+  bottom:0;
+  left:0;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:12px 15px;
+  background:#fff;
+
+  border-top:1px solid #eee;
+  box-shadow:0 -4px 12px rgba(0,0,0,0.08);
+
+  z-index:999;   /* 🔥 always on top */
+}
+
+/* left side */
+.checkoutInfo{
+  display:flex;
+  flex-direction:column;
+}
+
+#checkoutPrice{
+  font-size:16px;
+  font-weight:700;
+  color:#000;
+}
+
+.checkoutText{
+  font-size:11px;
+  color:#777;
+}
+
+/* button */
+#placeOrderBtn{
+  background:#0f5c5c;
+  color:#fff;
+
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -4067,11 +4127,12 @@ body.popup-open {
     placeholder="Enter promo code"
   />
   <button id="applyPromoBtn">Apply</button>
+  <div id="couponMsg"></div>
 </div>
+
 <div class="billSection">
 
-  <div class="billTitle">Bill Details</div>
-
+<div class="billTitle">BILL DETAILS</div>
   <div class="billRow">
     <span>Items Total</span>
     <span id="billItemsTotal">₹0</span>
@@ -4086,6 +4147,10 @@ body.popup-open {
     <span>Delivery Partner Fee</span>
     <span id="billDelivery">₹0</span>
   </div>
+  <div id="billCouponRow" class="billRow" style="display:none;">
+  <span id="billCouponText"></span>
+  <span id="billDiscount">-₹0</span>
+</div>
 
   <div class="billDivider"></div>
 
@@ -4094,6 +4159,14 @@ body.popup-open {
     <span id="billTotal">₹0</span>
   </div>
 
+</div>
+<div id="checkoutBar">
+  <div class="checkoutInfo">
+    <div id="checkoutPrice">₹0</div>
+    <div class="checkoutText">TOTAL</div>
+  </div>
+
+  <button id="placeOrderBtn">Place Order</button>
 </div>
 </div>
 
@@ -8167,6 +8240,17 @@ if(Object.keys(updatedCart).length === 0){
     }
 
     setCart(cart);
+    // 🔥 ADD HERE (exact place)
+discount = 0;
+
+const msg = document.getElementById("couponMsg");
+const billRow = document.getElementById("billCouponRow");
+const input = document.getElementById("promoInput");
+
+if(msg) msg.innerText = "";
+if(billRow) billRow.style.display = "none";
+if(input) input.value = "";
+
     updateCartBar();
 
     updateBoxes(id, table, count);        // ✅ FIXED
@@ -8440,9 +8524,12 @@ document.querySelector(".backBtn").onclick = () => {
   cartPopup.classList.remove("show");
   document.body.classList.remove("popup-open");
 };
+let itemsTotal = 0;
+let total = 0;
 function renderCartItems(attempt = 0) {
 
   const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+
   const keys = Object.keys(cart);
 
   const list = document.getElementById("cartItemsList");
@@ -8549,7 +8636,7 @@ function renderCartItems(attempt = 0) {
     `;
   });
 // 🔥 BILL CALCULATION
-let itemsTotal = 0;
+itemsTotal = 0;
 
 keys.forEach(key => {
   const item = getProduct(key);
@@ -8568,7 +8655,7 @@ if(totalItems > 10){
 
 let deliveryFee = 20;
 
-let total = itemsTotal + handlingFee + deliveryFee;
+total = itemsTotal + handlingFee + deliveryFee;
 
 // 🔥 SAFE UPDATE (no crash)
 const billItems = document.getElementById("billItemsTotal");
@@ -8588,6 +8675,10 @@ if(billHandling){
 
 if(billDelivery) billDelivery.innerText = `₹${deliveryFee}`;
 if(billTotal) billTotal.innerText = `₹${total}`;
+const checkoutPrice = document.getElementById("checkoutPrice");
+if(checkoutPrice){
+  checkoutPrice.innerText = `₹${total - discount}`;
+}
 
 initAllUI();
 }
@@ -8685,6 +8776,60 @@ function formatQuantity(item, qty){
   // 🔥 normal cases
   return total + " " + item.unit;
 }
+// 🔥 ADD HERE (very bottom of file)
+
+let discount = 0;
+
+document.addEventListener("click", function(e){
+
+  if(e.target.id === "applyPromoBtn"){
+
+    const code = document.getElementById("promoInput").value.trim().toUpperCase();
+    const msg = document.getElementById("couponMsg");
+
+    const billRow = document.getElementById("billCouponRow");
+    const billText = document.getElementById("billCouponText");
+    const billDiscount = document.getElementById("billDiscount");
+
+    if(code !== "FIRST100"){
+      msg.innerText = "Invalid coupon";
+      if(billRow) billRow.style.display = "none";
+      return;
+    }
+
+    if(itemsTotal < 100){
+      msg.innerText = "Shop above ₹100 to apply this coupon";
+      if(billRow) billRow.style.display = "none";
+      return;
+    }
+
+    // 🔥 discount logic
+    discount = Math.floor(itemsTotal / 100) * 10;
+
+    if(discount > 50) discount = 50;
+
+    msg.innerText = "Coupon Applied ✅";
+
+    // 🔥 SHOW in bill
+    if(billRow) billRow.style.display = "flex";
+    if(billText) billText.innerText = "Coupon (FIRST100)";
+    if(billDiscount) billDiscount.innerText = `-₹${discount}`;
+
+    // 🔥 update total
+    const newTotal = total - discount;
+
+    const billTotal = document.getElementById("billTotal");
+    if(billTotal){
+      billTotal.innerText = `₹${newTotal}`;
+    }
+    // 🔥 ALSO UPDATE STICKY BAR
+const checkoutPrice = document.getElementById("checkoutPrice");
+if(checkoutPrice){
+  checkoutPrice.innerText = `₹${newTotal}`;
+}
+  }
+
+});
 </script>
 </body>
 </html>
