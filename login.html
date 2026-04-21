@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step Form UI</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+      body {
+        background: #f7f8fa;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* TOP ARC */
+      .top-arc {
+        width: 100%;
+        height: 280px;
+        background: linear-gradient(135deg, #ff7451, #ff7c24);
+        border-bottom-left-radius: 70% 180px;
+        border-bottom-right-radius: 70% 180px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* shine + blobs */
+      .top-arc::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 220px;
+        height: 220px;
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+        filter: blur(35px);
+      }
+      .top-arc::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        right: -60px;
+        width: 260px;
+        height: 260px;
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 50%;
+        filter: blur(40px);
+      }
+      .shine {
+        position: absolute;
+        top: 20px;
+        left: -50px;
+        width: 200%;
+        height: 120px;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
+        transform: rotate(-10deg);
+      }
+
+      /* RIBBONS */
+      .ribbon-container {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .ribbon {
+        position: absolute;
+        width: 6px;
+        height: 16px;
+        border-radius: 2px;
+        opacity: 0;
+      }
+      .ribbon.left {
+        left: -10px;
+        animation: ribbonLeft linear infinite;
+      }
+      .ribbon.right {
+        right: -10px;
+        animation: ribbonRight linear infinite;
+      }
+
+      @keyframes ribbonLeft {
+        0% {
+          transform: translate(0, 140px) rotate(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        30% {
+          transform: translate(160px, -40px) rotate(160deg);
+        }
+        70% {
+          transform: translate(220px, 120px) rotate(300deg);
+        }
+        100% {
+          transform: translate(240px, 200px) rotate(420deg);
+          opacity: 0;
+        }
+      }
+      @keyframes ribbonRight {
+        0% {
+          transform: translate(0, 140px) rotate(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        30% {
+          transform: translate(-160px, -40px) rotate(-160deg);
+        }
+        70% {
+          transform: translate(-220px, 120px) rotate(-300deg);
+        }
+        100% {
+          transform: translate(-240px, 200px) rotate(-420deg);
+          opacity: 0;
+        }
+      }
+
+      /* FORM */
+      .content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 90px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .form-area {
+        width: 100%;
+        max-width: 320px;
+      }
+      #step1 {
+        margin-top: 30px;
+      }
+      h2 {
+        margin-bottom: 25px;
+        text-align: center;
+        color: #222;
+      }
+      input {
+        width: 100%;
+        border: none;
+        border-bottom: 2px solid #ddd;
+        font-size: 16px;
+        margin-bottom: 25px;
+        outline: none;
+        background: transparent;
+      }
+      input:focus {
+        border-bottom: 2px solid #000;
+      }
+      .mobile-row {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 25px;
+        padding-bottom: 6px;
+      }
+      .country-code {
+        margin-right: 8px;
+        font-size: 16px;
+        color: #333;
+      }
+      .mobile-row input {
+        border: none;
+        flex: 1;
+        margin: 0;
+      }
+      .mobile-row:focus-within {
+        border-bottom: 2px solid #000;
+      }
+      button {
+        width: 100%;
+        padding: 14px;
+        background: #111;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .hidden {
+        display: none;
+      }
+      .brand {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        color: #16a34a; /* green */
+      }
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-6px);
+        }
+        50% {
+          transform: translateX(6px);
+        }
+        75% {
+          transform: translateX(-6px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+      .shake {
+        animation: shake 0.3s;
+        border-bottom: 2px solid red !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="top-arc">
+      <div class="shine"></div>
+      <div class="ribbon-container"></div>
+    </div>
+
+    <div class="content">
+      <div class="form-area">
+        <div id="step1">
+          <h2>Enter your name</h2>
+          <input type="text" id="name" placeholder="Your Name" />
+          <button onclick="step2()">Next</button>
+          <br /><br /><br /><br /><br /><br />
+          <div class="brand">CEZZO</div>
+        </div>
+
+        <div id="step2" class="hidden">
+          <h2 id="welcome"></h2>
+          <div class="mobile-row">
+            <span class="country-code">+91</span>
+            <input
+              type="tel"
+              id="mobile"
+              maxlength="10"
+              placeholder="Mobile Number"
+            />
+          </div>
+          <button onclick="step3()">Next</button>
+          <br /><br /><br /><br /><br /><br />
+          <div class="brand">CEZZO</div>
+        </div>
+
+        <div id="step3" class="hidden">
+          <h2>Create password</h2>
+          <input type="password" id="password" placeholder="Password" />
+          <button onclick="submitForm()">Submit</button>
+          <br /><br /><br /><br /><br /><br />
+          <div class="brand">CEZZO</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+      const supabase = createClient(
+        "https://ahhctqtquqklofdnuols.supabase.co",
+        "sb_publishable_F_UwO2kM0pu2Y63WKlo5mQ_sDXLCvOI",
+      );
+
+      /* Ribbon generator */
+      const container = document.querySelector(".ribbon-container");
+      const colors = [
+        "#fff",
+        "#ffd166",
+        "#06d6a0",
+        "#ef476f",
+        "#118ab2",
+        "#ffe66d",
+      ];
+
+      function createRibbon(side) {
+        const r = document.createElement("div");
+        r.className = "ribbon " + side;
+        r.style.background = colors[Math.floor(Math.random() * colors.length)];
+        r.style.top = 120 + Math.random() * 40 + "px";
+        r.style.animationDuration = 3 + Math.random() * 2 + "s";
+        r.style.animationDelay = Math.random() * 1.5 + "s";
+        container.appendChild(r);
+        setTimeout(() => r.remove(), 5000);
+      }
+      setInterval(() => {
+        for (let i = 0; i < 3; i++) {
+          createRibbon("left");
+          createRibbon("right");
+        }
+      }, 400);
+
+      /* Form logic */
+      let nameValue = "";
+      function shake(el) {
+        el.classList.add("shake");
+        setTimeout(() => el.classList.remove("shake"), 300);
+        if (navigator.vibrate) navigator.vibrate(100);
+      }
+
+      window.step2 = function () {
+        const n = document.getElementById("name");
+        nameValue = n.value.trim();
+        if (!nameValue) {
+          shake(n);
+          return;
+        }
+        document.getElementById("step1").classList.add("hidden");
+        document.getElementById("step2").classList.remove("hidden");
+        document.getElementById("welcome").innerText = "Hi, " + nameValue;
+      };
+
+      window.step3 = function () {
+        const m = document.getElementById("mobile");
+        if (m.value.length !== 10 || isNaN(m.value)) {
+          shake(m);
+          return;
+        }
+        document.getElementById("step2").classList.add("hidden");
+        document.getElementById("step3").classList.remove("hidden");
+      };
+
+      window.submitForm = async function () {
+        const p = document.getElementById("password");
+        const mobile = document.getElementById("mobile").value;
+        if (!p.value) {
+          shake(p);
+          return;
+        }
+        const { error } = await supabase
+          .from("users")
+          .insert([{ name: nameValue, mobile, password: p.value }]);
+        if (!error) {
+          document.getElementById("name").value = "";
+          document.getElementById("mobile").value = "";
+          document.getElementById("password").value = "";
+          document.getElementById("step3").classList.add("hidden");
+          document.getElementById("step1").classList.remove("hidden");
+        } else {
+          console.log(error);
+          shake(p);
+        }
+      };
+    </script>
+  </body>
+</html>
