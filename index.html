@@ -3443,8 +3443,8 @@ body.popup-open {
       <div class="city" id="cityName"></div>
       <div class="address" id="shortAddress"></div>
     </div>
-   <div class="profile">
-  <a href="login.html">
+  <div class="profile">
+  <a href="#" id="profileLink">
     <img src="profile.webp" alt="profile">
   </a>
 </div>
@@ -10127,7 +10127,21 @@ function playCouponBlast(){
   }, 3000);
 
 }
+document.getElementById("profileLink").addEventListener("click", function(e){
 
+ e.preventDefault();
+
+ if(
+   localStorage.getItem("userName") &&
+   localStorage.getItem("userMobile")
+ ){
+    window.location.href="order.html";
+ }
+ else{
+    window.location.href="login.html";
+ }
+
+});
 </script>
 </body>
 </html>
