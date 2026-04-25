@@ -406,7 +406,10 @@ Back
           .insert([{ name: nameValue, mobile, password: p.value }]);
 if (!error) {
 
-  // mark user came from login
+  // save user details
+  localStorage.setItem("userName", nameValue);
+  localStorage.setItem("userMobile", mobile);
+
   sessionStorage.setItem("skipIntro", "true");
 
   window.location.href = "index.html";
