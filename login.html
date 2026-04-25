@@ -240,6 +240,12 @@
           <h2>Enter your name</h2>
           <input type="text" id="name" placeholder="Your Name" />
           <button onclick="step2()">Next</button>
+
+<br><br>
+
+<button onclick="goBack()" style="background:#fff;color:#111;border:1px solid #111;">
+Back
+</button>
           <br /><br /><br /><br /><br /><br />
           <div class="brand">CEZZO</div>
         </div>
@@ -345,17 +351,26 @@
         const { error } = await supabase
           .from("users")
           .insert([{ name: nameValue, mobile, password: p.value }]);
-        if (!error) {
-          document.getElementById("name").value = "";
-          document.getElementById("mobile").value = "";
-          document.getElementById("password").value = "";
-          document.getElementById("step3").classList.add("hidden");
-          document.getElementById("step1").classList.remove("hidden");
-        } else {
+if (!error) {
+
+  // mark user came from login
+  sessionStorage.setItem("skipIntro", "true");
+
+  window.location.href = "index.html";
+}else {
           console.log(error);
           shake(p);
         }
       };
+
+
+      window.goBack = function(){
+
+   // same as login success skip intro
+   sessionStorage.setItem("skipIntro","true");
+
+   window.location.href = "index.html";
+}
     </script>
   </body>
 </html>
