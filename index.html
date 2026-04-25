@@ -4578,22 +4578,40 @@ body.popup-open {
   "https://izoipzriynkcjtwuzrfu.supabase.co",
   "sb_publishable_7ZRL1Y4JAppLTJonepuTIw_UQyGjVVw"
 );
+if(sessionStorage.getItem("skipIntro") === "true"){
+
+    sessionStorage.removeItem("skipIntro");
+
+    splash.style.display = "none";
+    main.style.display = "none";
+
+    home.style.display = "block";
+
+    // restore saved address in navbar
+    cityName.innerText =
+      localStorage.getItem("savedCity") || "Your Location";
+
+    shortAddress.innerText =
+      localStorage.getItem("savedAddress") || "";
+}
+else{
+
 setTimeout(()=>{
 
-  // SHOW MAIN FIRST (behind splash)
   main.style.display = "flex";
   showOnly("detecting");
 
-  // THEN FADE SPLASH
   splash.style.opacity = "0";
   splash.style.transition = "0.6s";
 
   setTimeout(()=>{
     splash.style.display = "none";
-    getLocation();   // start location AFTER
+    getLocation();
   },600);
 
 },2600);
+
+}
 
 function getLocation(){
   navigator.geolocation.getCurrentPosition(async(pos)=>{
@@ -4615,8 +4633,12 @@ function getLocation(){
       main.style.display="none";
       home.style.display="block";
 
-      cityName.innerText = city;
-      shortAddress.innerText = full;
+     cityName.innerText = city;
+shortAddress.innerText = full;
+
+// save for login redirect use
+localStorage.setItem("savedCity", city);
+localStorage.setItem("savedAddress", full);
 
     },3000);
 
@@ -10105,6 +10127,7 @@ function playCouponBlast(){
   }, 3000);
 
 }
+
 </script>
 </body>
 </html>
