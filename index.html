@@ -17,6 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Orbitron:wght@600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -91,6 +93,12 @@ html, body{
   top:20%;
   left:50%;
   transform:translateX(-50%);
+}
+#mapBox2{
+height:300px;
+margin:15px;
+border-radius:18px;
+overflow:hidden;
 }
 .sideHeading {
   font-family: 'Cormorant Garamond', serif;
@@ -3397,6 +3405,77 @@ body.popup-open {
   }
 
 }
+#orderPopup{
+z-index:210000;
+background:#fff;
+}
+
+#mapBox,#mapBox2{
+height:260px;
+margin:15px;
+border-radius:18px;
+background:#eef6ff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:600;
+}
+
+#orderPopup input,
+#orderPopup textarea{
+width:100%;
+margin-bottom:12px;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+#orderPopup button{
+width:100%;
+margin-top:10px;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#0f5c5c;
+color:#fff;
+font-weight:600;
+}
+#mapBox{
+position:relative;
+height:280px;
+margin:15px;
+border-radius:18px;
+overflow:hidden;
+}
+
+
+.locateIcon{
+position:absolute;
+bottom:14px;
+right:14px;
+
+width:42px;
+height:42px;
+
+background:#fff;
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 4px 12px rgba(0,0,0,.18);
+
+font-size:18px;
+color:#0f5c5c;
+
+z-index:20;
+cursor:pointer;
+}
+
+.locateIcon:active{
+transform:scale(.92);
+}
 </style>
 </head>
 
@@ -4571,7 +4650,90 @@ body.popup-open {
 <!-- COUPON BLAST -->
 <div id="couponBlast" class="couponBlast"></div>
 </div>
+<div id="orderPopup" class="popup">
 
+<!-- header -->
+<div class="cartHeader">
+<div class="backBtn" onclick="closeOrderPopup()">
+<i class="fa fa-chevron-down"></i>
+</div>
+
+<div style="
+margin-left:auto;
+background:#0f5c5c;
+color:white;
+padding:8px 14px;
+border-radius:12px;
+font-weight:600;">
+Pay ₹<span id="finalPay">349</span>
+</div>
+</div>
+
+
+<!-- self order -->
+<div id="selfOrder">
+
+<div id="mapBox">
+
+<iframe id="userMap"
+width="100%"
+height="100%"
+style="border:0;border-radius:18px;">
+</iframe>
+
+
+<div class="locateIcon"
+onclick="relocateUser()">
+<i class="fa fa-location-crosshairs"></i>
+</div>
+
+</div>
+<div id="userAddress" class="box">
+Loading your address...
+</div>
+
+
+<div class="box">
+<input placeholder="Name">
+<input placeholder="Mobile">
+<textarea placeholder="Address"></textarea>
+
+<button onclick="confirmSelf()">
+Confirm Location
+</button>
+
+<button onclick="showOtherOrder()">
+Order For Someone Else
+</button>
+</div>
+
+</div>
+
+
+
+<!-- someone else -->
+<div id="otherOrder" style="display:none;">
+
+<div id="mapBox2"></div>
+
+<div id="pickedAddress" class="box">
+Drag pin to recipient location
+</div>
+
+<div class="box">
+<input placeholder="Recipient Name">
+<input placeholder="Mobile">
+<textarea placeholder="Address"></textarea>
+
+<button>
+Confirm Order
+</button>
+</div>
+
+</div>
+
+</div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   var supabase = window.supabase.createClient(
@@ -10142,6 +10304,158 @@ document.getElementById("profileLink").addEventListener("click", function(e){
  }
 
 });
+document.getElementById("placeOrderBtn").onclick=function(){
+
+// always start from first screen
+document.getElementById("selfOrder").style.display="block";
+document.getElementById("otherOrder").style.display="none";
+
+document.getElementById("orderPopup")
+.classList.add("show");
+
+document.body.classList.add("popup-open");
+
+}
+
+
+
+function closeOrderPopup(){
+
+document.getElementById("orderPopup")
+.classList.remove("show");
+
+document.body.classList.remove("popup-open");
+
+
+// reset after close animation
+setTimeout(function(){
+
+document.getElementById("selfOrder").style.display="block";
+
+document.getElementById("otherOrder").style.display="none";
+
+},300);
+
+}
+
+
+
+let recipientMap;
+let marker;
+
+function showOtherOrder(){
+
+document.getElementById("selfOrder").style.display="none";
+document.getElementById("otherOrder").style.display="block";
+
+
+navigator.geolocation.getCurrentPosition(function(pos){
+
+let lat=pos.coords.latitude;
+let lng=pos.coords.longitude;
+
+setTimeout(function(){
+
+if(recipientMap){
+recipientMap.remove();
+}
+
+recipientMap=L.map('mapBox2')
+.setView([lat,lng],16);
+
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+).addTo(recipientMap);
+
+
+
+marker=L.marker(
+[lat,lng],
+{draggable:true}
+).addTo(recipientMap);
+
+
+
+showAddress(lat,lng);
+
+
+/* when user drags pin */
+marker.on('dragend',function(){
+
+let p=marker.getLatLng();
+
+showAddress(p.lat,p.lng);
+
+});
+
+},300);
+
+});
+
+}
+function showAddress(lat,lng){
+
+fetch(
+"https://nominatim.openstreetmap.org/reverse?format=json&lat="
++lat+
+"&lon="
++lng
+)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById(
+"pickedAddress"
+).innerHTML=
+"<b>Your Address:</b><br>" +
+data.display_name;
+
+})
+
+.catch(function(){
+
+document.getElementById(
+"pickedAddress"
+).innerHTML=
+"Address not found";
+
+});
+
+}
+function relocateUser(){
+
+navigator.geolocation.getCurrentPosition(function(pos){
+
+let lat=pos.coords.latitude;
+let lng=pos.coords.longitude;
+
+document.getElementById("userMap").src=
+"https://www.google.com/maps?q="
++lat+","+lng+
+"&z=16&output=embed";
+
+
+fetch(
+"https://nominatim.openstreetmap.org/reverse?format=json&lat="
++lat+"&lon="+lng
+)
+.then(r=>r.json())
+.then(data=>{
+document.getElementById("userAddress").innerHTML=
+"<b>Your Address:</b><br>"+
+data.display_name;
+});
+
+});
+
+}
+
+
+/* auto load once popup opens */
+relocateUser();
 </script>
 </body>
 </html>
