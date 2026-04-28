@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CEZOO</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -2777,17 +2778,22 @@ body.popup-open {
 
 /* HEADER */
 .cartHeader{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 15px;
-  border-bottom:1px solid #eee;
+display:flex;
+align-items:center;
+justify-content:space-between; /* pushes both ends */
 
-  position:sticky;             /* 🔥 stays at top while scrolling */
-  top:0;
-  background:transparent;
-  z-index:10;
+padding:12px 15px;
+border-bottom:1px solid #eee;
+
+position:sticky;
+top:0;
+
+background:#fff;
+z-index:10;
+
+gap:0; /* remove gap */
 }
+
 
 
 /* BACK BUTTON */
@@ -2813,7 +2819,17 @@ body.popup-open {
   font-size:12px;
   color:#666;
 }
+.payTopBox{
+margin-right:0;
 
+background:#0f5c5c;
+color:#fff;
+
+padding:8px 14px;
+border-radius:12px;
+
+font-weight:600;
+}
 /* TITLE */
 .cartTitle{
   font-size:16px;
@@ -3476,6 +3492,305 @@ cursor:pointer;
 .locateIcon:active{
 transform:scale(.92);
 }
+.backToSelf{
+width:100%;
+margin-top:10px;
+padding:14px;
+
+background:#fff !important;
+color:#0f5c5c !important;
+
+border:2px solid #0f5c5c !important;
+border-radius:12px;
+font-weight:600;
+}
+.closeOrderBtn{
+width:38px;
+height:38px;
+
+border-radius:50%;
+background:#fff;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 3px 10px rgba(0,0,0,.12);
+
+font-size:22px;
+color:#111;
+
+cursor:pointer;
+
+margin-left:0;
+}
+
+.closeOrderBtn:active{
+transform:scale(.92);
+}
+.trustRow{
+display:flex;
+justify-content:space-between;
+gap:10px;
+
+margin:12px 15px;
+padding:12px;
+
+background:#f8fbff;
+border-radius:14px;
+}
+
+.trustItem{
+flex:1;
+text-align:center;
+}
+
+.trustItem i{
+font-size:18px;
+color:#0f5c5c;
+margin-bottom:6px;
+}
+
+.trustItem p{
+font-size:11px;
+font-weight:600;
+color:#333;
+line-height:1.2;
+margin:0;
+}
+.shake{
+animation:shake .35s;
+border:1px solid red !important;
+}
+
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-6px);}
+50%{transform:translateX(6px);}
+75%{transform:translateX(-4px);}
+100%{transform:translateX(0);}
+}
+#paymentPopup{
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100vh;
+
+background:#fff;
+z-index:220000;
+
+overflow-y:auto;
+
+transform:translateY(100%);
+transition:.35s;
+
+border-radius:0 !important;
+}
+
+
+#paymentPopup.show{
+transform:translateY(0);
+}
+
+
+
+/* fills full remaining page height */
+.paymentWrap{
+padding:15px;
+
+min-height:calc(100vh - 70px);
+
+display:flex;
+flex-direction:column;
+}
+
+
+
+/* pushes button + secure note toward bottom */
+.paymentContent{
+flex:1;
+}
+
+
+
+.paymentWrap h3{
+font-family:'Inter',sans-serif;
+font-size:19px;
+font-weight:700;
+letter-spacing:-0.3px;
+margin-bottom:18px;
+}
+
+
+
+.payCard{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:14px;
+margin-bottom:12px;
+
+border:1px solid #e6e6e6;
+border-radius:14px;
+
+background:#fff;
+}
+
+
+
+.payLeft{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:600;
+}
+
+.payLeft img{
+width:28px;
+height:28px;
+object-fit:contain;
+}
+
+
+
+.cardFields{
+display:none;
+background:#f7fbfb;
+padding:12px;
+border-radius:12px;
+margin-bottom:14px;
+}
+
+
+
+.cardFields input{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+
+
+.twoCol{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+
+
+.bankLogos{
+display:flex;
+gap:12px;
+margin-bottom:12px;
+}
+
+
+
+.bankLogos img{
+height:24px;
+padding:4px;
+background:#fff;
+border-radius:8px;
+}
+
+
+
+#finalPlaceBtn{
+width:100%;
+padding:15px;
+
+border:none;
+border-radius:14px;
+
+background:#bfc8c8;
+color:#eef2f2;
+
+font-weight:700;
+
+margin-top:auto; /* pushes to bottom */
+}
+
+
+
+#finalPlaceBtn.active{
+background:#0f5c5c;
+color:#fff;
+}
+
+
+
+.secureNote{
+margin-top:14px;
+margin-bottom:20px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+gap:6px;
+
+font-size:12px;
+font-weight:600;
+color:#0f5c5c;
+}
+.bankOption{
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:12px;
+margin-bottom:8px;
+
+border:1px solid #eee;
+border-radius:10px;
+}
+
+.bankOption img{
+height:24px;
+width:auto;
+}
+.bankGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.bankOption{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:12px;
+border:1px solid #e6e6e6;
+border-radius:12px;
+background:#fff;
+}
+
+.bankLogoWrap{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.bankLogoWrap img{
+height:20px;
+width:auto;
+object-fit:contain;
+}
+
+.bankLogoWrap span{
+font-size:12px;
+font-weight:600;
+}
+
+
+
+
 </style>
 </head>
 
@@ -4655,7 +4970,9 @@ transform:scale(.92);
 <!-- header -->
 <div class="cartHeader">
 <div class="backBtn" onclick="closeOrderPopup()">
-<i class="fa fa-chevron-down"></i>
+<div class="closeOrderBtn" onclick="closeOrderPopup()">
+<i class="fa fa-angle-down"></i>
+</div>
 </div>
 
 <div style="
@@ -4665,14 +4982,31 @@ color:white;
 padding:8px 14px;
 border-radius:12px;
 font-weight:600;">
-Pay ₹<span id="finalPay">349</span>
+Total<span id="finalPay">₹0</span>
 </div>
 </div>
 
 
 <!-- self order -->
 <div id="selfOrder">
+<div class="trustRow">
 
+<div class="trustItem">
+<i class="fa fa-bolt"></i>
+<p>Fast Delivery</p>
+</div>
+
+<div class="trustItem">
+<i class="fa fa-lock"></i>
+<p>100% Secure Payment</p>
+</div>
+
+<div class="trustItem">
+<i class="fa fa-route"></i>
+<p>Live Tracking</p>
+</div>
+
+</div>
 <div id="mapBox">
 
 <iframe id="userMap"
@@ -4694,9 +5028,18 @@ Loading your address...
 
 
 <div class="box">
-<input placeholder="Name">
-<input placeholder="Mobile">
-<textarea placeholder="Address"></textarea>
+
+<input id="custName"
+placeholder="Name">
+
+<input id="custMobile"
+placeholder="Mobile">
+
+<input id="custCity"
+placeholder="Enter Village or City Name">
+
+<textarea id="custAddress"
+placeholder="Address"></textarea>
 
 <button onclick="confirmSelf()">
 Confirm Location
@@ -4705,6 +5048,7 @@ Confirm Location
 <button onclick="showOtherOrder()">
 Order For Someone Else
 </button>
+
 </div>
 
 </div>
@@ -4721,18 +5065,263 @@ Drag pin to recipient location
 </div>
 
 <div class="box">
-<input placeholder="Recipient Name">
-<input placeholder="Mobile">
-<textarea placeholder="Address"></textarea>
 
-<button>
+<input id="recName"
+placeholder="Recipient Name">
+
+<input id="recMobile"
+placeholder="Mobile">
+
+<input id="recCity"
+placeholder="Enter Village or City Name">
+
+<textarea id="recAddress"
+placeholder="Address"></textarea>
+
+<button onclick="confirmRecipient()">
 Confirm Order
 </button>
-</div>
+
+<button class="backToSelf"
+onclick="backToSelfOrder()">
+Back
+</button>
 
 </div>
 
 </div>
+
+</div>
+
+<div id="paymentPopup" class="popup">
+
+<div class="cartHeader">
+
+<div class="closeOrderBtn"
+onclick="closePaymentPopup()">
+<i class="fa fa-angle-left"></i>
+</div>
+
+<div class="payTopBox">
+To Pay <span id="paymentTotal">₹0</span>
+</div>
+
+</div>
+
+
+
+<div class="paymentWrap">
+
+<h3>Choose Payment Method</h3>
+
+
+<div class="paymentContent">
+
+<label class="payCard">
+<div class="payLeft">
+<img src="https://img.icons8.com/color/48/google-pay.png">
+<span>Google Pay</span>
+</div>
+<input type="radio" name="pay"
+onclick="selectPayment()">
+</label>
+
+
+<label class="payCard">
+<div class="payLeft">
+<img src="https://img.icons8.com/color/48/phone-pe.png">
+<span>PhonePe</span>
+</div>
+<input type="radio" name="pay"
+onclick="selectPayment()">
+</label>
+
+
+<label class="payCard">
+<div class="payLeft">
+<img src="https://img.icons8.com/color/48/paytm.png">
+<span>Paytm</span>
+</div>
+<input type="radio" name="pay"
+onclick="selectPayment()">
+</label>
+
+<label class="payCard">
+<div class="payLeft">
+
+<img src="amazon.webp">
+
+<span>Amazon Pay</span>
+
+</div>
+
+<input type="radio"
+name="pay"
+onclick="selectPayment()">
+</label>
+
+
+
+<label class="payCard">
+<div class="payLeft">
+
+<img src="https://dl.svgcdn.com/png/arcticons/supermoney-800.png">
+
+<span>SuperMoney</span>
+
+</div>
+
+<input type="radio"
+name="pay"
+onclick="selectPayment()">
+</label>
+
+<label class="payCard">
+<div class="payLeft">
+<img src="https://img.icons8.com/color/48/bank-card-back-side.png">
+<span>Debit / Credit Card</span>
+</div>
+
+<input
+type="radio"
+name="pay"
+onclick="showCardFields()">
+</label>
+
+
+
+<div id="cardFields" class="cardFields">
+
+<div class="bankLogos">
+
+<img src="https://cdn-icons-png.flaticon.com/512/349/349221.png">
+
+<img src="https://cdn-icons-png.flaticon.com/512/196/196561.png">
+
+<img src="https://cdn-icons-png.flaticon.com/512/825/825454.png">
+
+</div>
+
+<input placeholder="Card Number">
+
+<div class="twoCol">
+<input placeholder="MM/YY">
+<input placeholder="CVV">
+</div>
+
+</div>
+
+
+
+<label class="payCard">
+<div class="payLeft">
+<img src="https://img.icons8.com/color/48/bank-building.png">
+<span>Net Banking</span>
+</div>
+
+<input
+type="radio"
+name="pay"
+onclick="showBankFields()">
+</label>
+
+
+<div id="bankFields" class="cardFields">
+
+<div class="bankGrid">
+
+
+<label class="bankOption">
+<div class="bankLogoWrap">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/SBI-logo.svg">
+<span>SBI</span>
+</div>
+<input type="radio" name="bank">
+</label>
+
+
+<label class="bankOption">
+<div class="bankLogoWrap">
+<img src="https://1000logos.net/wp-content/uploads/2021/06/HDFC-Bank-logo.png">
+<span>HDFC</span>
+</div>
+<input type="radio" name="bank">
+</label>
+
+
+<label class="bankOption">
+<div class="bankLogoWrap">
+<img src="icici.webp">
+<span>ICICI</span>
+</div>
+<input type="radio" name="bank">
+</label>
+
+
+<label class="bankOption">
+<div class="bankLogoWrap">
+<img src="axis.webp">
+<span>Axis</span>
+</div>
+<input type="radio" name="bank">
+</label>
+
+
+<label class="bankOption">
+<div class="bankLogoWrap">
+<img src="kok.webp">
+<span>Kotak</span>
+</div>
+<input type="radio" name="bank">
+</label>
+
+
+<label class="bankOption">
+<div class="bankLogoWrap">
+<img src="canara.webp">
+<span>Canara</span>
+</div>
+<input type="radio" name="bank">
+</label>
+
+
+</div>
+
+</div>
+
+<!--bank logs-->
+
+<label class="payCard">
+<div class="payLeft">
+<img src="https://img.icons8.com/color/48/cash-in-hand.png">
+<span>Cash on Delivery</span>
+</div>
+
+<input type="radio"
+name="pay"
+onclick="selectPayment()">
+</label>
+
+</div>
+
+
+
+<button id="finalPlaceBtn"
+disabled
+onclick="placeFinalOrder()">
+Place Order
+</button>
+
+
+<div class="secureNote">
+<i class="fa fa-lock"></i>
+100% Secured Payments
+</div>
+
+</div>
+
+
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -10306,14 +10895,26 @@ document.getElementById("profileLink").addEventListener("click", function(e){
 });
 document.getElementById("placeOrderBtn").onclick=function(){
 
-// always start from first screen
+
+// reset screens
 document.getElementById("selfOrder").style.display="block";
 document.getElementById("otherOrder").style.display="none";
+
+
+
+/* copy real cart total */
+document.getElementById("finalPay").innerText=
+document.getElementById("billTotal").innerText;
+
+
 
 document.getElementById("orderPopup")
 .classList.add("show");
 
 document.body.classList.add("popup-open");
+
+
+relocateUser();
 
 }
 
@@ -10452,10 +11053,289 @@ data.display_name;
 });
 
 }
+function backToSelfOrder(){
 
+document.getElementById("otherOrder").style.display="none";
+
+document.getElementById("selfOrder").style.display="block";
+
+}
 
 /* auto load once popup opens */
 relocateUser();
+
+function confirmSelf(){
+
+let name=
+document.getElementById("custName");
+
+let mobile=
+document.getElementById("custMobile");
+
+let city=
+document.getElementById("custCity");
+
+let address=
+document.getElementById("custAddress");
+
+let valid=true;
+
+
+/* Name check */
+if(name.value.trim()==""){
+shakeField(name);
+valid=false;
+}
+
+
+/* Mobile exactly 10 digits */
+if(!/^[0-9]{10}$/.test(mobile.value)){
+shakeField(mobile);
+valid=false;
+}
+
+
+/* City */
+if(city.value.trim()==""){
+shakeField(city);
+valid=false;
+}
+
+
+/* Address */
+if(address.value.trim()==""){
+shakeField(address);
+valid=false;
+}
+
+
+if(!valid){
+return;
+}
+
+
+/* passed validation */
+openPaymentPopup();
+
+}
+function confirmRecipient(){
+
+let name=
+document.getElementById("recName");
+
+let mobile=
+document.getElementById("recMobile");
+
+let city=
+document.getElementById("recCity");
+
+let address=
+document.getElementById("recAddress");
+
+let valid=true;
+
+
+if(name.value.trim()==""){
+shakeField(name);
+valid=false;
+}
+
+
+if(!/^[0-9]{10}$/.test(mobile.value)){
+shakeField(mobile);
+valid=false;
+}
+
+
+if(city.value.trim()==""){
+shakeField(city);
+valid=false;
+}
+
+
+if(address.value.trim()==""){
+shakeField(address);
+valid=false;
+}
+
+
+if(!valid){
+return;
+}
+
+
+/* only if all entered */
+openPaymentPopup();
+
+}
+
+function openPaymentPopup(){
+
+document.getElementById("paymentTotal").innerText=
+document.getElementById("billTotal").innerText;
+
+document.getElementById("paymentPopup")
+.classList.add("show");
+
+}
+
+
+function closePaymentPopup(){
+
+document.getElementById("paymentPopup")
+.classList.remove("show");
+
+}
+
+
+
+function hidePaymentFields(){
+
+document.getElementById(
+"cardFields"
+).style.display="none";
+
+}
+
+
+
+function selectPayment(){
+
+hidePaymentFields();
+
+let btn=
+document.getElementById(
+"finalPlaceBtn"
+);
+
+btn.disabled=false;
+
+btn.classList.add("active");
+
+}
+
+
+
+function showCardFields(){
+
+hidePaymentFields();
+
+document.getElementById(
+"cardFields"
+).style.display="block";
+
+
+let btn=
+document.getElementById(
+"finalPlaceBtn"
+);
+
+btn.disabled=false;
+
+btn.classList.add("active");
+
+}
+
+
+
+function placeFinalOrder(){
+
+alert("Order Placed Successfully 🎉");
+
+}
+function shakeField(el){
+
+el.classList.add("shake");
+
+setTimeout(function(){
+el.classList.remove("shake");
+},400);
+
+}
+function hidePaymentFields(){
+
+document.getElementById(
+"cardFields"
+).style.display="none";
+
+}
+
+
+
+function selectPayment(){
+
+/* hide extra fields when other methods chosen */
+hidePaymentFields();
+
+
+let btn=
+document.getElementById(
+"finalPlaceBtn"
+);
+
+btn.disabled=false;
+
+btn.classList.add("active");
+
+}
+
+
+
+/* only for card option */
+function showCardFields(){
+
+hidePaymentFields();
+
+document.getElementById(
+"cardFields"
+).style.display="block";
+
+
+let btn=
+document.getElementById(
+"finalPlaceBtn"
+);
+
+btn.disabled=false;
+
+btn.classList.add("active");
+
+}
+function showBankFields(){
+
+hidePaymentFields();
+
+document.getElementById(
+"bankFields"
+).style.display="block";
+
+let btn=
+document.getElementById(
+"finalPlaceBtn"
+);
+
+btn.disabled=false;
+
+btn.classList.add("active");
+
+}
+
+
+
+function hidePaymentFields(){
+
+document.getElementById(
+"cardFields"
+).style.display="none";
+
+
+if(document.getElementById("bankFields")){
+document.getElementById(
+"bankFields"
+).style.display="none";
+}
+
+}
 </script>
 </body>
 </html>
