@@ -3572,26 +3572,26 @@ border:1px solid red !important;
 }
 #paymentPopup{
 position:fixed;
-top:0;
+top:100%;   /* was top:0 */
 left:0;
 
 width:100%;
-height:100vh;
+height:100dvh;   /* better than 100vh on phones */
 
 background:#fff;
 z-index:220000;
 
 overflow-y:auto;
+-webkit-overflow-scrolling:touch;
 
-transform:translateY(100%);
-transition:.35s;
+transition:top .35s cubic-bezier(.22,1,.36,1);
 
 border-radius:0 !important;
 }
 
-
+/* open state */
 #paymentPopup.show{
-transform:translateY(0);
+top:0;
 }
 
 
@@ -3788,9 +3788,211 @@ font-size:12px;
 font-weight:600;
 }
 
+.payNotice{
+margin-top:12px;
+
+padding:10px 12px;
+
+background:#fff8e6;
+border:1px solid #ffe3a3;
+
+border-radius:10px;
+
+font-size:12px;
+font-weight:600;
+
+color:#9a6a00;
+
+text-align:center;
+}
+
+.cartHeaderCart{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 15px;
+}
 
 
 
+.backBtn{
+width:36px;
+height:36px;
+
+border-radius:50%;
+background:#fff;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 3px 8px rgba(0,0,0,.08);
+
+font-size:20px;
+color:#111;
+}
+
+
+
+.cartLocationCart{
+display:flex;
+flex-direction:column;
+gap:4px; /* space between city + address */
+
+line-height:1.3;
+}
+
+
+
+#cartCity{
+font-size:14px;
+font-weight:700;
+}
+
+
+
+#cartAddress{
+font-size:12px;
+color:#666;
+}
+
+.cartLocationCart{
+display:flex;
+flex-direction:column;
+
+align-items:flex-start;
+line-height:1.2;
+
+margin-left:0;
+}
+#successPopup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:
+radial-gradient(circle at top,#dff8ff,#ffffff);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+z-index:999999999;
+
+opacity:0;
+visibility:hidden;
+
+transition:.5s;
+overflow:hidden;
+}
+
+
+/* show */
+#successPopup.show{
+opacity:1;
+visibility:visible;
+}
+
+/* stop scrolling while shown */
+body.success-lock{
+overflow:hidden;
+position:fixed;
+width:100%;
+}
+
+/* card */
+.successCard{
+text-align:center;
+animation:pop .8s cubic-bezier(.22,1,.36,1);
+}
+
+/* big round success */
+.tickWrap{
+width:150px;
+height:150px;
+margin:auto;
+border-radius:50%;
+background:linear-gradient(145deg,#10c95b,#0c9e46);
+
+box-shadow:
+0 0 35px rgba(16,201,91,.45),
+0 15px 40px rgba(0,0,0,.15);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+position:relative;
+}
+
+/* pulse ring */
+.tickCircle{
+position:absolute;
+width:150px;
+height:150px;
+border-radius:50%;
+border:8px solid rgba(16,201,91,.25);
+animation:pulse 1.8s infinite;
+}
+
+/* checkmark */
+.tickSvg{
+width:70px;
+height:70px;
+fill:none;
+stroke:white;
+stroke-width:5;
+stroke-linecap:round;
+stroke-linejoin:round;
+}
+
+.tickSvg path{
+stroke-dasharray:80;
+stroke-dashoffset:80;
+animation:draw .7s ease forwards .4s;
+}
+
+.successCard h1{
+margin-top:28px;
+font-size:34px;
+color:#111;
+}
+
+.successCard p{
+margin-top:10px;
+font-size:17px;
+color:#666;
+}
+
+/* animations */
+@keyframes draw{
+to{
+stroke-dashoffset:0;
+}
+}
+
+@keyframes pop{
+0%{
+transform:scale(.6);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+@keyframes pulse{
+0%{
+transform:scale(1);
+opacity:1;
+}
+100%{
+transform:scale(1.35);
+opacity:0;
+}
+}
 </style>
 </head>
 
@@ -4839,12 +5041,12 @@ font-weight:600;
 <div class="cartTopSection">
 
   <!-- 🔝 TOP BAR -->
-  <div class="cartHeader">
+  <div class="cartHeaderCart">
     <div class="backBtn">
-      <i class="fa fa-arrow-left"></i>
-    </div>
+<i class="fa fa-chevron-left"></i>
+</div>
 
-    <div class="cartLocation">
+    <div class="cartLocationCart">
       <div id="cartCity"></div>
       <div id="cartAddress"></div>
     </div>
@@ -5122,8 +5324,9 @@ To Pay <span id="paymentTotal">₹0</span>
 <img src="https://img.icons8.com/color/48/google-pay.png">
 <span>Google Pay</span>
 </div>
-<input type="radio" name="pay"
-onclick="selectPayment()">
+<input
+type="radio"
+disabled>
 </label>
 
 
@@ -5132,8 +5335,9 @@ onclick="selectPayment()">
 <img src="https://img.icons8.com/color/48/phone-pe.png">
 <span>PhonePe</span>
 </div>
-<input type="radio" name="pay"
-onclick="selectPayment()">
+<input
+type="radio"
+disabled>
 </label>
 
 
@@ -5142,8 +5346,9 @@ onclick="selectPayment()">
 <img src="https://img.icons8.com/color/48/paytm.png">
 <span>Paytm</span>
 </div>
-<input type="radio" name="pay"
-onclick="selectPayment()">
+<input
+type="radio"
+disabled>
 </label>
 
 <label class="payCard">
@@ -5155,9 +5360,9 @@ onclick="selectPayment()">
 
 </div>
 
-<input type="radio"
-name="pay"
-onclick="selectPayment()">
+<input
+type="radio"
+disabled>
 </label>
 
 
@@ -5171,9 +5376,9 @@ onclick="selectPayment()">
 
 </div>
 
-<input type="radio"
-name="pay"
-onclick="selectPayment()">
+<input
+type="radio"
+disabled>
 </label>
 
 <label class="payCard">
@@ -5184,8 +5389,7 @@ onclick="selectPayment()">
 
 <input
 type="radio"
-name="pay"
-onclick="showCardFields()">
+disabled>
 </label>
 
 
@@ -5219,10 +5423,10 @@ onclick="showCardFields()">
 <span>Net Banking</span>
 </div>
 
+
 <input
 type="radio"
-name="pay"
-onclick="showBankFields()">
+disabled>
 </label>
 
 
@@ -5311,13 +5515,35 @@ disabled
 onclick="placeFinalOrder()">
 Place Order
 </button>
-
+<div class="payNotice">
+Currently online payments are unavailable.
+Please use Cash on Delivery.
+</div>
 
 <div class="secureNote">
 <i class="fa fa-lock"></i>
 100% Secured Payments
 </div>
+<!-- SUCCESS FULL SCREEN -->
+<div id="successPopup">
 
+  <div class="successCard">
+
+    <!-- animated circle -->
+    <div class="tickWrap">
+      <div class="tickCircle"></div>
+
+      <svg class="tickSvg" viewBox="0 0 52 52">
+        <path d="M14 27 L22 35 L38 18"/>
+      </svg>
+    </div>
+
+    <h1>Order Placed</h1>
+    <p>Your order was placed successfully 🎉</p>
+
+  </div>
+
+</div>
 </div>
 
 
@@ -10889,29 +11115,73 @@ document.getElementById("profileLink").addEventListener("click", function(e){
     window.location.href="order.html";
  }
  else{
-    window.location.href="login.html";
+    localStorage.setItem(
+"redirectAfterLogin",
+window.location.href
+);
+
+localStorage.setItem(
+"openOrderPopupAfterLogin",
+"yes"
+);
+
+window.location.href="login.html";
  }
 
 });
-document.getElementById("placeOrderBtn").onclick=function(){
+document.getElementById(
+"placeOrderBtn"
+).onclick=function(){
+
+let userName=
+localStorage.getItem(
+"userName"
+);
+
+let userMobile=
+localStorage.getItem(
+"userMobile"
+);
 
 
-// reset screens
-document.getElementById("selfOrder").style.display="block";
-document.getElementById("otherOrder").style.display="none";
+/* if not logged in */
+if(!userName || !userMobile){
+
+window.location.href=
+"login.html";
+
+return;
+
+}
 
 
+/* logged in continue normal flow */
 
-/* copy real cart total */
-document.getElementById("finalPay").innerText=
-document.getElementById("billTotal").innerText;
+document.getElementById(
+"selfOrder"
+).style.display="block";
+
+document.getElementById(
+"otherOrder"
+).style.display="none";
 
 
+document.getElementById(
+"finalPay"
+).innerText=
+document.getElementById(
+"billTotal"
+).innerText;
 
-document.getElementById("orderPopup")
-.classList.add("show");
 
-document.body.classList.add("popup-open");
+document.getElementById(
+"orderPopup"
+).classList.add("show");
+
+
+document.body.classList.add(
+"popup-open"
+);
 
 
 relocateUser();
@@ -11236,13 +11506,240 @@ btn.classList.add("active");
 
 }
 
+async function placeFinalOrder(){
 
 
-function placeFinalOrder(){
+let customerName=
+localStorage.getItem(
+"userName"
+) || "";
 
-alert("Order Placed Successfully 🎉");
+
+let customerMobile=
+localStorage.getItem(
+"userMobile"
+) || "";
+
+
+
+let isRecipient=
+document.getElementById(
+"otherOrder"
+).style.display=="block";
+
+
+
+let recipientName="";
+let recipientMobile="";
+
+
+if(isRecipient){
+
+recipientName=
+document.getElementById(
+"recName"
+).value;
+
+
+recipientMobile=
+document.getElementById(
+"recMobile"
+).value;
 
 }
+
+
+
+/* cart object from localStorage */
+let rawCart=
+JSON.parse(
+localStorage.getItem("cart")
+) || {};
+
+
+
+/* convert keys into order items */
+let cartItems=[];
+
+
+Object.entries(rawCart)
+.forEach(function(entry){
+
+let key=entry[0];
+
+let qty=entry[1];
+
+
+/* all_products_7 -> table + id */
+let parts=
+key.split("_");
+
+
+let productId=
+parts.pop();
+
+
+let tableName=
+parts.join("_");
+
+
+
+cartItems.push({
+
+product_id:
+productId,
+
+
+table_name:
+tableName,
+
+
+qty:
+qty,
+
+
+gift:false,
+
+
+gift_note:""
+
+});
+
+});
+
+
+
+let payMethod=
+document.querySelector(
+'input[name="pay"]:checked'
+)?.parentElement.innerText
+|| "Cash On Delivery";
+
+
+
+let finalTotal=
+parseFloat(
+document.getElementById(
+"billTotal"
+).innerText.replace(/[^\d.]/g,'')
+);
+
+
+
+let deliveryFee=0;
+
+
+
+let mapAddress=
+isRecipient
+? document.getElementById(
+"pickedAddress"
+).innerText
+: document.getElementById(
+"userAddress"
+).innerText;
+
+
+
+const {error}=await supabase
+.from("orders")
+.insert([{
+
+customer_name:
+customerName,
+
+
+customer_mobile:
+customerMobile,
+self_form_name:
+isRecipient
+? null
+: document.getElementById(
+"custName"
+).value,
+
+
+self_form_mobile:
+isRecipient
+? null
+: document.getElementById(
+"custMobile"
+).value,
+
+order_type:
+isRecipient
+? "recipient"
+: "self",
+
+
+recipient_name:
+recipientName,
+
+
+recipient_mobile:
+recipientMobile,
+
+
+village_city:
+isRecipient
+? document.getElementById(
+"recCity"
+).value
+: document.getElementById(
+"custCity"
+).value,
+
+
+typed_address:
+isRecipient
+? document.getElementById(
+"recAddress"
+).value
+: document.getElementById(
+"custAddress"
+).value,
+
+
+map_address:
+mapAddress,
+
+
+payment_method:
+payMethod,
+
+
+delivery_fee:
+deliveryFee,
+
+
+total_amount:
+finalTotal,
+
+
+cart_items:
+cartItems
+
+}]);
+
+
+if(!error){
+
+showSuccessPopup();
+
+}else{
+
+console.log(error);
+
+alert(
+"Order failed"
+);
+
+}
+
+}
+
+
+// above plave
 function shakeField(el){
 
 el.classList.add("shake");
@@ -11334,6 +11831,147 @@ document.getElementById(
 "bankFields"
 ).style.display="none";
 }
+
+}
+function showSuccessPopup(){
+
+const payment=document.getElementById("paymentPopup");
+const s=document.getElementById("successPopup");
+
+/* preserve user data */
+const savedName=
+localStorage.getItem("custName");
+
+const savedMobile=
+localStorage.getItem("custMobile");
+
+const savedUsername=
+localStorage.getItem("username");
+
+const savedPassword=
+localStorage.getItem("password");
+
+
+payment.scrollTop=0;
+payment.style.overflow="hidden";
+
+document.body.classList.add("success-lock");
+
+
+/* show success instantly */
+s.classList.add("show");
+
+
+/* 🔥 instant cart/data reset NOW (not after 4 sec) */
+
+localStorage.removeItem("cart");
+localStorage.removeItem("cartItems");
+localStorage.removeItem("coupon");
+localStorage.removeItem("giftWrap");
+localStorage.removeItem("custAddress");
+localStorage.removeItem("custCity");
+localStorage.removeItem("orderData");
+
+
+/* restore protected data */
+if(savedName)
+localStorage.setItem("custName",savedName);
+
+if(savedMobile)
+localStorage.setItem("custMobile",savedMobile);
+
+if(savedUsername)
+localStorage.setItem("username",savedUsername);
+
+if(savedPassword)
+localStorage.setItem("password",savedPassword);
+
+
+/* empty cart */
+cart=[];
+
+
+/* hide bars immediately */
+document.querySelector(".cartBar")
+?.classList.add("hidden");
+
+document.querySelector(".miniCart")
+?.classList.remove("show");
+
+
+/* reset totals instantly */
+if(document.getElementById("cartCount")){
+document.getElementById("cartCount").textContent="0 Items";
+}
+
+if(document.getElementById("cartTotal")){
+document.getElementById("cartTotal").textContent="₹0";
+}
+
+if(document.getElementById("cartItemsList")){
+document.getElementById("cartItemsList").innerHTML="";
+}
+
+
+/* reset all + - controls to ADD */
+document.querySelectorAll(
+".cartControl,.popupCartControl"
+).forEach(el=>{
+el.classList.remove("active");
+el.innerHTML=
+'<div class="addBtn2">+</div>';
+});
+
+
+document.querySelectorAll(".qtyInside")
+.forEach(el=>el.remove());
+
+
+if(typeof updateCartUI==="function"){
+updateCartUI();
+}
+
+if(typeof renderProducts==="function"){
+renderProducts();
+}
+
+
+
+/* after animation ends just close popups */
+setTimeout(()=>{
+
+s.classList.remove("show");
+
+document.body.classList.remove("success-lock");
+
+payment.style.overflow="auto";
+
+
+closePaymentPopup();
+closeOrderPopup();
+
+if(document.getElementById("cartPopup")){
+document.getElementById("cartPopup")
+.classList.remove("show");
+}
+
+
+document.getElementById("home").style.display="block";
+
+
+if(document.getElementById("custName")){
+document.getElementById("custName").value=
+savedName||"";
+}
+
+if(document.getElementById("custMobile")){
+document.getElementById("custMobile").value=
+savedMobile||"";
+}
+
+window.scrollTo(0,0);
+
+},4000);
 
 }
 </script>
