@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>CEZOO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -29,13 +30,22 @@ body{
   font-family:'Outfit',sans-serif;
   color:#fff;
 }
+body{
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 html, body{
   touch-action: manipulation;   /* 🔥 stops double tap zoom */
 }
 .mainText{
   animation:fadeUp 0.6s ease;
 }
-
+#splashScreen{
+  padding-top: calc(env(safe-area-inset-top) + 20px);
+}
+#topSection{
+  padding-top: calc(env(safe-area-inset-top) + 12px);
+}
 .subText{
   animation:fade 1s ease;
 }
