@@ -1566,13 +1566,15 @@ left:0;
   pointer-events:none;
 }
 #popup .topIcons,
-#popup .imageSlider,
 #popup .dots,
 #popup .popupContent{
   position:relative;
-  top:20px;
+  top:10px;
 }
-
+.imageSlider{
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x;
+}
 #popup{
  overflow-y:auto;
  overflow-x:hidden;
