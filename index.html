@@ -4492,6 +4492,7 @@ style="
  muted
  loop
  playsinline
+ preload="auto"
  style="
   width:100%;
   height:180px;
@@ -4501,14 +4502,16 @@ style="
   border-radius:14px;
   margin-top:10px;
  ">
- <source src="banner2.webm" type="video/webm">
+ <source src="banner2.webm" type="video/mp4">
 </video>
 
 </div>
 <div id="productSection7" class="productSectionWithHeading">
   
   
-  
+  <div class="sideHeading">
+    Top Picks
+  </div>
 
   <div class="productGrid" id="productGrid7"></div>
 
@@ -4851,14 +4854,24 @@ style="
   border-radius:14px;
   margin-top:10px;
  ">
- <source src="banners3.mp4" type="video/webm">
+ <source src="banners3.mp4" type="video/mp4">
 </video>
+
+</div>
+
+<div id="productSection41" class="productSectionWithHeading">
+  
+ 
+
+  <div class="productGrid" id="productGrid41"></div>
 
 </div>
 
 <div id="productSection42" class="productSectionWithHeading">
   
-
+  <div class="sideHeading">
+    Face Care
+  </div>
 
   <div class="productGrid" id="productGrid42"></div>
 
@@ -7550,8 +7563,6 @@ async function loadProducts6(){
     .in("id", [3,4,5,6,7,8]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid6"); // ✅ new grid
-  if(!grid) return;
-
   grid.innerHTML = "";
 
   data.forEach(item => {
@@ -7873,7 +7884,6 @@ async function loadProducts10(){
     .in("id", [7,8,9,10,11,12]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid10"); // ✅ new grid
-  if(!grid) return;
   grid.innerHTML = "";
 
   data.forEach(item => {
@@ -9732,11 +9742,8 @@ async function loadProducts40(){
     .select("*")
     .in("id", [1,2,3,4,5,6,7]);   // ✅ new IDs
 
-  const grid = document.getElementById("productGrid40");
-   if(!grid) return;
-
+  const grid = document.getElementById("productGrid40"); // ✅ new grid
   grid.innerHTML = "";
-
 
   data.forEach(item => {
 
