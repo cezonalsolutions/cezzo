@@ -414,7 +414,7 @@ input, textarea{
 
   margin: -15px;     /* ✅ remove side gaps */
   padding: 15px;     /* keep spacing inside */
-padding-top:60px; 
+
   padding-bottom:10px;
 
   border-radius:0;   /* ❌ remove rounded corners */
@@ -1407,32 +1407,15 @@ padding-top:60px;
   transition:transform 0.3s ease;
 }
 
+/* productcare */
+/* GRID */
+/* HORIZONTAL SCROLL */
 .productGrid{
   display:flex;
+  overflow-x:auto;
   gap:12px;
   padding:12px 10px;
-
-  overflow-x:auto;
-  overflow-y:hidden;
-
-  -webkit-overflow-scrolling:touch; /* iPhone momentum */
-  touch-action:pan-x;               /* horizontal swipe */
-  overscroll-behavior-x:contain;
-
-  scroll-behavior:auto;             /* remove smooth */
-  scrollbar-width:none;
-}
-.productCard,
-.productCard2{
-  flex:0 0 auto;
-  min-width:95px;
-
-  touch-action:manipulation;
-  -webkit-user-select:none;
-  user-select:none;
-}
-.productGrid::-webkit-scrollbar{
- display:none;
+  scroll-behavior:smooth;
 }
 
 .productGrid::-webkit-scrollbar{
@@ -1527,12 +1510,11 @@ padding-top:60px;
 
   text-decoration: line-through;   /* ✅ ADD THIS */
 }
-
 /* POPUP FULL SCREEN */
 .popup{
   position:fixed;
-top:0px;
-left:0;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   background:#fff;
@@ -1550,12 +1532,6 @@ left:0;
   transition:all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 
   pointer-events:none;
-}
-#popup .topIcons,
-#popup .imageSlider,
-#popup .dots,
-#popup .popupContent{
-  top:65px;
 }
 
 .popup.show{
@@ -2314,17 +2290,10 @@ left:0;
   z-index: 11000;
 }
 /* 🔒 Prevent background scrolling when popup is open */
-html.popup-open,
-body.popup-open{
-  overflow:hidden !important;
-  position:fixed;
-  width:100%;
-  height:100%;
-  scrollbar-width:none; /* Firefox */
-}
-
-body.popup-open::-webkit-scrollbar{
-  display:none; /* Chrome/Safari */
+body.popup-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
  /* Edge-to-edge horizontal scrolling container */
         .brand-container {
@@ -2853,7 +2822,7 @@ display:flex;
 align-items:center;
 justify-content:space-between; /* pushes both ends */
 
-padding:63px 15px 12px;
+padding:12px 15px;
 border-bottom:1px solid #eee;
 
 position:sticky;
@@ -3298,19 +3267,7 @@ font-weight:600;
 .giftOptionNew:active{
   transform:scale(0.98);
 }
-#categoryPopup{
-  overflow-y:auto;
-  overflow-x:hidden;
 
-  overscroll-behavior:none;
-  touch-action:pan-y;
-
-  scrollbar-width:none; /* Firefox hide scrollbar */
-}
-
-#categoryPopup::-webkit-scrollbar{
-  display:none; /* Chrome/Safari hide scrollbar */
-}
 /* 🎁 ANIMATION */
 .giftAnim{
   position:relative;
@@ -3807,6 +3764,7 @@ color:#fff;
 }
 
 
+
 .secureNote{
 margin-top:14px;
 margin-bottom:20px;
@@ -3892,7 +3850,7 @@ text-align:center;
 display:flex;
 align-items:center;
 gap:12px;
-padding:63px 15px 12px; /* top right/left bottom */
+padding:12px 15px;
 }
 
 
@@ -4651,7 +4609,7 @@ filter:grayscale(1);
 <div class="midCategory" id="wholesalecools">
 
   <div class="midHeader">
-    <h3>Brands</h3>
+    <h3>BrandS</h3>
   </div>
 
    <div class="brand-container">
@@ -5210,7 +5168,7 @@ Bite Delight Hub
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:65px 15px 12px;
+      padding:12px 15px;
       border-bottom:1px solid #eee;
       font-family:'Poppins', sans-serif;
   ">
@@ -5248,7 +5206,7 @@ Bite Delight Hub
     </h2>
   </div>
 
-  <div id="categoryGrid"></div>
+  <div id="categoryGrid" class="productGrid"></div>
 </div>
 
 <div id="cartPopup" class="popup">
@@ -5381,8 +5339,6 @@ Bite Delight Hub
 <!-- COUPON BLAST -->
 <div id="couponBlast" class="couponBlast"></div>
 </div>
-
-
 <div id="orderPopup" class="popup">
 
 <!-- header -->
@@ -6884,7 +6840,6 @@ async function loadProducts(){
 
 }
 function openPopup(item){
-lockBodyScroll();
   const table = item.table || "all_products";
 
   const popup = document.getElementById("popup");
@@ -7072,7 +7027,7 @@ lockBodyScroll();
   `;
 
   popup.style.display = "flex";
-lockBodyScroll();   // add here
+
 requestAnimationFrame(()=>{
   popup.classList.add("show");
 });
@@ -7101,7 +7056,6 @@ function closePopup(){
 
   setTimeout(()=>{
     popup.style.display = "none";
-    unlockBodyScroll();
   },300);
   
 }
@@ -11203,8 +11157,6 @@ document.addEventListener("DOMContentLoaded", () => {
       titleElement.textContent = config.title;
 
       // Show popup
-       lockBodyScroll();
-
       popup.classList.add("show");
 
       // Load products from Supabase
@@ -11215,7 +11167,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Close popup
   closeBtn.addEventListener("click", () => {
     popup.classList.remove("show");
-    unlockBodyScroll();
   });
 });
 async function loadCategoryProducts(tableName, ids) {
@@ -11302,29 +11253,18 @@ async function loadCategoryProducts(tableName, ids) {
 
 let scrollPosition = 0;
 
-function lockBodyScroll(){
-  scrollPosition = window.scrollY;
-
-  document.documentElement.classList.add("popup-open");
+// 🔒 Disable background scrolling
+function lockBodyScroll() {
+  scrollPosition = window.pageYOffset;
   document.body.classList.add("popup-open");
-
   document.body.style.top = `-${scrollPosition}px`;
 }
 
-function unlockBodyScroll(){
-
-  document.documentElement.classList.remove("popup-open");
+// 🔓 Restore scrolling and previous position
+function unlockBodyScroll() {
   document.body.classList.remove("popup-open");
-
   document.body.style.top = "";
-
-  setTimeout(()=>{
-    window.scrollTo({
-      top: scrollPosition,
-      behavior:"instant"
-    });
-  },10);
-
+  window.scrollTo(0, scrollPosition);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
