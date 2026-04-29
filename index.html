@@ -1412,7 +1412,11 @@ padding-top:55px;
 
   overflow-x:auto;
   overflow-y:hidden;
--webkit-overflow-scrolling:touch;
+
+  -webkit-overflow-scrolling:touch;
+
+  touch-action:pan-y;  /* add this */
+
   scrollbar-width:none;
 }
   
@@ -1428,7 +1432,6 @@ padding-top:55px;
 .productGrid::-webkit-scrollbar{
  display:none;
 }
-
 
 
 /* REMOVE CARD LOOK */
@@ -1561,18 +1564,12 @@ left:0;
 #popup .topIcons,
 #popup .dots,
 #popup .popupContent{
- position:relative;
- margin-top:10px;
- top:auto;
+  position:relative;
+  top:10px;
 }
-
 .imageSlider{
- touch-action:pan-y;
- -webkit-overflow-scrolling:touch;
-}
-
-.imageSlider img{
- pointer-events:none;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x;
 }
 #popup{
  overflow-y:auto;
@@ -2355,7 +2352,7 @@ left:0;
 html.popup-open,
 body.popup-open{
   overflow:hidden !important;
-
+  position:fixed;
   width:100%;
   height:100%;
   scrollbar-width:none; /* Firefox */
@@ -4017,7 +4014,7 @@ visibility:visible;
 /* stop scrolling while shown */
 body.success-lock{
 overflow:hidden;
-
+position:fixed;
 width:100%;
 }
 
