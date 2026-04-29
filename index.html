@@ -2303,6 +2303,11 @@ body.popup-open{
   position:fixed;
   width:100%;
   height:100%;
+  scrollbar-width:none; /* Firefox */
+}
+
+body.popup-open::-webkit-scrollbar{
+  display:none; /* Chrome/Safari */
 }
  /* Edge-to-edge horizontal scrolling container */
         .brand-container {
@@ -3278,9 +3283,16 @@ font-weight:600;
 }
 #categoryPopup{
   overflow-y:auto;
-  overflow-x:hidden;   /* no horizontal scroll */
-  overscroll-behavior:contain;
+  overflow-x:hidden;
+
+  overscroll-behavior:none;
   touch-action:pan-y;
+
+  scrollbar-width:none; /* Firefox hide scrollbar */
+}
+
+#categoryPopup::-webkit-scrollbar{
+  display:none; /* Chrome/Safari hide scrollbar */
 }
 /* 🎁 ANIMATION */
 .giftAnim{
