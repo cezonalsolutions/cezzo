@@ -1407,15 +1407,32 @@ padding-top:60px;
   transition:transform 0.3s ease;
 }
 
-/* productcare */
-/* GRID */
-/* HORIZONTAL SCROLL */
 .productGrid{
   display:flex;
-  overflow-x:auto;
   gap:12px;
   padding:12px 10px;
-  scroll-behavior:smooth;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  -webkit-overflow-scrolling:touch; /* iPhone momentum */
+  touch-action:pan-x;               /* horizontal swipe */
+  overscroll-behavior-x:contain;
+
+  scroll-behavior:auto;             /* remove smooth */
+  scrollbar-width:none;
+}
+.productCard,
+.productCard2{
+  flex:0 0 auto;
+  min-width:95px;
+
+  touch-action:manipulation;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.productGrid::-webkit-scrollbar{
+ display:none;
 }
 
 .productGrid::-webkit-scrollbar{
