@@ -1412,11 +1412,7 @@ padding-top:55px;
 
   overflow-x:auto;
   overflow-y:hidden;
-
-  -webkit-overflow-scrolling:touch;
-
-  touch-action:pan-y;  /* add this */
-
+-webkit-overflow-scrolling:touch;
   scrollbar-width:none;
 }
   
@@ -1432,6 +1428,7 @@ padding-top:55px;
 .productGrid::-webkit-scrollbar{
  display:none;
 }
+
 
 
 /* REMOVE CARD LOOK */
@@ -7326,7 +7323,7 @@ lockBodyScroll();
   `;
 
   popup.style.display = "flex";
-lockBodyScroll();   // add here
+
 requestAnimationFrame(()=>{
   popup.classList.add("show");
 });
