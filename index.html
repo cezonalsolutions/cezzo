@@ -1696,8 +1696,11 @@ left:0;
 
   display:-webkit-box;
   -webkit-box-orient:vertical;
-  -webkit-line-clamp:3;     /* max 3 lines */
+  -webkit-line-clamp:3;
+
   overflow:hidden;
+
+  max-width:120px; /* forces short lines like 2-3 words */
 }
 
 /* BRAND BELOW NAME */
@@ -1725,18 +1728,7 @@ left:0;
 
 
 /* IMPORTANT FIX */
-.nameRow h2{
-  font-size:18px;
-  font-weight:700;
-  margin:0;
-  color:#111;
 
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-
-  max-width:unset;   /* ❌ remove 70% limit */
-}
 
 .brandInline{
   font-size:13px;
