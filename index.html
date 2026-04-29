@@ -2331,8 +2331,6 @@ left:0;
 html.popup-open,
 body.popup-open{
   overflow:hidden !important;
-  position:fixed;
-  width:100%;
   height:100%;
   scrollbar-width:none; /* Firefox */
 }
@@ -3317,7 +3315,7 @@ font-weight:600;
   overflow-x:hidden;
 
   overscroll-behavior:none;
-  touch-action:pan-y;
+
 
   scrollbar-width:none; /* Firefox hide scrollbar */
 }
@@ -11330,17 +11328,13 @@ function unlockBodyScroll(){
   document.documentElement.classList.remove("popup-open");
   document.body.classList.remove("popup-open");
 
-  document.body.style.top = "";
+  document.body.style.top="";
 
   setTimeout(()=>{
-    window.scrollTo({
-      top: scrollPosition,
-      behavior:"instant"
-    });
-  },10);
+    window.scrollTo(0, scrollPosition); // simpler
+  },50);
 
 }
-
 document.addEventListener("DOMContentLoaded", function(){
   document.getElementById("cartBar").addEventListener("click", toggleMiniCart);
 
