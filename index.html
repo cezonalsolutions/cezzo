@@ -11186,6 +11186,8 @@ document.addEventListener("DOMContentLoaded", () => {
       titleElement.textContent = config.title;
 
       // Show popup
+       lockBodyScroll();
+
       popup.classList.add("show");
 
       // Load products from Supabase
