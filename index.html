@@ -4509,9 +4509,7 @@ style="
 <div id="productSection7" class="productSectionWithHeading">
   
   
-  <div class="sideHeading">
-    Top Picks
-  </div>
+  
 
   <div class="productGrid" id="productGrid7"></div>
 
@@ -13211,6 +13209,27 @@ window.scrollTo(0,0);
 },4000);
 
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  document.querySelectorAll("video").forEach(function(v){
+
+    v.muted = true;
+    v.setAttribute("playsinline","");
+    v.setAttribute("webkit-playsinline","");
+
+    function forcePlay(){
+      v.play().catch(()=>{});
+    }
+
+    forcePlay();
+
+    document.addEventListener("touchstart", forcePlay, {once:true});
+
+    v.addEventListener("loadeddata", forcePlay);
+  });
+
+});
 </script>
 </body>
 </html>
