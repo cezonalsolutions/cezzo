@@ -3274,7 +3274,12 @@ font-weight:600;
 .giftOptionNew:active{
   transform:scale(0.98);
 }
-
+#categoryPopup{
+  overflow-y:auto;
+  overflow-x:hidden;   /* no horizontal scroll */
+  overscroll-behavior:contain;
+  touch-action:pan-y;
+}
 /* 🎁 ANIMATION */
 .giftAnim{
   position:relative;
@@ -7036,6 +7041,7 @@ lockBodyScroll();
   `;
 
   popup.style.display = "flex";
+lockBodyScroll();   // add here
 
 requestAnimationFrame(()=>{
   popup.classList.add("show");
@@ -11177,6 +11183,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Close popup
   closeBtn.addEventListener("click", () => {
     popup.classList.remove("show");
+    unlockBodyScroll();
   });
 });
 async function loadCategoryProducts(tableName, ids) {
