@@ -1412,22 +1412,16 @@ padding-top:55px;
 
   overflow-x:auto;
   overflow-y:hidden;
-
-  -webkit-overflow-scrolling:touch; /* iPhone momentum */
- touch-action:auto;
-  
-  overscroll-behavior-x:contain;
-
-  scroll-behavior:auto;             /* remove smooth */
+-webkit-overflow-scrolling:touch;
   scrollbar-width:none;
 }
+  
 .productCard,
 .productCard2{
   flex:0 0 auto;
   min-width:95px;
 
-    touch-action:auto;
-
+    
   -webkit-user-select:none;
   user-select:none;
 }
@@ -1435,9 +1429,8 @@ padding-top:55px;
  display:none;
 }
 
-.productGrid::-webkit-scrollbar{
-  display:none;
-}
+
+
 /* REMOVE CARD LOOK */
 /* CARD */
 .productCard{
@@ -1685,7 +1678,6 @@ left:0;
   display:block;            /* remove horizontal flex */
 }
 
-/* NAME */
 .nameRow h2{
   font-size:18px;
   font-weight:700;
@@ -1694,7 +1686,8 @@ left:0;
   line-height:1.25;
 
   white-space:normal;
-  word-break:break-word;
+  word-break:normal;      /* don't break words too early */
+  overflow-wrap:break-word;
 
   display:-webkit-box;
   -webkit-box-orient:vertical;
@@ -1702,7 +1695,7 @@ left:0;
 
   overflow:hidden;
 
-  max-width:120px; /* forces short lines like 2-3 words */
+  max-width:180px; /* wider so 2 words stay same line */
 }
 
 /* BRAND BELOW NAME */
