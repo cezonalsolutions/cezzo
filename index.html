@@ -2297,10 +2297,12 @@ left:0;
   z-index: 11000;
 }
 /* 🔒 Prevent background scrolling when popup is open */
-body.popup-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
+html.popup-open,
+body.popup-open{
+  overflow:hidden !important;
+  position:fixed;
+  width:100%;
+  height:100%;
 }
  /* Edge-to-edge horizontal scrolling container */
         .brand-container {
@@ -7042,7 +7044,6 @@ lockBodyScroll();
 
   popup.style.display = "flex";
 lockBodyScroll();   // add here
-
 requestAnimationFrame(()=>{
   popup.classList.add("show");
 });
@@ -11271,15 +11272,20 @@ async function loadCategoryProducts(tableName, ids) {
 let scrollPosition = 0;
 
 // 🔒 Disable background scrolling
-function lockBodyScroll() {
+function lockBodyScroll(){
   scrollPosition = window.pageYOffset;
+
+  document.documentElement.classList.add("popup-open");
   document.body.classList.add("popup-open");
+
   document.body.style.top = `-${scrollPosition}px`;
 }
 
-// 🔓 Restore scrolling and previous position
-function unlockBodyScroll() {
+// 🔓 Restore scrolling
+function unlockBodyScroll(){
+  document.documentElement.classList.remove("popup-open");
   document.body.classList.remove("popup-open");
+
   document.body.style.top = "";
   window.scrollTo(0, scrollPosition);
 }
