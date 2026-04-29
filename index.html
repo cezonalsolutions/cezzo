@@ -5231,7 +5231,7 @@ Bite Delight Hub
     </h2>
   </div>
 
-  <div id="categoryGrid" class="productGrid"></div>
+  <div id="categoryGrid"></div>
 </div>
 
 <div id="cartPopup" class="popup">
@@ -11285,9 +11285,8 @@ async function loadCategoryProducts(tableName, ids) {
 
 let scrollPosition = 0;
 
-// 🔒 Disable background scrolling
 function lockBodyScroll(){
-  scrollPosition = window.pageYOffset;
+  scrollPosition = window.scrollY;
 
   document.documentElement.classList.add("popup-open");
   document.body.classList.add("popup-open");
@@ -11295,13 +11294,20 @@ function lockBodyScroll(){
   document.body.style.top = `-${scrollPosition}px`;
 }
 
-// 🔓 Restore scrolling
 function unlockBodyScroll(){
+
   document.documentElement.classList.remove("popup-open");
   document.body.classList.remove("popup-open");
 
   document.body.style.top = "";
-  window.scrollTo(0, scrollPosition);
+
+  setTimeout(()=>{
+    window.scrollTo({
+      top: scrollPosition,
+      behavior:"instant"
+    });
+  },10);
+
 }
 
 document.addEventListener("DOMContentLoaded", function(){
