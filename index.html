@@ -6849,6 +6849,8 @@ async function loadProducts(){
   }
 
   const grid = document.getElementById("productGrid");
+  if(!grid) return;   // prevents error if removed
+
   grid.innerHTML = "";
 
   data.forEach(item => {
