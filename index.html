@@ -1561,12 +1561,18 @@ left:0;
 #popup .topIcons,
 #popup .dots,
 #popup .popupContent{
-  position:relative;
-  top:10px;
+ position:relative;
+ margin-top:10px;
+ top:auto;
 }
+
 .imageSlider{
-  -webkit-overflow-scrolling:touch;
-  touch-action:pan-x;
+ touch-action:pan-y pan-x;
+ -webkit-overflow-scrolling:touch;
+}
+
+.imageSlider img{
+ pointer-events:none;
 }
 #popup{
  overflow-y:auto;
