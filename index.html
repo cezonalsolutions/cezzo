@@ -6848,6 +6848,7 @@ async function loadProducts(){
 
 }
 function openPopup(item){
+lockBodyScroll();
   const table = item.table || "all_products";
 
   const popup = document.getElementById("popup");
@@ -7064,6 +7065,7 @@ function closePopup(){
 
   setTimeout(()=>{
     popup.style.display = "none";
+    unlockBodyScroll();
   },300);
   
 }
