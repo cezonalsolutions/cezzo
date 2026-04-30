@@ -4145,15 +4145,30 @@ filter:grayscale(1);
   cursor:zoom-in;
 }
 
-/* 🔥 close icon */
 #closePreview{
   position:absolute;
-  top:20px;
+  top:70px;              /* 🔥 little down from top */
   right:20px;
 
-  font-size:26px;
+  width:40px;
+  height:40px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:rgba(0,0,0,0.5);   /* 🔥 soft dark shade */
+  backdrop-filter:blur(6px);    /* 🔥 glass effect */
+
   color:#fff;
+  font-size:18px;
+
   cursor:pointer;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+
   z-index:2;
 }
 </style>
