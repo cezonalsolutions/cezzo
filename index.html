@@ -4358,6 +4358,193 @@ button:active{
 
   color:#16a34a;   /* green */
 }
+
+/* options ui */
+#optionScreen{
+  position:fixed;
+  inset:0;
+  background:#fff;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.optionHeader{
+  background:#ffffff;
+
+  padding:56px 20px 12px;
+
+  border:none;
+  box-shadow:none;
+
+  margin-bottom:-2px;   /* 🔥 removes tiny white gap */
+}
+.optCity{
+  font-size:16px;
+  font-weight:600;
+  color:#ffffff;
+}
+
+.optAddress{
+  font-size:14px;
+  color:#6b7280;
+  margin-top:2px;
+}
+/* 🔥 GRID */
+.optionGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+
+  column-gap:10px;   /* left-right */
+  row-gap:25px;       /* 🔥 tight between rows */
+
+  padding:6px 16px 16px;
+  margin-top:20px;
+}
+
+/* 🔥 CARD */
+.optCard{
+  position:relative;
+
+  height:130px;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  cursor:pointer;
+
+  margin:10px;        /* 🔥 VERY IMPORTANT (removes hidden gaps) */
+}
+
+/* 🔥 IMAGE fills card */
+.optCard img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  animation:zoomLoop 6s infinite ease-in-out;
+}
+
+/* 🔥 TEXT OVER IMAGE */
+.optLabel{
+  position:absolute;
+  bottom:10px;
+  left:12px;
+
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+
+  z-index:2;
+}
+
+/* 🔥 DARK OVERLAY for readability */
+.optCard::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.1)
+  );
+
+  z-index:1;
+}
+
+/* 🔥 SMOOTH ZOOM ANIMATION */
+@keyframes zoomLoop{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.08); }
+  100%{ transform:scale(1); }
+}
+
+/* 🔥 CLICK EFFECT */
+.optCard:active{
+  transform:scale(0.96);
+}
+
+
+.optionVideoWrap{
+  width:100%;
+  height:180px;
+
+  overflow:hidden;
+
+  margin-top:0;
+  background:#203fca;
+
+  border-bottom-left-radius:24px;   /* 🔥 added curve */
+  border-bottom-right-radius:24px;  /* 🔥 added curve */
+}
+#optionVideo{
+  width:100%;
+  height:180px;
+
+  object-fit:cover;
+
+  display:block;
+
+  pointer-events:none;   /* ❌ no touch */
+}
+/* stack images */
+#cizooBtn1 img{
+  position:absolute;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  opacity:0;
+
+  transition:opacity 0.6s ease;
+}
+
+/* active image */
+#cizooBtn1 img.active{
+  opacity:1;
+}
+.brandBlock{
+  padding:20px 16px 30px;
+
+  text-align:left;   /* 🔥 left align */
+
+  color:#111;
+}
+
+/* 🔥 CEZZO (bigger + bold) */
+.brandName{
+  font-size:24px;   /* 🔥 increased size */
+  font-weight:800;
+
+  letter-spacing:1px;
+
+  margin-bottom:6px;
+}
+
+/* 🔥 tagline */
+.brandTag{
+  font-size:14px;
+  color:#6b7280;
+
+  margin-bottom:8px;
+}
+
+/* 🔥 made in india */
+.brandMade{
+  font-size:13px;
+  color:#9ca3af;
+}
+.brandBlock{
+  padding:20px 20px 30px;  /* match grid padding */
+}
 </style>
 </head>
 
@@ -4423,6 +4610,64 @@ button:active{
 <div id="secureText">Secure & Safe</div>
 </div>
 </div>
+
+<!--newly aaded -->
+
+
+
+<div id="optionScreen" style="display:none;">
+
+  <!-- 🔥 LOCATION HEADER -->
+  <div class="optionHeader">
+    <div class="optCity" id="optCityName">Hyderabad</div>
+    <div class="optAddress" id="optShortAddress">Jubilee Hills</div>
+  </div>
+<video id="optionVideo" autoplay muted loop playsinline>
+  <source src="cezoui.mp4" type="video/mp4">
+</video>
+  <div class="optionGrid">
+
+  <div class="optCard" id="cizooBtn">
+    <img src="cat/cezzo1.webp">
+    <div class="optLabel">Cizoo</div>
+  </div>
+
+  <div class="optCard" id="cizooBtn1">
+
+  <img src="cat/services 1.webp" class="img1 active">
+  <img src="cat/services2.webp" class="img2">
+
+  <div class="optLabel">Services</div>
+
+</div>
+
+  <div class="optCard" id="cizooBtn2">
+    <img src="cat/something.webp">
+    <div class="optLabel">Rentals</div>
+  </div>
+
+  <div class="optCard" id="cizooBtn3">
+    <img src="cat/servives4.webp">
+    <div class="optLabel">Join</div>
+  </div>
+
+</div>
+<div class="brandBlock">
+
+  <div class="brandName">CEZZO</div>
+
+  <div class="brandTag">Delivery in Minutes</div>
+
+  <div class="brandMade">
+    Made with ❤️ in India
+  </div>
+
+</div>
+</div>
+
+
+
+
 
 <!-- HOME -->
 <div id="home">
@@ -6293,8 +6538,9 @@ function getLocation(){
 
     setTimeout(()=>{
       main.style.display="none";
-      home.style.display="block";
-
+document.getElementById("optionScreen").style.display="flex";
+document.getElementById("optCityName").innerText = city;
+document.getElementById("optShortAddress").innerText = full;
       cityName.innerText = city;
       shortAddress.innerText = full;
 
@@ -6302,6 +6548,7 @@ function getLocation(){
       localStorage.setItem("savedAddress", full);
 
     },3000);
+    
 
   }, ()=>{
 
@@ -6311,6 +6558,10 @@ function getLocation(){
   });
 
 }
+document.getElementById("cizooBtn").onclick = function(){
+  document.getElementById("optionScreen").style.display="none";
+  home.style.display="block";
+};
 // 🔁 retry
 document.getElementById("retryBtn").onclick = function(){
   showOnly("detecting");
@@ -14532,6 +14783,13 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 
 });
+const img1 = document.querySelector("#cizooBtn1 .img1");
+const img2 = document.querySelector("#cizooBtn1 .img2");
+
+setInterval(()=>{
+  img1.classList.toggle("active");
+  img2.classList.toggle("active");
+},3000);
 </script>
 </body>
 </html>
