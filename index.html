@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CEZOO</title>
+<link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,9 +30,7 @@ body{
   font-family:'Outfit',sans-serif;
   color:#fff;
 }
-html, body{
-  touch-action: manipulation;   /* 🔥 stops double tap zoom */
-}
+
 .mainText{
   animation:fadeUp 0.6s ease;
 }
@@ -411,11 +410,12 @@ input, textarea{
 #topSection{
   background:#fff;
   transition:0.4s;
-top:0px;
+
   margin: -15px;     /* ✅ remove side gaps */
   padding: 15px;     /* keep spacing inside */
+padding-top:55px; /* DELETE THIS */
+  padding-bottom:10px;
 
-  
   border-radius:0;   /* ❌ remove rounded corners */
 }
 #success{
@@ -1076,7 +1076,7 @@ top:0px;
 
   background: linear-gradient(
     to bottom,
-    #EAD6F5,
+    #EAD7C3,
     #ffffff
   );
 }
@@ -1193,10 +1193,10 @@ top:0px;
   overflow:hidden;
 
   background: linear-gradient(
-    to bottom,
-    #D6DBF5,
-    #ffffff
-  );
+  to bottom,
+  #66BB6A,
+  #ffffff
+);
 }
 
 .gBuy{
@@ -1406,20 +1406,32 @@ top:0px;
   transition:transform 0.3s ease;
 }
 
-/* productcare */
-/* GRID */
-/* HORIZONTAL SCROLL */
 .productGrid{
   display:flex;
-  overflow-x:auto;
   gap:12px;
   padding:12px 10px;
-  scroll-behavior:smooth;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+  
+.productCard,
+.productCard2{
+  flex:0 0 auto;
+  min-width:95px;
+
+    
+  -webkit-user-select:none;
+  user-select:none;
+}
+.productGrid::-webkit-scrollbar{
+ display:none;
 }
 
-.productGrid::-webkit-scrollbar{
-  display:none;
-}
+
+
 /* REMOVE CARD LOOK */
 /* CARD */
 .productCard{
@@ -1427,6 +1439,20 @@ top:0px;
   min-width:95px;
   max-width:95px;
   flex-shrink:0;
+}
+.productCard img,
+.productCard2 img,
+.pName,
+.pName2,
+.brand2,
+.pPrice,
+.pPrice2{
+  pointer-events:none;
+}
+.addBtn,
+.addBtn2,
+.cartControl{
+  pointer-events:auto;
 }
 
 #productSection{
@@ -1509,11 +1535,12 @@ top:0px;
 
   text-decoration: line-through;   /* ✅ ADD THIS */
 }
+
 /* POPUP FULL SCREEN */
 .popup{
   position:fixed;
-  top:0;
-  left:0;
+top:0px;
+left:0;
   width:100%;
   height:100%;
   background:#fff;
@@ -1522,7 +1549,7 @@ top:0px;
   flex-direction:column;
   overflow-y:auto;
 
-  z-index:99999;
+  z-index:300000;
   color:#111;
 
   /* 🔥 animation base */
@@ -1531,6 +1558,28 @@ top:0px;
   transition:all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 
   pointer-events:none;
+}
+#popup .topIcons,
+#popup .dots,
+#popup .popupContent{
+  margin-top:35px; /* DELETE THIS */
+}
+.imageSlider{
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x;
+}
+#popup{
+ overflow-y:auto;
+ overflow-x:hidden;
+}
+
+#popup .popupContent{
+ max-width:100%;
+ overflow-x:hidden;
+}
+
+#popup .popupContent{
+  padding-top:30px;
 }
 
 .popup.show{
@@ -1627,7 +1676,6 @@ top:0px;
   display:block;            /* remove horizontal flex */
 }
 
-/* NAME */
 .nameRow h2{
   font-size:18px;
   font-weight:700;
@@ -1636,12 +1684,16 @@ top:0px;
   line-height:1.25;
 
   white-space:normal;
-  word-break:break-word;
+  word-break:normal;      /* don't break words too early */
+  overflow-wrap:break-word;
 
   display:-webkit-box;
   -webkit-box-orient:vertical;
-  -webkit-line-clamp:3;     /* max 3 lines */
+  -webkit-line-clamp:3;
+
   overflow:hidden;
+
+  max-width:180px; /* wider so 2 words stay same line */
 }
 
 /* BRAND BELOW NAME */
@@ -1669,18 +1721,7 @@ top:0px;
 
 
 /* IMPORTANT FIX */
-.nameRow h2{
-  font-size:18px;
-  font-weight:700;
-  margin:0;
-  color:#111;
 
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-
-  max-width:unset;   /* ❌ remove 70% limit */
-}
 
 .brandInline{
   font-size:13px;
@@ -2021,8 +2062,22 @@ top:0px;
 /* TEXT */
 .pName2{
   font-size:12px;
-  margin-top:2px;   /* 🔥 reduce gap */
+  margin-top:2px;
+  line-height:1.2;
   font-weight:600;
+
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+
+  white-space:normal;
+  word-break:break-word;
+
+  max-height:2.4em;
+  min-height:29px;
 }
 
 /* 🔥 BLUE RATING */
@@ -2289,10 +2344,17 @@ top:0px;
   z-index: 11000;
 }
 /* 🔒 Prevent background scrolling when popup is open */
-body.popup-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
+html.popup-open,
+body.popup-open{
+  overflow:hidden !important;
+  position:fixed;
+  width:100%;
+  height:100%;
+  scrollbar-width:none; /* Firefox */
+}
+
+body.popup-open::-webkit-scrollbar{
+  display:none; /* Chrome/Safari */
 }
  /* Edge-to-edge horizontal scrolling container */
         .brand-container {
@@ -2821,7 +2883,7 @@ display:flex;
 align-items:center;
 justify-content:space-between; /* pushes both ends */
 
-padding:12px 15px;
+padding:63px 15px 12px;
 border-bottom:1px solid #eee;
 
 position:sticky;
@@ -2870,15 +2932,38 @@ border-radius:12px;
 font-weight:600;
 }
 /* TITLE */
+/* TITLE */
 .cartTitle{
-  font-size:16px;
-  font-weight:700;
-  padding:12px 15px;
+    font-family: "Times New Roman", Times, serif !important;  /* 🔥 force apply */
 
-  position:sticky;            /* 🔥 stays below header */
+
+  font-size:18px;        /* slightly bigger */
+  font-weight:600;       /* not too bold → premium feel */
+
+  letter-spacing:0.4px;  /* subtle spacing */
+  color:#1a1a1a;
+
+  padding:14px 15px;
+
+  position:sticky;
   top:50px;
+
   background:#fff;
   z-index:9;
+
+  display:flex;                 /* 🔥 align text + count */
+  align-items:center;
+  justify-content:space-between;
+
+  border-bottom:1px solid #eee; /* 🔥 subtle divider */
+}
+#cartItemCount{
+  font-family: "Times New Roman", Times, serif !important;
+
+  font-size:13px;
+  font-weight:500;
+
+  color:#777;
 }
 
 /* ITEMS LIST */
@@ -3266,7 +3351,19 @@ font-weight:600;
 .giftOptionNew:active{
   transform:scale(0.98);
 }
+#categoryPopup{
+  overflow-y:auto;
+  overflow-x:hidden;
 
+  overscroll-behavior:none;
+  touch-action:pan-y;
+
+  scrollbar-width:none; /* Firefox hide scrollbar */
+}
+
+#categoryPopup::-webkit-scrollbar{
+  display:none; /* Chrome/Safari hide scrollbar */
+}
 /* 🎁 ANIMATION */
 .giftAnim{
   position:relative;
@@ -3420,6 +3517,7 @@ font-weight:600;
   font-weight: 700;
   color: #0f5c5c;
 }
+
 
 /* Best Offers — secondary section (smaller, neutral) */
 .cartRecoHeader {
@@ -3763,7 +3861,6 @@ color:#fff;
 }
 
 
-
 .secureNote{
 margin-top:14px;
 margin-bottom:20px;
@@ -3849,7 +3946,7 @@ text-align:center;
 display:flex;
 align-items:center;
 gap:12px;
-padding:12px 15px;
+padding:63px 15px 12px; /* top right/left bottom */
 }
 
 
@@ -4037,6 +4134,68 @@ opacity:.45;
 pointer-events:none;
 filter:grayscale(1);
 }
+/* 🔥 overlay */
+#imgPreview{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,0.6);
+
+  display:none;
+  justify-content:center;
+  align-items:center;
+
+  z-index:999999999;
+
+  overflow:hidden;              /* 🔥 prevent scroll */
+  touch-action:manipulation;  /* 🔥 allow gestures */
+}
+
+/* show */
+#imgPreview.active{
+  display:flex;
+}
+
+/* 🔥 image */
+#previewImg{
+  max-width:90vw;               /* 🔥 prevent overflow */
+  max-height:85vh;
+
+  object-fit:contain;
+  border-radius:10px;
+
+  transition:transform 0.2s ease;
+  transform-origin:center;
+
+  cursor:zoom-in;
+}
+
+#closePreview{
+  position:absolute;
+  top:70px;              /* 🔥 little down from top */
+  right:20px;
+
+  width:40px;
+  height:40px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:rgba(0,0,0,0.5);   /* 🔥 soft dark shade */
+  backdrop-filter:blur(6px);    /* 🔥 glass effect */
+
+  color:#fff;
+  font-size:18px;
+
+  cursor:pointer;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+
+  z-index:2;
+}
 </style>
 </head>
 
@@ -4138,14 +4297,14 @@ filter:grayscale(1);
     <div class="catText">Home</div>
   </div>
 
-  <div class="catItem" data-color="#EAD6F5"> <!-- Chocolates -->
+ <div class="catItem" data-color="#EAD7C3">
     <div class="catIcon">
       <img src="cat/chocolates.webp">
     </div>
     <div class="catText">Chocolates</div>
   </div>
 
-  <div class="catItem" data-color="#D6DBF5"> <!-- Groceries -->
+  <div class="catItem" data-color="#66BB6A">
     <div class="catIcon">
       <img src="cat/Groceries.webp">
     </div>
@@ -4167,7 +4326,24 @@ filter:grayscale(1);
 </div>
 
 <div id="productSection">
-  <div class="productGrid" id="productGrid"></div>
+
+<video
+autoplay
+muted
+loop
+playsinline
+style="
+ width:100%;
+ height:180px;
+ object-fit:cover;
+ object-position:top center; /* keeps top fully visible */
+ display:block;
+ border-radius:14px;
+ margin-top:10px;
+">
+<source src="banner1.webm" type="video/webm">
+</video>
+
 </div>
 <div class="midCategory" id="freshItems">
 
@@ -4412,13 +4588,30 @@ filter:grayscale(1);
 </div>
 
 <div id="productSection6">
-  <div class="productGrid" id="productGrid6"></div>
+
+<video
+ autoplay
+ muted
+ loop
+ playsinline
+ preload="auto"
+ style="
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  border-radius:14px;
+  margin-top:10px;
+ ">
+ <source src="banner2.webm" type="video/webm">
+</video>
+
 </div>
 <div id="productSection7" class="productSectionWithHeading">
   
-  <div class="sideHeading">
-    Top Picks
-  </div>
+  
+  
 
   <div class="productGrid" id="productGrid7"></div>
 
@@ -4499,19 +4692,31 @@ filter:grayscale(1);
 </div>
 
 <div id="productSection10" class="productSectionWithHeading">
-  
- 
 
-  <div class="productGrid" id="productGrid10"></div>
+<video
+ autoplay
+ muted
+ loop
+ playsinline
+ preload="auto"
+ style="
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  border-radius:14px;
+  margin-top:10px;
+ ">
+ <source src="baners/cool drinks banner.mp4" type="video/mp4">
+</video>
 
 </div>
 
 <!-- 250ml-->
 <div id="productSection11" class="productSectionWithHeading">
   
-  <div class="sideHeading">
-    Instant Fresh
-  </div>
+  
 
   <div class="productGrid" id="productGrid11"></div>
 
@@ -4608,7 +4813,7 @@ filter:grayscale(1);
 <div class="midCategory" id="wholesalecools">
 
   <div class="midHeader">
-    <h3>BrandS</h3>
+    <h3>Brands</h3>
   </div>
 
    <div class="brand-container">
@@ -4732,13 +4937,29 @@ filter:grayscale(1);
 
 <div id="productSection40" class="productSectionWithHeading">
 
-  <div class="productGrid" id="productGrid40"></div>
+<video
+ autoplay
+ muted
+ loop
+ playsinline
+ preload="auto"
+ style="
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  border-radius:14px;
+  margin-top:10px;
+ ">
+ <source src="banners3.mp4" type="video/mp4">
+</video>
 
-</div><div id="productSection41" class="productSectionWithHeading">
+</div>
+
+<div id="productSection41" class="productSectionWithHeading">
   
-  <div class="sideHeading">
-    Face Wash
-  </div>
+ 
 
   <div class="productGrid" id="productGrid41"></div>
 
@@ -4859,17 +5080,31 @@ filter:grayscale(1);
 </div>
 
 <div id="productSection21" class="productSectionWithHeading">
-  
 
-  <div class="productGrid" id="productGrid21"></div>
+<video
+ autoplay
+ muted
+ loop
+ playsinline
+ webkit-playsinline
+ preload="auto"
+ style="
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:center 70%;
+  display:block;
+  border-radius:14px;
+  margin-top:10px;
+ ">
+ <source src="baners/Chocbanner.mp4" type="video/mp4"">
+</video>
 
 </div>
 
 <div id="productSection22" class="productSectionWithHeading">
   
-  <div class="sideHeading">
-    Delights
-  </div>
+  
 
   <div class="productGrid" id="productGrid22"></div>
 
@@ -5015,19 +5250,32 @@ Bite Delight Hub
 
 </div>
 <div id="productSection25" class="productSectionWithHeading">
-  
-  
 
-  <div class="productGrid" id="productGrid25"></div>
+<video
+ autoplay
+ muted
+ loop
+ playsinline
+ webkit-playsinline
+ preload="auto"
+ style="
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position:center 70%; /* shows lower part more */
+  display:block;
+  border-radius:14px;
+  margin-top:10px;
+ ">
+ <source src="groceriesbanner.webm" type="video/webm">
+</video>
 
 </div>
 
 
 <div id="productSection26" class="productSectionWithHeading">
   
-  <div class="sideHeading">
-   Home Needs
-  </div>
+  
 
   <div class="productGrid" id="productGrid26"></div>
 
@@ -5083,12 +5331,79 @@ Bite Delight Hub
 <div id="productSection32" class="productSectionWithHeading">
   
   <div class="sideHeading">
-    Your Favorites
+    From the Market
   </div>
 
   <div class="productGrid" id="productGrid32"></div>
 
 </div>
+
+<div id="productSection57" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Fresh Finds
+  </div>
+
+  <div class="productGrid" id="productGrid57"></div>
+
+</div>
+
+
+<div id="productSection58" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Weekly Basics
+  </div>
+
+  <div class="productGrid" id="productGrid58"></div>
+
+</div>
+
+
+<div id="productSection59" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Farm to Table
+  </div>
+
+  <div class="productGrid" id="productGrid59"></div>
+
+</div>
+
+
+<div id="productSection60" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+   Pantry
+  </div>
+
+  <div class="productGrid" id="productGrid60"></div>
+
+</div>
+
+<div id="productSection61" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Grocery Picks
+  </div>
+
+  <div class="productGrid" id="productGrid61"></div>
+
+</div>
+
+<div id="productSection62" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+    Basket Basics
+  </div>
+
+  <div class="productGrid" id="productGrid62"></div>
+
+</div>
+
+
+
+<!-- here aboove groceries-->
 
 <div id="miniCart" class="miniCart"></div>   <!-- ✅ HERE -->
 
@@ -5155,6 +5470,11 @@ Bite Delight Hub
 
 
 </div>
+
+<div id="imgPreview">
+  <i id="closePreview" class="fa-solid fa-xmark"></i>
+  <img id="previewImg">
+</div>
 <div class="popup" id="popup">
   <div class="popupContent" id="popupContent">
   
@@ -5167,7 +5487,7 @@ Bite Delight Hub
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:12px 15px;
+      padding:65px 15px 12px;
       border-bottom:1px solid #eee;
       font-family:'Poppins', sans-serif;
   ">
@@ -5205,7 +5525,7 @@ Bite Delight Hub
     </h2>
   </div>
 
-  <div id="categoryGrid" class="productGrid"></div>
+  <div id="categoryGrid"></div>
 </div>
 
 <div id="cartPopup" class="popup">
@@ -5338,6 +5658,8 @@ Bite Delight Hub
 <!-- COUPON BLAST -->
 <div id="couponBlast" class="couponBlast"></div>
 </div>
+
+
 <div id="orderPopup" class="popup">
 
 <!-- header -->
@@ -5886,6 +6208,12 @@ const productSection55 = document.getElementById("productSection55");
 
 const productSection56 = document.getElementById("productSection56");
 
+const productSection57 = document.getElementById("productSection57");
+const productSection58 = document.getElementById("productSection58");
+const productSection59 = document.getElementById("productSection59");
+const productSection60 = document.getElementById("productSection60");
+const productSection61 = document.getElementById("productSection61");
+const productSection62 = document.getElementById("productSection62");
 
 
 
@@ -5964,6 +6292,12 @@ productSection54.style.display = "none";
 productSection55.style.display = "none";
 
 productSection56.style.display = "none";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 
 }
@@ -6036,6 +6370,12 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "none";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 }
 
@@ -6109,6 +6449,12 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "none";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 }
 
@@ -6180,6 +6526,12 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "none";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 }
 
@@ -6251,6 +6603,12 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "block";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 }
 
@@ -6322,6 +6680,12 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "none";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 }
 else if(text === "Chocolates"){
@@ -6392,6 +6756,12 @@ productSection53.style.display = "block";
 productSection54.style.display = "block";
 productSection55.style.display = "block";
 productSection56.style.display = "none";
+productSection57.style.display = "none";
+productSection58.style.display = "none";
+productSection59.style.display = "none";
+productSection60.style.display = "none";
+productSection61.style.display = "none";
+productSection62.style.display = "none";
 
 }
 else if(text === "Groceries"){
@@ -6463,6 +6833,12 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "none";
+productSection57.style.display = "block";
+productSection58.style.display = "block";
+productSection59.style.display = "block";
+productSection60.style.display = "block";
+productSection61.style.display = "block";
+productSection62.style.display = "block";
 
 }
 else{
@@ -6533,6 +6909,13 @@ productSection53.style.display = "none";
 productSection54.style.display = "none";
 productSection55.style.display = "none";
 productSection56.style.display = "none";
+productSection57.style.display = "block";
+productSection58.style.display = "block";
+productSection59.style.display = "block";
+productSection60.style.display = "block";
+productSection61.style.display = "block";
+productSection62.style.display = "block";
+
 
 }
   });
@@ -6773,6 +7156,8 @@ async function loadProducts(){
   }
 
   const grid = document.getElementById("productGrid");
+  if(!grid) return;   // prevents error if removed
+
   grid.innerHTML = "";
 
   data.forEach(item => {
@@ -6839,6 +7224,7 @@ async function loadProducts(){
 
 }
 function openPopup(item){
+lockBodyScroll();
   const table = item.table || "all_products";
 
   const popup = document.getElementById("popup");
@@ -7016,19 +7402,80 @@ function openPopup(item){
   </div>
 </div>
 <div class="buyNowWrap">
-  <button class="buyNowBtn">
-    Buy Now • ₹${item.discount_price}
-    <span>₹${item.original_price}</span>
-  </button>
+  <button class="buyNowBtn" id="buyNowBtn">
+  Buy Now • ₹${item.discount_price}
+  <span>₹${item.original_price}</span>
+</button>
 </div>
     </div>
 
   `;
 
   popup.style.display = "flex";
+  const buyBtn = document.getElementById("buyNowBtn");
+
+if(buyBtn){
+  buyBtn.onclick = function(){
+
+    console.log("🛒 Buy Now clicked");
+
+    const key = table + "_" + item.id;
+
+    let cart = JSON.parse(localStorage.getItem("cart") || "{}");
+
+    cart[key] = (cart[key] || 0) + 1;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    console.log("✅ Added to cart:", key);
+
+    // 🔥 update everything
+    renderCartItems();   // popup
+    updateCartBar();     // 🔥 FIX → cart bar
+
+    // 🔥 close product popup
+    closePopup();
+
+    // 🔥 open cart popup
+    document.getElementById("cartPopup").classList.add("show");
+    document.body.classList.add("popup-open");
+  };
+}
 
 requestAnimationFrame(()=>{
   popup.classList.add("show");
+});
+
+console.log("✅ Popup opened");
+
+const preview = document.getElementById("imgPreview");
+const previewImg = document.getElementById("previewImg");
+
+const imgs = document.querySelectorAll("#slider img");
+
+console.log("Images found:", imgs.length);
+
+imgs.forEach((img, i) => {
+
+  console.log("Binding image", i, img.src);
+
+  img.onclick = function(){
+    console.log("🔥 IMAGE CLICKED:", this.src);
+
+    if(!preview || !previewImg){
+      console.log("❌ preview elements missing");
+      return;
+    }
+
+    // 🔥 set image
+    previewImg.src = this.src;
+
+    // 🔥 open overlay (clean way)
+    preview.classList.add("active");
+
+    console.log("✅ Preview opened");
+  };
+
 });
 initAllUI();
   // 🔥 DOTS WORKING
@@ -7055,6 +7502,7 @@ function closePopup(){
 
   setTimeout(()=>{
     popup.style.display = "none";
+    unlockBodyScroll();
   },300);
   
 }
@@ -8976,84 +9424,7 @@ loadProducts24();
 
 
 
-async function loadProducts25(){
 
-  const { data } = await supabase
-    .from("grocery_products")
-    .select("*")
-    .in("id", [20,21,22,23,24,25,26,27,28]);   // ✅ new IDs
-
-  const grid = document.getElementById("productGrid25"); // ✅ new grid
-  grid.innerHTML = "";
-
-  data.forEach(item => {
-
-  // ✅ ADD THIS LINE HERE
-  window.productMap = window.productMap || {};
-  window.productMap["grocery_products_" + item.id] = item;
-    const card = document.createElement("div");
-    card.className = "productCard2";   // ✅ SAME UI
-
-    card.innerHTML = `
-      <div class="imgWrap2">
-        <img src="${item.image1}">
-       <div class="cartControl" 
-     data-id="${item.id}" 
-     data-table="grocery_products">
-  <div class="addBtn2">+</div>
-</div>
-
-        <div class="qtyInside">
-          ${item.quantity} ${item.unit}
-        </div>
-      </div>
-
-      <div class="pName2">${item.name}</div>
-      <div class="brand2">${item.brand || ""}</div>
-
-      <div class="priceRow2">
-        <div class="pPrice2">
-          ₹${item.discount_price}
-          <span>₹${item.original_price}</span>
-        </div>
-
-        <div class="ratingGreen">
-          <i class="fa-solid fa-star"></i>
-          ${item.rating || "0"}
-        </div>
-      </div>
-    `;
-
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
-  openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
-
-    grid.appendChild(card);
-  });
-  initAllUI();
-}
-
-loadProducts25(); 
 
 
 async function loadProducts26(){
@@ -9270,7 +9641,7 @@ async function loadProducts28(){
   const { data } = await supabase
     .from("grocery_products")
     .select("*")
-    .in("id", [45,46,47,48,49,50,51,52,53]);   // ✅ new IDs
+    .in("id", [45,46,47,48,49,50,51,52,20,21,22,28,53]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid28"); // ✅ new grid
   grid.innerHTML = "";
@@ -9349,7 +9720,7 @@ async function loadProducts29(){
   const { data } = await supabase
     .from("grocery_products")
     .select("*")
-    .in("id", [54,55,56,57,58,59,60,61,63]);   // ✅ new IDs
+    .in("id", [54,55,56,57,58,59,60,61,63,23,24,25,26,27]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid29"); // ✅ new grid
   grid.innerHTML = "";
@@ -9451,7 +9822,7 @@ async function loadProducts30(){
   const { data } = await supabase
     .from("grocery_products")
     .select("*")
-    .in("id", [64,65,66,67,68,69,70,71]);   // ✅ new IDs
+    .in("id", [64,65,66,67,68,69,70,71,141,142,143]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid30"); // ✅ new grid
   grid.innerHTML = "";
@@ -9531,7 +9902,7 @@ async function loadProducts31(){
   const { data } = await supabase
     .from("grocery_products")
     .select("*")
-    .in("id", [72,73,74,75,76,77,78,79]);   // ✅ new IDs
+    .in("id", [72,73,74,75,76,77,78,79,148,149,150]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid31"); // ✅ new grid
   grid.innerHTML = "";
@@ -11092,6 +11463,663 @@ imgWrap.addEventListener("click", function(e){
 loadProducts32();
 
 
+
+
+
+async function loadProducts57(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [88,89,90,91,92,93,94,95,96]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid57"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts57();
+
+
+
+
+
+async function loadProducts58(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [97,98,99,100,101,102,103,104]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid58"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts58();
+
+
+
+
+async function loadProducts59(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [105,106,107,108,109,110,111,112,113]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid59"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts59();
+
+
+
+
+
+
+async function loadProducts60(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [114,115,116,117,118,119,120,121,122]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid60"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts60();
+
+
+
+
+
+async function loadProducts61(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [123,124,125,126,127,128,129,130]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid61"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts61();
+
+
+
+async function loadProducts62(){
+
+  const { data } = await supabase
+    .from("grocery_products")
+    .select("*")
+    .in("id", [131,132,133,134,135,136,137,138,139,140,151]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid62"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["grocery_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="grocery_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "grocery_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts62();
+
 // Mapping of categories to Supabase tables and product IDs
 const categoryConfig = {
   cool_drinks: {
@@ -11156,6 +12184,8 @@ document.addEventListener("DOMContentLoaded", () => {
       titleElement.textContent = config.title;
 
       // Show popup
+       lockBodyScroll();
+
       popup.classList.add("show");
 
       // Load products from Supabase
@@ -11166,6 +12196,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Close popup
   closeBtn.addEventListener("click", () => {
     popup.classList.remove("show");
+    unlockBodyScroll();
   });
 });
 async function loadCategoryProducts(tableName, ids) {
@@ -11252,20 +12283,27 @@ async function loadCategoryProducts(tableName, ids) {
 
 let scrollPosition = 0;
 
-// 🔒 Disable background scrolling
-function lockBodyScroll() {
-  scrollPosition = window.pageYOffset;
+function lockBodyScroll(){
+  scrollPosition = window.scrollY;
+
+  document.documentElement.classList.add("popup-open");
   document.body.classList.add("popup-open");
+
   document.body.style.top = `-${scrollPosition}px`;
 }
 
-// 🔓 Restore scrolling and previous position
-function unlockBodyScroll() {
-  document.body.classList.remove("popup-open");
-  document.body.style.top = "";
-  window.scrollTo(0, scrollPosition);
-}
+function unlockBodyScroll(){
 
+  document.documentElement.classList.remove("popup-open");
+  document.body.classList.remove("popup-open");
+
+  document.body.style.top="";
+
+  setTimeout(()=>{
+    window.scrollTo(0, scrollPosition); // simpler
+  },50);
+
+}
 document.addEventListener("DOMContentLoaded", function(){
   document.getElementById("cartBar").addEventListener("click", toggleMiniCart);
 
@@ -11653,26 +12691,47 @@ const table = parts.join("_");          // rest = table
 }
 function waitAndLoadCart(){
 
-if(window.productMap &&
-Object.keys(window.productMap).length > 0){
+  const cart = JSON.parse(localStorage.getItem("cart") || "{}");
+  const keys = Object.keys(cart);
 
-const skel=
-document.getElementById(
-"cartLoadingSkeleton"
-);
+  const bar = document.getElementById("cartBar");
 
-if(skel){
-skel.style.display="flex";
-}
+  // 🔥 STEP 1: INSTANT PRELOAD (no productMap needed)
+  if(keys.length > 0){
 
-updateCartBar();
-initAllUI();
+    bar.classList.remove("hidden");
 
-}
-else{
-setTimeout(waitAndLoadCart,100);
-}
+    let totalItems = 0;
 
+    keys.forEach(k => {
+      totalItems += cart[k];
+    });
+
+    // 🔥 show instantly
+    document.getElementById("cartCount").innerText =
+      totalItems === 1 ? "1 item" : totalItems + " items";
+
+    document.getElementById("cartTotal").innerText = "Loading...";
+  }
+
+  // 🔥 STEP 2: WAIT FOR productMap (your original logic)
+  if(window.productMap && Object.keys(window.productMap).length > 0){
+
+    console.log("✅ productMap ready → loading full cart");
+
+    const skel = document.getElementById("cartLoadingSkeleton");
+    if(skel){
+      skel.style.display = "none";
+    }
+
+    updateCartBar();   // 🔥 full update with price + images
+    initAllUI();
+
+  } else {
+
+    console.log("⏳ still waiting for productMap...");
+    setTimeout(waitAndLoadCart, 150);
+  }
 }
 
 waitAndLoadCart();
@@ -13072,6 +14131,146 @@ window.scrollTo(0,0);
 },4000);
 
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  document.querySelectorAll("video").forEach(function(v){
+
+    v.muted = true;
+    v.setAttribute("playsinline","");
+    v.setAttribute("webkit-playsinline","");
+
+    function forcePlay(){
+      v.play().catch(()=>{});
+    }
+
+    forcePlay();
+
+    document.addEventListener("touchstart", forcePlay, {once:true});
+
+    v.addEventListener("loadeddata", forcePlay);
+  });
+
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const cartList = document.getElementById("cartItemsList");
+
+  cartList.addEventListener("click", function(e){
+
+    const row = e.target.closest(".cartItemRow");
+    if(!row) return;
+
+    // ignore + - clicks
+    if(e.target.closest(".cartControl")){
+      return;
+    }
+
+    const control = row.querySelector(".cartControl");
+
+    if(!control){
+      console.log("❌ control not found");
+      return;
+    }
+
+    const id = control.dataset.id;
+    const table = control.dataset.table;
+
+    console.log("CLICKED:", id, table); // 🔥 DEBUG
+
+    const key = table + "_" + id;
+    const item = getProduct(key);
+
+    if(!item){
+      console.log("❌ item not found:", key);
+      return;
+    }
+
+    openPopup({
+      ...item,
+      table: table
+    });
+
+  });
+
+});
+
+document.getElementById("closePreview").onclick = function(){
+  const preview = document.getElementById("imgPreview");
+  const img = document.getElementById("previewImg");
+
+  preview.classList.remove("active");
+
+  // 🔥 reset zoom
+  img.style.transform = "scale(1)";
+};
+document.addEventListener("DOMContentLoaded", function(){
+
+  let scale = 1;
+  let startDistance = 0;
+
+  const img = document.getElementById("previewImg");
+
+  if(!img) return;
+
+  // 🔥 DESKTOP ZOOM (mouse wheel)
+  img.addEventListener("wheel", function(e){
+    e.preventDefault();
+
+    if(e.deltaY < 0){
+      scale += 0.2;
+    } else {
+      scale -= 0.2;
+    }
+
+    scale = Math.max(1, Math.min(scale, 4));
+
+    img.style.transform = `scale(${scale})`;
+  });
+
+  // 🔥 MOBILE PINCH ZOOM
+  img.addEventListener("touchstart", function(e){
+    if(e.touches.length === 2){
+      startDistance = getDistance(e.touches);
+    }
+  });
+
+  img.addEventListener("touchmove", function(e){
+    if(e.touches.length === 2){
+      e.preventDefault();
+
+      let newDistance = getDistance(e.touches);
+
+      if(startDistance){
+        let diff = newDistance - startDistance;
+
+        scale += diff * 0.005;
+        scale = Math.max(1, Math.min(scale, 4));
+
+        img.style.transform = `scale(${scale})`;
+      }
+
+      startDistance = newDistance;
+    }
+  });
+
+  // 🔥 RESET on close
+  document.getElementById("closePreview").onclick = function(){
+    document.getElementById("imgPreview").classList.remove("active");
+
+    scale = 1;
+    img.style.transform = "scale(1)";
+  };
+
+  // 🔥 helper
+  function getDistance(touches){
+    let dx = touches[0].clientX - touches[1].clientX;
+    let dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+
+});
 </script>
 </body>
 </html>
