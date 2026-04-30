@@ -1548,7 +1548,7 @@ left:0;
   flex-direction:column;
   overflow-y:auto;
 
-  z-index:99999;
+  z-index:300000;
   color:#111;
 
   /* 🔥 animation base */
@@ -1561,7 +1561,7 @@ left:0;
 #popup .topIcons,
 #popup .dots,
 #popup .popupContent{
-  margin-top:10px;
+  margin-top:35px; /* DELETE THIS */
 }
 .imageSlider{
   -webkit-overflow-scrolling:touch;
@@ -13975,6 +13975,49 @@ document.addEventListener("DOMContentLoaded", function(){
     document.addEventListener("touchstart", forcePlay, {once:true});
 
     v.addEventListener("loadeddata", forcePlay);
+  });
+
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const cartList = document.getElementById("cartItemsList");
+
+  cartList.addEventListener("click", function(e){
+
+    const row = e.target.closest(".cartItemRow");
+    if(!row) return;
+
+    // ignore + - clicks
+    if(e.target.closest(".cartControl")){
+      return;
+    }
+
+    const control = row.querySelector(".cartControl");
+
+    if(!control){
+      console.log("❌ control not found");
+      return;
+    }
+
+    const id = control.dataset.id;
+    const table = control.dataset.table;
+
+    console.log("CLICKED:", id, table); // 🔥 DEBUG
+
+    const key = table + "_" + id;
+    const item = getProduct(key);
+
+    if(!item){
+      console.log("❌ item not found:", key);
+      return;
+    }
+
+    openPopup({
+      ...item,
+      table: table
+    });
+
   });
 
 });
