@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CEZOO</title>
+<link href="https://fonts.googleapis.com/css2?family=B612:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -54,12 +55,27 @@ body{
 }
 /* TAGLINE */
 .tagline{
-  font-family:'Outfit', sans-serif;
+  margin-top:12px;
+  font-family:'B612', sans-serif;
+
   font-size:15px;
   font-weight:500;
-  color:#333;
 
-  margin-top:6px;
+  opacity:0;
+  animation:fade 1s forwards;
+  animation-delay:0.5s;
+
+  /* 🔥 APPLY GRADIENT TO FULL TEXT */
+  background:linear-gradient(135deg,#ff6a00,#ffb347);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* OPTIONAL: slight emphasis */
+.tagline span{
+  font-weight:700;
+  font-size:16px;
+  margin-right:4px;
 }
 .miniRow{
   display:flex;
@@ -69,17 +85,7 @@ body{
 
   position:relative;   /* 🔥 THIS IS THE REAL FIX */
 }
-/* HIGHLIGHT "10 min" */
-.tagline span{
-  font-weight:700;
-  font-size:18px;
 
-  background:linear-gradient(135deg,#ff6a00,#ffb347);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  margin-right:4px;
-}
 /* soft light glow */
 #splash::before{
   content:"";
@@ -116,7 +122,7 @@ overflow:hidden;
 
   font-size:52px;
   font-weight:700;
-  font-family:'Poppins', sans-serif;
+  font-family: "Times New Roman", Times, serif;  /* 🔥 cezoo font */
   line-height:1;
 
   opacity:0;
@@ -195,17 +201,8 @@ overflow:hidden;
 }
 /* logo splahs */
 
-.tagline{
-  margin-top:12px;
-  font-family:'Inter';
-  font-size:15px;
-  color:#aaa;
-  opacity:0;
-  animation:fade 1s forwards;
-  animation-delay:0.5s;
-}
 
-.tagline span{color:#fff;font-weight:600;}
+
 
 .loader{
   position:absolute;bottom:70px;width:140px;height:2px;background:#222;overflow:hidden;
@@ -3707,6 +3704,10 @@ border:1px solid red !important;
 75%{transform:translateX(-4px);}
 100%{transform:translateX(0);}
 }
+.inputError{
+  border-color:#d93025 !important;
+  animation:shake 0.3s ease;
+}
 #paymentPopup{
 position:fixed;
 top:100%;   /* was top:0 */
@@ -4196,6 +4197,167 @@ filter:grayscale(1);
 
   z-index:2;
 }
+/* 🔹 COMMON */
+#locationError,
+#manualEntry{
+  font-size:16px;
+  font-family:system-ui, -apple-system, sans-serif;
+}
+
+/* =========================
+   🔴 LOCATION ERROR SCREEN
+========================= */
+#locationError{
+  max-width:420px;
+  margin:60px auto;
+  padding:28px 22px;
+
+  background:#fff;
+  border-radius:16px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+  text-align:center;
+}
+
+.cryEmoji{
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.locTitle{
+  font-size:16px;
+  font-weight:600;
+  color:#111827;
+  margin-bottom:6px;
+}
+
+.locSub{
+  font-size:16px;
+  color:#6b7280;
+  margin-bottom:22px;
+}
+
+#retryBtn,
+#manualBtn{
+  width:100%;
+  padding:13px;
+
+  border-radius:12px;
+  border:none;
+
+  font-size:16px;
+  font-weight:500;
+
+  cursor:pointer;
+}
+
+#retryBtn{
+  background:#111827;
+  color:#fff;
+}
+
+#manualBtn{
+  margin-top:10px;
+  background:#f3f4f6;
+  color:#111827;
+}
+
+/* =========================
+   🟢 MANUAL ENTRY (TOP IMAGE + BOTTOM UI)
+========================= */
+#manualEntry{
+  position:fixed;
+  inset:0;
+
+  background:#ffffff;
+  padding:24px 20px;
+}
+
+/* 🔥 FULL TOP IMAGE */
+#manualImg{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:40vh;            /* 🔥 control image height */
+
+  object-fit:cover;       /* full cover look */
+}
+
+/* 🔥 INPUT */
+#manualAddress{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:300px;
+
+  border:none;
+  border-bottom:2px solid #e5e7eb;
+
+  padding:12px 0;
+  font-size:16px;
+  outline:none;
+
+  background:transparent;
+}
+
+#manualAddress:focus{
+  border-bottom:2px solid #111827;
+}
+
+/* 🔥 BUTTONS */
+#saveManual{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:240px;
+
+  padding:14px;
+  border-radius:12px;
+  border:none;
+
+  font-size:16px;
+  font-weight:500;
+
+  background:#111827;
+  color:#fff;
+}
+
+#retryBtnManual{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:190px;
+
+  padding:14px;
+  border-radius:12px;
+  border:none;
+
+  font-size:16px;
+  font-weight:500;
+
+  background:#f3f4f6;
+  color:#111827;
+}
+
+/* 🔹 interaction */
+button:active{
+  transform:scale(0.96);
+}
+#secureText{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:50px;   /* 👈 60px below button (adjust if needed) */
+
+  text-align:center;
+
+  font-size:16px;
+  font-weight:500;
+
+  color:#16a34a;   /* green */
+}
 </style>
 </head>
 
@@ -4205,12 +4367,12 @@ filter:grayscale(1);
 <div id="splash">
  <div class="logo">
   <span class="c">C</span>
-  <span class="e">e</span>
-  <span class="z">z</span>
-  <span class="o">o</span>
-  <span class="o2">o</span>  <!-- 🔥 last o -->
+  <span class="e">E</span>
+  <span class="z">Z</span>
+  <span class="o">Z</span>
+  <span class="o2">O</span>  <!-- 🔥 last o -->
 </div>
-  <div class="tagline"><span>10 minutes</span>Delivery</div>
+  <div class="tagline"><span>Delivery in</span>Minutes</div>
   <div class="loader"></div>
 </div>
 
@@ -4231,7 +4393,35 @@ filter:grayscale(1);
     <h2>Your Address</h2>
     <p id="addressText" style="margin-top:10px;color:#aaa;white-space:pre-line;"></p>
   </div>
+<div id="locationError" style="display:none;">
 
+  <div class="cryEmoji">🥺</div>
+  <div class="locTitle">
+    
+    Location not available
+  </div>
+
+  <div class="locSub">
+    Please allow location or enter manually
+  </div>
+
+  <button id="retryBtn">Try Again</button>
+  <button id="manualBtn">Enter Manually</button>
+
+</div>
+
+
+<div id="manualEntry" style="display:none;">
+    <img id="manualImg" src="mapsimage.webp" />
+
+
+  <input id="manualAddress" placeholder="Enter your address" />
+
+  <button id="saveManual">Save Address</button>
+
+  <button id="retryBtnManual">Retry Location</button>
+<div id="secureText">Secure & Safe</div>
+</div>
 </div>
 
 <!-- HOME -->
@@ -6084,7 +6274,9 @@ setTimeout(()=>{
 }
 
 function getLocation(){
+
   navigator.geolocation.getCurrentPosition(async(pos)=>{
+
     const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
     const data = await res.json();
     const a = data.address;
@@ -6103,20 +6295,89 @@ function getLocation(){
       main.style.display="none";
       home.style.display="block";
 
-     cityName.innerText = city;
-shortAddress.innerText = full;
+      cityName.innerText = city;
+      shortAddress.innerText = full;
 
-// save for login redirect use
-localStorage.setItem("savedCity", city);
-localStorage.setItem("savedAddress", full);
+      localStorage.setItem("savedCity", city);
+      localStorage.setItem("savedAddress", full);
 
     },3000);
 
+  }, ()=>{
+
+    // ❌ USER DENIED
+    showOnly("locationError");
+
   });
+
 }
+// 🔁 retry
+document.getElementById("retryBtn").onclick = function(){
+  showOnly("detecting");
+  getLocation(); // 🔥 ask again
+};
+document.getElementById("retryBtnManual").onclick = function(){
+
+  showOnly("detecting");
+  getLocation();
+
+};
+
+// ✍️ manual entry
+document.getElementById("manualBtn").onclick = function(){
+  showOnly("manualEntry");
+};
+
+// 💾 save manual
+document.getElementById("saveManual").onclick = function(){
+
+  const input = document.getElementById("manualAddress");
+  const val = input.value.trim();
+
+  // ❌ EMPTY → SHAKE
+  if(!val){
+    input.classList.remove("inputError"); // reset
+    void input.offsetWidth;              // restart animation
+    input.classList.add("inputError");
+    return;
+  }
+
+  // ✅ VALID → continue
+  addressText.innerText = val;
+
+  showOnly("success");
+
+  setTimeout(()=>{
+  main.style.display="none";
+  home.style.display="block";
+
+  const parts = val.split(",").map(p => p.trim());
+
+  if(parts.length === 1){
+    // ✅ only city entered
+    cityName.innerText = parts[0];
+    shortAddress.innerText = "";
+
+    localStorage.setItem("savedCity", parts[0]);
+    localStorage.setItem("savedAddress", "");
+  }else{
+    // ✅ full address
+    const city = parts[0];
+    const rest = parts.slice(1).join(", ");
+
+    cityName.innerText = city;
+    shortAddress.innerText = rest;
+
+    localStorage.setItem("savedCity", city);
+    localStorage.setItem("savedAddress", rest);
+  }
+
+},2000);
+
+};
 
 function showOnly(id){
-  ["detecting","success"].forEach(sec=>{
+  ["detecting","success","locationError","manualEntry"].forEach(sec=>{
     document.getElementById(sec).style.display="none";
   });
   document.getElementById(id).style.display="block";
