@@ -4123,7 +4123,7 @@ filter:grayscale(1);
   z-index:999999999;
 
   overflow:hidden;              /* 🔥 prevent scroll */
-  touch-action:none;            /* 🔥 better mobile zoom */
+  touch-action:manipulation;  /* 🔥 allow gestures */
 }
 
 /* show */
@@ -14115,6 +14115,72 @@ document.getElementById("closePreview").onclick = function(){
   // 🔥 reset zoom
   img.style.transform = "scale(1)";
 };
+document.addEventListener("DOMContentLoaded", function(){
+
+  let scale = 1;
+  let startDistance = 0;
+
+  const img = document.getElementById("previewImg");
+
+  if(!img) return;
+
+  // 🔥 DESKTOP ZOOM (mouse wheel)
+  img.addEventListener("wheel", function(e){
+    e.preventDefault();
+
+    if(e.deltaY < 0){
+      scale += 0.2;
+    } else {
+      scale -= 0.2;
+    }
+
+    scale = Math.max(1, Math.min(scale, 4));
+
+    img.style.transform = `scale(${scale})`;
+  });
+
+  // 🔥 MOBILE PINCH ZOOM
+  img.addEventListener("touchstart", function(e){
+    if(e.touches.length === 2){
+      startDistance = getDistance(e.touches);
+    }
+  });
+
+  img.addEventListener("touchmove", function(e){
+    if(e.touches.length === 2){
+      e.preventDefault();
+
+      let newDistance = getDistance(e.touches);
+
+      if(startDistance){
+        let diff = newDistance - startDistance;
+
+        scale += diff * 0.005;
+        scale = Math.max(1, Math.min(scale, 4));
+
+        img.style.transform = `scale(${scale})`;
+      }
+
+      startDistance = newDistance;
+    }
+  });
+
+  // 🔥 RESET on close
+  document.getElementById("closePreview").onclick = function(){
+    document.getElementById("imgPreview").classList.remove("active");
+
+    scale = 1;
+    img.style.transform = "scale(1)";
+  };
+
+  // 🔥 helper
+  function getDistance(touches){
+    let dx = touches[0].clientX - touches[1].clientX;
+    let dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+
+});
 </script>
 </body>
 </html>
