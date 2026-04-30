@@ -412,7 +412,7 @@ input, textarea{
 
   margin: -15px;     /* ✅ remove side gaps */
   padding: 15px;     /* keep spacing inside */
-padding-top:55px; 
+padding-top:55px; /* DELETE THIS */
   padding-bottom:10px;
 
   border-radius:0;   /* ❌ remove rounded corners */
@@ -4109,6 +4109,53 @@ opacity:.45;
 pointer-events:none;
 filter:grayscale(1);
 }
+/* 🔥 overlay */
+#imgPreview{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,0.6);
+
+  display:none;
+  justify-content:center;
+  align-items:center;
+
+  z-index:999999999;
+
+  overflow:hidden;              /* 🔥 prevent scroll */
+  touch-action:none;            /* 🔥 better mobile zoom */
+}
+
+/* show */
+#imgPreview.active{
+  display:flex;
+}
+
+/* 🔥 image */
+#previewImg{
+  max-width:90vw;               /* 🔥 prevent overflow */
+  max-height:85vh;
+
+  object-fit:contain;
+  border-radius:10px;
+
+  transition:transform 0.2s ease;
+  transform-origin:center;
+
+  cursor:zoom-in;
+}
+
+/* 🔥 close icon */
+#closePreview{
+  position:absolute;
+  top:20px;
+  right:20px;
+
+  font-size:26px;
+  color:#fff;
+  cursor:pointer;
+  z-index:2;
+}
 </style>
 </head>
 
@@ -5382,6 +5429,11 @@ Bite Delight Hub
 </div>
 
 
+</div>
+
+<div id="imgPreview">
+  <i id="closePreview" class="fa-solid fa-xmark"></i>
+  <img id="previewImg">
 </div>
 <div class="popup" id="popup">
   <div class="popupContent" id="popupContent">
@@ -7323,6 +7375,38 @@ lockBodyScroll();
 
 requestAnimationFrame(()=>{
   popup.classList.add("show");
+});
+
+console.log("✅ Popup opened");
+
+const preview = document.getElementById("imgPreview");
+const previewImg = document.getElementById("previewImg");
+
+const imgs = document.querySelectorAll("#slider img");
+
+console.log("Images found:", imgs.length);
+
+imgs.forEach((img, i) => {
+
+  console.log("Binding image", i, img.src);
+
+  img.onclick = function(){
+    console.log("🔥 IMAGE CLICKED:", this.src);
+
+    if(!preview || !previewImg){
+      console.log("❌ preview elements missing");
+      return;
+    }
+
+    // 🔥 set image
+    previewImg.src = this.src;
+
+    // 🔥 open overlay (clean way)
+    preview.classList.add("active");
+
+    console.log("✅ Preview opened");
+  };
+
 });
 initAllUI();
   // 🔥 DOTS WORKING
@@ -14021,6 +14105,16 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 
 });
+
+document.getElementById("closePreview").onclick = function(){
+  const preview = document.getElementById("imgPreview");
+  const img = document.getElementById("previewImg");
+
+  preview.classList.remove("active");
+
+  // 🔥 reset zoom
+  img.style.transform = "scale(1)";
+};
 </script>
 </body>
 </html>
