@@ -6177,10 +6177,10 @@ Bite Delight Hub
   <p>Categories</p>
 </div>
 
-  <div class="navItem">
-    <img src="custeer.webp">
-    <p>Help</p>
-  </div>
+  <div class="navItem" onclick="openHelp()">
+  <img src="custeer.webp">
+  <p>Help</p>
+</div>
 
   <div class="navItem videoNav">
     <video 
@@ -7887,9 +7887,9 @@ navItems.forEach(item=>{
   return;
 }
 
-    if(text.includes("Help")){
-      alert("Help & Support coming soon 🚀");
-    }
+    if(text.toLowerCase().includes("help")){
+  window.location.href = "help.html";
+}
 
     if(text.includes("Video")){
       alert("Video banner coming soon 🎬");
