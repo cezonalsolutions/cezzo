@@ -299,18 +299,23 @@ overflow:hidden;
   margin-top:15px;
   display:flex;
   align-items:center;
-   background:#f1f1f1; 
-  border-radius:10px;
-  padding:10px;
+
+  background:#f1f1f1;
+  border-radius:14px;      /* slightly bigger curve */
+
+  padding:14px 14px;       /* 🔥 increases height */
+  min-height:50px;         /* 🔥 fixed taller bar */
 }
 
 .searchBar input{
   flex:1;
   background:none;
   border:none;
+
   color:#111;
   outline:none;
-  font-size:12px; 
+
+  font-size:15px;          /* 🔥 bigger text */
 }
 input, textarea{
   font-size:12px !important;
@@ -5015,9 +5020,9 @@ scroll-behavior:smooth;
   </div>
 
   <div class="searchBar">
-    <input placeholder="Search for groceries">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </div>
+  <input id="searchInput" placeholder="Search for groceries">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</div>
   <div id="searchResults"></div>
   <div class="categories">
 
@@ -6979,7 +6984,50 @@ document.getElementById("saveManual").onclick = function(){
   },2000);
 
 };
+document.addEventListener("DOMContentLoaded", () => {
 
+  const words = [
+    "groceries",
+    "drinks",
+    "fruits",
+    "snacks",
+    "vegetables",
+    "dairy"
+  ];
+
+  const input = document.getElementById("searchInput");
+
+  let i = 0;
+
+  function changeWord() {
+
+    // don't animate if user typing
+    if (input.value.length !== 0) return;
+
+    // animate up (fade + move)
+    input.style.transition = "all 0.3s ease";
+    input.style.opacity = "0";
+    input.style.transform = "translateY(-8px)";
+
+    setTimeout(() => {
+      input.placeholder = "Search for " + words[i];
+
+      // reset from below
+      input.style.transform = "translateY(8px)";
+
+      setTimeout(() => {
+        input.style.opacity = "1";
+        input.style.transform = "translateY(0)";
+      }, 50);
+
+      i = (i + 1) % words.length;
+
+    }, 300);
+  }
+
+  setInterval(changeWord, 2000);
+
+});
 function normalize(text){
   return text
     .toLowerCase()
