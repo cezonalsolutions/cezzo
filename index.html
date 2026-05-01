@@ -4745,6 +4745,33 @@ button:active{
 .pencilItem span{
   font-size:11px;
 }
+#searchResults{
+  position:absolute;
+  left:10px;
+  right:10px;
+
+  /* 🔥 POSITION */
+  top: calc(55px + 100px);
+
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+
+  max-height:250px;
+  overflow-y:auto;
+
+  z-index:999;
+  display:none;
+scroll-behavior:smooth;
+
+  /* 🔥 HIDE SCROLLBAR */
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE */
+}
+
+#searchResults::-webkit-scrollbar{
+  display:none;                /* Chrome, Safari */
+}
 </style>
 </head>
 
@@ -4971,15 +4998,16 @@ button:active{
     </div>
   <div class="profile">
   <a href="#" id="profileLink">
-    <img src="profile.webp" alt="profile">
+    <img src="cat/profile url2.webp" alt="profile">
   </a>
 </div>
   </div>
 
   <div class="searchBar">
     <input placeholder="Search for groceries">
-    <span>🔍</span>
+    <i class="fa-solid fa-magnifying-glass"></i>
   </div>
+  <div id="searchResults"></div>
   <div class="categories">
 
  <div class="catItem" data-color="#E3F2FD"> <!-- All (soft blue) -->
@@ -6809,10 +6837,17 @@ setTimeout(()=>{
 },2600);
 
 }
-
+let locationTimeout;
 function getLocation(){
 
+  // 🔥 START 30 SECOND TIMER
+  locationTimeout = setTimeout(()=>{
+    showOnly("locationError");
+  }, 20000);
+
   navigator.geolocation.getCurrentPosition(async(pos)=>{
+
+    clearTimeout(locationTimeout); // ✅ STOP TIMER
 
     const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
     const data = await res.json();
@@ -6830,9 +6865,11 @@ function getLocation(){
 
     setTimeout(()=>{
       main.style.display="none";
-document.getElementById("optionScreen").style.display="flex";
-document.getElementById("optCityName").innerText = city;
-document.getElementById("optShortAddress").innerText = full;
+      document.getElementById("optionScreen").style.display="flex";
+
+      document.getElementById("optCityName").innerText = city;
+      document.getElementById("optShortAddress").innerText = full;
+
       cityName.innerText = city;
       shortAddress.innerText = full;
 
@@ -6840,16 +6877,33 @@ document.getElementById("optShortAddress").innerText = full;
       localStorage.setItem("savedAddress", full);
 
     },3000);
-    
 
   }, ()=>{
 
-    // ❌ USER DENIED
+    clearTimeout(locationTimeout); // ✅ STOP TIMER
+
     showOnly("locationError");
 
   });
 
 }
+function loadSavedLocation(){
+
+  const savedCity = localStorage.getItem("savedCity");
+  const savedAddress = localStorage.getItem("savedAddress");
+
+  if(savedCity){
+    document.getElementById("optCityName").innerText = savedCity;
+    cityName.innerText = savedCity;
+  }
+
+  if(savedAddress){
+    document.getElementById("optShortAddress").innerText = savedAddress;
+    shortAddress.innerText = savedAddress;
+  }
+
+}
+loadSavedLocation();
 document.getElementById("cizooBtn").onclick = function(){
   document.getElementById("optionScreen").style.display="none";
   home.style.display="block";
@@ -6913,6 +6967,23 @@ document.getElementById("saveManual").onclick = function(){
 
   },2000);
 
+};
+
+function normalize(text){
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s]/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const translateMap = {
+  pindi: "flour",
+  biyyam: "rice",
+  paalu: "milk",
+  neyyi: "ghee",
+  karam: "spice",
+  oil: "oil"
 };
 function showOnly(id){
   ["detecting","success","locationError","manualEntry"].forEach(sec=>{
@@ -14755,6 +14826,120 @@ function goHome(){
   const option = document.getElementById("optionScreen");
   if(option) option.style.display = "block";
 }
+// 🔥 NORMALIZE FUNCTION
+
+
+const input = document.querySelector(".searchBar input");
+const resultsBox = document.getElementById("searchResults");
+
+input.addEventListener("input", function(){
+
+  const value = this.value.trim();
+
+  if(!value){
+    resultsBox.style.display = "none";
+    return;
+  }
+
+  let results = [];
+  const query = normalize(value);
+
+  // 🔥 SMART SEARCH
+  Object.entries(window.productMap || {}).forEach(([key, p]) => {
+
+    const name = normalize(p.name);
+    let match = false;
+
+    // ✅ direct match
+    if(name.includes(query)){
+      match = true;
+    }
+
+    // ✅ Telugu keyword match
+    Object.entries(translateMap).forEach(([tel, eng]) => {
+      if(query.includes(tel) && name.includes(eng)){
+        match = true;
+      }
+    });
+
+    // ✅ partial word match
+    query.split(" ").forEach(word => {
+      if(name.includes(word)){
+        match = true;
+      }
+    });
+
+    if(match){
+      const table = key.substring(0, key.lastIndexOf("_"));
+
+      results.push({
+        ...p,
+        table_name: table
+      });
+    }
+
+  });
+
+  // 🔥 REMOVE DUPLICATES
+  results = [...new Map(results.map(p => [p.id + p.table_name, p])).values()];
+
+  resultsBox.innerHTML = "";
+
+  if(results.length === 0){
+    resultsBox.innerHTML = `<div style="padding:10px;">No results</div>`;
+    resultsBox.style.display = "block";
+    return;
+  }
+
+  results.slice(0,10).forEach(p => {
+
+    const div = document.createElement("div");
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+    div.style.gap = "10px";
+    div.style.padding = "10px";
+    div.style.borderBottom = "1px solid #eee";
+    div.style.cursor = "pointer";
+
+    div.innerHTML = `
+      <img src="${p.image1}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:600;">${p.name}</div>
+        <div style="font-size:12px;color:#666;">₹${p.discount_price || p.price}</div>
+      </div>
+    `;
+
+    div.onclick = () => {
+
+      // 🔥 CLEAR SEARCH
+      input.value = "";
+
+      // 🔥 CLOSE KEYBOARD
+      input.blur();
+
+      resultsBox.style.display = "none";
+
+      // 🔥 OPEN EXISTING POPUP
+      openPopup({
+        ...p,
+        table: p.table_name
+      });
+
+    };
+
+    resultsBox.appendChild(div);
+  });
+
+  resultsBox.style.display = "block";
+
+});
+
+// 🔥 HIDE ON OUTSIDE CLICK
+document.addEventListener("click", (e)=>{
+  if(!e.target.closest(".searchBar")){
+    resultsBox.style.display = "none";
+  }
+});
 </script>
 </body>
 </html>
