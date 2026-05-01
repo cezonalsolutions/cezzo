@@ -4367,12 +4367,17 @@ button:active{
 
   display:flex;
   flex-direction:column;
+
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+
+  padding-bottom:90px;   /* 🔥 IMPORTANT: space for bottom bar */
 }
 
 .optionHeader{
   background:#ffffff;
 
-  padding:56px 20px 12px;
+  padding:53px 20px 12px;  /* remove up side gap */
 
   border:none;
   box-shadow:none;
@@ -4396,7 +4401,7 @@ button:active{
   grid-template-columns:repeat(2,1fr);
 
   column-gap:10px;   /* left-right */
-  row-gap:25px;       /* 🔥 tight between rows */
+  row-gap:20px;       /* 🔥 tight between rows */
 
   padding:6px 16px 16px;
   margin-top:20px;
@@ -4406,7 +4411,7 @@ button:active{
 .optCard{
   position:relative;
 
-  height:130px;
+  height:150px;
 
   border-radius:18px;
 
@@ -4414,7 +4419,7 @@ button:active{
 
   cursor:pointer;
 
-  margin:10px;        /* 🔥 VERY IMPORTANT (removes hidden gaps) */
+  margin:8px;
 }
 
 /* 🔥 IMAGE fills card */
@@ -4429,19 +4434,66 @@ button:active{
   animation:zoomLoop 6s infinite ease-in-out;
 }
 
+/* 🔥 COLOR OVERLAY (key part) */
+.optCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  opacity:0.35;   /* 🔥 controls color strength */
+  z-index:1;
+}
+
+/* 🔥 DIFFERENT COLORS */
+.optionGrid .optCard:nth-child(1)::before{
+  background:#a5d6a7;   /* green */
+}
+
+.optionGrid .optCard:nth-child(2)::before{
+  background:#ffe082;   /* yellow */
+}
+
+.optionGrid .optCard:nth-child(3)::before{
+  background:#80cbc4;   /* teal */
+}
+
+.optionGrid .optCard:nth-child(4)::before{
+  background:#ce93d8;   /* purple */
+}
+
+
 /* 🔥 TEXT OVER IMAGE */
 .optLabel{
   position:absolute;
   bottom:10px;
   left:12px;
 
-  color:#fff;
+  color:#000000;
   font-size:16px;
   font-weight:600;
 
   z-index:2;
 }
+/* 🔥 smooth base */
+.optCard{
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
 
+/* 🔥 HOVER EFFECT */
+.optCard:hover{
+  transform:translateY(-6px) scale(1.02);   /* lift + slight zoom */
+  box-shadow:0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* 🔥 IMAGE ZOOM ON HOVER */
+.optCard:hover img{
+  transform:scale(1.08);
+}
+
+/* 🔥 smooth image transition */
+.optCard img{
+  transition:transform 0.4s ease;
+}
 /* 🔥 DARK OVERLAY for readability */
 .optCard::after{
   content:"";
@@ -4511,39 +4563,181 @@ button:active{
 #cizooBtn1 img.active{
   opacity:1;
 }
-.brandBlock{
-  padding:20px 16px 30px;
 
-  text-align:left;   /* 🔥 left align */
-
-  color:#111;
+.optCityWrap{
+  display:flex;            /* 🔥 horizontal */
+  align-items:center;      /* 🔥 vertical center */
+  gap:6px;
 }
 
-/* 🔥 CEZZO (bigger + bold) */
-.brandName{
-  font-size:24px;   /* 🔥 increased size */
-  font-weight:800;
+/* make sure city doesn't break layout */
+.optCity{
+  display:inline-block;
+  font-size:16px;
+  font-weight:600;
+  color:#111827;
+}
 
+/* icon */
+.locIcon{
+  color:#16a34a;
+  font-size:16px;
+  display:inline-flex;     /* 🔥 prevents top shift */
+  align-items:center;
+}
+/* subtitle text */
+.optSub{
+  position:absolute;
+  bottom:2px;   /* 👇 below main label */
+  left:12px;
+
+  font-size:12px;
+  color:#101011;
+
+  z-index:2;
+}
+
+/* adjust main label slightly up */
+.optLabel{
+  bottom:18px;   /* 🔥 move up to make space */
+}
+/* 🔥 ICON CONTAINER */
+.cardIcon{
+  position:absolute;
+  top:10px;
+  right:10px;
+
+  width:36px;
+  height:36px;
+
+  border-radius:50%;
+
+  background:#ffffff;   /* outer white */
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:3;
+
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 🔥 ICON INSIDE */
+.cardIcon i{
+  color:#16a34a;   /* 🔥 green */
+  font-size:16px;
+}
+/* 🔥 MAIN BLOCK */
+.brandBlock{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:16px 20px;
+
+  background:#f9fafb;
+
+  border-radius:14px;
+
+  margin:16px;
+}
+
+/* 🔥 LEFT SIDE */
+.brandLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brandIcon{
+  font-size:20px;
+  color:#16a34a;
+}
+
+.brandName{
+  font-size:22px;
+  font-weight:800;
   letter-spacing:1px;
 
-  margin-bottom:6px;
+  background:linear-gradient(90deg,#203fca,#5e176b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-/* 🔥 tagline */
-.brandTag{
+/* 🔥 RIGHT SIDE */
+.brandRight{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* 🔥 EACH ROW */
+.brandRow{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  font-size:13px;
+  color:#374151;
+}
+
+/* icons */
+.brandRow i{
   font-size:14px;
+  color:#16a34a;
+}
+/* 🔥 WRAPPER */
+.bottomNavWrap{
+  position:fixed;
+  bottom:14px;
+  left:0;
+  width:100%;
+
+  padding:0 10px;   /* 🔥 control side spacing (no big gap) */
+
+  z-index:100;
+}
+
+/* 🔥 BAR */
+.bottomNav{
+  width:100%;       /* 🔥 full width now */
+  height:65px;
+
+  background:#ffffff;
+
+  border-radius:18px;
+
+  display:flex;
+  justify-content:space-around;   /* 🔥 better than space-between */
+  align-items:center;
+
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* 🔥 ITEMS */
+.navItem{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
   color:#6b7280;
 
-  margin-bottom:8px;
+  text-align:center;
 }
 
-/* 🔥 made in india */
-.brandMade{
-  font-size:13px;
-  color:#9ca3af;
+/* 🔥 ICON */
+.navItem i{
+  font-size:18px;
+  margin-bottom:4px;
 }
-.brandBlock{
-  padding:20px 20px 30px;  /* match grid padding */
+
+/* 🔥 TEXT */
+.navItem span{
+  font-size:11px;
 }
 </style>
 </head>
@@ -4617,11 +4811,16 @@ button:active{
 
 <div id="optionScreen" style="display:none;">
 
-  <!-- 🔥 LOCATION HEADER -->
   <div class="optionHeader">
+
+  <div class="optCityWrap">
+    <i class="fa-solid fa-location-dot locIcon"></i>
     <div class="optCity" id="optCityName">Hyderabad</div>
-    <div class="optAddress" id="optShortAddress">Jubilee Hills</div>
   </div>
+
+  <div class="optAddress" id="optShortAddress">Jubilee Hills</div>
+
+</div>
 <video id="optionVideo" autoplay muted loop playsinline>
   <source src="cezoui.mp4" type="video/mp4">
 </video>
@@ -4629,7 +4828,13 @@ button:active{
 
   <div class="optCard" id="cizooBtn">
     <img src="cat/cezzo1.webp">
+    <div class="cardIcon">
+    <i class="fa-solid fa-basket-shopping"></i>
+  </div>
+  
     <div class="optLabel">Cizoo</div>
+      <div class="optSub">Groceries in Minutes</div>
+
   </div>
 
   <div class="optCard" id="cizooBtn1">
@@ -4637,29 +4842,86 @@ button:active{
   <img src="cat/services 1.webp" class="img1 active">
   <img src="cat/services2.webp" class="img2">
 
+  <div class="cardIcon">
+   <i class="fa-solid fa-bell-concierge"></i>  
+  </div> 
+
   <div class="optLabel">Services</div>
+  <div class="optSub">Events Bookings</div>
 
 </div>
 
   <div class="optCard" id="cizooBtn2">
     <img src="cat/something.webp">
+
+    <div class="cardIcon">
+   <i class="fa-solid fa-motorcycle"></i>
+  </div> 
     <div class="optLabel">Rentals</div>
+    <div class="optSub">Coming Soon</div>
   </div>
 
   <div class="optCard" id="cizooBtn3">
+
     <img src="cat/servives4.webp">
+<div class="cardIcon">
+<i class="fa-solid fa-users"></i>  
+  </div> 
+    
     <div class="optLabel">Join</div>
+    <div class="optSub">Patner With Us</div>
   </div>
 
 </div>
 <div class="brandBlock">
 
-  <div class="brandName">CEZZO</div>
+  <!-- LEFT -->
+  <div class="brandLeft">
+    <i class="fa-solid fa-bag-shopping brandIcon"></i>
+    <div class="brandName">CEZZO</div>
+  </div>
 
-  <div class="brandTag">Delivery in Minutes</div>
+  <!-- RIGHT -->
+  <div class="brandRight">
 
-  <div class="brandMade">
-    Made with ❤️ in India
+    <div class="brandRow">
+      <i class="fa-regular fa-clock"></i>
+      <span>Delivery in Minutes</span>
+    </div>
+
+    <div class="brandRow">
+      <i class="fa-regular fa-heart"></i>
+      <span>Made with ❤️ in India</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="bottomNavWrap">
+
+  <div class="bottomNav">
+
+    <div class="navItem ">
+     <i class="fa-solid fa-basket-shopping"></i>
+      <span>Cizoo</span>
+    </div>
+
+    <div class="navItem">
+      <i class="fa-solid fa-bell-concierge"></i>
+      <span>Services</span>
+    </div>
+
+    <div class="navItem">
+      <i class="fa-solid fa-motorcycle"></i>
+      <span>Rentals</span>
+    </div>
+
+    <div class="navItem">
+      <i class="fa-solid fa-users"></i> 
+      <span>Join</span>
+    </div>
+
   </div>
 
 </div>
@@ -6587,8 +6849,8 @@ document.getElementById("saveManual").onclick = function(){
 
   // ❌ EMPTY → SHAKE
   if(!val){
-    input.classList.remove("inputError"); // reset
-    void input.offsetWidth;              // restart animation
+    input.classList.remove("inputError");
+    void input.offsetWidth;
     input.classList.add("inputError");
     return;
   }
@@ -6599,34 +6861,29 @@ document.getElementById("saveManual").onclick = function(){
   showOnly("success");
 
   setTimeout(()=>{
-  main.style.display="none";
-  home.style.display="block";
+    main.style.display="none";
+    document.getElementById("optionScreen").style.display="flex";
 
-  const parts = val.split(",").map(p => p.trim());
+    const parts = val.split(",").map(p => p.trim());
 
-  if(parts.length === 1){
-    // ✅ only city entered
-    cityName.innerText = parts[0];
-    shortAddress.innerText = "";
+    let city = parts[0] || "Your Location";
+    let rest = parts.slice(1).join(", ");
 
-    localStorage.setItem("savedCity", parts[0]);
-    localStorage.setItem("savedAddress", "");
-  }else{
-    // ✅ full address
-    const city = parts[0];
-    const rest = parts.slice(1).join(", ");
+    // 🔥 OPTION SCREEN (IMPORTANT FIX)
+    document.getElementById("optCityName").innerText = city;
+    document.getElementById("optShortAddress").innerText = rest;
 
+    // 🔥 HOME SCREEN
     cityName.innerText = city;
     shortAddress.innerText = rest;
 
+    // 🔥 STORAGE
     localStorage.setItem("savedCity", city);
     localStorage.setItem("savedAddress", rest);
-  }
 
-},2000);
+  },2000);
 
 };
-
 function showOnly(id){
   ["detecting","success","locationError","manualEntry"].forEach(sec=>{
     document.getElementById(sec).style.display="none";
