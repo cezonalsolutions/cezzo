@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categories</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#f7f8fa;
+  overflow-x:hidden;
+}
+
+/* 🔥 PAGE ANIMATION */
+.page{
+  animation:slideUp 0.4s ease;
+}
+
+@keyframes slideUp{
+  from{
+    transform:translateY(40px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* 🔥 HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:56px 12px 12px; /* 🔥 top gap added */
+  background:#fff;
+  position:sticky;
+  top:0;
+  border-bottom:1px solid #eee;
+}
+
+.backBtn{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#f1f5f9;
+  cursor:pointer;
+}
+
+.title{
+  font-size:16px;
+  font-weight:700;
+}
+
+/* 🔥 GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  padding:16px;
+}
+
+/* 🔥 CARD */
+.card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* 🔥 IMAGE FULL */
+.card img{
+  width:100%;
+  height:100px;
+  object-fit:cover;
+  border-radius:16px;
+}
+
+/* 🔥 TEXT BELOW IMAGE */
+.card p{
+  margin-top:8px;
+  font-size:13px;
+  font-weight:600;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- 🔥 HEADER -->
+  <div class="header">
+    <div class="backBtn" onclick="goBack()">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+    <div class="title">Categories</div>
+  </div>
+
+  <!-- 🔥 GRID -->
+  <div class="grid" id="catGrid"></div>
+
+</div>
+
+<script>
+
+const catData = [
+  {name:"Fresh Fruits", img:"caters/2.webp"},
+  {name:"Fresh Vegetables", img:"caters/1.webp"},
+  {name:"Dry Fruits", img:"caters/3.webp"},
+  {name:"Nuts & Seeds", img:"caters/4.webp"},
+  {name:"Rice & Rice Products", img:"caters/14.webp"},
+  {name:"Atta Pulses & Dal", img:"caters/6.webp"},
+  {name:"Whole Grains", img:"caters/7.webp"},
+  {name:"Cooking Oils", img:"caters/8.webp"},
+  {name:"Ghee & Butter", img:"caters/9.webp"},
+  {name:"Spices", img:"caters/10.webp"},
+  {name:"Spice Powders", img:"caters/11.webp"},
+
+
+
+  {name:"Baking Essentials", img:"caters/13.webp"},
+  {name:"Ready-to-Cook Items", img:"caters/14.webp"},
+  {name:"Ready-to-Eat Foods", img:"caters/25.webp"},
+
+
+
+  
+  
+  
+  {name:"Soft Drinks / Cool Drinks", img:"caters/15.webp"},
+  {name:"Energy & Sports Drinks", img:"caters/17.webp"},
+  
+  {name:"Personal Care", img:"caters/18.webp"},
+
+  {name:"Biscuits & Cookies", img:"caters/19.webp"},
+  {name:"Chips & Wafers", img:"caters/20.webp"},
+  {name:"Chocolates & Candies", img:"caters/21.webp"},
+  {name:"Ice Cream & Frozen Desserts", img:"caters/22.webp"},
+  
+
+  {name:"Pet Food & Supplies", img:"caters/23.webp"},
+  {name:"Stationery & Miscellaneous", img:"caters/24.webp"},
+  {name:"Dishwash & Laundry", img:"caters/26.webp"}
+];
+
+// 🔥 LOAD
+function loadCats(){
+  const grid = document.getElementById("catGrid");
+
+  catData.forEach(cat => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="${cat.img}">
+      <p>${cat.name}</p>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+// 🔙 BACK
+function goBack(){
+
+  // 🔥 skip intro next time
+  sessionStorage.setItem("skipIntro","true");
+
+  // 🔥 go back to index page
+  window.location.href = "index.html";
+}
+// 🔥 INIT
+loadCats();
+
+</script>
+
+</body>
+</html>
