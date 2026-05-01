@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Help & Support</title>
+
+<style>
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#e5ddd5;
+}
+
+/* 🔥 HEADER */
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  padding:60px 16px 14px; /* top space */
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+  z-index:10;
+}
+
+.backBtn{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#f1f5f9;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+.backBtn i{
+  font-size:14px;
+}
+
+.title{
+  font-size:18px;
+  font-weight:700;
+}
+
+/* 🔥 CHAT */
+.chat{
+  padding:12px;
+  padding-top:130px; /* space below header */
+  padding-bottom:90px;
+  max-width:600px;
+  margin:auto;
+}
+
+/* Messages */
+.msg{
+  max-width:75%;
+  padding:10px 14px;
+  border-radius:12px;
+  margin:8px 0;
+  font-size:14px;
+  word-wrap:break-word;
+}
+
+.bot{
+  background:#fff;
+  border-top-left-radius:0;
+}
+
+.user{
+  background:#dcf8c6;
+  margin-left:auto;
+  border-top-right-radius:0;
+}
+
+/* Input */
+.inputBar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  padding:10px;
+  gap:8px;
+  border-top:1px solid #ddd;
+}
+
+.inputBar input{
+  flex:1;
+  padding:10px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
+
+.inputBar button{
+  background:#25d366;
+  border:none;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:20px;
+}
+
+/* Options */
+.option{
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  margin-top:6px;
+  cursor:pointer;
+  border:1px solid #ddd;
+}
+
+/* Orders */
+.order{
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  margin-top:8px;
+  cursor:pointer;
+}
+
+/* Item */
+.item{
+  display:flex;
+  gap:8px;
+  margin-top:6px;
+  align-items:center;
+}
+
+.item img{
+  width:40px;
+  height:40px;
+  border-radius:8px;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 HEADER -->
+<div class="header">
+  <div class="backBtn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
+  <div class="title">Help & Support</div>
+</div>
+
+<!-- 🔥 CHAT -->
+<div class="chat" id="chat"></div>
+
+<!-- 🔥 INPUT -->
+<div class="inputBar">
+  <input id="input" placeholder="Type your message...">
+  <button onclick="sendMsg()">Send</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// 🔐 LOGIN CHECK (run first)
+const checkName = localStorage.getItem("userName");
+const checkMobile = localStorage.getItem("userMobile");
+
+if(!checkName || !checkMobile){
+  window.location.href = "login.html";
+}
+// 🔥 BACK
+function goBack(){
+
+  // 🔥 skip intro next time
+  sessionStorage.setItem("skipIntro","true");
+
+  // 🔥 go to index page directly (no intro)
+  window.location.href = "index.html";
+}
+
+// 🔥 Supabase safe init
+if (!window.supabaseClient) {
+  window.supabaseClient = window.supabase.createClient(
+    "https://izoipzriynkcjtwuzrfu.supabase.co",
+    "sb_publishable_7ZRL1Y4JAppLTJonepuTIw_UQyGjVVw"
+  );
+}
+var supabase = window.supabaseClient;
+
+// 🔥 Elements
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+
+const name = localStorage.getItem("userName") || "User";
+const mobile = localStorage.getItem("userMobile");
+
+let step = 0;
+let selectedType = "";
+let selectedOrder = null;
+let aiCount = 0;
+let chatHistory = [];   // ✅ ADD HERE
+
+// 🔥 Product map
+async function loadProductMap(){
+  const tables = ["all_products","grocery_products","fresh_products","offer_products"];
+  window.productMap = {};
+
+  for(const table of tables){
+    const { data } = await supabase.from(table).select("*");
+    data.forEach(item=>{
+      window.productMap[table + "_" + item.id] = item;
+    });
+  }
+}
+
+// 🔥 Message
+function addMsg(text, type="bot"){
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.innerText = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// 🔥 Init
+init();
+async function init(){
+  await loadProductMap();
+  addMsg("Hi " + name + " 👋");
+  addMsg("How can I help you today?");
+}
+
+// 🔥 Send
+function sendMsg(){
+  const text = input.value.trim();
+  if(!text) return;
+
+  addMsg(text, "user");
+  input.value = "";
+
+  if(step === 0){
+    askType();
+  } else if(step === 2){
+    submitIssue(text);
+  }
+}
+
+// 🔥 Issue type
+function askType(){
+
+  addMsg("Select your issue type:");
+
+  ["Product Issue","Order Issue","Payment Issue"].forEach(t=>{
+
+    const div = document.createElement("div");
+    div.className = "option";
+    div.innerText = t;
+
+    div.onclick = ()=>{
+      addMsg(t, "user");
+
+      if(t.includes("Product")) selectedType = "product";
+      if(t.includes("Order")) selectedType = "order";
+      if(t.includes("Payment")) selectedType = "payment";
+
+      if(selectedType === "payment"){
+        askFinal();
+      } else {
+        loadOrders();
+      }
+    };
+
+    chat.appendChild(div);
+  });
+
+  step = 1;
+}
+async function loadOrders(){
+
+  addMsg("Select your order:");
+
+  const { data } = await supabase
+    .from("orders")
+    .select("*")
+    .eq("customer_mobile", mobile)
+    .order("id", { ascending:false });
+
+  // 🔥 ✅ ADD THIS BLOCK
+  if(!data || data.length === 0){
+    addMsg("❌ No orders found");
+
+    // optional: show options again
+    setTimeout(()=>{
+      askType();
+    },1000);
+
+    return;
+  }
+
+  // 🔥 existing loop
+  data.forEach(order => {
+
+    const div = document.createElement("div");
+    div.className = "order";
+
+    let html = `<b>Order #${order.id} - ₹${order.total_amount}</b>`;
+
+    (order.cart_items || []).slice(0,3).forEach(item=>{
+      const key = item.table_name + "_" + item.product_id;
+      const p = window.productMap[key];
+      if(!p) return;
+
+      html += `
+        <div class="item">
+          <img src="${p.image1}">
+          <div style="flex:1;font-size:13px;">${p.name}</div>
+          <div style="font-size:13px;">₹${p.discount_price || p.price}</div>
+        </div>
+      `;
+    });
+
+    div.innerHTML = html;
+
+    div.onclick = ()=>{
+      addMsg("Selected Order #" + order.id, "user");
+      selectedOrder = order;
+      askFinal();
+    };
+
+    chat.appendChild(div);
+  });
+}
+// 🔥 Final
+function askFinal(){
+  addMsg("Please describe your issue:");
+  step = 2;
+}
+
+// 🔥 Submit
+async function submitIssue(text){
+
+  aiCount++;
+
+  // 🧠 Save user message
+  chatHistory.push({
+    role: "user",
+    content: text
+  });
+
+  // 🔥 After 10 messages → fallback
+  if(aiCount >= 10){
+    addMsg("Our Cizzon team will handle this query shortly 🙌");
+    step = 0;
+    aiCount = 0;
+    chatHistory = [];
+    return;
+  }
+
+  try{
+
+    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer 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",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+  model: "openai/gpt-3.5-turbo",
+  messages: [
+    {
+      role: "system",
+      content: "You are a support assistant for a fast online grocery delivery app. Orders are delivered to the user's home within minutes. There are no physical stores. Never mention shops or store visits. Always respond related to delivery, orders, payments, or app issues. Be short and human-like."
+    },
+    ...chatHistory
+  ],
+  temperature: 0.7
+})
+    });
+
+    const data = await res.json();
+   const reply = data?.choices?.[0]?.message?.content;
+
+// 🔥 FORCE AI RESPONSE
+let finalReply = reply;
+
+if(!finalReply || finalReply.trim() === ""){
+  finalReply = "Let me help you with that 👍 Could you please share a bit more detail?";
+}
+
+// ✅ always show AI message
+addMsg(finalReply);
+
+// 🧠 save to history
+chatHistory.push({
+  role: "assistant",
+  content: finalReply
+});
+
+
+
+  }catch(e){
+    console.log(e);
+    addMsg("Something went wrong. Please try again.");
+  }
+}
+
+</script>
+
+</body>
+</html>
