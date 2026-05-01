@@ -2,48 +2,648 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Orders</title>
 
 <style>
 body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#f7f8fa;
-font-family:Segoe UI,sans-serif;
+  margin:0;
+  background:#f7f8fa;
+  font-family:Segoe UI,sans-serif;
 }
 
-button{
-padding:16px 40px;
-border:none;
-border-radius:35px;
-background:#111;
-color:white;
-font-size:18px;
-cursor:pointer;
+/* 🔥 HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:60px 16px 14px; /* top gap */
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+.backBtn{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#f1f5f9;
+  cursor:pointer;
+}
+
+.headerTitle{
+  font-size:18px;
+  font-weight:700;
+}
+
+/* 🔥 CONTAINER */
+.container{
+  padding:16px;
+  padding-bottom:90px; 
+}
+
+/* 🔥 ORDER */
+.orderCard{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:16px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.06);
+}
+.itemRow{
+  display:flex;
+  gap:10px;
+  margin-top:12px;   /* 🔥 increased */
+  align-items:center;
+}
+.orderHeader{
+  display:flex;
+  justify-content:space-between;
+}
+
+.orderPrice{
+  color:#16a34a;
+  font-weight:600;
+}
+
+/* 🔥 ITEM */
+.itemRow{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+  align-items:center;
+}
+
+.itemImg{
+  width:55px;
+  height:55px;
+  border-radius:10px;
+  object-fit:cover;
+  background:#eee;
+}
+
+.itemName{
+  font-size:13px;
+  font-weight:500;
+}
+
+.itemQty{
+  font-size:12px;
+  color:#6b7280;
+}
+
+/* 🔥 SEE ALL */
+.seeMore{
+  margin-top:8px;
+  font-size:13px;
+  color:#2563eb;
+  cursor:pointer;
+}
+
+
+.loader{
+  width:40px;
+  height:40px;
+  position:relative;
+}
+
+.loader div{
+  position:absolute;
+  width:4px;
+  height:10px;
+  background:#16a34a;
+  border-radius:2px;
+  top:0;
+  left:50%;
+  transform-origin: center 20px;
+  opacity:0.2;
+  animation:fade 1.2s linear infinite;
+}
+
+@keyframes fade{
+  0%{ opacity:1; }
+  100%{ opacity:0.2; }
+}
+
+
+
+#orderPopup{
+  animation:slideUp 0.25s ease;
+}
+
+@keyframes slideUp{
+  from{ transform:translateY(100%); }
+  to{ transform:translateY(0); }
+}
+.loaderWrap{
+  position:fixed;
+
+  top:60px;              /* 👈 header height adjust if needed */
+  left:0;
+  width:100%;
+  height:calc(100vh - 60px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:50;            /* below popup, above content */
+}
+/* 🔥 WRAP */
+.logoutWrap{
+  position:fixed;
+  bottom:12px;
+  left:0;
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+
+  z-index:100;
+}
+
+/* 🔥 BOX (same style as your cards/nav) */
+.logoutBox{
+  width:92%;
+  background:#fff;
+  padding:10px;
+
+  border-radius:18px;
+
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* 🔥 BUTTON */
+.logoutBtn{
+  width:100%;
+  padding:14px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#111;
+  color:#fff;
+
+  font-size:15px;
+  font-weight:600;
 }
 </style>
 </head>
+
 <body>
 
-<button onclick="logout()">Logout</button>
+
+
+<!-- 🔥 HEADER -->
+<div class="header">
+  <div class="backBtn" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
+  <div class="headerTitle">My Orders</div>
+</div>
+
+<div class="container">
+    <!-- 🔥 SPINNER -->
+<div class="loaderWrap" id="loader">
+  <div class="loader" id="iosLoader"></div>
+</div>
+  <div id="ordersList"></div>
+</div>
+<!-- 🔥 ORDER DETAILS POPUP -->
+<div id="orderPopup" style="display:none; position:fixed; inset:0; background:#fff; z-index:9999; overflow-y:auto;">
+
+ <div style="
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:0 16px 14px;
+  padding-top:calc(55px + env(safe-area-inset-top)); /* 🔥 REAL GAP */
+
+  border-bottom:1px solid #eee;
+  background:#fff;
+
+  position:sticky;
+  top:0;
+  z-index:10;
+">
+    <div onclick="closePopup()" style="
+  font-size:18px;
+  cursor:pointer;
+
+  width:36px;
+  height:36px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+  background:#f1f5f9;
+
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+    <div style="font-weight:600;">Order Details</div>
+  </div>
+
+  <!-- content -->
+  <div id="popupContent" style="padding:16px;"></div>
+
+</div>
+<div class="logoutWrap">
+  <div class="logoutBox">
+    <button onclick="logout()" class="logoutBtn">
+      Logout
+    </button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+var supabase = window.supabase.createClient(
+  "https://izoipzriynkcjtwuzrfu.supabase.co",
+  "sb_publishable_7ZRL1Y4JAppLTJonepuTIw_UQyGjVVw"
+);
 
-function logout(){
+const mobile = localStorage.getItem("userMobile");
 
- // clear login details
- localStorage.removeItem("userName");
- localStorage.removeItem("userMobile");
-
- // skip splash once after logout
- sessionStorage.setItem("skipIntro","true");
-
- window.location.href="index.html";
+function goBack(){
+  window.history.back();
 }
+
+// 🔥 LOAD PRODUCTS
+async function loadProductMap(){
+
+  const tables = [
+    "all_products",
+    "chocolate_products",
+    "cool_drinks_products",
+    "fresh_products",
+    "grocery_products",
+    "home_products",
+    "offer_products"
+  ];
+
+  window.productMap = {};
+
+  for(const table of tables){
+    const { data } = await supabase.from(table).select("*");
+
+    data.forEach(item=>{
+      window.productMap[table + "_" + item.id] = item;
+    });
+  }
+}
+
+// 🔥 ITEMS (LIMIT 3 + SEE ALL)
+function buildItems(cartItems, showAll=false){
+
+  let html = "";
+  let items = showAll ? cartItems : cartItems.slice(0,3);
+
+  items.forEach(item => {
+
+    const key = item.table_name + "_" + item.product_id;
+    const product = window.productMap?.[key];
+
+    if(!product) return;
+
+    let img = product.image1 || "https://via.placeholder.com/60";
+
+    html += `
+      <div class="itemRow">
+        <img src="${img}" class="itemImg"
+             onerror="this.src='https://via.placeholder.com/60'">
+
+        <div style="flex:1;">
+          <div class="itemName">${product.name}</div>
+          <div class="itemQty">Qty: ${item.qty}</div>
+        </div>
+
+        <div>₹${product.discount_price || product.price}</div>
+      </div>
+    `;
+  });
+
+  return html;
+}
+
+// 🔥 LOAD ORDERS
+async function loadOrders(){
+
+  const { data } = await supabase
+    .from("orders")
+    .select("*")
+    .eq("customer_mobile", mobile)
+    .order("id", { ascending:false });
+
+  const container = document.getElementById("ordersList");
+
+  data.forEach((order, index)=>{
+
+    const card = document.createElement("div");
+    card.className = "orderCard";
+
+    let expanded = false;
+
+    function render(){
+card.innerHTML = `
+  <div class="orderHeader" style="margin-bottom:8px;">
+    
+    <div style="flex:1;">
+      
+      <div style="font-weight:600; margin-bottom:12px;">
+        Your Order
+      </div>
+
+      <!-- 🔥 STATUS -->
+      <div style="margin-top:4px;">
+        ${getOrderStatusUI(order)}
+      </div>
+
+    </div>
+
+    <div class="orderPrice" style="margin-left:10px;">
+      ₹${order.total_amount}
+    </div>
+
+  </div>
+
+  ${buildItems(order.cart_items, expanded)}
+
+  ${
+    order.cart_items.length > 3
+    ? `<div class="seeMore">${expanded ? "Show less" : "See all"}</div>`
+    : ""
+  }
+`;
+
+      const btn = card.querySelector(".seeMore");
+      if(btn){
+        btn.onclick = () => {
+          expanded = !expanded;
+          render();
+        };
+      }
+    }
+
+    render();
+    card.onclick = () => openOrderPopup(order);
+
+    container.appendChild(card);
+  });
+}
+
+// 🔥 START
+async function start(){
+  await loadProductMap();
+  await loadOrders();
+
+  // ✅ hide loader
+  document.getElementById("loader").remove();
+}
+
+start();
+// 🔥 create iOS spinner
+const ios = document.getElementById("iosLoader");
+
+if(ios){
+  for(let i=0;i<12;i++){
+    const bar = document.createElement("div");
+    bar.style.transform = `rotate(${i*30}deg) translate(-50%, 0)`;
+    bar.style.animationDelay = `${i*0.1}s`;
+    ios.appendChild(bar);
+  }
+}
+function getOrderStatusUI(order){
+
+  const steps = ["pending","packed","out","delivered"];
+  const labels = ["Received","Packed","Out","Delivered"];
+
+  let status = (order.order_status || "").toLowerCase().trim();
+
+if(status === "order received") status = "pending";
+if(status === "out for delivery") status = "out";
+
+let current = steps.indexOf(status);
+  return `
+    <div style="margin-top:6px;">
+
+      <!-- 🔥 LINE + DOTS -->
+      <div style="
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  padding:0 6px;   /* 🔥 spacing added */
+">
+        <!-- line -->
+        <div style="
+          position:absolute;
+          top:8px;
+          left:0;
+          right:0;
+          height:2px;
+          background:#e5e7eb;
+          z-index:0;
+        "></div>
+
+        ${
+          steps.map((step, i)=>{
+
+            let active = i <= current;
+
+            return `
+              <div style="flex:1;display:flex;justify-content:center;z-index:1;">
+
+                <div style="
+                  width:16px;
+                  height:16px;
+                  border-radius:50%;
+                  background:${active ? "#16a34a" : "#e5e7eb"};
+                "></div>
+
+              </div>
+            `;
+          }).join("")
+        }
+
+      </div>
+
+      <!-- 🔥 LABELS -->
+      <div style="
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;     /* 🔥 more gap */
+  font-size:11px;
+  gap:6px;            /* 🔥 spacing between labels */
+">
+        ${
+          labels.map((label,i)=>`
+            <div style="
+              flex:1;
+              text-align:center;
+              color:${i <= current ? "#16a34a" : "#9ca3af"};
+            ">
+              ${label}
+            </div>
+          `).join("")
+        }
+      </div>
+
+    </div>
+  `;
+}
+function openOrderPopup(order){
+
+  let itemsHTML = "";
+
+  // 🔥 PRODUCTS LIST
+  order.cart_items.forEach(item => {
+
+    const key = item.table_name + "_" + item.product_id;
+    const product = window.productMap?.[key];
+
+    if(!product) return;
+
+    let img = product.image1 || "https://via.placeholder.com/60";
+    let price = product.discount_price || product.price || 0;
+
+    itemsHTML += `
+      <div style="display:flex; gap:12px; margin-bottom:14px; align-items:center;">
+        
+        <img src="${img}" 
+             style="width:60px;height:60px;border-radius:12px;object-fit:cover;">
+
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:600;">${product.name}</div>
+          <div style="font-size:12px;color:#6b7280;">Qty: ${item.qty}</div>
+        </div>
+
+        <div style="font-weight:600;">₹${price}</div>
+
+      </div>
+    `;
+  });
+
+  // 🔥 BILL CALCULATION
+  let delivery = order.delivery_fee || 0;
+  let handling = 5; // optional static
+  let total = order.total_amount;
+
+  // 🔥 FULL UI
+  let html = `
+
+    <!-- 🔥 DELIVERY -->
+<div style="background:#f9fafb;padding:12px;border-radius:12px;margin-bottom:16px;">
+  
+  <div style="font-size:12px;color:#6b7280;">DELIVER TO</div>
+
+  ${
+    (() => {
+
+      let isRecipient = order.recipient_name && order.recipient_name.trim() !== "";
+
+      let name = isRecipient 
+        ? order.recipient_name 
+        : order.self_form_name;
+
+      let mobile = isRecipient 
+        ? order.recipient_mobile 
+        : order.self_form_mobile;
+
+      return `
+        <div style="font-size:14px;font-weight:600;margin-top:4px;">
+          ${name || "User"}
+        </div>
+
+        <div style="font-size:13px;color:#374151;">
+          ${mobile || ""}
+        </div>
+      `;
+    })()
+  }
+
+  <!-- 🔥 ADDRESS -->
+  <div style="font-size:13px;color:#6b7280;margin-top:4px;">
+    ${order.map_address}
+  </div>
+
+  <!-- 🔥 PAYMENT -->
+  <div style="margin-top:6px;font-size:12px;color:#6b7280;">
+    Payment: 
+    <span style="color:#111;font-weight:600;">
+      ${order.payment_method}
+    </span>
+  </div>
+  <!-- 🔥 ORDER STATUS -->
+<div style="margin-top:14px;margin-bottom:16px;">
+
+  <div style="font-size:14px;font-weight:700;margin-bottom:14px;">
+    Order Status
+  </div>
+
+    <div style="margin-top:6px;">
+    ${getOrderStatusUI(order)}
+  </div>
+</div>
+
+</div>
+
+    <!-- 🔥 ITEMS -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Items</div>
+      ${itemsHTML}
+    </div>
+
+    <!-- 🔥 BILL TABLE -->
+   <div style="background:#ecfdf5;border-radius:12px;padding:14px;">
+
+  <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:#16a34a;">
+    <span>Total</span>
+    <span>₹${total}</span>
+  </div>
+
+</div>
+
+    <!-- 🔥 PAYMENT -->
+    
+
+  `;
+
+  document.getElementById("popupContent").innerHTML = html;
+  document.getElementById("orderPopup").style.display = "block";
+}
+
+function closePopup(){
+  document.getElementById("orderPopup").style.display = "none";
+}
+function logout(){
+  localStorage.removeItem("userName");
+  localStorage.removeItem("userMobile");
+
+  sessionStorage.setItem("skipIntro","true");
+
+  window.location.href = "index.html";
+}
+
+function goBack(){
+
+  // 🔥 skip intro next time
+  sessionStorage.setItem("skipIntro","true");
+
+  // 🔥 go to main page
+  window.location.href = "index.html";
+}
+
 </script>
 
 </body>
