@@ -4460,7 +4460,13 @@ button:active{
 .optionGrid .optCard:nth-child(4)::before{
   background:#ce93d8;   /* purple */
 }
+.optionGrid .optCard:nth-child(5)::before{
+  background:#90caf9;   /* blue */
+}
 
+.optionGrid .optCard:nth-child(6)::before{
+  background:#ffab91;   /* orange */
+}
 
 /* 🔥 TEXT OVER IMAGE */
 .optLabel{
@@ -4688,7 +4694,7 @@ button:active{
   color:#16a34a;
 }
 /* 🔥 WRAPPER */
-.dockNavWrap{
+.pencilNavWrap{
   position:fixed;
   bottom:14px;
   left:0;
@@ -4700,7 +4706,7 @@ button:active{
 }
 
 /* 🔥 BAR */
-.dockNav{
+.pencilNav{
   width:100%;
   height:65px;
 
@@ -4716,7 +4722,7 @@ button:active{
 }
 
 /* 🔥 ITEMS */
-.dockItem{
+.pencilItem{
   flex:1;
   display:flex;
   flex-direction:column;
@@ -4730,13 +4736,13 @@ button:active{
 }
 
 /* 🔥 ICON */
-.dockItem i{
+.pencilItem i{
   font-size:18px;
   margin-bottom:4px;
 }
 
 /* 🔥 TEXT */
-.dockItem span{
+.pencilItem span{
   font-size:11px;
 }
 </style>
@@ -4824,6 +4830,8 @@ button:active{
 <video id="optionVideo" autoplay muted loop playsinline>
   <source src="cezoui.mp4" type="video/mp4">
 </video>
+
+
   <div class="optionGrid">
 
   <div class="optCard" id="cizooBtn">
@@ -4872,6 +4880,28 @@ button:active{
     <div class="optSub">Patner With Us</div>
   </div>
 
+
+  <div class="optCard" id="cizooBtn4">
+  <img src="cat/biriyani.webp">
+
+  <div class="cardIcon">
+    <i class="fa-solid fa-utensils"></i>
+  </div>
+
+  <div class="optLabel">Food</div>
+  <div class="optSub">Order Meals</div>
+</div>
+
+<div class="optCard" id="cizooBtn5">
+  <img src="cat/mediiens.webp">
+
+  <div class="cardIcon">
+    <i class="fa-solid fa-briefcase-medical"></i>
+  </div>
+
+  <div class="optLabel">Medicines</div>
+  <div class="optSub">Pharmacy Nearby</div>
+</div>
 </div>
 <div class="brandBlock">
 
@@ -4897,27 +4927,26 @@ button:active{
   </div>
 
 </div>
+<div class="pencilNavWrap">
 
-<div class="dockNavWrap">
+  <div class="pencilNav">
 
-  <div class="dockNav">
-
-    <div class="dockItem">
+    <div class="pencilItem">
       <i class="fa-solid fa-basket-shopping"></i>
       <span>Cizoo</span>
     </div>
 
-    <div class="dockItem">
+    <div class="pencilItem">
       <i class="fa-solid fa-bell-concierge"></i>
       <span>Services</span>
     </div>
 
-    <div class="dockItem">
+    <div class="pencilItem">
       <i class="fa-solid fa-motorcycle"></i>
       <span>Rentals</span>
     </div>
 
-    <div class="dockItem">
+    <div class="pencilItem">
       <i class="fa-solid fa-users"></i> 
       <span>Join</span>
     </div>
@@ -4925,6 +4954,7 @@ button:active{
   </div>
 
 </div>
+
 </div>
 
 
@@ -8641,86 +8671,7 @@ loadProducts5();
 
 
 // ✅ fresh Section
-
-
-async function loadProducts6(){
-
-  const { data } = await supabase
-    .from("fresh_products")
-    .select("*")
-    .in("id", [3,4,5,6,7,8]);   // ✅ new IDs
-
-  const grid = document.getElementById("productGrid6"); // ✅ new grid
-  grid.innerHTML = "";
-
-  data.forEach(item => {
-
-  // ✅ ADD THIS LINE HERE
-  window.productMap = window.productMap || {};
-  window.productMap["fresh_products_" + item.id] = item;
-    const card = document.createElement("div");
-    card.className = "productCard2";   // ✅ SAME UI
-
-    card.innerHTML = `
-      <div class="imgWrap2">
-        <img src="${item.image1}">
-       <div class="cartControl" 
-     data-id="${item.id}" 
-    data-table="fresh_products">
-  <div class="addBtn2">+</div>
-</div>
-
-        <div class="qtyInside">
-          ${item.quantity} ${item.unit}
-        </div>
-      </div>
-
-      <div class="pName2">${item.name}</div>
-      <div class="brand2">${item.brand || ""}</div>
-
-      <div class="priceRow2">
-        <div class="pPrice2">
-          ₹${item.discount_price}
-          <span>₹${item.original_price}</span>
-        </div>
-
-        <div class="ratingGreen">
-          <i class="fa-solid fa-star"></i>
-          ${item.rating || "0"}
-        </div>
-      </div>
-    `;
-
-    card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
-  openPopup({
-  ...item,
-  table: item.table || "fresh_products"
-});
-});
-
-    grid.appendChild(card);
-  });
-  initAllUI();
-}
-
-loadProducts6(); 
+ 
 
 async function loadProducts7(){
 
@@ -8961,111 +8912,6 @@ async function loadProducts9(){
 
 loadProducts9(); 
 // ✅ cool starts here 
-
-
-async function loadProducts10(){
-
-  const { data } = await supabase
-    .from("cool_drinks_products")
-    
-    .select("*")
-    .in("id", [7,8,9,10,11,12]);   // ✅ new IDs
-
-  const grid = document.getElementById("productGrid10"); // ✅ new grid
-  grid.innerHTML = "";
-
-  data.forEach(item => {
-
-  // ✅ ADD THIS LINE HERE
-  window.productMap = window.productMap || {};
-  window.productMap["cool_drinks_products_" + item.id] = item;
-    const card = document.createElement("div");
-    card.className = "productCard2";   // ✅ SAME UI
-
-    card.innerHTML = `
-      <div class="imgWrap2">
-        <img src="${item.image1}">
-       <div class="cartControl" 
-     data-id="${item.id}" 
-     data-table="cool_drinks_products">
-  <div class="addBtn2">+</div>
-</div>
-
-        <div class="qtyInside">
-          ${item.quantity} ${item.unit}
-        </div>
-      </div>
-
-      <div class="pName2">${item.name}</div>
-      <div class="brand2">${item.brand || ""}</div>
-
-      <div class="priceRow2">
-        <div class="pPrice2">
-          ₹${item.discount_price}
-          <span>₹${item.original_price}</span>
-        </div>
-
-        <div class="ratingGreen">
-          <i class="fa-solid fa-star"></i>
-          ${item.rating || "0"}
-        </div>
-      </div>
-    `;
-const addBtn = card.querySelector(".addBtn2");
-
-
-// 🔥 FIXED HALF AREA BLOCK
-const imgWrap = addBtn.parentElement;
-
-imgWrap.addEventListener("click", function(e){
-
-  // ✅ VERY IMPORTANT → allow + click
-  if(e.target === addBtn){
-    return;
-  }
-
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ block only top half
-  if(clickY < half){
-    e.stopPropagation();
-  }
-
-});
-    card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
-  openPopup({
-  ...item,
-  table: item.table || "cool_drinks_products"
-  
-});
-});
-
-    grid.appendChild(card);
-  });
-  initAllUI();
-}
-
-loadProducts10(); 
 
 async function loadProducts11(){
 
@@ -9868,85 +9714,7 @@ async function loadProducts20(){
 loadProducts20(); 
 
 
-
-async function loadProducts21(){
-
-  const { data } = await supabase
-    .from("chocolate_products")
-    .select("*")
-    .in("id", [9,10,11,12,13,14,23]);   // ✅ new IDs
-
-  const grid = document.getElementById("productGrid21"); // ✅ new grid
-  grid.innerHTML = "";
-
-  data.forEach(item => {
-
-  // ✅ ADD THIS LINE HERE
-  window.productMap = window.productMap || {};
-  window.productMap["chocolate_products_" + item.id] = item;
-    const card = document.createElement("div");
-    card.className = "productCard2";   // ✅ SAME UI
-
-    card.innerHTML = `
-      <div class="imgWrap2">
-        <img src="${item.image1}">
-       <div class="cartControl" 
-     data-id="${item.id}" 
-     data-table="chocolate_products">
-  <div class="addBtn2">+</div>
-</div>
-
-        <div class="qtyInside">
-          ${item.quantity} ${item.unit}
-        </div>
-      </div>
-
-      <div class="pName2">${item.name}</div>
-      <div class="brand2">${item.brand || ""}</div>
-
-      <div class="priceRow2">
-        <div class="pPrice2">
-          ₹${item.discount_price}
-          <span>₹${item.original_price}</span>
-        </div>
-
-        <div class="ratingGreen">
-          <i class="fa-solid fa-star"></i>
-          ${item.rating || "0"}
-        </div>
-      </div>
-    `;
-
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
-  openPopup({
-  ...item,
-  table: item.table || "chocolate_products"
-});
-});
-
-    grid.appendChild(card);
-  });
-  initAllUI();
-}
-
-loadProducts21(); 
+ 
 
 
 async function loadProducts22(){
@@ -10744,87 +10512,6 @@ async function loadProducts31(){
 }
 
 loadProducts31(); 
-
-
-async function loadProducts40(){
-
-  const { data } = await supabase
-    .from("skincare_products")
-    .select("*")
-    .in("id", [1,2,3,4,5,6,7]);   // ✅ new IDs
-
-  const grid = document.getElementById("productGrid40"); // ✅ new grid
-  grid.innerHTML = "";
-
-  data.forEach(item => {
-
-  // ✅ ADD THIS LINE HERE
-  window.productMap = window.productMap || {};
-  window.productMap["skincare_products_" + item.id] = item; //chnage
-    const card = document.createElement("div");
-    card.className = "productCard2";   // ✅ SAME UI
-
-    card.innerHTML = `
-      <div class="imgWrap2">
-        <img src="${item.image1}">
-       <div class="cartControl" 
-     data-id="${item.id}" 
-     data-table="skincare_products"> // chnage
-  <div class="addBtn2">+</div>
-</div>
-
-        <div class="qtyInside">
-          ${item.quantity} ${item.unit}
-        </div>
-      </div>
-
-      <div class="pName2">${item.name}</div>
-      <div class="brand2">${item.brand || ""}</div>
-
-      <div class="priceRow2">
-        <div class="pPrice2">
-          ₹${item.discount_price}
-          <span>₹${item.original_price}</span>
-        </div>
-
-        <div class="ratingGreen">
-          <i class="fa-solid fa-star"></i>
-          ${item.rating || "0"}
-        </div>
-      </div>
-    `;
-
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
-  openPopup({
-  ...item,
-  table: item.table || "skincare_products" //chnage
-});
-});
-
-    grid.appendChild(card);
-  });
-  initAllUI();
-}
-
-loadProducts40(); //chnage
-
 
 
 
