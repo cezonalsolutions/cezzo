@@ -425,9 +425,64 @@ if(ios){
 }
 function getOrderStatusUI(order){
 
-  const steps = ["pending","packed","out","delivered"];
-  const labels = ["Received","Packed","Out","Delivered"];
+   if(order.order_status === "cancelled"){
 
+  const labels = ["Received","Packed","Out for Delivery","Delivered"];
+  return `
+    <div style="margin-top:6px;">
+
+      <!-- 🔴 RED LINE -->
+      <div style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        position:relative;
+        padding:0 6px;
+      ">
+
+        <div style="
+          position:absolute;
+          top:8px;
+          left:0;
+          right:0;
+          height:2px;
+          background:#ef4444;
+          z-index:0;
+        "></div>
+
+        ${
+          labels.map(()=>`
+            <div style="flex:1;display:flex;justify-content:center;z-index:1;">
+              <div style="
+                width:16px;
+                height:16px;
+                border-radius:50%;
+                background:#ef4444;
+              "></div>
+            </div>
+          `).join("")
+        }
+
+      </div>
+
+      <!-- 🔴 LABEL -->
+      <div style="
+        text-align:center;
+        margin-top:10px;
+        font-size:12px;
+        font-weight:600;
+        color:#ef4444;
+      ">
+        Order Cancelled
+      </div>
+
+    </div>
+  `;
+}
+
+
+  const steps = ["pending","packed","out","delivered"];
+  const labels = ["Received","Packed","Out for Delivery","Delivered"];
   let status = (order.order_status || "").toLowerCase().trim();
 
 if(status === "order received") status = "pending";
@@ -614,6 +669,29 @@ function openOrderPopup(order){
 
 </div>
 
+<!-- 🔥 ADD HERE 👇 CANCEL BUTTON -->
+${ 
+  (order.order_status !== "out" &&
+   order.order_status !== "delivered" &&
+   order.order_status !== "cancelled")
+  ? `
+    <div style="margin-top:16px;">
+      <button onclick="cancelOrder(${order.id})" style="
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:12px;
+        background:#ef4444;
+        color:#fff;
+        font-size:14px;
+        font-weight:600;
+      ">
+        Cancel Order
+      </button>
+    </div>
+  `
+  : ""
+}
     <!-- 🔥 PAYMENT -->
     
 
@@ -642,6 +720,24 @@ function goBack(){
 
   // 🔥 go to main page
   window.location.href = "index.html";
+}
+async function cancelOrder(orderId){
+
+  const { error } = await supabase
+    .from("orders")
+    .update({ order_status: "cancelled" })
+    .eq("id", orderId);
+
+  if(error){
+    console.log("Cancel failed");
+    return;
+  }
+
+  // 🔥 close popup
+  closePopup();
+
+  // 🔥 reload orders (clean refresh)
+  location.reload();
 }
 
 </script>
