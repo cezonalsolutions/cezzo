@@ -4772,6 +4772,17 @@ scroll-behavior:smooth;
 #searchResults::-webkit-scrollbar{
   display:none;                /* Chrome, Safari */
 }
+.suggestTag{
+  background:#f3f4f6;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.suggestTag:hover{
+  background:#e5e7eb;
+}
 </style>
 </head>
 
@@ -14886,7 +14897,42 @@ input.addEventListener("input", function(){
   resultsBox.innerHTML = "";
 
   if(results.length === 0){
-    resultsBox.innerHTML = `<div style="padding:10px;">No results</div>`;
+   resultsBox.innerHTML = `
+  <div style="
+    text-align:center;
+    padding:20px 10px;
+  ">
+    <div style="font-size:14px;font-weight:600;color:#333;">
+      No results found
+    </div>
+
+    <div style="font-size:12px;color:#777;margin-top:6px;">
+      Try searching for
+    </div>
+
+    <div style="
+      margin-top:10px;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      flex-wrap:wrap;
+    ">
+
+      <span class="suggestTag">Milk</span>
+      <span class="suggestTag">Snacks</span>
+      <span class="suggestTag">Rice</span>
+      <span class="suggestTag">Oil</span>
+
+    </div>
+  </div>
+`;
+document.querySelectorAll(".suggestTag").forEach(tag=>{
+    tag.onclick = () => {
+      input.value = tag.innerText.toLowerCase();
+      input.dispatchEvent(new Event("input"));
+    };
+  });
+
     resultsBox.style.display = "block";
     return;
   }
