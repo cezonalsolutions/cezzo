@@ -209,6 +209,7 @@ let step = 0;
 let selectedType = "";
 let selectedOrder = null;
 let aiCount = 0;
+let selectedProduct = null; 
 let chatHistory = [];   // ✅ ADD HERE
 
 // 🔥 Product map
@@ -333,10 +334,10 @@ async function loadOrders(){
     div.innerHTML = html;
 
     div.onclick = ()=>{
-      addMsg("Selected Order #" + order.id, "user");
-      selectedOrder = order;
-      askFinal();
-    };
+  addMsg("Selected Order #" + order.id, "user");
+  selectedOrder = order;
+  askProductSelection(order);
+};
 
     chat.appendChild(div);
   });
@@ -346,7 +347,46 @@ function askFinal(){
   addMsg("Please describe your issue:");
   step = 2;
 }
+function askProductSelection(order){
 
+  addMsg("Please select the product you need help with:");
+
+  (order.cart_items || []).forEach(item=>{
+
+    const key = item.table_name + "_" + item.product_id;
+    const p = window.productMap[key];
+    if(!p) return;
+
+    const div = document.createElement("div");
+    div.className = "order";
+
+    div.innerHTML = `
+      <div class="item">
+        <img src="${p.image1}">
+        <div style="flex:1;font-size:13px;">${p.name}</div>
+      </div>
+    `;
+
+    div.onclick = ()=>{
+      addMsg(p.name, "user");
+      selectedProduct = p;
+
+      // 🔥 Continue flow
+      showOrderStatus();
+      askFinal();
+    };
+
+    chat.appendChild(div);
+  });
+}
+function showOrderStatus(){
+
+  if(!selectedOrder) return;
+
+  let status = selectedOrder.status || "Processing";
+
+  addMsg(`📦 Order Status: ${status}`);
+}
 // 🔥 Submit
 async function submitIssue(text){
 
@@ -360,61 +400,77 @@ async function submitIssue(text){
 
   // 🔥 After 10 messages → fallback
   if(aiCount >= 10){
-    addMsg("Our Cizzon team will handle this query shortly 🙌");
-    step = 0;
-    aiCount = 0;
-    chatHistory = [];
-    return;
-  }
+
+  // 🔥 SAVE CHAT
+  await saveChatToDB();
+
+  addMsg("📞 Our Cizzon team will contact you shortly 🙌");
+
+  step = 0;
+  aiCount = 0;
+  chatHistory = [];
+
+  return;
+}
 
   try{
 
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-  model: "openai/gpt-3.5-turbo",
-  messages: [
-    {
-      role: "system",
-      content: "You are a support assistant for a fast online grocery delivery app. Orders are delivered to the user's home within minutes. There are no physical stores. Never mention shops or store visits. Always respond related to delivery, orders, payments, or app issues. Be short and human-like."
+  const res = await fetch("https://backend-wxmg.onrender.com/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     },
-    ...chatHistory
-  ],
-  temperature: 0.7
-})
-    });
+    body: JSON.stringify({
+      model: "openai/gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "You are a professional customer support assistant for a fast online grocery delivery app. Always respond like a real human support agent. Do NOT ask for order ID or unnecessary details. Do NOT ask too many questions. Give direct solutions or next steps. If there is an issue like delay, payment, or damaged product, respond with a clear resolution like refund, replacement, or escalation. Keep replies short, confident, and helpful. Never mention shops or store visits."
+        },
+        ...chatHistory
+      ],
+      temperature: 0.7
+    })
+  });
 
-    const data = await res.json();
-   const reply = data?.choices?.[0]?.message?.content;
+  const data = await res.json();
+  const reply = data?.choices?.[0]?.message?.content;
 
-// 🔥 FORCE AI RESPONSE
-let finalReply = reply;
+  let finalReply = reply;
 
-if(!finalReply || finalReply.trim() === ""){
-  finalReply = "Let me help you with that 👍 Could you please share a bit more detail?";
+  if(!finalReply || finalReply.trim() === ""){
+    finalReply = "Let me help you with that 👍 Could you please share more details?";
+  }
+
+  addMsg(finalReply);
+
+  chatHistory.push({
+    role: "assistant",
+    content: finalReply
+  });
+
+}catch(e){
+  console.log(e);
+  addMsg("⚠️ Something went wrong. Please try again.");
 }
+}
+async function saveChatToDB(){
 
-// ✅ always show AI message
-addMsg(finalReply);
+  try{
 
-// 🧠 save to history
-chatHistory.push({
-  role: "assistant",
-  content: finalReply
-});
+    await supabase.from("support_chats").insert([{
+      user_name: name,
+      mobile: mobile,
+      messages: chatHistory
+    }]);
 
-
+    console.log("✅ Chat saved");
 
   }catch(e){
-    console.log(e);
-    addMsg("Something went wrong. Please try again.");
+    console.log("❌ Save failed", e);
   }
-}
 
+}
 </script>
 
 </body>
