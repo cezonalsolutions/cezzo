@@ -4860,13 +4860,13 @@ button:active{
 </div>
 
   <div class="optCard" id="cizooBtn2">
-    <img src="cat/something.webp">
+    <img src="cat/cleaning.webp">
 
     <div class="cardIcon">
-   <i class="fa-solid fa-motorcycle"></i>
+   <i class="fa-solid fa-broom"></i>
   </div> 
-    <div class="optLabel">Rentals</div>
-    <div class="optSub">Coming Soon</div>
+    <div class="optLabel">Cleaning</div>
+    <div class="optSub">Clean And Grren</div>
   </div>
 
   <div class="optCard" id="cizooBtn3">
@@ -4942,8 +4942,8 @@ button:active{
     </div>
 
     <div class="pencilItem">
-      <i class="fa-solid fa-motorcycle"></i>
-      <span>Rentals</span>
+      <i class="fa-solid fa-utensils"></i>
+      <span>Food</span>
     </div>
 
     <div class="pencilItem">
@@ -6167,15 +6167,15 @@ Bite Delight Hub
 
 <div class="bottomNav">
 
-  <div class="navItem active">
-    <img src="homie.webp">
-    <p>Home</p>
-  </div>
+  <div class="navItem active" onclick="goHome()">
+  <img src="homie.webp">
+  <p>Home</p>
+</div>
 
-  <div class="navItem">
-    <img src="catergrois.webp">
-    <p>Categories</p>
-  </div>
+  <div class="navItem" onclick="window.location.href='categories.html'">
+  <img src="catergrois.webp">
+  <p>Categories</p>
+</div>
 
   <div class="navItem">
     <img src="custeer.webp">
@@ -7882,11 +7882,10 @@ navItems.forEach(item=>{
       window.scrollTo({top:0, behavior:"smooth"});
     }
 
-    if(text.includes("Categories")){
-      document.querySelector(".categories").scrollIntoView({
-        behavior:"smooth"
-      });
-    }
+    if(text.toLowerCase().includes("categories")){
+  window.location.href = "categories.html";
+  return;
+}
 
     if(text.includes("Help")){
       alert("Help & Support coming soon 🚀");
@@ -14734,6 +14733,28 @@ setInterval(()=>{
   img1.classList.toggle("active");
   img2.classList.toggle("active");
 },3000);
+
+function goHome(){
+
+  // 🔝 scroll top
+  window.scrollTo(0,0);
+
+  // ❌ hide HOME (all grocery UI)
+  const home = document.getElementById("home");
+  if(home) home.style.display = "none";
+
+  // ❌ hide MAIN (location screen if visible)
+  const main = document.getElementById("main");
+  if(main) main.style.display = "none";
+
+  // ❌ hide any popup if open
+  const popup = document.getElementById("orderPopup");
+  if(popup) popup.style.display = "none";
+
+  // ✅ show OPTION SCREEN
+  const option = document.getElementById("optionScreen");
+  if(option) option.style.display = "block";
+}
 </script>
 </body>
 </html>
