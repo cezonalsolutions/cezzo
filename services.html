@@ -373,6 +373,188 @@ body{
 .makeupCard:nth-child(2) .bookNow{
   background:#ff4d6d;
 }
+.cateringHeader i{
+  margin-right:5px;
+  color:#0f5c5c;
+}
+.cateringHeader{
+  padding:16px;
+  margin-top:14px;
+}
+
+/* small top label */
+.cateringHeader span{
+  font-size:11px;
+  letter-spacing:2px;
+  color:#999;
+}
+
+/* main heading */
+.cateringHeader h2{
+  font-size:20px;
+  font-weight:700;
+  margin:2px 0 0;
+
+  color:#0f5c5c;
+  font-family:'Poppins', sans-serif;
+}
+
+/* GRID */
+.cateringGrid{
+  display:flex;
+  gap:12px;
+  padding:0 16px;
+  margin-top:10px;
+}
+
+/* CARD */
+.cateringCard{
+  flex:1;
+  position:relative;
+  height:140px;
+
+  border-radius:14px;
+  overflow:hidden;
+}
+
+/* IMAGE */
+.cateringCard img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* OVERLAY */
+.cateringOverlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+
+  padding:10px;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.7),
+    transparent
+  );
+
+  color:#fff;
+}
+
+/* TITLE */
+.cateringTitle{
+  font-size:13px;
+  font-weight:600;
+}
+
+/* BUTTON */
+.bookNow{
+  margin-top:5px;
+
+  background:#0f5c5c;
+  color:#fff;
+  border:none;
+
+  padding:5px 10px;
+  border-radius:8px;
+
+  font-size:11px;
+}
+.cateringWrap{
+  padding:0 16px;
+  margin-top:10px;
+}
+
+/* TOP ROW */
+.cateringRow{
+  display:flex;
+  gap:10px;
+}
+
+/* CARD */
+.cateringCard{
+  flex:1;
+  position:relative;
+  height:140px;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+/* CENTER WRAPPER */
+.cateringCenter{
+  display:flex;
+  justify-content:center;   /* 🔥 center align */
+  margin-top:12px;
+}
+
+/* CENTER CARD SIZE */
+.cateringCard.center{
+  width:70%;   /* 🔥 controls size */
+  height:150px;
+}
+
+/* IMAGE */
+.cateringCard img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* OVERLAY */
+.cateringOverlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  padding:10px;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.7),
+    transparent
+  );
+
+  color:#fff;
+}
+
+/* TITLE */
+.cateringTitle{
+  font-size:14px;
+  font-weight:600;
+}
+
+/* BUTTON */
+.bookNow{
+  margin-top:6px;
+  background:#0f5c5c;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:11px;
+}
+/* SIDE HEADING STYLE */
+.photoHeaderSide{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin:16px;
+  padding-left:10px;
+
+  border-left:4px solid #0f5c5c;   /* 🔥 side line */
+
+  font-size:17px;
+  font-weight:700;
+  color:#222;
+}
+
+/* ICON */
+.photoHeaderSide i{
+  color:#0f5c5c;
+  font-size:16px;
+}
 </style>
 </head>
 
@@ -475,6 +657,31 @@ body{
 
     <div class="priceRow">
       <div class="price">Starting from ₹4000</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="serviceCard">
+
+  <div class="imgSlider">
+    <img src="services/Surprise Room Setup1.webp" class="active">
+     <img src="services/Surprise Room Setup2.webp">
+   <img src="services/Surprise Room Setup3.webp">
+  </div>
+
+  <div class="cardOverlay">
+    <div class="title">Surprise Room Setup</div>
+
+    <div class="tags">
+      <span>Birthday Parties</span>
+      <span>Aniversary Day</span>
+      <span>Suprise</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">Starting from ₹1600</div>
       <button class="bookBtn">Book</button>
     </div>
   </div>
@@ -619,6 +826,115 @@ body{
   </div>
 
 </div>
+
+
+<div class="cateringHeader">
+  <span><i class="fa-solid fa-utensils"></i> CATERING</span>
+  <h2>Services</h2>
+</div>
+
+<div class="cateringWrap">
+
+  <!-- TOP ROW -->
+  <div class="cateringRow">
+    <div class="cateringCard">
+      <img src="services/vegcat1.webp">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">Veg Catering</div>
+        <button class="bookNow">Book Now</button>
+      </div>
+    </div>
+
+    <div class="cateringCard">
+      <img src="services/vegcat2.webp">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">Non-Veg Catering</div>
+        <button class="bookNow">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER CARD -->
+  <div class="cateringCenter">
+    <div class="cateringCard center">
+      <img src="services/vegcat3.webp">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">Veg & Non-Veg Catering</div>
+        <button class="bookNow">Book Now</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="photoHeaderSide">
+  <i class="fa-solid fa-camera"></i>
+  <span>Photography & Videography</span>
+</div>
+
+<div class="serviceList">
+
+ <div class="serviceCard">
+
+  <div class="imgSlider">
+    <img src="services/photo1.webp" class="active">
+    <img src="services/photo2.webp">
+     <img src="services/photo3.webp">
+  </div>
+
+  <div class="cardOverlay">
+    <div class="title">Photo Shoot</div>
+    <div class="tags">
+  <span>Birthday Events</span>
+  <span>Recption</span>
+  <span>Parks</span>
+</div>
+
+    <div class="priceRow">
+      <div class="price">Starting from ₹400</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="serviceCard">
+
+  <div class="videoCard">
+  <video src="services/videoshoot1.mp4" autoplay muted loop playsinline></video>
+</div>
+
+  <div class="cardOverlay">
+    <div class="title">Video Shotting</div>
+
+    <div class="tags">
+      <span>Wedding Shooting</span>
+      <span>Party Shooting</span>
+      <span>Events Shooting</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">Starting from ₹2999</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- NAVBAR -->
 <div class="bottomNav">
