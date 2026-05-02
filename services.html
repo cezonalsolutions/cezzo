@@ -602,8 +602,22 @@ body.popup-open{
 
 .popupTitle{
   margin-left:auto;
+  text-align:right;
+  line-height:1.2;
+}
+
+/* MAIN TITLE */
+.popupTitle span{
+  display:block;
   font-size:16px;
-  font-weight:600;
+  font-weight:700;
+  color:#111;
+}
+
+/* SUB TEXT */
+.popupTitle small{
+  font-size:11px;
+  color:#777;
 }
 
 /* IMAGE SLIDER */
@@ -1361,7 +1375,10 @@ body.popup-open{
   <!-- HEADER -->
   <div class="popupHeader">
     <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup('balloonPopup')"></i>
-    <div class="popupTitle">Balloons Decoration</div>
+    <div class="popupTitle">
+  <span>Balloons Decoration</span>
+  <small>Event Setup Service</small>
+</div>
   </div>
 
   <!-- IMAGE SCROLL -->
