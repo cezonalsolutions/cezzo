@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Outfit',sans-serif;
+  background:#fff;
+  padding-bottom:65px;
+}
+
+/* TOP GAP */
+.topGap{ height:55px; }
+
+/* LOCATION */
+.locationBox{ padding:0 15px; }
+
+.locRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.locRow i{
+  color:#0f9d58;
+  font-size:16px;
+}
+
+.city{
+  font-size:15px;
+  font-weight:600;
+}
+
+.address{
+  font-size:11px;
+  color:#666;
+}
+
+/* 🎥 VIDEO SECTION */
+.videoBox{
+  width:100%;
+  margin:0;              /* ❌ remove side gaps */
+       /* keep only top spacing if needed */
+  border-radius:0;       /* 🔥 remove curve so edges match */
+  overflow:hidden;
+}
+
+.videoBox video{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  object-position: top;   /* 🔥 KEY FIX */
+  display:block;
+}
+
+/* CARDS */
+.serviceList{ padding:10px; }
+
+.serviceCard{
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  margin-bottom:12px;
+}
+
+.serviceCard img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+}
+
+.cardContent{ padding:10px; }
+
+.title{ font-size:14px; font-weight:600; }
+
+.sub{
+  font-size:11px;
+  color:#666;
+  margin-top:3px;
+}
+
+.priceRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:8px;
+}
+
+.price{ font-size:14px; font-weight:700; }
+
+.bookBtn{
+  background:#0f5c5c;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:11px;
+}
+
+/* NAVBAR */
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:58px;
+
+  background:#fff;
+  border-top:1px solid #eee;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.navItem{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  color:#888;
+  font-size:10px;
+}
+
+.navItem i{
+  font-size:20px;
+  margin-bottom:2px;
+}
+
+.navItem span{
+  font-size:10px;
+}
+
+.navItem.active{
+  color:#0f5c5c;
+}
+.topSection{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+}
+
+/* IMAGE BACKGROUND */
+.topBg{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+
+/* CONTENT ABOVE IMAGE */
+.topSection > *:not(.topBg){
+  position:relative;
+  z-index:1;
+}
+</style>
+</head>
+
+<body>
+<div class="topSection">
+  <img src="services/services 1.webp" class="topBg">
+
+<div class="topGap"></div>
+
+<!-- LOCATION -->
+<div class="locationBox">
+  <div class="locRow">
+    <i class="fa-solid fa-location-dot"></i>
+    <div>
+      <div class="city" id="city">Your City</div>
+      <div class="address" id="address">Loading location...</div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- 🎥 VIDEO SECTION -->
+<div class="videoBox">
+  <video autoplay muted loop playsinline>
+    <source src="services/service.webm" type="video/webm">
+  </video>
+</div>
+
+<!-- SERVICES -->
+<div class="serviceList">
+
+  <div class="serviceCard">
+    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622">
+    <div class="cardContent">
+      <div class="title">Birthday Decoration</div>
+      <div class="sub">Balloon + Theme Setup</div>
+      <div class="priceRow">
+        <div class="price">₹1499</div>
+        <button class="bookBtn">Book</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="serviceCard">
+    <img src="https://images.unsplash.com/photo-1555244162-803834f70033">
+    <div class="cardContent">
+      <div class="title">Catering Service</div>
+      <div class="sub">Veg & Non-Veg</div>
+      <div class="priceRow">
+        <div class="price">₹299/person</div>
+        <button class="bookBtn">Book</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVBAR -->
+<div class="bottomNav">
+  <div class="navItem">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
+  </div>
+
+  <div class="navItem active">
+    <i class="fa-solid fa-bell-concierge"></i>
+    <span>Services</span>
+  </div>
+
+  <div class="navItem">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span>Cart</span>
+  </div>
+
+  <div class="navItem">
+    <i class="fa-solid fa-user"></i>
+    <span>Profile</span>
+  </div>
+</div>
+
+<script>
+const fullAddress = localStorage.getItem("savedAddress");
+
+if(fullAddress){
+  const parts = fullAddress.split(",");
+  document.getElementById("city").innerText = parts[1]?.trim() || "Your City";
+  document.getElementById("address").innerText = fullAddress;
+}
+</script>
+
+</body>
+</html>
