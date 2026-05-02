@@ -16,7 +16,11 @@ body{
   background:#fff;
   padding-bottom:65px;
 }
-
+/* 🔒 LOCK BACKGROUND */
+body.popup-open{
+  overflow:hidden;
+  height:100vh;
+}
 /* TOP GAP */
 .topGap{ height:55px; }
 
@@ -555,6 +559,290 @@ body{
   color:#0f5c5c;
   font-size:16px;
 }
+/* FULL PAGE POPUP */
+.popupPage{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#fff;
+  z-index:9999;
+  display:none;
+  overflow-y:auto;
+}
+/* 🔥 HIDE SCROLLBAR (POPUP ONLY) */
+.popupPage{
+  -ms-overflow-style: none;   /* IE + Edge */
+  scrollbar-width: none;      /* Firefox */
+}
+
+.popupPage::-webkit-scrollbar{
+  display:none;               /* Chrome, Safari */
+}
+/* HEADER */
+.popupHeader{
+  position:sticky;
+  top:0;
+  background:#fff;
+
+  display:flex;
+  align-items:center;
+
+  padding:12px 16px;
+  padding-top:55px;
+
+  border-bottom:1px solid #eee;
+}
+
+.closeBtn{
+  font-size:20px;
+  cursor:pointer;
+}
+
+.popupTitle{
+  margin-left:auto;
+  font-size:16px;
+  font-weight:600;
+}
+
+/* IMAGE SLIDER */
+.popupSlider{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+}
+
+.popupSlider::-webkit-scrollbar{
+  display:none;
+}
+
+.popupSlider img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  flex-shrink:0;
+  scroll-snap-align:start;
+}
+
+/* DOTS */
+.dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin:8px 0;
+}
+
+.dots span{
+  width:6px;
+  height:6px;
+  background:#ccc;
+  border-radius:50%;
+}
+
+.dots span.active{
+  background:#0f5c5c;
+}
+
+/* CONTENT */
+.popupContent{
+  padding:16px;
+}
+
+/* PRICE */
+.popupPrice{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+/* SAMPLE */
+.sampleTitle{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.sampleScroll{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-bottom:14px;
+}
+
+.sampleScroll::-webkit-scrollbar{
+  display:none;
+}
+
+.sampleScroll img{
+  width:90px;
+  height:90px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* 🔥 SERVICE INCLUDE TITLE */
+.detailTitle{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+/* 🔥 SERVICE LIST (VERTICAL BOX STYLE) */
+.serviceListText{
+  list-style:none;
+  padding:0;
+  margin:0 0 14px;
+}
+
+/* BOX ITEM */
+.serviceListText li{
+  background:#f5f5f5;
+  border-radius:10px;
+
+  padding:10px 12px;
+  margin-bottom:8px;
+
+  font-size:13px;
+  color:#333;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* ✔ ICON */
+.serviceListText li::before{
+  content:"✔";
+  font-size:12px;
+  color:#0f5c5c;
+}
+
+
+
+/* BUTTON */
+.popupBook{
+  width:100%;
+  margin-top:10px;
+
+  background:#0f5c5c;
+  color:#fff;
+  border:none;
+
+  padding:12px;
+  border-radius:10px;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+.popupBook:active{
+  transform:scale(0.97);
+}
+/* 🔥 ROUND BACK BUTTON */
+.closeBtn{
+  width:36px;
+  height:36px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#f2f2f2;
+  border-radius:50%;
+
+  font-size:16px;
+  color:#333;
+
+  cursor:pointer;
+}
+.popupPrice{
+  display:flex;
+  flex-direction:column;
+
+  font-size:18px;
+  font-weight:700;
+  color:#111;
+  margin-bottom:12px;
+}
+
+.popupPrice span{
+  font-size:12px;
+  font-weight:500;
+  color:#777;
+}
+
+/* 🔥 TRUST SECTION */
+.trustRow{
+  display:flex;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+/* ITEM BOX */
+.trustItem{
+  flex:1;
+
+  background:#f7f7f7;
+  border-radius:10px;
+
+  padding:10px 6px;
+
+  text-align:center;
+
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* ICON */
+.trustItem i{
+  font-size:18px;
+  color:#0f5c5c;
+  margin-bottom:5px;
+}
+
+/* TEXT */
+.trustItem span{
+  display:block;
+  font-size:11px;
+  color:#555;
+}
+
+/* 🔥 SIDE HEADING */
+.serviceTypeHeader{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin-top:12px;
+  margin-bottom:8px;
+
+  padding-left:10px;
+  border-left:4px solid #0f5c5c;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+.serviceTypeHeader i{
+  color:#0f5c5c;
+  font-size:14px;
+}
+
+/* 🔥 TAGS */
+.serviceTags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.serviceTags span{
+  background:#f5f5f5;
+  border-radius:20px;
+
+  padding:6px 12px;
+  font-size:12px;
+
+  color:#333;
+}
 </style>
 </head>
 
@@ -589,7 +877,7 @@ body{
 <!-- SERVICES -->
 <div class="serviceList">
 
- <div class="serviceCard">
+ <div class="serviceCard" onclick="openPopup('balloonPopup')">
 
   <div class="imgSlider">
     <img src="services/ballons1.webp" class="active">
@@ -598,7 +886,7 @@ body{
   </div>
 
   <div class="cardOverlay">
-    <div class="title">Balloons Decoration</div>
+    <div class="title">Ballons Decoration</div>
     <div class="tags">
   <span>Birthday Parties</span>
   <span>Marriage Events</span>
@@ -958,7 +1246,92 @@ body{
     <span>Profile</span>
   </div>
 </div>
+<div id="balloonPopup" class="popupPage">
 
+  <!-- HEADER -->
+  <div class="popupHeader">
+    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup('balloonPopup')"></i>
+    <div class="popupTitle">Balloons Decoration</div>
+  </div>
+
+  <!-- IMAGE SCROLL -->
+  <div class="popupSlider" id="slider1">
+    <img src="services/ballons1.webp">
+    <img src="services/ballon2.webp">
+    <img src="services/ballon3.webp">
+    <img src="services/ballon4.webp">
+    <img src="services/ballon5.webp">
+    <img src="services/ballon6.webp">
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots" id="dots1"></div>
+
+  <!-- CONTENT -->
+  <div class="popupContent">
+
+    <div class="popupPrice">
+  <span>Starting from</span>
+  ₹1499
+</div>
+
+<div class="trustRow">
+
+  <div class="trustItem">
+  <i class="fa-solid fa-shield-halved"></i>
+  <span>100% Secured</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-circle-check"></i>
+  <span>Verified Services</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-thumbs-up"></i>
+  <span>Trusted Quality</span>
+</div>
+
+</div>
+    <!-- SAMPLE -->
+    <div class="sampleTitle">Our Samples</div>
+
+    <div class="sampleScroll">
+      <img src="services/ballons1.webp">
+      <img src="services/ballon2.webp">
+      <img src="services/ballon3.webp">
+      <img src="services/ballon4.webp">
+      <img src="services/ballon5.webp">
+    </div>
+
+    <!-- DETAILS -->
+    <div class="detailTitle">Service Includes :</div>
+
+    <ul class="serviceListText">
+      <li>100+ Balloons Setup</li>
+      <li>All Shapes Available</li>
+      <li>Theme Decoration</li>
+      <li>Wall & Ceiling Setup</li>
+      <li>Name Customization</li>
+      <li>Quick Installation</li>
+    </ul>
+<div class="serviceTypeHeader">
+  <i class="fa-solid fa-tags"></i>
+  <span>Service Type</span>
+</div>
+
+<div class="serviceTags">
+  <span>Birthday Event</span>
+  <span>Marriage</span>
+  <span>Anniversary</span>
+  <span>House Party</span>
+  <span>Baby Shower</span>
+</div>
+    <button class="popupBook">Book Now</button>
+
+  </div>
+
+</div>
 <script>
 const fullAddress = localStorage.getItem("savedAddress");
 
@@ -987,6 +1360,44 @@ document.getElementById("homeBtn").addEventListener("click", function(){
   window.location.href = "index.html";
 
 });
+function openPopup(id){
+  document.getElementById(id).style.display = "block";
+
+  // 🔥 LOCK BACKGROUND
+  document.body.classList.add("popup-open");
+}
+
+function closePopup(id){
+  document.getElementById(id).style.display = "none";
+
+  // 🔥 UNLOCK BACKGROUND
+  document.body.classList.remove("popup-open");
+}
+
+/* DOTS INIT (call once per popup) */
+function initSlider(sliderId, dotsId){
+  const slider = document.getElementById(sliderId);
+  const dots = document.getElementById(dotsId);
+
+  const images = slider.querySelectorAll("img");
+
+  dots.innerHTML = "";
+
+  images.forEach((_, i) => {
+    let dot = document.createElement("span");
+    if(i === 0) dot.classList.add("active");
+    dots.appendChild(dot);
+  });
+
+  slider.addEventListener("scroll", () => {
+    let index = Math.round(slider.scrollLeft / slider.clientWidth);
+    dots.querySelectorAll("span").forEach(d => d.classList.remove("active"));
+    dots.children[index]?.classList.add("active");
+  });
+}
+
+/* INIT */
+initSlider("slider1","dots1");
 </script>
 
 </body>
