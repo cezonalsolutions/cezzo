@@ -6828,9 +6828,11 @@ if(sessionStorage.getItem("skipIntro") === "true"){
     splash.style.display = "none";
     main.style.display = "none";
 
-    home.style.display = "block";
+    // 🔥 CHANGE HERE
+    home.style.display = "none";              // ❌ don't show home
+    optionScreen.style.display = "block";     // ✅ show option screen
 
-    // restore saved address in navbar
+    // restore saved address
     cityName.innerText =
       localStorage.getItem("savedCity") || "Your Location";
 
@@ -15038,6 +15040,30 @@ document.addEventListener("click", (e)=>{
 });
 document.getElementById("cizooBtn1").onclick = function() {
   window.location.href = "services.html";
+};
+
+window.onload = function(){
+
+  const skip = sessionStorage.getItem("skipIntro");
+
+  if(skip === "true"){
+
+    // ✅ hide splash
+    const splash = document.getElementById("splash");
+    if(splash) splash.style.display = "none";
+
+    // ✅ hide loading/main screen
+    const main = document.getElementById("main");
+    if(main) main.style.display = "none";
+
+    // ✅ show option screen
+    const option = document.getElementById("optionScreen");
+    if(option) option.style.display = "block";
+
+    // 🔥 optional: scroll top
+    window.scrollTo(0,0);
+  }
+
 };
 </script>
 </body>
