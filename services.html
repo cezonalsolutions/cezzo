@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
 
@@ -61,50 +62,128 @@ body{
 }
 
 /* CARDS */
-.serviceList{ padding:10px; }
-
 .serviceCard{
+  position:relative;
+  height:180px;              /* 🔥 full card height */
   border-radius:14px;
   overflow:hidden;
-  background:#fff;
-  box-shadow:0 3px 10px rgba(0,0,0,0.08);
   margin-bottom:12px;
 }
 
-.serviceCard img{
+/* IMAGE SLIDER */
+.imgSlider{
+  position:absolute;
   width:100%;
-  height:140px;
-  object-fit:cover;
+  height:100%;
 }
 
-.cardContent{ padding:10px; }
+.imgSlider img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 
-.title{ font-size:14px; font-weight:600; }
+  opacity:0;
+  transition:opacity 0.6s ease;
+}
+
+.imgSlider img.active{
+  opacity:1;
+}
+/* OVERLAY LAYOUT FIX */
+.cardOverlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:100%;   /* 🔥 full height control */
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end; /* push content to bottom */
+
+  padding:12px;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.05)
+  );
+
+  color:#fff;
+  box-sizing:border-box;
+}
+
+/* TEXT */
+.title{
+    font-family:'Playfair Display', serif;
+
+  font-size:16px;
+  font-weight:700;
+}
 
 .sub{
-  font-size:11px;
-  color:#666;
-  margin-top:3px;
+  font-size:12px;
+  margin-top:2px;
+  color:#ddd;
 }
 
+/* PRICE + BUTTON ROW */
 .priceRow{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-top:8px;
+
+  margin-top:10px;
 }
 
-.price{ font-size:14px; font-weight:700; }
+/* PRICE */
+.price{
+  font-size:15px;
+  font-weight:700;
+}
 
+/* BUTTON FIX */
 .bookBtn{
   background:#0f5c5c;
   color:#fff;
   border:none;
-  padding:6px 12px;
-  border-radius:8px;
-  font-size:11px;
+
+  padding:6px 14px;
+  border-radius:20px;   /* 🔥 pill shape (better UI) */
+
+  font-size:12px;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  min-width:60px;       /* 🔥 prevents shrink */
+  height:28px;
+
+  cursor:pointer;
 }
 
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:6px;
+}
+
+.tags span{
+  font-size:10px;
+  padding:4px 8px;
+
+  background:rgba(255,255,255,0.2); /* 🔥 glass look */
+  color:#fff;
+
+  border-radius:20px;
+  backdrop-filter:blur(4px);
+
+  border:1px solid rgba(255,255,255,0.3);
+}
 /* NAVBAR */
 .bottomNav{
   position:fixed;
@@ -140,9 +219,7 @@ body{
   font-size:10px;
 }
 
-.navItem.active{
-  color:#0f5c5c;
-}
+
 .topSection{
   position:relative;
   width:100%;
@@ -184,6 +261,7 @@ body{
   border-radius:2px;
   margin-top:6px;
 }
+
 </style>
 </head>
 
@@ -218,41 +296,119 @@ body{
 <!-- SERVICES -->
 <div class="serviceList">
 
-  <div class="serviceCard">
-    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622">
-    <div class="cardContent">
-      <div class="title">Birthday Decoration</div>
-      <div class="sub">Balloon + Theme Setup</div>
-      <div class="priceRow">
-        <div class="price">₹1499</div>
-        <button class="bookBtn">Book</button>
-      </div>
-    </div>
+ <div class="serviceCard">
+
+  <div class="imgSlider">
+    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622" class="active">
+    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce">
+    <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063">
   </div>
 
-  <div class="serviceCard">
-    <img src="https://images.unsplash.com/photo-1555244162-803834f70033">
-    <div class="cardContent">
-      <div class="title">Catering Service</div>
-      <div class="sub">Veg & Non-Veg</div>
-      <div class="priceRow">
-        <div class="price">₹299/person</div>
-        <button class="bookBtn">Book</button>
-      </div>
+  <div class="cardOverlay">
+    <div class="title">Balloons Decoration</div>
+    <div class="tags">
+  <span>Birthday Parties</span>
+  <span>Marriage Events</span>
+  <span>Decorations</span>
+</div>
+
+    <div class="priceRow">
+      <div class="price">₹1499</div>
+      <button class="bookBtn">Book</button>
     </div>
   </div>
 
 </div>
 
+<div class="serviceCard">
+
+  <div class="imgSlider">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9" class="active">
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+    <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+  </div>
+
+  <div class="cardOverlay">
+    <div class="title">Flower Decoration</div>
+
+    <div class="tags">
+      <span>Wedding Stage</span>
+      <span>Mandap Setup</span>
+      <span>Fresh Flowers</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">₹2999</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="serviceCard">
+
+  <div class="imgSlider">
+    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" class="active">
+    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
+    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176">
+  </div>
+
+  <div class="cardOverlay">
+    <div class="title">Party Decoration</div>
+
+    <div class="tags">
+      <span>Birthday Parties</span>
+      <span>Theme Setup</span>
+      <span>Balloons</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">₹1999</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="serviceCard">
+
+  <div class="imgSlider">
+    <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" class="active">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745">
+  </div>
+
+  <div class="cardOverlay">
+    <div class="title">LED Decoration</div>
+
+    <div class="tags">
+      <span>Lighting Setup</span>
+      <span>Stage Lights</span>
+      <span>Outdoor Decor</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">₹2499</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+</div>
+
 <!-- NAVBAR -->
 <div class="bottomNav">
-  <div class="navItem">
+  <div class="navItem" id="homeBtn">
     <i class="fa-solid fa-house"></i>
     <span>Home</span>
   </div>
 
   <div class="navItem active">
-    <i class="fa-solid fa-bell-concierge"></i>
+    <i class="fa-solid fa-screwdriver-wrench"></i>
     <span>Services</span>
   </div>
 
@@ -275,6 +431,26 @@ if(fullAddress){
   document.getElementById("city").innerText = parts[1]?.trim() || "Your City";
   document.getElementById("address").innerText = fullAddress;
 }
+
+document.querySelectorAll(".imgSlider").forEach(slider => {
+  let imgs = slider.querySelectorAll("img");
+  let index = 0;
+
+  setInterval(() => {
+    imgs[index].classList.remove("active");
+    index = (index + 1) % imgs.length;
+    imgs[index].classList.add("active");
+  }, 2500);
+});
+document.getElementById("homeBtn").addEventListener("click", function(){
+
+  // 🔥 skip intro next time
+  sessionStorage.setItem("skipIntro", "true");
+
+  // 🔥 redirect to home page
+  window.location.href = "index.html";
+
+});
 </script>
 
 </body>
