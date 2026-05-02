@@ -275,6 +275,104 @@ body{
   object-fit:cover;
   display:block;
 }
+.makeupHeader{
+  padding:16px;
+  margin-top:10px;
+}
+
+/* stylish heading */
+.makeupHeader h2{
+  font-size:18px;
+  font-weight:700;
+  font-family:'Poppins', sans-serif;
+
+  display:inline-block;
+  position:relative;
+  color:#222;
+}
+
+/* underline accent */
+.makeupHeader h2::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+
+  width:100%;
+  height:3px;
+
+  background:linear-gradient(to right, #ff7eb3, #ff758c);
+  border-radius:2px;
+}
+
+/* GRID */
+.makeupGrid{
+  display:flex;
+  gap:12px;
+  padding:0 16px;
+  margin-top:10px;
+}
+
+/* CARD */
+.makeupCard{
+  flex:1;
+  position:relative;
+  height:180px;
+
+  border-radius:14px;
+  overflow:hidden;
+}
+
+/* VIDEO */
+.makeupCard video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* OVERLAY */
+.makeupContent{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+
+  padding:10px;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.7),
+    transparent
+  );
+
+  color:#fff;
+}
+
+/* TITLE */
+.makeupTitle{
+  font-size:14px;
+  font-weight:600;
+}
+
+/* BUTTON */
+.bookNow{
+  margin-top:6px;
+
+  background:#0f5c5c;
+  color:#fff;
+  border:none;
+
+  padding:5px 10px;
+  border-radius:8px;
+
+  font-size:11px;
+}
+.makeupCard video{
+  transform:scale(1.05);
+}
+.makeupCard:nth-child(2) .bookNow{
+  background:#ff4d6d;
+}
 </style>
 </head>
 
@@ -452,7 +550,7 @@ body{
 </div>
 
   <div class="cardOverlay">
-    <div class="title">Reception</div>
+    <div class="title">Reception Event</div>
 
     <div class="tags">
       <span>Wedding Stage</span>
@@ -493,6 +591,32 @@ body{
   </div>
 
 </div>
+
+</div>
+<div class="makeupHeader">
+  <h2>Makeup Services</h2>
+</div>
+<div class="makeupGrid">
+
+  <!-- MEN -->
+  <div class="makeupCard">
+    <video src="services/menmakep.mp4 " autoplay muted loop playsinline></video>
+
+    <div class="makeupContent">
+      <div class="makeupTitle">Men Makeup</div>
+      <button class="bookNow">Book Now</button>
+    </div>
+  </div>
+
+  <!-- FEMALE -->
+  <div class="makeupCard">
+    <video src="services/feamlemakeup.mp4" autoplay muted loop playsinline></video>
+
+    <div class="makeupContent">
+      <div class="makeupTitle">Female Makeup</div>
+      <button class="bookNow">Book Now</button>
+    </div>
+  </div>
 
 </div>
 
