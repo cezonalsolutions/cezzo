@@ -1008,6 +1008,106 @@ body.popup-open{
 .flowerLoader span:nth-child(2){ animation-delay:0.2s; }
 .flowerLoader span:nth-child(3){ animation-delay:0.4s; }
 .flowerLoader span:nth-child(4){ animation-delay:0.6s; }
+
+/* 🔥 SIDE HEADING */
+.whatGetHeader{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin-top:14px;
+  margin-bottom:8px;
+
+  padding-left:10px;
+  border-left:4px solid #0f5c5c;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+.whatGetHeader i{
+  color:#0f5c5c;
+}
+
+/* 🔥 LIST */
+.whatGetList{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* ITEM */
+.whatItem{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  background:#f5f5f5;
+  padding:10px;
+
+  border-radius:10px;
+  font-size:13px;
+  color:#333;
+}
+
+/* ICON */
+.whatItem i{
+  color:#0f5c5c;
+}
+.whatItem{
+  background:#eef6f6;
+}
+
+/* 🔥 HEADER CONTAINER */
+.whatGetHeaderNew{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin-top:14px;
+  margin-bottom:10px;
+}
+
+/* ICON BOX */
+.iconBox{
+  width:32px;
+  height:32px;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+  font-size:14px;
+}
+
+/* TEXT */
+.textBox span{
+  font-size:15px;
+  font-weight:700;
+  color:#111;
+}
+
+/* UNDERLINE ACCENT */
+.textBox{
+  position:relative;
+}
+
+.textBox::after{
+  content:"";
+  position:absolute;
+  bottom:-4px;
+  left:0;
+
+  width:40px;
+  height:3px;
+
+  background:#0f5c5c;
+  border-radius:2px;
+}
 </style>
 </head>
 
@@ -1543,6 +1643,22 @@ body.popup-open{
   <span>Anniversary</span>
   <span>House Party</span>
   <span>Baby Shower</span>
+</div>
+
+<div class="whatGetHeaderNew">
+  <div class="iconBox">
+    <i class="fa-solid fa-gift"></i>
+  </div>
+  <div class="textBox">
+    <span>Package Includes</span>
+  </div>
+</div>
+
+<div class="whatGetList">
+  <div class="whatItem"><i class="fa-solid fa-utensils"></i> Food Arrangement</div>
+  <div class="whatItem"><i class="fa-solid fa-music"></i> Sound System</div>
+  <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
+  <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
 </div>
     <button class="popupBook">Book Now</button>
 
