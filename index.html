@@ -4888,19 +4888,21 @@ scroll-behavior:smooth;
 
   </div>
 
+  <a href="services.html" style="text-decoration:none; color:inherit;">
   <div class="optCard" id="cizooBtn1">
 
-  <img src="cat/services 1.webp" class="img1 active">
-  <img src="cat/services2.webp" class="img2">
+    <img src="cat/services 1.webp" class="img1 active">
+    <img src="cat/services2.webp" class="img2">
 
-  <div class="cardIcon">
-   <i class="fa-solid fa-bell-concierge"></i>  
-  </div> 
+    <div class="cardIcon">
+      <i class="fa-solid fa-bell-concierge"></i>  
+    </div> 
 
-  <div class="optLabel">Services</div>
-  <div class="optSub">Events Bookings</div>
+    <div class="optLabel">Services</div>
+    <div class="optSub">Events Bookings</div>
 
-</div>
+  </div>
+</a>
 
   <div class="optCard" id="cizooBtn2">
     <img src="cat/cleaning.webp">
@@ -15034,6 +15036,9 @@ document.addEventListener("click", (e)=>{
     resultsBox.style.display = "none";
   }
 });
+document.getElementById("cizooBtn1").onclick = function() {
+  window.location.href = "services.html";
+};
 </script>
 </body>
 </html>
