@@ -22,7 +22,7 @@ body.popup-open{
   height:100vh;
 }
 /* TOP GAP */
-.topGap{ height:55px; }
+.topGap{ height:50px; }
 
 /* LOCATION */
 .locationBox{ padding:0 15px; }
@@ -1108,6 +1108,74 @@ body.popup-open{
   background:#0f5c5c;
   border-radius:2px;
 }
+/* 🔥 GLOBAL FIX (important) */
+body{
+  overflow-x:hidden;   /* ❌ remove side scroll */
+}
+
+/* 🔥 FOOTER */
+.footerBlock{
+  width:100%;                /* 🔥 ensure full width */
+  box-sizing:border-box;     /* include padding inside width */
+
+  margin-top:20px;
+  padding:14px 16px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  border-top:1px solid #eee;
+  background:#fafafa;
+
+  overflow:hidden;           /* 🔥 prevent overflow */
+}
+
+/* LEFT */
+.footerLeft{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  min-width:0;               /* 🔥 prevents overflow */
+}
+
+.footerIcon{
+  font-size:18px;
+  color:#0f5c5c;
+}
+
+.footerName{
+  font-size:16px;
+  font-weight:700;
+  color:#111;
+}
+
+/* RIGHT */
+.footerRight{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+
+  min-width:0;               /* 🔥 important */
+}
+
+/* ROW */
+.footerRow{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  font-size:11px;
+  color:#555;
+
+  white-space:nowrap;        /* 🔥 prevent breaking */
+}
+
+.footerRow i{
+  font-size:12px;
+  color:#0f5c5c;
+}
 </style>
 </head>
 
@@ -1166,7 +1234,8 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('flowerPopup')">
+
 
   <div class="imgSlider">
     <img src="services/flowers1.webp" class="active">
@@ -1191,7 +1260,7 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('ledPopup')">
 
   <div class="imgSlider">
     <img src="services/led1.webp" class="active">
@@ -1216,7 +1285,7 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('housewarmPopup')">
 
   <div class="imgSlider">
     <img src="services/housewarm1.webp" class="active">
@@ -1240,7 +1309,8 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('templePopup')">
+
 
   <div class="imgSlider">
     <img src="services/temples1.webp" class="active">
@@ -1263,7 +1333,7 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('suprisePopup')">
 
   <div class="imgSlider">
     <img src="services/Surprise Room Setup1.webp" class="active">
@@ -1289,7 +1359,7 @@ body.popup-open{
 </div>
 
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('partydecPopup')">
 
   <div class="imgSlider">
     <img src="services/party1.webp" class="active">
@@ -1329,7 +1399,7 @@ body.popup-open{
 <!-- SERVICES 2 -->
 <div class="serviceList">
 
- <div class="serviceCard">
+ <div class="serviceCard" onclick="openPopup('marriagePopup')">
 
   <div class="videoCard">
   <video src="services/wedding video.mp4" autoplay muted loop playsinline></video>
@@ -1350,7 +1420,7 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('receptionPopup')">
 
  <div class="videoCard">
   <video src="services/recption event.mp4" autoplay muted loop playsinline></video>
@@ -1376,7 +1446,7 @@ body.popup-open{
 
 
 
-<div class="serviceCard">
+<div class="serviceCard" onclick="openPopup('celebrationsPopup')">
 
   <div class="videoCard">
   <video src="services/party.mp4" autoplay muted loop playsinline></video>
@@ -1406,7 +1476,7 @@ body.popup-open{
 <div class="makeupGrid">
 
   <!-- MEN -->
-  <div class="makeupCard">
+  <div class="makeupCard" onclick="openPopup('menmakeupPopup')">
     <video src="services/menmakep.mp4 " autoplay muted loop playsinline></video>
 
     <div class="makeupContent">
@@ -1416,7 +1486,7 @@ body.popup-open{
   </div>
 
   <!-- FEMALE -->
-  <div class="makeupCard">
+ <div class="makeupCard" onclick="openPopup('femalemakeupPopup')">
     <video src="services/feamlemakeup.mp4" autoplay muted loop playsinline></video>
 
     <div class="makeupContent">
@@ -1437,7 +1507,7 @@ body.popup-open{
 
   <!-- TOP ROW -->
   <div class="cateringRow">
-    <div class="cateringCard">
+    <div class="cateringCard" onclick="openPopup('vegPopup')">
       <img src="services/vegcat1.webp">
       <div class="cateringOverlay">
         <div class="cateringTitle">Veg Catering</div>
@@ -1445,7 +1515,7 @@ body.popup-open{
       </div>
     </div>
 
-    <div class="cateringCard">
+       <div class="cateringCard" onclick="openPopup('nonvegPopup')">
       <img src="services/vegcat2.webp">
       <div class="cateringOverlay">
         <div class="cateringTitle">Non-Veg Catering</div>
@@ -1456,7 +1526,7 @@ body.popup-open{
 
   <!-- CENTER CARD -->
   <div class="cateringCenter">
-    <div class="cateringCard center">
+    <div class="cateringCard center" onclick="openPopup('bothvnPopup')">
       <img src="services/vegcat3.webp">
       <div class="cateringOverlay">
         <div class="cateringTitle">Veg & Non-Veg Catering</div>
@@ -1476,7 +1546,7 @@ body.popup-open{
 
 <div class="serviceList">
 
- <div class="serviceCard">
+ <div class="serviceCard" onclick="openPopup('photoPopup')">
 
   <div class="imgSlider">
     <img src="services/photo1.webp" class="active">
@@ -1500,7 +1570,7 @@ body.popup-open{
 
 </div>
 
-<div class="serviceCard">
+ <div class="serviceCard" onclick="openPopup('videoPopup')">
 
   <div class="videoCard">
   <video src="services/videoshoot1.mp4" autoplay muted loop playsinline></video>
@@ -1558,11 +1628,13 @@ body.popup-open{
     <span>Profile</span>
   </div>
 </div>
+
+
 <div id="balloonPopup" class="popupPage">
 
   <!-- HEADER -->
   <div class="popupHeader">
-    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup('balloonPopup')"></i>
+<i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
     <div class="popupTitle">
   <span>Balloons Decoration</span>
   <small>Event Setup Service</small>
@@ -1665,6 +1737,242 @@ body.popup-open{
   </div>
 
 </div>
+
+
+<!-- 2nd popup -->
+
+
+<div id="flowerPopup" class="popupPage">
+
+  <!-- HEADER -->
+  <div class="popupHeader">
+    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
+    <div class="popupTitle">
+  <span>Flowers Decoration</span>
+  <small>Event Setup Service</small>
+</div>
+  </div>
+
+  <!-- IMAGE SCROLL -->
+  <div class="popupSlider" id="slider1">
+    <img src="services/flowers1.webp">
+    <img src="services/flowers2.webp">
+    <img src="services/flowers3.webp">
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots" id="dots1"></div>
+
+  <!-- CONTENT -->
+  <div class="popupContent">
+
+    <div class="popupPrice">
+  <span>Starting from</span>
+  ₹1499
+</div>
+
+<div class="trustRow">
+
+  <div class="trustItem">
+  <i class="fa-solid fa-shield-halved"></i>
+  <span>100% Secured</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-circle-check"></i>
+  <span>Verified Services</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-thumbs-up"></i>
+  <span>Trusted Quality</span>
+</div>
+
+</div>
+    <!-- SAMPLE -->
+    <div class="sampleTitle">Our Samples</div>
+
+    <div class="sampleScroll">
+  <img src="sample1/25.webp" onclick="openImage(this)">
+ <img src="sample1/24.webp" onclick="openImage(this)">
+ <img src="sample1/23.webp" onclick="openImage(this)">
+ <img src="sample1/22.webp" onclick="openImage(this)">
+ <img src="sample1/23.webp" onclick="openImage(this)">
+ <img src="sample1/22.webp" onclick="openImage(this)">
+ <img src="sample1/21.webp" onclick="openImage(this)">
+ <img src="sample1/20.webp" onclick="openImage(this)">
+ <img src="sample1/19.webp" onclick="openImage(this)">
+ <img src="sample1/18.webp" onclick="openImage(this)">
+ <img src="sample1/17.webp" onclick="openImage(this)">
+ <img src="sample1/16.webp" onclick="openImage(this)">
+ <img src="sample1/15.webp" onclick="openImage(this)">
+ <img src="sample1/14.webp" onclick="openImage(this)">
+ <img src="sample1/13.webp" onclick="openImage(this)">
+ <img src="sample1/12.webp" onclick="openImage(this)">
+ <img src="sample1/11.webp" onclick="openImage(this)">
+</div>
+
+    <!-- DETAILS -->
+    <div class="detailTitle">Service Includes :</div>
+
+    <ul class="serviceListText">
+      <li>100+ Balloons Setup</li>
+      <li>All Shapes Available</li>
+      <li>Theme Decoration</li>
+      <li>Wall & Ceiling Setup</li>
+      <li>Name Customization</li>
+      <li>Quick Installation</li>
+    </ul>
+<div class="serviceTypeHeader">
+  <i class="fa-solid fa-tags"></i>
+  <span>Service Type</span>
+</div>
+
+<div class="serviceTags">
+  <span>Birthday Event</span>
+  <span>Marriage</span>
+  <span>Anniversary</span>
+  <span>House Party</span>
+  <span>Baby Shower</span>
+</div>
+
+<div class="whatGetHeaderNew">
+  <div class="iconBox">
+    <i class="fa-solid fa-gift"></i>
+  </div>
+  <div class="textBox">
+    <span>Package Includes</span>
+  </div>
+</div>
+
+<div class="whatGetList">
+  <div class="whatItem"><i class="fa-solid fa-utensils"></i> Food Arrangement</div>
+  <div class="whatItem"><i class="fa-solid fa-music"></i> Sound System</div>
+  <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
+  <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
+</div>
+    <button class="popupBook">Book Now</button>
+
+  </div>
+
+</div>
+
+
+<!--3rd popup-->
+
+
+<div id="ledPopup" class="popupPage">
+
+  <!-- HEADER -->
+  <div class="popupHeader">
+    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
+    <div class="popupTitle">
+  <span>Flowers Decoration</span>
+  <small>Event Setup Service</small>
+</div>
+  </div>
+
+  <!-- IMAGE SCROLL -->
+  <div class="popupSlider" id="slider1">
+    <img src="services/led1.webp">
+    <img src="services/led2.webp">
+    <img src="services/led3.webp">
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots" id="dots1"></div>
+
+  <!-- CONTENT -->
+  <div class="popupContent">
+
+    <div class="popupPrice">
+  <span>Starting from</span>
+  ₹1499
+</div>
+
+<div class="trustRow">
+
+  <div class="trustItem">
+  <i class="fa-solid fa-shield-halved"></i>
+  <span>100% Secured</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-circle-check"></i>
+  <span>Verified Services</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-thumbs-up"></i>
+  <span>Trusted Quality</span>
+</div>
+
+</div>
+    <!-- SAMPLE -->
+    <div class="sampleTitle">Our Samples</div>
+
+    <div class="sampleScroll">
+  <img src="sample1/26.webp" onclick="openImage(this)">
+ <img src="sample1/27.webp" onclick="openImage(this)">
+ <img src="sample1/28.webp" onclick="openImage(this)">
+ <img src="sample1/29.webp" onclick="openImage(this)">
+ <img src="sample1/30.webp" onclick="openImage(this)">
+ <img src="sample1/31.webp" onclick="openImage(this)">
+ <img src="sample1/32.webp" onclick="openImage(this)">
+ <img src="sample1/33.webp" onclick="openImage(this)">
+ <img src="sample1/34.webp" onclick="openImage(this)">
+ <img src="sample1/35.webp" onclick="openImage(this)">
+ <img src="sample1/36.webp" onclick="openImage(this)">
+
+</div>
+
+    <!-- DETAILS -->
+    <div class="detailTitle">Service Includes :</div>
+
+    <ul class="serviceListText">
+      <li>100+ Balloons Setup</li>
+      <li>All Shapes Available</li>
+      <li>Theme Decoration</li>
+      <li>Wall & Ceiling Setup</li>
+      <li>Name Customization</li>
+      <li>Quick Installation</li>
+    </ul>
+<div class="serviceTypeHeader">
+  <i class="fa-solid fa-tags"></i>
+  <span>Service Type</span>
+</div>
+
+<div class="serviceTags">
+  <span>Birthday Event</span>
+  <span>Marriage</span>
+  <span>Anniversary</span>
+  <span>House Party</span>
+  <span>Baby Shower</span>
+</div>
+
+<div class="whatGetHeaderNew">
+  <div class="iconBox">
+    <i class="fa-solid fa-gift"></i>
+  </div>
+  <div class="textBox">
+    <span>Package Includes</span>
+  </div>
+</div>
+
+<div class="whatGetList">
+  <div class="whatItem"><i class="fa-solid fa-utensils"></i> Food Arrangement</div>
+  <div class="whatItem"><i class="fa-solid fa-music"></i> Sound System</div>
+  <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
+  <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
+</div>
+    <button class="popupBook">Book Now</button>
+
+  </div>
+
+</div>
+
+
+
 <div id="imgViewer" class="imgViewer">
 
   <i class="fa-solid fa-xmark imgClose" onclick="closeImage()"></i>
@@ -1679,6 +1987,32 @@ body.popup-open{
     <span></span>
     <span></span>
   </div>
+</div>
+
+
+<div class="footerBlock">
+
+  <!-- LEFT -->
+  <div class="footerLeft">
+    <i class="fa-solid fa-bag-shopping footerIcon"></i>
+    <div class="footerName">CEZZO</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="footerRight">
+
+    <div class="footerRow">
+      <i class="fa-regular fa-clock"></i>
+      <span>Everything in Minutes</span>
+    </div>
+
+    <div class="footerRow">
+      <i class="fa-solid fa-heart"></i>
+      <span>Made with ❤️ in India</span>
+    </div>
+
+  </div>
+
 </div>
 <script>
 const fullAddress = localStorage.getItem("savedAddress");
@@ -1802,6 +2136,14 @@ document.getElementById("viewerSlider").addEventListener("click", function(e){
 window.addEventListener("load", function(){
   document.getElementById("appLoader").style.display = "none";
 });
+function closePopup(el){
+  const popup = el.closest(".popupPage");
+  if(popup){
+    popup.style.display = "none";
+  }
+
+  document.body.style.overflow = "";
+}
 </script>
 
 </body>
