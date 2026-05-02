@@ -52,7 +52,9 @@ body{
   border-radius:0;       /* 🔥 remove curve so edges match */
   overflow:hidden;
 }
-
+.serviceList{
+  padding:0 16px;   /* 🔥 left & right gap */
+}
 .videoBox video{
   width:100%;
   height:180px;
@@ -261,7 +263,18 @@ body{
   border-radius:2px;
   margin-top:6px;
 }
+.videoCard{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
 
+.videoCard video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 </style>
 </head>
 
@@ -299,9 +312,9 @@ body{
  <div class="serviceCard">
 
   <div class="imgSlider">
-    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622" class="active">
-    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce">
-    <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063">
+    <img src="services/ballons1.webp" class="active">
+    <img src="services/ballon2.webp">
+     <img src="services/ballon3.webp">
   </div>
 
   <div class="cardOverlay">
@@ -313,7 +326,7 @@ body{
 </div>
 
     <div class="priceRow">
-      <div class="price">₹1499</div>
+      <div class="price">Starting from ₹1499</div>
       <button class="bookBtn">Book</button>
     </div>
   </div>
@@ -323,9 +336,9 @@ body{
 <div class="serviceCard">
 
   <div class="imgSlider">
-    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9" class="active">
-    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
-    <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+    <img src="services/flowers1.webp" class="active">
+    <img src="services/flowers1.webp">
+    <img src="services/flowers2.webp">
   </div>
 
   <div class="cardOverlay">
@@ -338,7 +351,7 @@ body{
     </div>
 
     <div class="priceRow">
-      <div class="price">₹2999</div>
+      <div class="price">Starting from ₹2999</div>
       <button class="bookBtn">Book</button>
     </div>
   </div>
@@ -348,13 +361,13 @@ body{
 <div class="serviceCard">
 
   <div class="imgSlider">
-    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" class="active">
-    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329">
-    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176">
+    <img src="services/led1.webp" class="active">
+     <img src="services/led2.webp">
+   <img src="services/led3.webp">
   </div>
 
   <div class="cardOverlay">
-    <div class="title">Party Decoration</div>
+    <div class="title">LED Decoration</div>
 
     <div class="tags">
       <span>Birthday Parties</span>
@@ -363,7 +376,7 @@ body{
     </div>
 
     <div class="priceRow">
-      <div class="price">₹1999</div>
+      <div class="price">Starting from ₹4000</div>
       <button class="bookBtn">Book</button>
     </div>
   </div>
@@ -374,13 +387,98 @@ body{
 <div class="serviceCard">
 
   <div class="imgSlider">
-    <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" class="active">
-    <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
-    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745">
+    <img src="services/party1.webp" class="active">
+    <img src="services/party2 (1).webp">
+    <img src="services/party3 (1).webp">
   </div>
 
   <div class="cardOverlay">
-    <div class="title">LED Decoration</div>
+    <div class="title">Party Decoration</div>
+
+    <div class="tags">
+      <span>Lighting Setup</span>
+      <span>Stage Lights</span>
+      <span>Outdoor Decor</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">₹2499</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+<div class="sectionHeader">
+  <h2>Event Booking</h2>
+  <div class="line"></div>
+</div>
+</div>
+
+</div>
+<div class="sectionHeader">
+  <h2>Event Booking</h2>
+  <div class="line"></div>
+</div>
+</div>
+
+
+
+<!-- SERVICES 2 -->
+<div class="serviceList">
+
+ <div class="serviceCard">
+
+  <div class="videoCard">
+  <video src="services/wedding video.mp4" autoplay muted loop playsinline></video>
+</div>
+  <div class="cardOverlay">
+    <div class="title">Marriage Event</div>
+    <div class="tags">
+  <span>Decoartion</span>
+  <span>Food Supplies</span>
+  <span>Sound System</span>
+</div>
+
+    <div class="priceRow">
+      <div class="price">Starting from ₹1499</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="serviceCard">
+
+ <div class="videoCard">
+  <video src="services/recption event.mp4" autoplay muted loop playsinline></video>
+</div>
+
+  <div class="cardOverlay">
+    <div class="title">Reception</div>
+
+    <div class="tags">
+      <span>Wedding Stage</span>
+      <span>Mandap Setup</span>
+      <span>Fresh Flowers</span>
+    </div>
+
+    <div class="priceRow">
+      <div class="price">Starting from ₹2999</div>
+      <button class="bookBtn">Book</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="serviceCard">
+
+  <div class="videoCard">
+  <video src="services/party.mp4" autoplay muted loop playsinline></video>
+</div>
+
+  <div class="cardOverlay">
+    <div class="title">Celebration Event</div>
 
     <div class="tags">
       <span>Lighting Setup</span>
@@ -395,8 +493,6 @@ body{
   </div>
 
 </div>
-
-
 
 </div>
 
