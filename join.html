@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join With Us</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html, body{
+  overflow-x:hidden;
+  width:100%;
+}
+
+body{
+  background:#ffffff;
+  color:#111;
+  font-family:'Outfit', sans-serif;
+}
+
+/* TOP IMAGE */
+.topImg{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+
+  margin-top:50px;
+  border-radius:0 0 18px 18px;
+  display:block;
+}
+
+/* CENTER TEXT */
+.centerBox{
+  text-align:center;
+  padding:30px 20px 10px;
+}
+
+.centerBox h2{
+  font-family:'Playfair Display', serif;
+  font-size:32px;
+  font-weight:600;
+
+  background:linear-gradient(135deg,#0f5c5c,#2e7d32);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.centerBox p{
+  font-size:15px;
+  font-weight:600;
+  color:#222;
+}
+
+.centerBox .small{
+  font-size:13px;
+  color:#777;
+  margin-top:6px;
+  line-height:1.4;
+}
+
+/* FORM SECTION */
+.content{
+  padding:20px;
+}
+
+/* TITLE */
+.title{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.sub{
+  font-size:13px;
+  color:#777;
+  margin-bottom:16px;
+}
+
+/* INPUT */
+.input{
+  width:100%;
+  padding:14px 12px;
+  margin-bottom:14px;
+
+  border:none;
+  border-bottom:1px solid #ddd;
+
+  font-size:16px;              /* 👈 required to stop zoom */
+  transform:scale(0.875);      /* 👈 makes it look like ~14px */
+  transform-origin:left center;
+
+  outline:none;
+  background:transparent;
+  transition:0.2s;
+}
+
+/* fix spacing after scaling */
+.input{
+  width:114%;   /* compensate scale shrink */
+}
+
+/* focus underline effect */
+.input:focus{
+  border-bottom:1.5px solid #0f5c5c;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  font-size:15px;
+  font-weight:600;
+
+  margin-top:8px;
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+/* press effect */
+.btn:active{
+  transform:scale(0.97);
+}
+
+/* subtle divider line */
+.content::before{
+  content:"";
+  display:block;
+  height:1px;
+  background:#eee;
+  margin-bottom:16px;
+}
+.trustRow{
+  display:flex;
+  justify-content:space-between; /* spread across full width */
+  align-items:center;
+
+  margin-top:12px;
+  gap:6px;
+}
+
+/* each item */
+.tItem{
+  flex:1; /* equal width */
+  text-align:center;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* icon */
+.tItem i{
+  font-size:15px;
+  color:#0f5c5c;
+
+  background:#f2f6f6;
+  padding:7px;
+  border-radius:10px;
+  margin-bottom:4px;
+}
+
+/* text */
+.tItem span{
+  font-size:10px;
+  color:#666;
+  line-height:1.2;
+}
+.whyBox{
+  margin-top:26px;
+  text-align:center;
+}
+
+/* heading */
+.whyTitle{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:16px;
+}
+
+/* GRID = 1 column */
+.whyGrid{
+  display:grid;
+  grid-template-columns:1fr; /* 👈 only one per row */
+  gap:14px;
+}
+
+/* CARD */
+.whyCard{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* IMAGE */
+.whyCard img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+}
+
+/* TEXT */
+.whyCard p{
+  font-size:14px;
+  font-weight:600;
+  padding:10px;
+  color:#111;
+}
+.whySub{
+  font-size:13px;
+  color:#666;
+  margin-bottom:14px;
+  padding:0 10px;
+}
+/* BOTTOM NAV */
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:65px;
+
+  background:#ffffff;
+  border-top:1px solid #eee;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+
+  z-index:1000;
+}
+
+/* ITEM */
+.navItem{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
+  color:#777;
+  cursor:pointer;
+}
+body{
+  padding-bottom:70px;
+}
+/* ICON */
+.navItem i{
+  font-size:18px;
+  margin-bottom:3px;
+}
+
+/* ACTIVE */
+.navItem.active{
+  color:#0f5c5c;
+  font-weight:600;
+}
+
+/* TAP EFFECT */
+.navItem:active{
+  transform:scale(0.9);
+}
+.footer{
+  text-align:center;
+  padding:25px 15px 20px;
+
+  background:#fafafa;
+}
+
+/* heading */
+.footer h4{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+/* services row */
+.footerLinks{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+/* each item */
+.footerLinks span{
+  font-size:12px;
+  color:#444;
+
+  background:#fff;
+  padding:6px 10px;
+  border-radius:20px;
+
+  border:1px solid #eee;
+}
+
+/* tagline */
+.footer .tagline{
+  font-size:13px;
+  color:#555;
+  margin-bottom:6px;
+}
+
+/* bottom line */
+.footer .made{
+  font-size:11px;
+  color:#888;
+}
+
+.stockGraph{
+  width:100%;
+  height:120px;
+  margin:10px 0 5px;
+  padding:0 10px;
+}
+
+.stockGraph svg{
+  width:100%;
+  height:100%;
+}
+
+/* area */
+.area{
+  fill:url(#fillGradient);
+}
+
+/* main line */
+.lineMain{
+  fill:none;
+  stroke:#0f5c5c;
+  stroke-width:3;
+  stroke-linecap:round;
+
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:drawMain 2s ease forwards;
+}
+
+/* second line */
+.lineSecond{
+  fill:none;
+  stroke:url(#line2);
+  stroke-width:2;
+  stroke-linecap:round;
+  opacity:0.9;
+
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:drawSecond 2.5s ease forwards;
+}
+
+/* animations */
+@keyframes drawMain{
+  to{
+    stroke-dashoffset:0;
+  }
+}
+
+@keyframes drawSecond{
+  to{
+    stroke-dashoffset:0;
+  }
+}
+
+/* LINE 3 - Blue */
+.line3{
+  fill:none;
+  stroke:#42a5f5;
+  stroke-width:2;
+  opacity:0.8;
+
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:draw3 2.8s ease forwards;
+}
+
+/* LINE 4 - Orange */
+.line4{
+  fill:none;
+  stroke:#ffa726;
+  stroke-width:2;
+  opacity:0.8;
+
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:draw4 3s ease forwards;
+}
+
+/* LINE 5 - Purple */
+.line5{
+  fill:none;
+  stroke:#7e57c2;
+  stroke-width:2;
+  opacity:0.8;
+
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:draw5 3.2s ease forwards;
+}
+
+/* animations */
+@keyframes draw3{
+  to{ stroke-dashoffset:0; }
+}
+
+@keyframes draw4{
+  to{ stroke-dashoffset:0; }
+}
+
+@keyframes draw5{
+  to{ stroke-dashoffset:0; }
+}
+path{
+  shape-rendering:geometricPrecision;
+}
+.joinTypes{
+  margin-top:26px;
+  padding:0 15px;
+  text-align:center;
+}
+
+/* heading */
+.joinTypes h3{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+/* sub text */
+.joinSub{
+  font-size:13px;
+  color:#666;
+  margin-bottom:16px;
+}
+
+/* GRID */
+.joinGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+/* CARD */
+.joinCard{
+  background:#fafafa;
+  border:1px solid #eee;
+
+  border-radius:12px;
+  padding:12px;
+
+  font-size:13px;
+  font-weight:500;
+  color:#333;
+
+  text-align:center;
+
+  transition:0.2s;
+}
+@keyframes shake {
+  0% { transform:translateX(0); }
+  25% { transform:translateX(-5px); }
+  50% { transform:translateX(5px); }
+  75% { transform:translateX(-5px); }
+  100% { transform:translateX(0); }
+}
+
+.shake{
+  animation:shake 0.3s;
+}
+/* tap effect */
+.joinCard:active{
+  transform:scale(0.96);
+  background:#f0f7f7;
+}
+.textarea{
+  min-height:80px;
+  resize:none;        /* no resize handle */
+  border-bottom:1px solid #ddd;
+}
+
+/* focus same as input */
+.textarea:focus{
+  border-bottom:1.5px solid #0f5c5c;
+}
+/* loader */
+.loader{
+  display:none;
+  width:18px;
+  height:18px;
+  border:2px solid #fff;
+  border-top:2px solid transparent;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  margin:auto;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+/* loading state */
+.btn.loading .btnText{
+  display:none;
+}
+.btn.loading .loader{
+  display:block;
+}
+
+/* success state */
+.btn.success{
+  background:#2e7d32;
+}
+
+/* confetti container */
+.confetti{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* confetti pieces */
+.confetti::before,
+.confetti::after{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:#fff;
+  animation:blast 1s linear infinite;
+}
+
+.confetti::after{
+  left:70%;
+  background:#ffd54f;
+}
+
+/* blast animation */
+@keyframes blast{
+  0%{ transform:translateY(0) scale(1); opacity:1; }
+  100%{ transform:translateY(-40px) scale(0.5); opacity:0; }
+}
+/* button base fix */
+.btn{
+  position:relative;
+  overflow:hidden;
+}
+
+/* loader */
+.loader{
+  display:none;
+  width:18px;
+  height:18px;
+  border:2px solid #fff;
+  border-top:2px solid transparent;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  margin:auto;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+/* loading state */
+.btn.loading .btnText{
+  display:none;
+}
+.btn.loading .loader{
+  display:block;
+}
+
+/* success state */
+.btn.success{
+  background:#2e7d32;
+}
+
+/* 🎉 confetti box */
+.confettiBox{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  display:none;
+}
+
+/* ribbon pieces */
+.confettiBox span{
+  position:absolute;
+  width:6px;
+  height:10px;
+  background:#fff;
+  opacity:0;
+  animation:confettiBlast 1s linear infinite;
+}
+
+/* different colors + delays */
+.confettiBox span:nth-child(1){ left:10%; background:#ff5252; animation-delay:0s;}
+.confettiBox span:nth-child(2){ left:20%; background:#ffd740; animation-delay:0.2s;}
+.confettiBox span:nth-child(3){ left:30%; background:#40c4ff; animation-delay:0.4s;}
+.confettiBox span:nth-child(4){ left:40%; background:#69f0ae; animation-delay:0.6s;}
+.confettiBox span:nth-child(5){ left:50%; background:#ff4081; animation-delay:0.8s;}
+.confettiBox span:nth-child(6){ left:60%; background:#7c4dff; animation-delay:0.1s;}
+.confettiBox span:nth-child(7){ left:70%; background:#ffab40; animation-delay:0.3s;}
+.confettiBox span:nth-child(8){ left:80%; background:#00e5ff; animation-delay:0.5s;}
+.confettiBox span:nth-child(9){ left:90%; background:#c6ff00; animation-delay:0.7s;}
+.confettiBox span:nth-child(10){ left:15%; background:#ff1744; animation-delay:0.9s;}
+
+/* animation */
+@keyframes confettiBlast{
+  0%{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-50px) rotate(360deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- IMAGE FIRST -->
+<img src="join/welcome.webp" class="topImg">
+<div class="centerBox">
+
+  <h2>CEZOO</h2>
+
+  <p>Everything in Minutes ⚡</p>
+
+  <p class="small">
+    Partnering with local business owners to deliver faster services
+  </p>
+<div class="trustRow">
+
+  <div class="tItem">
+    <i class="fa-solid fa-store"></i>
+    <span>50+ Vendors</span>
+  </div>
+
+  <div class="tItem">
+    <i class="fa-solid fa-shield-halved"></i>
+    <span>Verified</span>
+  </div>
+
+  <div class="tItem">
+    <i class="fa-solid fa-lock"></i>
+    <span>Secured</span>
+  </div>
+
+  <div class="tItem">
+    <i class="fa-solid fa-star"></i>
+    <span>Trusted</span>
+  </div>
+
+</div>
+</div>
+<div class="stockGraph">
+
+  <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+
+    <defs>
+      <!-- main gradient -->
+      <linearGradient id="fillGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0f5c5c" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="#0f5c5c" stop-opacity="0"/>
+      </linearGradient>
+
+      <!-- second line color -->
+      <linearGradient id="line2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#66bb6a"/>
+        <stop offset="100%" stop-color="#2e7d32"/>
+      </linearGradient>
+    </defs>
+
+    <!-- AREA (main growth) -->
+    <path class="area"
+      d="M0,100
+         C30,95 60,85 80,90
+         C100,95 120,70 140,60
+         C160,50 180,40 200,45
+         C220,50 250,20 300,5
+         L300,120 L0,120 Z" />
+
+    <!-- MAIN LINE -->
+    <path class="lineMain"
+      d="M0,100
+         C30,95 60,85 80,90
+         C100,95 120,70 140,60
+         C160,50 180,40 200,45
+         C220,50 250,20 300,5" />
+
+    <!-- SECOND LINE (CEZOO growth) -->
+    <path class="lineSecond"
+      d="M0,105
+         C40,95 70,90 100,80
+         C130,70 150,65 180,55
+         C210,45 240,35 300,15" />
+
+    <!-- LABEL -->
+    
+<!-- LINE 3 -->
+<path class="line3"
+  d="M0,110
+     C20,105 40,100 60,95
+     C80,90 100,85 120,80
+     C140,75 160,70 180,65
+     C200,60 220,50 240,45
+     C260,40 280,30 300,25" />
+
+<!-- LINE 4 -->
+<path class="line4"
+  d="M0,115
+     C20,110 40,105 60,100
+     C80,95 100,90 120,85
+     C140,80 160,75 180,70
+     C200,65 230,55 260,45
+     C280,40 290,38 300,35" />
+
+<!-- LINE 5 -->
+<path class="line5"
+  d="M0,120
+     C30,110 60,105 90,100
+     C120,95 150,85 180,75
+     C210,65 240,60 260,55
+     C280,50 290,45 300,40" />
+
+  </svg>
+
+</div>
+
+<div class="content">
+
+  <div class="formWrap" id="formWrap">
+
+    <div class="title">Join With Us</div>
+<div class="sub">Partner with us and grow your business 🚀</div>
+
+<input id="name" type="text" placeholder="Full Name" class="input">
+
+<input id="phone" type="tel" placeholder="Mobile Number" class="input">
+
+<input id="business" type="text" placeholder="Business Type" class="input">
+
+<input id="location" type="text" placeholder="Location" class="input">
+
+<textarea id="about" class="input textarea"
+  placeholder="Tell us about your shop or service (products, services, experience...)"></textarea>
+
+<button class="btn" id="submitBtn">
+  <span class="btnText">Submit</span>
+  <span class="loader"></span>
+
+  <!-- 🎉 multiple ribbons -->
+  <div class="confettiBox">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</button>
+  </div>
+
+</div>
+
+<div class="whyBox">
+
+  <h3 class="whyTitle">Why Choose Us</h3>
+  <p class="whySub">
+  Deliver faster, reach more customers, and grow your business with CEZOO.
+</p>
+
+  <div class="whyGrid">
+
+    <div class="whyCard">
+      <img src="join/fast.webp">
+      <p>Fast Delivery in Minutes</p>
+    </div>
+
+    <div class="whyCard">
+      <img src="join/Increase Your Daily Earnings1.webp">
+      <p>Reach More Nearby Customers</p>
+    </div>
+
+    <div class="whyCard">
+      <img src="join/Reach More Nearby Customers.webp">
+      <p>Increase Your Daily Earnings</p>
+    </div>
+
+    <div class="whyCard">
+      <img src="join/Reliable Partner Support1.webp">
+      <p>Reliable Partner Support</p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="joinTypes">
+
+  <h3>Who Can Join Us</h3>
+
+  <p class="joinSub">
+    From small shops to big brands — everyone can grow with CEZOO
+  </p>
+
+  <div class="joinGrid">
+
+  <div class="joinCard">Shopkeepers</div>
+  <div class="joinCard">Retail Stores</div>
+  <div class="joinCard">Wholesale Dealers</div>
+  <div class="joinCard">Electronics Shops</div>
+  <div class="joinCard">Grocery Stores</div>
+  <div class="joinCard">Medical Stores</div>
+  <div class="joinCard">Food Vendors</div>
+  <div class="joinCard">Clothing Stores</div>
+  <div class="joinCard">Home Services</div>
+  <div class="joinCard">Cleaning Services</div>
+  <div class="joinCard">Decorators</div>
+  <div class="joinCard">Brands</div>
+
+</div>
+
+</div>
+<div class="footer">
+
+  <h4>CEZOO </h4>
+
+  <div class="footerLinks">
+    <span>Cleaning</span>
+    <span>Food Delivery</span>
+    <span>Medicines</span>
+    <span>Home Services</span>
+  </div>
+
+  <p class="tagline">
+    Everything delivered in minutes ⚡
+  </p>
+
+  <p class="made">
+    🇮🇳 Made in India • Built with ❤️
+  </p>
+
+</div>
+<div class="bottomNav">
+
+  <div class="navItem" id="homeBtn">
+  <i class="fa-solid fa-house"></i>
+  <p>Home</p>
+</div>
+
+  <div class="navItem">
+    <i class="fa-solid fa-layer-group"></i>
+    <p>Services</p>
+  </div>
+
+  <div class="navItem active">
+    <i class="fa-solid fa-users"></i>
+    <p>Join</p>
+  </div>
+
+  <div class="navItem">
+    <i class="fa-solid fa-user"></i>
+    <p>Profile</p>
+  </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabaseUrl = "https://bqhkfftgahjisueyjmcy.supabase.co";
+const supabaseKey = "sb_publishable_cw6gcb2DMXbPPZDnkow5bg_66osKKBP";
+
+// ✅ attach to window (no duplicate issue)
+window.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+
+document.getElementById("submitBtn").addEventListener("click", async () => {
+
+  const btn = document.getElementById("submitBtn");
+  const text = btn.querySelector(".btnText");
+  const confetti = btn.querySelector(".confettiBox");
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const business = document.getElementById("business").value.trim();
+  const location = document.getElementById("location").value.trim();
+  const about = document.getElementById("about").value.trim();
+
+  if(!name || !phone || !business || !location){
+    return;
+  }
+
+  // loader
+  btn.classList.add("loading");
+
+  const { error } = await window.supabaseClient
+    .from("partners")
+    .insert([{ name, phone, business_name: business, location, about }]);
+
+  btn.classList.remove("loading");
+
+  if(error){
+    alert("Error");
+    return;
+  }
+
+  // 🎉 success mode
+  btn.classList.add("success");
+  text.innerText = "Submitted ";
+
+  // start looping blast
+  confetti.style.display = "block";
+
+  // stop after 5 sec
+  setTimeout(() => {
+    confetti.style.display = "none";
+    btn.classList.remove("success");
+    text.innerText = "Submit";
+
+    // clear form
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("business").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("about").value = "";
+
+  }, 5000);
+
+});
+
+document.getElementById("homeBtn").addEventListener("click", function(){
+
+  // 🔥 skip intro next time
+  sessionStorage.setItem("skipIntro", "true");
+
+  // 🔥 redirect to home page
+  window.location.href = "index.html";
+
+});
+</script>
+</body>
+</html>
