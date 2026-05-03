@@ -4904,7 +4904,7 @@ scroll-behavior:smooth;
   </div>
 </a>
 
-  <div class="optCard" id="cizooBtn2">
+<div class="optCard" id="cizooBtn2" onclick="goCleaning()">
     <img src="cat/cleaning.webp">
 
     <div class="cardIcon">
@@ -15045,7 +15045,9 @@ window.onload = function(){
 document.getElementById("cizooBtn3").onclick = function () {
   window.location.href = "join.html";
 };
-
+function goCleaning() {
+  window.location.href = "cleaning.html";
+}
 </script>
 </body>
 </html>
