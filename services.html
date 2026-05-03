@@ -18,8 +18,9 @@ body{
 }
 /* 🔒 LOCK BACKGROUND */
 body.popup-open{
+  position:fixed;
+  width:100%;
   overflow:hidden;
-  height:100vh;
 }
 /* TOP GAP */
 .topGap{ height:50px; }
@@ -2049,12 +2050,6 @@ function openPopup(id){
   document.body.classList.add("popup-open");
 }
 
-function closePopup(id){
-  document.getElementById(id).style.display = "none";
-
-  // 🔥 UNLOCK BACKGROUND
-  document.body.classList.remove("popup-open");
-}
 
 /* DOTS INIT (call once per popup) */
 function initSlider(sliderId, dotsId){
@@ -2136,13 +2131,23 @@ document.getElementById("viewerSlider").addEventListener("click", function(e){
 window.addEventListener("load", function(){
   document.getElementById("appLoader").style.display = "none";
 });
+function openPopup(id){
+  const popup = document.getElementById(id);
+  popup.style.display = "block";
+
+  // LOCK SCROLL
+  document.body.classList.add("popup-open");
+}
+
 function closePopup(el){
   const popup = el.closest(".popupPage");
+
   if(popup){
     popup.style.display = "none";
   }
 
-  document.body.style.overflow = "";
+  // 🔥 ALWAYS UNLOCK
+  document.body.classList.remove("popup-open");
 }
 </script>
 
