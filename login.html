@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Step Form UI</title>
+    <title>Login</title>
 
     <style>
       * {
@@ -275,6 +275,27 @@ transform:rotate(-45deg);
 60%{transform:scale(.95)}
 100%{transform:scale(.9)}
 }
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* make popup relative for button */
+.terms-content {
+  position: relative;
+}
     </style>
   </head>
 
@@ -289,6 +310,23 @@ transform:rotate(-45deg);
         <div id="step1">
           <h2>Enter your name</h2>
           <input type="text" id="name" placeholder="Your Name" />
+<p style="
+  font-size:12px;
+  color:#666;
+  text-align:center;
+  margin:-2px 0 10px 0; /* top right bottom left */
+  line-height:1.5;
+">
+  By continuing, you confirm that you are 18 years of age and agree to 
+  <a href="terms.html" onclick="openTerms()" style="color:#2563eb; text-decoration:none; font-weight:500;">
+  Terms of Use
+</a>
+  and 
+  <a href="privacypolicy.html" style="color:#2563eb; text-decoration:none; font-weight:500;">
+    Privacy Policy
+  </a>.
+</p>
+
           <button onclick="step2()">Next</button>
 
 <br><br>
@@ -325,6 +363,64 @@ Back
         </div>
       </div>
     </div>
+
+    <div id="termsPopup" class="terms-popup hidden">
+  <div class="terms-content">
+
+    <!-- ROUND CLOSE BUTTON -->
+    <div class="close-btn" onclick="closeTerms()">×</div>
+
+    <h2>Terms of Use</h2>
+
+    <p>
+      Welcome to <b>CezzO Groceries</b>, your all-in-one service platform for groceries and daily needs.
+    </p>
+
+    <p>
+      By using our services, you agree to the following terms and conditions.
+    </p>
+
+    <h3>Information We Collect</h3>
+    <ul>
+      <li>Name and Mobile Number</li>
+      <li>Delivery Location and Address</li>
+      <li>Order and Product Preferences</li>
+      <li>Payment Details (processed securely)</li>
+      <li>Device and usage data</li>
+    </ul>
+
+    <h3>How We Use Your Data</h3>
+    <ul>
+      <li>To process grocery orders and deliveries</li>
+      <li>To improve product recommendations</li>
+      <li>To provide customer support</li>
+      <li>To enhance app performance and experience</li>
+    </ul>
+
+    <h3>Products & Services</h3>
+    <p>
+      CezzO provides groceries, household items, and other daily essentials. Product availability,
+      pricing, and delivery times may vary based on your location.
+    </p>
+
+    <h3>Payments</h3>
+    <p>
+      All payments are handled securely. We do not store sensitive payment details on our servers.
+    </p>
+
+    <h3>User Responsibility</h3>
+    <ul>
+      <li>Provide accurate information</li>
+      <li>Do not misuse the platform</li>
+      <li>Keep your account details safe</li>
+    </ul>
+
+    <p>
+      By continuing, you accept these terms and agree to use the service responsibly.
+    </p>
+
+  </div>
+</div>
 <div id="loadingScreen" style="display:none;">
    <div class="loader"></div>
 </div>
@@ -426,7 +522,16 @@ if (!error) {
    // same as login success skip intro
    sessionStorage.setItem("skipIntro","true");
 
-   window.location.href = "index.html";
+   let goBack=
+localStorage.getItem(
+"redirectAfterLogin"
+);
+
+if(goBack){
+window.location.href=goBack;
+}else{
+window.location.href="index.html";
+}
 }
     </script>
   </body>
