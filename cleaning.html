@@ -3,29 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Services</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Cleaning Services</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body{
+
+*{
+  box-sizing:border-box;
+}
+
+html, body{
   margin:0;
+  padding:0;
+  overflow-x:hidden;
+  background:#ffffff;
   font-family:'Outfit',sans-serif;
-  background:#fff;
-  padding-bottom:65px;
 }
-/* 🔒 LOCK BACKGROUND */
-body.popup-open{
-  overflow:hidden;
-  height:100vh;
+
+/* GAP */
+.topGap{
+  height:55px;
 }
-/* TOP GAP */
-.topGap{ height:50px; }
+
+/* TOP SECTION */
+.topSection{
+  background:#ffffff;
+}
 
 /* LOCATION */
-.locationBox{ padding:0 15px; }
+.locationBox{
+  padding:20px;
+}
 
 .locRow{
   display:flex;
@@ -34,726 +44,169 @@ body.popup-open{
 }
 
 .locRow i{
-  color:#0f9d58;
+  color:#2e7d32;   
   font-size:16px;
 }
 
 .city{
-  font-size:15px;
+  font-size:18px;
   font-weight:600;
+  color:#111;
 }
 
 .address{
-  font-size:11px;
+  font-size:12px;
   color:#666;
 }
 
-/* 🎥 VIDEO SECTION */
-.videoBox{
+/* BANNER */
+.banner{
   width:100%;
-  margin:0;              /* ❌ remove side gaps */
-       /* keep only top spacing if needed */
-  border-radius:0;       /* 🔥 remove curve so edges match */
-  overflow:hidden;
-}
-.serviceList{
-  padding:0 16px;   /* 🔥 left & right gap */
-}
-.videoBox video{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position: top;   /* 🔥 KEY FIX */
-  display:block;
+  padding:0 15px 4px;
 }
 
-/* CARDS */
-.serviceCard{
+.banner img{
+  width:100%;
+  height:250px;        /* ✅ natural height */
+  object-fit:contain; /* ✅ show full image */
+  border-radius:12px;
+}
+
+/* TITLE */
+.pageTitle{
+  padding:8px 15px;     
+  font-size:18px;
+  font-weight:700;
+  color:#111;
+}
+/* LIST */
+.serviceList{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:12px;
+}
+
+/* CARD */
+.serviceCardFull{
   position:relative;
-  height:195px;              /* 🔥 full card height */
+  width:100%;
+  height:160px;           /* 🔥 fixed height */
   border-radius:14px;
   overflow:hidden;
-  margin-bottom:12px;
 }
 
-/* IMAGE SLIDER */
-.imgSlider{
-  position:absolute;
-  width:100%;
-  height:100%;
-}
-
-.imgSlider img{
-  position:absolute;
+/* IMAGE */
+.serviceCardFull img{
   width:100%;
   height:100%;
   object-fit:cover;
-
-  opacity:0;
-  transition:opacity 0.6s ease;
 }
 
-.imgSlider img.active{
-  opacity:1;
-}
-/* OVERLAY LAYOUT FIX */
-.cardOverlay{
+/* OVERLAY */
+.overlay{
   position:absolute;
-  bottom:0;
+  top:0;
   left:0;
   width:100%;
-  height:100%;   /* 🔥 full height control */
+  height:100%;
+
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.4),
+    rgba(0,0,0,0.6)
+  );
 
   display:flex;
   flex-direction:column;
-  justify-content:flex-end; /* push content to bottom */
+  justify-content:flex-end;
 
   padding:12px;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.75),
-    rgba(0,0,0,0.05)
-  );
-
   color:#fff;
-  box-sizing:border-box;
 }
 
 /* TEXT */
-.title{
-    font-family:'Playfair Display', serif;
-
+.serviceTitle{
   font-size:16px;
   font-weight:700;
 }
 
-.sub{
-  font-size:12px;
+.servicePrice{
+  font-size:13px;
   margin-top:2px;
-  color:#ddd;
 }
 
-/* PRICE + BUTTON ROW */
-.priceRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  margin-top:10px;
-}
-
-/* PRICE */
-.price{
-  font-size:15px;
-  font-weight:700;
-}
-
-/* BUTTON FIX */
+/* BUTTON */
 .bookBtn{
-  background:#0f5c5c;
-  color:#fff;
+  margin-top:6px;
+  padding:6px 12px;
+  background:#fff;
+  color:#111;
   border:none;
-
-  padding:6px 14px;
-  border-radius:20px;   /* 🔥 pill shape (better UI) */
-
+  border-radius:8px;
   font-size:12px;
   font-weight:600;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  min-width:60px;       /* 🔥 prevents shrink */
-  height:28px;
-
-  cursor:pointer;
 }
-
-.tags{
+/* POINT LIST */
+.servicePoints{
   display:flex;
   flex-wrap:wrap;
   gap:6px;
   margin-top:6px;
 }
 
-.tags span{
-  font-size:10px;
+/* 🔥 BOX STYLE */
+.servicePoints span{
+  background:rgba(255,255,255,0.25);   /* transparent white */
+  backdrop-filter:blur(6px);           /* glass effect */
+  color:#fff;
+  font-size:11px;
   padding:4px 8px;
+  border-radius:8px;
 
-  background:rgba(255,255,255,0.2); /* 🔥 glass look */
-  color:#fff;
-
-  border-radius:20px;
-  backdrop-filter:blur(4px);
-
-  border:1px solid rgba(255,255,255,0.3);
+  border:1px solid rgba(255,255,255,0.4);
 }
-/* NAVBAR */
-.bottomNav{
+/* 🔥 FORCE LOCK SCROLL */
+body.popup-open {
   position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:58px;
-
-  background:#fff;
-  border-top:1px solid #eee;
-
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
-
-.navItem{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-
-  color:#888;
-  font-size:10px;
-}
-
-.navItem i{
-  font-size:20px;
-  margin-bottom:2px;
-}
-
-.navItem span{
-  font-size:10px;
-}
-
-
-.topSection{
-  position:relative;
   width:100%;
   overflow:hidden;
 }
 
-/* IMAGE BACKGROUND */
-.topBg{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:0;
-}
-
-/* CONTENT ABOVE IMAGE */
-.topSection > *:not(.topBg){
-  position:relative;
-  z-index:1;
-}
-.sectionHeader{
-  padding:14px 15px 6px;
-}
-
-.sectionHeader h2{
-  font-size:18px;
-  font-weight:600;
-  margin:0;
-  color:#222;
-}
-
-/* small decorative line */
-.sectionHeader .line{
-  width:40px;
-  height:3px;
-  background:#0f5c5c;
-  border-radius:2px;
-  margin-top:6px;
-}
-.videoCard{
-  position:absolute;
-  width:100%;
-  height:100%;
-}
-
-.videoCard video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.makeupHeader{
-  padding:16px;
-  margin-top:10px;
-}
-
-/* stylish heading */
-.makeupHeader h2{
-  font-size:18px;
-  font-weight:700;
-  font-family:'Poppins', sans-serif;
-
-  display:inline-block;
-  position:relative;
-  color:#222;
-}
-
-/* underline accent */
-.makeupHeader h2::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-4px;
-
-  width:100%;
-  height:3px;
-
-  background:linear-gradient(to right, #ff7eb3, #ff758c);
-  border-radius:2px;
-}
-
-/* GRID */
-.makeupGrid{
-  display:flex;
-  gap:12px;
-  padding:0 16px;
-  margin-top:10px;
-}
-
-/* CARD */
-.makeupCard{
-  flex:1;
-  position:relative;
-  height:180px;
-
-  border-radius:14px;
-  overflow:hidden;
-}
-
-/* VIDEO */
-.makeupCard video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* OVERLAY */
-.makeupContent{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-
-  padding:10px;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.7),
-    transparent
-  );
-
-  color:#fff;
-}
-
-/* TITLE */
-.makeupTitle{
-  font-size:14px;
-  font-weight:600;
-}
-
-/* BUTTON */
-.bookNow{
-  margin-top:6px;
-
-  background:#0f5c5c;
-  color:#fff;
-  border:none;
-
-  padding:5px 10px;
-  border-radius:8px;
-
-  font-size:11px;
-}
-.makeupCard video{
-  transform:scale(1.05);
-}
-.makeupCard:nth-child(2) .bookNow{
-  background:#ff4d6d;
-}
-.cateringHeader i{
-  margin-right:5px;
-  color:#0f5c5c;
-}
-.cateringHeader{
-  padding:16px;
-  margin-top:14px;
-}
-
-/* small top label */
-.cateringHeader span{
-  font-size:11px;
-  letter-spacing:2px;
-  color:#999;
-}
-
-/* main heading */
-.cateringHeader h2{
-  font-size:20px;
-  font-weight:700;
-  margin:2px 0 0;
-
-  color:#0f5c5c;
-  font-family:'Poppins', sans-serif;
-}
-
-/* GRID */
-.cateringGrid{
-  display:flex;
-  gap:12px;
-  padding:0 16px;
-  margin-top:10px;
-}
-
-/* CARD */
-.cateringCard{
-  flex:1;
-  position:relative;
-  height:140px;
-
-  border-radius:14px;
-  overflow:hidden;
-}
-
-/* IMAGE */
-.cateringCard img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* OVERLAY */
-.cateringOverlay{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-
-  padding:10px;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.7),
-    transparent
-  );
-
-  color:#fff;
-}
-
-/* TITLE */
-.cateringTitle{
-  font-size:13px;
-  font-weight:600;
-}
-
-/* BUTTON */
-.bookNow{
-  margin-top:5px;
-
-  background:#0f5c5c;
-  color:#fff;
-  border:none;
-
-  padding:5px 10px;
-  border-radius:8px;
-
-  font-size:11px;
-}
-.cateringWrap{
-  padding:0 16px;
-  margin-top:10px;
-}
-
-/* TOP ROW */
-.cateringRow{
-  display:flex;
-  gap:10px;
-}
-
-/* CARD */
-.cateringCard{
-  flex:1;
-  position:relative;
-  height:140px;
-  border-radius:14px;
-  overflow:hidden;
-}
-
-/* CENTER WRAPPER */
-.cateringCenter{
-  display:flex;
-  justify-content:center;   /* 🔥 center align */
-  margin-top:12px;
-}
-
-/* CENTER CARD SIZE */
-.cateringCard.center{
-  width:70%;   /* 🔥 controls size */
-  height:150px;
-}
-
-/* IMAGE */
-.cateringCard img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* OVERLAY */
-.cateringOverlay{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  padding:10px;
-
-  background:linear-gradient(
-    to top,
-    rgba(0,0,0,0.7),
-    transparent
-  );
-
-  color:#fff;
-}
-
-/* TITLE */
-.cateringTitle{
-  font-size:14px;
-  font-weight:600;
-}
-
-/* BUTTON */
-.bookNow{
-  margin-top:6px;
-  background:#0f5c5c;
-  color:#fff;
-  border:none;
-  padding:6px 12px;
-  border-radius:8px;
-  font-size:11px;
-}
-/* SIDE HEADING STYLE */
-.photoHeaderSide{
-  display:flex;
-  align-items:center;
-  gap:8px;
-
-  margin:16px;
-  padding-left:10px;
-
-  border-left:4px solid #0f5c5c;   /* 🔥 side line */
-
-  font-size:17px;
-  font-weight:700;
-  color:#222;
-}
-
-/* ICON */
-.photoHeaderSide i{
-  color:#0f5c5c;
-  font-size:16px;
-}
-/* FULL PAGE POPUP */
-.popupPage{
+/* POPUP */
+.fullPopup{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
   background:#fff;
-  z-index:9999;
+  z-index:99999;
+
   display:none;
-  overflow-y:auto;
-}
-/* 🔥 HIDE SCROLLBAR (POPUP ONLY) */
-.popupPage{
-  -ms-overflow-style: none;   /* IE + Edge */
-  scrollbar-width: none;      /* Firefox */
+  flex-direction:column;
 }
 
-.popupPage::-webkit-scrollbar{
-  display:none;               /* Chrome, Safari */
-}
 /* HEADER */
 .popupHeader{
-  position:sticky;
-  top:0;
-  background:#fff;
+  padding:55px 15px 12px;
 
   display:flex;
   align-items:center;
+  justify-content:space-between;   /* 🔥 KEY FIX */
 
-  padding:12px 16px;
-  padding-top:55px;
+  font-size:16px;
+  font-weight:600;
 
   border-bottom:1px solid #eee;
 }
-
-.closeBtn{
-  font-size:20px;
-  cursor:pointer;
+.sliderContainer{
+  position:relative;   /* 🔥 IMPORTANT FIX */
 }
-
-.popupTitle{
-  margin-left:auto;
-  text-align:right;
-  line-height:1.2;
-}
-
-/* MAIN TITLE */
-.popupTitle span{
-  display:block;
+/* BACK ICON */
+.popupHeader i{
   font-size:16px;
-  font-weight:700;
-  color:#111;
-}
 
-/* SUB TEXT */
-.popupTitle small{
-  font-size:11px;
-  color:#777;
-}
-
-/* IMAGE SLIDER */
-.popupSlider{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
-
-.popupSlider::-webkit-scrollbar{
-  display:none;
-}
-
-.popupSlider img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  flex-shrink:0;
-  scroll-snap-align:start;
-}
-
-/* DOTS */
-.dots{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin:8px 0;
-}
-
-.dots span{
-  width:6px;
-  height:6px;
-  background:#ccc;
-  border-radius:50%;
-}
-
-.dots span.active{
-  background:#0f5c5c;
-}
-
-/* CONTENT */
-.popupContent{
-  padding:16px;
-}
-
-/* PRICE */
-.popupPrice{
-  font-size:16px;
-  font-weight:700;
-  margin-bottom:12px;
-}
-
-/* SAMPLE */
-.sampleTitle{
-  font-size:14px;
-  font-weight:600;
-  margin-bottom:6px;
-}
-
-.sampleScroll{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin-bottom:14px;
-}
-
-.sampleScroll::-webkit-scrollbar{
-  display:none;
-}
-
-.sampleScroll img{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:8px;
-}
-
-/* 🔥 SERVICE INCLUDE TITLE */
-.detailTitle{
-  font-size:14px;
-  font-weight:600;
-  margin-bottom:10px;
-}
-/* 🔥 SERVICE LIST (VERTICAL BOX STYLE) */
-.serviceListText{
-  list-style:none;
-  padding:0;
-  margin:0 0 14px;
-}
-
-/* BOX ITEM */
-.serviceListText li{
-  background:#f5f5f5;
-  border-radius:10px;
-
-  padding:10px 12px;
-  margin-bottom:8px;
-
-  font-size:13px;
-  color:#333;
-
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-/* ✔ ICON */
-.serviceListText li::before{
-  content:"✔";
-  font-size:12px;
-  color:#0f5c5c;
-}
-
-
-
-/* BUTTON */
-.popupBook{
-  width:100%;
-  margin-top:10px;
-
-  background:#0f5c5c;
-  color:#fff;
-  border:none;
-
-  padding:12px;
-  border-radius:10px;
-
-  font-size:14px;
-  font-weight:600;
-}
-
-.popupBook:active{
-  transform:scale(0.97);
-}
-/* 🔥 ROUND BACK BUTTON */
-.closeBtn{
   width:36px;
   height:36px;
 
@@ -761,1389 +214,407 @@ body.popup-open{
   align-items:center;
   justify-content:center;
 
-  background:#f2f2f2;
   border-radius:50%;
 
-  font-size:16px;
-  color:#333;
-
+  background:rgba(0,0,0,0.08);   /* light shade */
+  
   cursor:pointer;
 }
-.popupPrice{
-  display:flex;
-  flex-direction:column;
 
-  font-size:18px;
-  font-weight:700;
-  color:#111;
-  margin-bottom:12px;
+/* TITLE RIGHT SIDE */
+.headerTitle{
+  margin-left:auto;   /* 🔥 pushes text to right */
 }
 
-.popupPrice span{
-  font-size:12px;
-  font-weight:500;
-  color:#777;
-}
-
-/* 🔥 TRUST SECTION */
-.trustRow{
-  display:flex;
-  gap:8px;
-  margin-bottom:14px;
-}
-
-/* ITEM BOX */
-.trustItem{
-  flex:1;
-
-  background:#f7f7f7;
-  border-radius:10px;
-
-  padding:10px 6px;
-
-  text-align:center;
-
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
-}
-
-/* ICON */
-.trustItem i{
-  font-size:18px;
-  color:#0f5c5c;
-  margin-bottom:5px;
-}
-
-/* TEXT */
-.trustItem span{
-  display:block;
-  font-size:11px;
-  color:#555;
-}
-
-/* 🔥 SIDE HEADING */
-.serviceTypeHeader{
-  display:flex;
-  align-items:center;
-  gap:8px;
-
-  margin-top:12px;
-  margin-bottom:8px;
-
-  padding-left:10px;
-  border-left:4px solid #0f5c5c;
-
-  font-size:14px;
-  font-weight:600;
-}
-
-.serviceTypeHeader i{
-  color:#0f5c5c;
-  font-size:14px;
-}
-
-/* 🔥 TAGS */
-.serviceTags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.serviceTags span{
-  background:#f5f5f5;
-  border-radius:20px;
-
-  padding:6px 12px;
-  font-size:12px;
-
-  color:#333;
-}
-/* FULL SCREEN IMAGE VIEW */
-.imgViewer{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-
-  background:rgba(0,0,0,0.9); /* 🔥 transparent dark */
-
-  display:none;
-  align-items:center;
-  justify-content:center;
-
-  z-index:99999;
-}
-
-/* IMAGE */
-.imgViewer img{
-  max-width:90%;
-  max-height:80%;
-  border-radius:10px;
-}
-
-/* CLOSE BUTTON */
-.imgClose{
-  position:absolute;
-  top:55px;   /* 🔥 your requirement */
-  left:16px;
-
-  font-size:22px;
-  color:#fff;
-
-  background:rgba(255,255,255,0.2);
-  padding:8px;
-  border-radius:50%;
-}
 /* SLIDER */
-.imgSliderViewer{
+.slider{
   display:flex;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
-
-  width:100%;
-  height:100%;
-
-  align-items:center;
 }
 
-.imgSliderViewer::-webkit-scrollbar{
-  display:none;
-}
-
-/* IMAGE */
-.imgSliderViewer img{
+/* ---------- SLIDER IMAGE ---------- */
+.slider img{
   width:100%;
-  max-height:80%;
-
-  object-fit:contain;
-
+  height:220px;
+  object-fit:cover;
   flex-shrink:0;
-  scroll-snap-align:center;
-}
-/* LOADER BACKGROUND */
-.appLoader{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-
-  background:#fff;
-  z-index:999999;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-/* 🌸 FLOWER */
-.flowerLoader{
-  position:relative;
-  width:50px;
-  height:50px;
+/* ---------- SLIDER DOTS ---------- */
+.sliderContainer{
+  position:relative;   /* 🔥 REQUIRED */
 }
 
-.flowerLoader span{
+.dots{
   position:absolute;
-  width:18px;
-  height:18px;
-
-  background:#0f5c5c;
-  border-radius:50%;
-
-  animation:flower 1.2s infinite ease-in-out;
-}
-
-/* PETALS POSITION */
-.flowerLoader span:nth-child(1){
-  top:0;
-  left:16px;
-}
-
-.flowerLoader span:nth-child(2){
-  right:0;
-  top:16px;
-}
-
-.flowerLoader span:nth-child(3){
-  bottom:0;
-  left:16px;
-}
-
-.flowerLoader span:nth-child(4){
-  left:0;
-  top:16px;
-}
-
-/* ANIMATION */
-@keyframes flower{
-  0%, 100%{
-    transform:scale(0.8);
-    opacity:0.6;
-  }
-  50%{
-    transform:scale(1.3);
-    opacity:1;
-  }
-}
-.flowerLoader span{
-  background:#ff7eb3;
-}
-.flowerLoader::after{
-  content:"";
-  position:absolute;
-  top:50%;
+  bottom:12px;
   left:50%;
+  transform:translateX(-50%);
 
-  width:8px;
-  height:8px;
-
-  background:#222;
-  border-radius:50%;
-
-  transform:translate(-50%,-50%);
-}
-/* DELAY FOR ROTATION EFFECT */
-.flowerLoader span:nth-child(1){ animation-delay:0s; }
-.flowerLoader span:nth-child(2){ animation-delay:0.2s; }
-.flowerLoader span:nth-child(3){ animation-delay:0.4s; }
-.flowerLoader span:nth-child(4){ animation-delay:0.6s; }
-
-/* 🔥 SIDE HEADING */
-.whatGetHeader{
   display:flex;
-  align-items:center;
-  gap:8px;
+  gap:6px;
 
-  margin-top:14px;
-  margin-bottom:8px;
+  padding:4px 8px;
+  background:rgba(0,0,0,0.3);
+  border-radius:20px;
+}
 
-  padding-left:10px;
-  border-left:4px solid #0f5c5c;
+.dot{
+  width:7px;
+  height:7px;
+  background:rgba(255,255,255,0.5);
+  border-radius:50%;
+}
 
-  font-size:14px;
+.dot.active{
+  background:#fff;
+}
+
+/* ---------- BODY ---------- */
+.popupBody{
+  padding:16px;
+  overflow-y:auto;
+  flex:1;
+}
+
+/* ---------- INFO BLOCK (NEW CLEAN STRUCTURE) ---------- */
+.infoBlock{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+
+  margin-bottom:14px;
+}
+
+/* ---------- RATING ---------- */
+.ratingBox{
+  background:#111;
+  color:#fff;
+
+  padding:4px 8px;
+  border-radius:6px;
+
+  font-size:12px;
   font-weight:600;
 }
 
-.whatGetHeader i{
-  color:#0f5c5c;
-}
-
-/* 🔥 LIST */
-.whatGetList{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-/* ITEM */
-.whatItem{
-  display:flex;
+/* ---------- PREMIUM PRICE ---------- */
+.priceBox{
+  display:inline-flex;
   align-items:center;
-  gap:8px;
+  gap:6px;
 
-  background:#f5f5f5;
-  padding:10px;
+  background:linear-gradient(135deg,#111,#333);
+  color:#fff;
 
+  padding:6px 10px;
   border-radius:10px;
-  font-size:13px;
-  color:#333;
+
+  font-size:12px;
+  font-weight:600;
 }
 
-/* ICON */
-.whatItem i{
-  color:#0f5c5c;
-}
-.whatItem{
-  background:#eef6f6;
+.priceLabel{
+  opacity:0.8;
+  font-size:11px;
 }
 
-/* 🔥 HEADER CONTAINER */
-.whatGetHeaderNew{
+.priceValue{
+  font-size:14px;
+  font-weight:700;
+}
+
+/* ---------- ICON GRID ---------- */
+.iconGrid{
   display:flex;
-  align-items:center;
-  gap:10px;
-
-  margin-top:14px;
-  margin-bottom:10px;
+  gap:8px;
+  margin-top:16px;
 }
 
 /* ICON BOX */
 .iconBox{
-  width:32px;
-  height:32px;
-
-  background:#0f5c5c;
-  color:#fff;
+  flex:1;
+  background:#fafafa;   /* 🔥 softer premium */
+  border-radius:12px;
+  padding:12px 8px;
 
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
 
-  border-radius:8px;
-  font-size:14px;
+  text-align:center;
+
+  border:1px solid #eee;   /* 🔥 subtle border */
 }
 
-/* TEXT */
-.textBox span{
-  font-size:15px;
-  font-weight:700;
-  color:#111;
-}
-
-/* UNDERLINE ACCENT */
-.textBox{
-  position:relative;
-}
-
-.textBox::after{
-  content:"";
-  position:absolute;
-  bottom:-4px;
-  left:0;
-
-  width:40px;
-  height:3px;
-
-  background:#0f5c5c;
-  border-radius:2px;
-}
-/* 🔥 GLOBAL FIX (important) */
-body{
-  overflow-x:hidden;   /* ❌ remove side scroll */
-}
-
-/* 🔥 FOOTER */
-.footerBlock{
-  width:100%;                /* 🔥 ensure full width */
-  box-sizing:border-box;     /* include padding inside width */
-
-  margin-top:20px;
-  padding:14px 16px;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  border-top:1px solid #eee;
-  background:#fafafa;
-
-  overflow:hidden;           /* 🔥 prevent overflow */
-}
-
-/* LEFT */
-.footerLeft{
-  display:flex;
-  align-items:center;
-  gap:8px;
-
-  min-width:0;               /* 🔥 prevents overflow */
-}
-
-.footerIcon{
+.iconBox i{
   font-size:18px;
-  color:#0f5c5c;
+  margin-bottom:6px;
 }
 
-.footerName{
-  font-size:16px;
-  font-weight:700;
-  color:#111;
-}
-
-/* RIGHT */
-.footerRight{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-
-  min-width:0;               /* 🔥 important */
-}
-
-/* ROW */
-.footerRow{
-  display:flex;
-  align-items:center;
-  gap:6px;
-
+.iconBox span{
   font-size:11px;
-  color:#555;
-
-  white-space:nowrap;        /* 🔥 prevent breaking */
+  color:#333;
 }
 
-.footerRow i{
-  font-size:12px;
-  color:#0f5c5c;
+/* ---------- BENEFITS ---------- */
+.benefitsBox{
+  margin-top:18px;
+  background:#fafafa;
+  border-radius:12px;
+  padding:14px;
+
+  border:1px solid #eee;
+}
+
+.benefitsBox h4{
+  margin:0 0 10px 0;
+  font-size:14px;
+  font-weight:600;
+}
+
+.benefitItem{
+  font-size:13px;
+  margin:6px 0;
+  color:#444;
+}
+
+/* ---------- BUTTON ---------- */
+.bottomBar{
+  position:sticky;
+  bottom:0;
+  background:#fff;
+  padding:10px;
+  border-top:1px solid #eee;
+}
+
+.bookNowFull{
+  width:100%;
+  padding:14px;
+
+  background:#111;
+  color:#fff;
+
+  border:none;
+  border-radius:12px;
+
+  font-size:14px;
+  font-weight:600;
+}
+.shortDesc{
+  font-size:13px;
+  color:#666;
+
+  line-height:1.4;
+  max-width:90%;
+
+  margin-top:2px;
 }
 </style>
 </head>
 
 <body>
+
+<!-- TOP -->
 <div class="topSection">
-  <img src="services/services 1.webp" class="topBg">
-
-<div class="topGap"></div>
-
-<!-- LOCATION -->
-<div class="locationBox">
-  <div class="locRow">
-    <i class="fa-solid fa-location-dot"></i>
-    <div>
-      <div class="city" id="city">Your City</div>
-      <div class="address" id="address">Loading location...</div>
-    </div>
-  </div>
-</div>
-</div>
-<!-- 🎥 VIDEO SECTION -->
-<div class="videoBox">
-  <video autoplay muted loop playsinline>
-    <source src="services/service.webm" type="video/webm">
-  </video>
-</div>
-<div class="sectionHeader">
-  <h2>Event Services</h2>
-  <div class="line"></div>
-</div>
-
-<!-- SERVICES -->
-<div class="serviceList">
-
- <div class="serviceCard" onclick="openPopup('balloonPopup')">
-
-  <div class="imgSlider">
-    <img src="services/ballons1.webp" class="active">
-    <img src="services/ballon2.webp">
-     <img src="services/ballon3.webp">
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">Ballons Decoration</div>
-    <div class="tags">
-  <span>Birthday Parties</span>
-  <span>Marriage Events</span>
-  <span>Decorations</span>
-</div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹1499</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-<div class="serviceCard" onclick="openPopup('flowerPopup')">
-
-
-  <div class="imgSlider">
-    <img src="services/flowers1.webp" class="active">
-    <img src="services/flowers1.webp">
-    <img src="services/flowers2.webp">
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">Flower Decoration</div>
-
-    <div class="tags">
-      <span>Wedding Stage</span>
-      <span>Mandap Setup</span>
-      <span>Fresh Flowers</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹2999</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-<div class="serviceCard" onclick="openPopup('ledPopup')">
-
-  <div class="imgSlider">
-    <img src="services/led1.webp" class="active">
-     <img src="services/led2.webp">
-   <img src="services/led3.webp">
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">LED Decoration</div>
-
-    <div class="tags">
-      <span>Birthday Parties</span>
-      <span>Theme Setup</span>
-      <span>Balloons</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹4000</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-<div class="serviceCard" onclick="openPopup('housewarmPopup')">
-
-  <div class="imgSlider">
-    <img src="services/housewarm1.webp" class="active">
-     <img src="services/housewarming2.webp">
-   
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">House Warming Decoration</div>
-
-    <div class="tags">
-      <span>House Openining</span>
-      <span>House Construction</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹1500</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-<div class="serviceCard" onclick="openPopup('templePopup')">
-
-
-  <div class="imgSlider">
-    <img src="services/temples1.webp" class="active">
-     <img src="services/temples2.webp">
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">Temple Decoration</div>
-
-    <div class="tags">
-      <span>All Temples</span>
-    
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹2000</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-<div class="serviceCard" onclick="openPopup('suprisePopup')">
-
-  <div class="imgSlider">
-    <img src="services/Surprise Room Setup1.webp" class="active">
-     <img src="services/Surprise Room Setup2.webp">
-   <img src="services/Surprise Room Setup3.webp">
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">Surprise Room Setup</div>
-
-    <div class="tags">
-      <span>Birthday Parties</span>
-      <span>Aniversary Day</span>
-      <span>Suprise</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹1600</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-
-<div class="serviceCard" onclick="openPopup('partydecPopup')">
-
-  <div class="imgSlider">
-    <img src="services/party1.webp" class="active">
-    <img src="services/party2 (1).webp">
-    <img src="services/party3 (1).webp">
-  </div>
-
-  <div class="cardOverlay">
-    <div class="title">Party Decoration</div>
-
-    <div class="tags">
-      <span>Lighting Setup</span>
-      <span>Stage Lights</span>
-      <span>Outdoor Decor</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹2499</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-<div class="sectionHeader">
-  <h2>Event Booking</h2>
-  <div class="line"></div>
-</div>
-</div>
-
-</div>
-<div class="sectionHeader">
-  <h2>Event Booking</h2>
-  <div class="line"></div>
-</div>
-</div>
-
-
-
-<!-- SERVICES 2 -->
-<div class="serviceList">
-
- <div class="serviceCard" onclick="openPopup('marriagePopup')">
-
-  <div class="videoCard">
-  <video src="services/wedding video.mp4" autoplay muted loop playsinline></video>
-</div>
-  <div class="cardOverlay">
-    <div class="title">Marriage Event</div>
-    <div class="tags">
-  <span>Decoartion</span>
-  <span>Food Supplies</span>
-  <span>Sound System</span>
-</div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹1499</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-<div class="serviceCard" onclick="openPopup('receptionPopup')">
-
- <div class="videoCard">
-  <video src="services/recption event.mp4" autoplay muted loop playsinline></video>
-</div>
-
-  <div class="cardOverlay">
-    <div class="title">Reception Event</div>
-
-    <div class="tags">
-      <span>Wedding Stage</span>
-      <span>Mandap Setup</span>
-      <span>Fresh Flowers</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹2999</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-
-
-
-<div class="serviceCard" onclick="openPopup('celebrationsPopup')">
-
-  <div class="videoCard">
-  <video src="services/party.mp4" autoplay muted loop playsinline></video>
-</div>
-
-  <div class="cardOverlay">
-    <div class="title">Celebration Event</div>
-
-    <div class="tags">
-      <span>Lighting Setup</span>
-      <span>Stage Lights</span>
-      <span>Outdoor Decor</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">₹2499</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-
-</div>
-<div class="makeupHeader">
-  <h2>Makeup Services</h2>
-</div>
-<div class="makeupGrid">
-
-  <!-- MEN -->
-  <div class="makeupCard" onclick="openPopup('menmakeupPopup')">
-    <video src="services/menmakep.mp4 " autoplay muted loop playsinline></video>
-
-    <div class="makeupContent">
-      <div class="makeupTitle">Men Makeup</div>
-      <button class="bookNow">Book Now</button>
-    </div>
-  </div>
-
-  <!-- FEMALE -->
- <div class="makeupCard" onclick="openPopup('femalemakeupPopup')">
-    <video src="services/feamlemakeup.mp4" autoplay muted loop playsinline></video>
-
-    <div class="makeupContent">
-      <div class="makeupTitle">Female Makeup</div>
-      <button class="bookNow">Book Now</button>
-    </div>
-  </div>
-
-</div>
-
-
-<div class="cateringHeader">
-  <span><i class="fa-solid fa-utensils"></i> CATERING</span>
-  <h2>Services</h2>
-</div>
-
-<div class="cateringWrap">
-
-  <!-- TOP ROW -->
-  <div class="cateringRow">
-    <div class="cateringCard" onclick="openPopup('vegPopup')">
-      <img src="services/vegcat1.webp">
-      <div class="cateringOverlay">
-        <div class="cateringTitle">Veg Catering</div>
-        <button class="bookNow">Book Now</button>
-      </div>
-    </div>
-
-       <div class="cateringCard" onclick="openPopup('nonvegPopup')">
-      <img src="services/vegcat2.webp">
-      <div class="cateringOverlay">
-        <div class="cateringTitle">Non-Veg Catering</div>
-        <button class="bookNow">Book Now</button>
+  
+  <div class="topGap"></div>
+
+  <div class="locationBox">
+    <div class="locRow">
+      <i class="fa-solid fa-location-dot"></i>
+      <div>
+        <div class="city" id="city">Detecting...</div>
+        <div class="address" id="address">Please wait...</div>
       </div>
     </div>
   </div>
 
-  <!-- CENTER CARD -->
-  <div class="cateringCenter">
-    <div class="cateringCard center" onclick="openPopup('bothvnPopup')">
-      <img src="services/vegcat3.webp">
-      <div class="cateringOverlay">
-        <div class="cateringTitle">Veg & Non-Veg Catering</div>
-        <button class="bookNow">Book Now</button>
-      </div>
-    </div>
+  <!-- ✅ IMAGE NOW BELOW LOCATION -->
+  <div class="banner">
+    <img src="cleaning/celaning3.png">
   </div>
 
 </div>
 
-
-
-<div class="photoHeaderSide">
-  <i class="fa-solid fa-camera"></i>
-  <span>Photography & Videography</span>
-</div>
+<!-- TITLE -->
+<div class="pageTitle">Cleaning Services</div>
 
 <div class="serviceList">
 
- <div class="serviceCard" onclick="openPopup('photoPopup')">
+  <!-- CARD 1 -->
+<div class="serviceCardFull" onclick="openPopup('homePopup')">
+    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
 
-  <div class="imgSlider">
-    <img src="services/photo1.webp" class="active">
-    <img src="services/photo2.webp">
-     <img src="services/photo3.webp">
+    <div class="overlay">
+      <div class="serviceTitle">Home Cleaning</div>
+
+      <!-- 🔥 POINTS -->
+    <div class="servicePoints">
+  <span>Bedroom</span>
+  <span>Hall</span>
+  <span>Bathroom</span>
+</div>
+      <div class="servicePrice">Starting ₹499</div>
+      <button class="bookBtn">Book Now</button>
+    </div>
   </div>
 
-  <div class="cardOverlay">
-    <div class="title">Photo Shoot</div>
-    <div class="tags">
-  <span>Birthday Events</span>
-  <span>Recption</span>
-  <span>Parks</span>
+  <!-- CARD 2 -->
+<div class="serviceCardFull" onclick="openPopup('kitchenPopup')">
+    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
+
+    <div class="overlay">
+      <div class="serviceTitle">Kitchen Cleaning</div>
+
+      <!-- 🔥 POINTS -->
+     <div class="servicePoints">
+  <span>Bedroom</span>
+  <span>Hall</span>
+  <span>Bathroom</span>
 </div>
 
-    <div class="priceRow">
-      <div class="price">Starting from ₹400</div>
-      <button class="bookBtn">Book</button>
+      <div class="servicePrice">Starting ₹399</div>
+      <button class="bookBtn">Book Now</button>
+    </div>
+  </div>
+<div class="serviceCardFull">
+    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
+
+    <div class="overlay">
+      <div class="serviceTitle">Kitchen Cleaning</div>
+
+      <!-- 🔥 POINTS -->
+     <div class="servicePoints">
+  <span>Bedroom</span>
+  <span>Hall</span>
+  <span>Bathroom</span>
+</div>
+
+      <div class="servicePrice">Starting ₹399</div>
+      <button class="bookBtn">Book Now</button>
     </div>
   </div>
 
 </div>
 
- <div class="serviceCard" onclick="openPopup('videoPopup')">
-
-  <div class="videoCard">
-  <video src="services/videoshoot1.mp4" autoplay muted loop playsinline></video>
-</div>
-
-  <div class="cardOverlay">
-    <div class="title">Video Shotting</div>
-
-    <div class="tags">
-      <span>Wedding Shooting</span>
-      <span>Party Shooting</span>
-      <span>Events Shooting</span>
-    </div>
-
-    <div class="priceRow">
-      <div class="price">Starting from ₹2999</div>
-      <button class="bookBtn">Book</button>
-    </div>
-  </div>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- NAVBAR -->
-<div class="bottomNav">
-  <div class="navItem" id="homeBtn">
-    <i class="fa-solid fa-house"></i>
-    <span>Home</span>
-  </div>
-
-  <div class="navItem active">
-    <i class="fa-solid fa-screwdriver-wrench"></i>
-    <span>Services</span>
-  </div>
-
-  <div class="navItem">
-    <i class="fa-solid fa-cart-shopping"></i>
-    <span>Cart</span>
-  </div>
-
-  <div class="navItem">
-    <i class="fa-solid fa-user"></i>
-    <span>Profile</span>
-  </div>
-</div>
-
-
-<div id="balloonPopup" class="popupPage">
+<div id="homePopup" class="fullPopup">
 
   <!-- HEADER -->
-  <div class="popupHeader">
-<i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
-    <div class="popupTitle">
-  <span>Balloons Decoration</span>
-  <small>Event Setup Service</small>
-</div>
-  </div>
-
-  <!-- IMAGE SCROLL -->
-  <div class="popupSlider" id="slider1">
-    <img src="services/ballons1.webp">
-    <img src="services/ballon2.webp">
-    <img src="services/ballon3.webp">
-  </div>
-
-  <!-- DOTS -->
-  <div class="dots" id="dots1"></div>
-
-  <!-- CONTENT -->
-  <div class="popupContent">
-
-    <div class="popupPrice">
-  <span>Starting from</span>
-  ₹1499
+ <div class="popupHeader">
+  <i class="fa-solid fa-arrow-left" onclick="closePopup('homePopup')"></i>
+  <span class="headerTitle">Home Cleaning</span>
 </div>
 
-<div class="trustRow">
-
-  <div class="trustItem">
-  <i class="fa-solid fa-shield-halved"></i>
-  <span>100% Secured</span>
-</div>
-
-<div class="trustItem">
-  <i class="fa-solid fa-circle-check"></i>
-  <span>Verified Services</span>
-</div>
-
-<div class="trustItem">
-  <i class="fa-solid fa-thumbs-up"></i>
-  <span>Trusted Quality</span>
-</div>
-
-</div>
-    <!-- SAMPLE -->
-    <div class="sampleTitle">Our Samples</div>
-
-    <div class="sampleScroll">
-  <img src="sample1/4.webp" onclick="openImage(this)">
- <img src="sample1/2.webp" onclick="openImage(this)">
- <img src="sample1/10.webp" onclick="openImage(this)">
- <img src="sample1/9.webp" onclick="openImage(this)">
- <img src="sample1/8.webp" onclick="openImage(this)">
- <img src="sample1/7.webp" onclick="openImage(this)">
- <img src="sample1/6.webp" onclick="openImage(this)">
- <img src="sample1/5.webp" onclick="openImage(this)">
- <img src="sample1/1.webp" onclick="openImage(this)">
- <img src="sample1/3.webp" onclick="openImage(this)">
-</div>
-
-    <!-- DETAILS -->
-    <div class="detailTitle">Service Includes :</div>
-
-    <ul class="serviceListText">
-      <li>100+ Balloons Setup</li>
-      <li>All Shapes Available</li>
-      <li>Theme Decoration</li>
-      <li>Wall & Ceiling Setup</li>
-      <li>Name Customization</li>
-      <li>Quick Installation</li>
-    </ul>
-<div class="serviceTypeHeader">
-  <i class="fa-solid fa-tags"></i>
-  <span>Service Type</span>
-</div>
-
-<div class="serviceTags">
-  <span>Birthday Event</span>
-  <span>Marriage</span>
-  <span>Anniversary</span>
-  <span>House Party</span>
-  <span>Baby Shower</span>
-</div>
-
-<div class="whatGetHeaderNew">
-  <div class="iconBox">
-    <i class="fa-solid fa-gift"></i>
-  </div>
-  <div class="textBox">
-    <span>Package Includes</span>
-  </div>
-</div>
-
-<div class="whatGetList">
-  <div class="whatItem"><i class="fa-solid fa-utensils"></i> Food Arrangement</div>
-  <div class="whatItem"><i class="fa-solid fa-music"></i> Sound System</div>
-  <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
-  <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
-</div>
-    <button class="popupBook">Book Now</button>
-
-  </div>
-
-</div>
-
-
-<!-- 2nd popup -->
-
-
-<div id="flowerPopup" class="popupPage">
-
-  <!-- HEADER -->
-  <div class="popupHeader">
-    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
-    <div class="popupTitle">
-  <span>Flowers Decoration</span>
-  <small>Event Setup Service</small>
-</div>
-  </div>
-
-  <!-- IMAGE SCROLL -->
-  <div class="popupSlider" id="slider1">
-    <img src="services/flowers1.webp">
-    <img src="services/flowers2.webp">
-    <img src="services/flowers3.webp">
-  </div>
-
-  <!-- DOTS -->
-  <div class="dots" id="dots1"></div>
-
-  <!-- CONTENT -->
-  <div class="popupContent">
-
-    <div class="popupPrice">
-  <span>Starting from</span>
-  ₹1499
-</div>
-
-<div class="trustRow">
-
-  <div class="trustItem">
-  <i class="fa-solid fa-shield-halved"></i>
-  <span>100% Secured</span>
-</div>
-
-<div class="trustItem">
-  <i class="fa-solid fa-circle-check"></i>
-  <span>Verified Services</span>
-</div>
-
-<div class="trustItem">
-  <i class="fa-solid fa-thumbs-up"></i>
-  <span>Trusted Quality</span>
-</div>
-
-</div>
-    <!-- SAMPLE -->
-    <div class="sampleTitle">Our Samples</div>
-
-    <div class="sampleScroll">
-  <img src="sample1/25.webp" onclick="openImage(this)">
- <img src="sample1/24.webp" onclick="openImage(this)">
- <img src="sample1/23.webp" onclick="openImage(this)">
- <img src="sample1/22.webp" onclick="openImage(this)">
- <img src="sample1/23.webp" onclick="openImage(this)">
- <img src="sample1/22.webp" onclick="openImage(this)">
- <img src="sample1/21.webp" onclick="openImage(this)">
- <img src="sample1/20.webp" onclick="openImage(this)">
- <img src="sample1/19.webp" onclick="openImage(this)">
- <img src="sample1/18.webp" onclick="openImage(this)">
- <img src="sample1/17.webp" onclick="openImage(this)">
- <img src="sample1/16.webp" onclick="openImage(this)">
- <img src="sample1/15.webp" onclick="openImage(this)">
- <img src="sample1/14.webp" onclick="openImage(this)">
- <img src="sample1/13.webp" onclick="openImage(this)">
- <img src="sample1/12.webp" onclick="openImage(this)">
- <img src="sample1/11.webp" onclick="openImage(this)">
-</div>
-
-    <!-- DETAILS -->
-    <div class="detailTitle">Service Includes :</div>
-
-    <ul class="serviceListText">
-      <li>100+ Balloons Setup</li>
-      <li>All Shapes Available</li>
-      <li>Theme Decoration</li>
-      <li>Wall & Ceiling Setup</li>
-      <li>Name Customization</li>
-      <li>Quick Installation</li>
-    </ul>
-<div class="serviceTypeHeader">
-  <i class="fa-solid fa-tags"></i>
-  <span>Service Type</span>
-</div>
-
-<div class="serviceTags">
-  <span>Birthday Event</span>
-  <span>Marriage</span>
-  <span>Anniversary</span>
-  <span>House Party</span>
-  <span>Baby Shower</span>
-</div>
-
-<div class="whatGetHeaderNew">
-  <div class="iconBox">
-    <i class="fa-solid fa-gift"></i>
-  </div>
-  <div class="textBox">
-    <span>Package Includes</span>
-  </div>
-</div>
-
-<div class="whatGetList">
-  <div class="whatItem"><i class="fa-solid fa-utensils"></i> Food Arrangement</div>
-  <div class="whatItem"><i class="fa-solid fa-music"></i> Sound System</div>
-  <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
-  <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
-</div>
-    <button class="popupBook">Book Now</button>
-
-  </div>
-
-</div>
-
-
-<!--3rd popup-->
-
-
-<div id="ledPopup" class="popupPage">
-
-  <!-- HEADER -->
-  <div class="popupHeader">
-    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
-    <div class="popupTitle">
-  <span>Flowers Decoration</span>
-  <small>Event Setup Service</small>
-</div>
-  </div>
-
-  <!-- IMAGE SCROLL -->
-  <div class="popupSlider" id="slider1">
-    <img src="services/led1.webp">
-    <img src="services/led2.webp">
-    <img src="services/led3.webp">
-  </div>
-
-  <!-- DOTS -->
-  <div class="dots" id="dots1"></div>
-
-  <!-- CONTENT -->
-  <div class="popupContent">
-
-    <div class="popupPrice">
-  <span>Starting from</span>
-  ₹1499
-</div>
-
-<div class="trustRow">
-
-  <div class="trustItem">
-  <i class="fa-solid fa-shield-halved"></i>
-  <span>100% Secured</span>
-</div>
-
-<div class="trustItem">
-  <i class="fa-solid fa-circle-check"></i>
-  <span>Verified Services</span>
-</div>
-
-<div class="trustItem">
-  <i class="fa-solid fa-thumbs-up"></i>
-  <span>Trusted Quality</span>
-</div>
-
-</div>
-    <!-- SAMPLE -->
-    <div class="sampleTitle">Our Samples</div>
-
-    <div class="sampleScroll">
-  <img src="sample1/26.webp" onclick="openImage(this)">
- <img src="sample1/27.webp" onclick="openImage(this)">
- <img src="sample1/28.webp" onclick="openImage(this)">
- <img src="sample1/29.webp" onclick="openImage(this)">
- <img src="sample1/30.webp" onclick="openImage(this)">
- <img src="sample1/31.webp" onclick="openImage(this)">
- <img src="sample1/32.webp" onclick="openImage(this)">
- <img src="sample1/33.webp" onclick="openImage(this)">
- <img src="sample1/34.webp" onclick="openImage(this)">
- <img src="sample1/35.webp" onclick="openImage(this)">
- <img src="sample1/36.webp" onclick="openImage(this)">
-
-</div>
-
-    <!-- DETAILS -->
-    <div class="detailTitle">Service Includes :</div>
-
-    <ul class="serviceListText">
-      <li>100+ Balloons Setup</li>
-      <li>All Shapes Available</li>
-      <li>Theme Decoration</li>
-      <li>Wall & Ceiling Setup</li>
-      <li>Name Customization</li>
-      <li>Quick Installation</li>
-    </ul>
-<div class="serviceTypeHeader">
-  <i class="fa-solid fa-tags"></i>
-  <span>Service Type</span>
-</div>
-
-<div class="serviceTags">
-  <span>Birthday Event</span>
-  <span>Marriage</span>
-  <span>Anniversary</span>
-  <span>House Party</span>
-  <span>Baby Shower</span>
-</div>
-
-<div class="whatGetHeaderNew">
-  <div class="iconBox">
-    <i class="fa-solid fa-gift"></i>
-  </div>
-  <div class="textBox">
-    <span>Package Includes</span>
-  </div>
-</div>
-
-<div class="whatGetList">
-  <div class="whatItem"><i class="fa-solid fa-utensils"></i> Food Arrangement</div>
-  <div class="whatItem"><i class="fa-solid fa-music"></i> Sound System</div>
-  <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
-  <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
-</div>
-    <button class="popupBook">Book Now</button>
-
-  </div>
-
-</div>
-
-
-
-<div id="imgViewer" class="imgViewer">
-
-  <i class="fa-solid fa-xmark imgClose" onclick="closeImage()"></i>
-
-  <div class="imgSliderViewer" id="viewerSlider"></div>
-
-</div>
-<div id="appLoader" class="appLoader">
-  <div class="flowerLoader">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-
-
-<div class="footerBlock">
-
-  <!-- LEFT -->
-  <div class="footerLeft">
-    <i class="fa-solid fa-bag-shopping footerIcon"></i>
-    <div class="footerName">CEZZO</div>
-  </div>
-
-  <!-- RIGHT -->
-  <div class="footerRight">
-
-    <div class="footerRow">
-      <i class="fa-regular fa-clock"></i>
-      <span>Everything in Minutes</span>
+  <!-- SLIDER -->
+  <div class="sliderContainer">
+    <div class="slider" id="slider">
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
+      <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
     </div>
 
-    <div class="footerRow">
-      <i class="fa-solid fa-heart"></i>
-      <span>Made with ❤️ in India</span>
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+<div class="popupBody">
+
+  <!-- ⭐ RATING + PRICE (LEFT SIDE STACK) -->
+  <div class="infoBlock">
+    <div class="ratingBox">⭐ 4.8</div>
+
+    <div class="priceBox">
+      <span class="priceLabel">Starting</span>
+      <span class="priceValue">₹499</span>
+    </div>
+      <div class="shortDesc">
+    Deep home cleaning including bedroom, bathroom & full sanitization.
+  </div>
+  </div>
+
+  <!-- ICON BOXES -->
+  <div class="iconGrid">
+    <div class="iconBox">
+      <i class="fa-solid fa-shield-halved"></i>
+      <span>Trusted</span>
     </div>
 
+    <div class="iconBox">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Fast Service</span>
+    </div>
+
+    <div class="iconBox">
+      <i class="fa-solid fa-star"></i>
+      <span>Top Rated</span>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="benefitsBox">
+    <h4>What’s Included</h4>
+
+    <div class="benefitItem">✔ Bedroom Deep Cleaning</div>
+    <div class="benefitItem">✔ Bathroom Sanitization</div>
+    <div class="benefitItem">✔ Hall Cleaning</div>
+    <div class="benefitItem">✔ Floor Mopping</div>
+    <div class="benefitItem">✔ Dust Removal</div>
   </div>
 
 </div>
+  <!-- BUTTON -->
+  <div class="bottomBar">
+    <button class="bookNowFull">Book Now ₹499</button>
+  </div>
+
+</div>
+
+
+
+
+
+
 <script>
+
 const fullAddress = localStorage.getItem("savedAddress");
+
+const cityEl = document.getElementById("city");
+const addressEl = document.getElementById("address");
 
 if(fullAddress){
   const parts = fullAddress.split(",");
-  document.getElementById("city").innerText = parts[1]?.trim() || "Your City";
-  document.getElementById("address").innerText = fullAddress;
+  cityEl.innerText = parts[1]?.trim() || "Your City";
+  addressEl.innerText = fullAddress;
+} else {
+  cityEl.innerText = "Location not set";
+  addressEl.innerText = "Please select location";
 }
-
-document.querySelectorAll(".imgSlider").forEach(slider => {
-  let imgs = slider.querySelectorAll("img");
-  let index = 0;
-
-  setInterval(() => {
-    imgs[index].classList.remove("active");
-    index = (index + 1) % imgs.length;
-    imgs[index].classList.add("active");
-  }, 2500);
-});
-document.getElementById("homeBtn").addEventListener("click", function(){
-
-  // 🔥 skip intro next time
-  sessionStorage.setItem("skipIntro", "true");
-
-  // 🔥 redirect to home page
-  window.location.href = "index.html";
-
-});
 function openPopup(id){
-  document.getElementById(id).style.display = "block";
+  document.getElementById(id).style.display = "flex";
 
-  // 🔥 LOCK BACKGROUND
   document.body.classList.add("popup-open");
 }
 
 function closePopup(id){
   document.getElementById(id).style.display = "none";
 
-  // 🔥 UNLOCK BACKGROUND
   document.body.classList.remove("popup-open");
 }
+const slider = document.getElementById("slider");
+const dots = document.querySelectorAll(".dot");
 
-/* DOTS INIT (call once per popup) */
-function initSlider(sliderId, dotsId){
-  const slider = document.getElementById(sliderId);
-  const dots = document.getElementById(dotsId);
+slider.addEventListener("scroll", () => {
+  let index = Math.round(slider.scrollLeft / slider.clientWidth);
 
-  const images = slider.querySelectorAll("img");
-
-  dots.innerHTML = "";
-
-  images.forEach((_, i) => {
-    let dot = document.createElement("span");
-    if(i === 0) dot.classList.add("active");
-    dots.appendChild(dot);
-  });
-
-  slider.addEventListener("scroll", () => {
-    let index = Math.round(slider.scrollLeft / slider.clientWidth);
-    dots.querySelectorAll("span").forEach(d => d.classList.remove("active"));
-    dots.children[index]?.classList.add("active");
-  });
-}
-
-/* INIT */
-initSlider("slider1","dots1");
-
-
-let allImages = [];
-
-function openImage(el){
-
-  const viewer = document.getElementById("imgViewer");
-  const slider = document.getElementById("viewerSlider");
-
-  viewer.style.display = "flex";
-  document.body.style.overflow = "hidden";
-
-  // 🔥 get all images from same row
-  const parent = el.parentElement;
-  allImages = Array.from(parent.querySelectorAll("img"));
-
-  // clear old images
-  slider.innerHTML = "";
-
-  // add images to slider
-  allImages.forEach(img => {
-    let newImg = document.createElement("img");
-    newImg.src = img.src;
-    slider.appendChild(newImg);
-  });
-
-  // 🔥 scroll to clicked image
-  const index = allImages.indexOf(el);
-
-  // wait for render (important fix)
-  setTimeout(() => {
-    slider.scrollLeft = index * slider.clientWidth;
-  }, 50);
-}
-
-/* CLOSE */
-function closeImage(){
-  document.getElementById("imgViewer").style.display = "none";
-  document.body.style.overflow = "";
-}
-
-/* 🔥 OUTSIDE CLICK CLOSE */
-document.getElementById("imgViewer").addEventListener("click", function(e){
-  if(e.target === this){
-    closeImage();
-  }
+  dots.forEach(d => d.classList.remove("active"));
+  if(dots[index]) dots[index].classList.add("active");
 });
-
-/* 🔥 PREVENT CLOSE WHEN CLICKING IMAGE */
-document.getElementById("viewerSlider").addEventListener("click", function(e){
-  e.stopPropagation();
-});
-
-window.addEventListener("load", function(){
-  document.getElementById("appLoader").style.display = "none";
-});
-function closePopup(el){
-  const popup = el.closest(".popupPage");
-  if(popup){
-    popup.style.display = "none";
-  }
-
-  document.body.style.overflow = "";
-}
 </script>
 
 </body>
