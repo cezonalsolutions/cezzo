@@ -842,22 +842,61 @@ body.popup-open{
   font-size:14px;
 }
 
-/* 🔥 TAGS */
-.serviceTags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+/* 🔥 GRID */
+/* 🔥 HORIZONTAL SCROLL */
+.serviceTypeGrid{
+  display:flex;                 /* 🔥 change from grid */
+  overflow-x:auto;              /* enable horizontal scroll */
+  gap:10px;
+
+  padding-bottom:6px;           /* small spacing */
 }
 
-.serviceTags span{
-  background:#f5f5f5;
-  border-radius:20px;
+/* ❌ HIDE SCROLLBAR */
+.serviceTypeGrid::-webkit-scrollbar{
+  display:none;                 /* Chrome, Safari */
+}
 
-  padding:6px 12px;
+.serviceTypeGrid{
+  -ms-overflow-style:none;      /* IE */
+  scrollbar-width:none;         /* Firefox */
+}
+
+/* CARD */
+.typeCard{
+  flex:0 0 auto;                /* 🔥 important for scroll */
+  width:90px;                   /* fixed width */
+
+  text-align:center;
+}
+
+/* IMAGE */
+.typeCard img{
+  width:100%;
+  height:80px;
+  object-fit:cover;
+
+  border-radius:10px;
+}
+.serviceTypeGrid{
+  scroll-snap-type:x mandatory;
+}
+
+.typeCard{
+  scroll-snap-align:start;
+}
+/* TEXT */
+.typeCard span{
+  display:block;
+  margin-top:5px;
+
   font-size:12px;
-
   color:#333;
 }
+.serviceTypeGrid{
+  scroll-behavior:smooth;
+}
+
 /* FULL SCREEN IMAGE VIEW */
 .imgViewer{
   position:fixed;
@@ -1710,12 +1749,30 @@ body{
   <span>Service Type</span>
 </div>
 
-<div class="serviceTags">
-  <span>Birthday Event</span>
-  <span>Marriage</span>
-  <span>Anniversary</span>
-  <span>House Party</span>
-  <span>Baby Shower</span>
+<div class="serviceTypeGrid">
+
+  <div class="typeCard">
+    <img src="services/bhirthdayevnt.webp">
+    <span>Birthday Event</span>
+  </div>
+
+  <div class="typeCard">
+    <img src="services/marriage event.webp">
+    <span>Marriage</span>
+  </div>
+
+  <div class="typeCard">
+    <img src="services/anversiary.webp">
+    <span>Anniversary</span>
+  </div>
+
+  <div class="typeCard">
+    <img src="services/house party.webp">
+    <span>House Party</span>
+  </div>
+
+  
+
 </div>
 
 <div class="whatGetHeaderNew">
