@@ -4437,55 +4437,40 @@ button:active{
   display:block;
 
   animation:zoomLoop 6s infinite ease-in-out;
-   will-change: transform;
-}
-.scrolling .optCard img{
-  animation-play-state: paused;
 }
 
 /* 🔥 COLOR OVERLAY (key part) */
-
-.optCard::after{
+.optCard::before{
   content:"";
   position:absolute;
   inset:0;
 
+  opacity:0.35;   /* 🔥 controls color strength */
   z-index:1;
-
-  background:
-    linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1)),
-    var(--cardColor, rgba(165,214,167,0.35));
-}
-.optionGrid .optCard:nth-child(1){
-  --cardColor: rgba(165,214,167,0.35);
 }
 
-.optionGrid .optCard:nth-child(2){
-  --cardColor: rgba(255,224,130,0.35);
-}
-
-.optionGrid .optCard:nth-child(3){
-  --cardColor: rgba(128,203,196,0.35);
-}
-
-.optionGrid .optCard:nth-child(4){
-  --cardColor: rgba(206,147,216,0.35);
-}
-
-.optionGrid .optCard:nth-child(5){
-  --cardColor: rgba(144,202,249,0.35);
-}
-
-.optionGrid .optCard:nth-child(6){
-  --cardColor: rgba(255,171,145,0.35);
-}
 /* 🔥 DIFFERENT COLORS */
-#optionScreen{
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+.optionGrid .optCard:nth-child(1)::before{
+  background:#a5d6a7;   /* green */
 }
-.optCard{
-  transform: translateZ(0);
+
+.optionGrid .optCard:nth-child(2)::before{
+  background:#ffe082;   /* yellow */
+}
+
+.optionGrid .optCard:nth-child(3)::before{
+  background:#80cbc4;   /* teal */
+}
+
+.optionGrid .optCard:nth-child(4)::before{
+  background:#ce93d8;   /* purple */
+}
+.optionGrid .optCard:nth-child(5)::before{
+  background:#90caf9;   /* blue */
+}
+
+.optionGrid .optCard:nth-child(6)::before{
+  background:#ffab91;   /* orange */
 }
 
 /* 🔥 TEXT OVER IMAGE */
@@ -4724,16 +4709,7 @@ button:active{
 
   z-index:100;
 }
-.optCard img,
-.leaves span,
-.fruit,
-.homeFloat span,
-.balloonContainer span{
-  animation-play-state: paused;
-}
-.in-view{
-  animation-play-state: running !important;
-}
+
 /* 🔥 BAR */
 .pencilNav{
   width:100%;
@@ -15072,32 +15048,6 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
-let isScrolling;
-
-window.addEventListener("scroll", () => {
-  document.body.classList.add("scrolling");
-
-  clearTimeout(isScrolling);
-  isScrolling = setTimeout(() => {
-    document.body.classList.remove("scrolling");
-  }, 150);
-});
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("in-view");
-    } else {
-      entry.target.classList.remove("in-view");
-    }
-  });
-}, {
-  threshold: 0.1
-});
-
-/* 🔥 TARGET ALL ANIMATED ELEMENTS */
-document.querySelectorAll(
-  '.optCard img, .leaves span, .fruit, .homeFloat span, .balloonContainer span'
-).forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
