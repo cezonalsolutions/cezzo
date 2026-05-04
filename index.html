@@ -4788,6 +4788,17 @@ scroll-behavior:smooth;
 .suggestTag:hover{
   background:#e5e7eb;
 }
+.optCard{
+  position:relative;
+  z-index:10;
+}
+.optCard *{
+  pointer-events:none;
+}
+
+.optCard{
+  pointer-events:auto;
+}
 </style>
 </head>
 
@@ -4888,21 +4899,19 @@ scroll-behavior:smooth;
 
   </div>
 
-  <a href="services.html" style="text-decoration:none; color:inherit;">
   <div class="optCard" id="cizooBtn1">
 
-    <img src="cat/services 1.webp" class="img1 active">
-    <img src="cat/services2.webp" class="img2">
+  <img src="cat/services 1.webp" class="img1 active">
+  <img src="cat/services2.webp" class="img2">
 
-    <div class="cardIcon">
-      <i class="fa-solid fa-bell-concierge"></i>  
-    </div> 
+  <div class="cardIcon">
+    <i class="fa-solid fa-bell-concierge"></i>  
+  </div> 
 
-    <div class="optLabel">Services</div>
-    <div class="optSub">Events Bookings</div>
+  <div class="optLabel">Services</div>
+  <div class="optSub">Events Bookings</div>
 
-  </div>
-</a>
+</div>
 
 <div class="optCard" id="cizooBtn2" onclick="goCleaning()">
     <img src="cat/cleaning.webp">
@@ -4913,6 +4922,8 @@ scroll-behavior:smooth;
     <div class="optLabel">Cleaning</div>
     <div class="optSub">Clean And Grren</div>
   </div>
+
+
 
   <div class="optCard" id="cizooBtn3">
 
@@ -15013,9 +15024,7 @@ document.addEventListener("click", (e)=>{
     resultsBox.style.display = "none";
   }
 });
-document.getElementById("cizooBtn1").onclick = function() {
-  window.location.href = "services.html";
-};
+
 
 window.onload = function(){
 
@@ -15048,6 +15057,9 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
+document.getElementById("cizooBtn1").onclick = function() {
+  window.location.href = "services.html";
+};
 </script>
 </body>
 </html>
