@@ -1517,6 +1517,26 @@ body{
   75% { transform:translateX(-5px); }
   100% { transform:translateX(0); }
 }
+.riceToggleRow{
+  display:flex;
+  gap:10px;
+}
+
+.riceToggleBtn{
+  flex:1;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  background:#f5f5f5;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.riceToggleBtn.active{
+  background:#0f5c5c;
+  color:#fff;
+  border-color:#0f5c5c;
+}
 </style>
 </head>
 
@@ -1839,7 +1859,7 @@ body{
     <div class="tags">
   <span>Birthday Events</span>
   <span>Recption</span>
-  <span>Parks</span>
+  <span>Marriages</span>
 </div>
 
     <div class="priceRow">
@@ -3660,7 +3680,7 @@ Home Decoration</span>
 <div class="riceItem"data-price="11" data-type="veg">
   <img src="veg catering/9.webp" class="riceThumb" alt="Punugulu">
   <div class="riceInfo">
-    <h3 class="riceName">Punugulu</h3>
+    <h3 class="riceName">Pun Makhana</h3>
     <p class="riceText">Crispy deep-fried snack made from dosa batter, perfect for starters.</p>
     <div class="riceRow">
       <button class="riceAdd">Add</button>
@@ -3987,7 +4007,219 @@ Home Decoration</span>
     </div>
   </div>
 </div>
+<div class="riceSideHead">Non Veg</div>
+<div class="riceItem" data-price="40" data-type="veg">
+  <img src="nonveg catering/1.webp" class="riceThumb" alt="Chicken 65">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken 65</h3>
+    <p class="riceText">Spicy deep-fried chicken tossed in traditional South Indian masala.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="35" data-type="veg">
+  <img src="nonveg catering/2.webp" class="riceThumb" alt="Chicken Leg Piece">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Leg Piece</h3>
+    <p class="riceText">Juicy fried chicken leg piece marinated with flavorful spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="nonveg catering/3.webp" class="riceThumb" alt="Egg Bajji">
+  <div class="riceInfo">
+    <h3 class="riceName">Egg Bajji</h3>
+    <p class="riceText">Boiled egg coated in spicy batter and deep fried crispy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/4.webp" class="riceThumb" alt="Chicken Lollipop">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Lollipop</h3>
+    <p class="riceText">Crispy chicken wings tossed in spicy and tangy sauce.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="40" data-type="veg">
+  <img src="nonveg catering/5.webp" class="riceThumb" alt="Chicken Dum Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Dum Biryani</h3>
+    <p class="riceText">Aromatic basmati rice cooked with tender chicken and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="40" data-type="veg">
+  <img src="nonveg catering/6.webp" class="riceThumb" alt="Chicken Fry Piece Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Fry Piece Biryani</h3>
+    <p class="riceText">Biryani served with crispy fried chicken pieces.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/7.webp" class="riceThumb" alt="Chicken Pulao">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Pulao</h3>
+    <p class="riceText">Lightly spiced rice cooked with chicken and herbs.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="nonveg catering/8.webp" class="riceThumb" alt="Plain Rice">
+  <div class="riceInfo">
+    <h3 class="riceName">Plain Rice</h3>
+    <p class="riceText">Steamed white rice served fresh and hot.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="45" data-type="veg">
+  <img src="nonveg catering/9.webp" class="riceThumb" alt="Prawn Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Prawn Biryani</h3>
+    <p class="riceText">Flavorful biryani made with fresh prawns and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="20" data-type="veg">
+  <img src="nonveg catering/10.webp" class="riceThumb" alt="Chicken Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Curry</h3>
+    <p class="riceText">Rich and spicy chicken curry cooked in traditional style.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/11.webp" class="riceThumb" alt="Mutton Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Mutton Curry</h3>
+    <p class="riceText">Tender mutton cooked in thick spicy gravy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
 
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/12.webp" class="riceThumb" alt="Fish Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Fish Curry</h3>
+    <p class="riceText">Spicy and tangy fish curry cooked in traditional Andhra style.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="32" data-type="veg">
+  <img src="nonveg catering/13.webp" class="riceThumb" alt="Gongura Chicken">
+  <div class="riceInfo">
+    <h3 class="riceName">Gongura Chicken</h3>
+    <p class="riceText">Chicken cooked with tangy gongura leaves and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="nonveg catering/14.webp" class="riceThumb" alt="Sambar">
+  <div class="riceInfo">
+    <h3 class="riceName">Sambar</h3>
+    <p class="riceText">Traditional lentil soup with vegetables and aromatic spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="nonveg catering/15.webp" class="riceThumb" alt="Rasam">
+  <div class="riceInfo">
+    <h3 class="riceName">Rasam</h3>
+    <p class="riceText">Hot and tangy South Indian soup with pepper and tamarind.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="8" data-type="veg">
+  <img src="nonveg catering/16.webp" class="riceThumb" alt="Appadam">
+  <div class="riceInfo">
+    <h3 class="riceName">Appadam</h3>
+    <p class="riceText">Crispy fried papad to complement your meal.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="9" data-type="veg">
+  <img src="nonveg catering/17.webp" class="riceThumb" alt="Curd">
+  <div class="riceInfo">
+    <h3 class="riceName">Curd</h3>
+    <p class="riceText">Fresh and creamy curd to complete your meal.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/18.webp" class="riceThumb" alt="Chicken Pickle">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Pickle</h3>
+    <p class="riceText">Spicy homemade chicken pickle with rich flavors.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="34" data-type="veg">
+  <img src="nonveg catering/19.webp" class="riceThumb" alt="Prawn Pickle">
+  <div class="riceInfo">
+    <h3 class="riceName">Prawn Pickle</h3>
+    <p class="riceText">Tangy and spicy prawn pickle packed with flavor.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="31" data-type="veg">
+  <img src="nonveg catering/20.webp" class="riceThumb" alt="Fish Special">
+  <div class="riceInfo">
+    <h3 class="riceName">Fish Special</h3>
+    <p class="riceText">Fresh fish cooked or fried with rich coastal spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="ricePlateBox">
+
+  <div class="ricePlateTitle">Catering Boys Required?</div>
+
+  <div class="riceToggleRow">
+    <button class="riceToggleBtn active" id="boysYes">Yes</button>
+    <button class="riceToggleBtn" id="boysNo">No</button>
+  </div>
+
+</div>
 <div class="ricePlateBox">
 
   <h3 class="ricePlateTitle">Number of Plates</h3>
@@ -4064,12 +4296,7 @@ document.getElementById("homeBtn").addEventListener("click", function(){
   window.location.href = "index.html";
 
 });
-function openPopup(id){
-  document.getElementById(id).style.display = "block";
 
-  // 🔥 LOCK BACKGROUND
-  document.body.classList.add("popup-open");
-}
 
 
 /* DOTS INIT (call once per popup) */
@@ -4152,24 +4379,39 @@ document.getElementById("viewerSlider").addEventListener("click", function(e){
 window.addEventListener("load", function(){
   document.getElementById("appLoader").style.display = "none";
 });
+
+let scrollPosition = 0;
+
+// 🔥 OPEN POPUP (NO JUMP)
 function openPopup(id){
+
+  scrollPosition = window.scrollY; // save position
+
   const popup = document.getElementById(id);
   popup.style.display = "block";
 
-  // LOCK SCROLL
-  document.body.classList.add("popup-open");
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollPosition}px`;
+  document.body.style.width = "100%";
 }
 
+
+// 🔥 CLOSE POPUP (RESTORE POSITION)
 function closePopup(el){
+
   const popup = el.closest(".popupPage");
 
   if(popup){
     popup.style.display = "none";
   }
 
-  // 🔥 ALWAYS UNLOCK
-  document.body.classList.remove("popup-open");
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+
+  window.scrollTo(0, scrollPosition);
 }
+
 function toggleFAQ(el){
   const item = el.parentElement;
 
@@ -4322,7 +4564,43 @@ function shakeElement(el){
     el.classList.remove("shake");
   }, 400);
 }
+let cateringBoys = true; // 🔥 default YES
 
+const boysYes = document.getElementById("boysYes");
+const boysNo = document.getElementById("boysNo");
+
+// Load saved state
+const savedBoys = localStorage.getItem("cateringBoys");
+if(savedBoys !== null){
+  cateringBoys = savedBoys === "true";
+}
+
+updateToggleUI();
+
+boysYes.addEventListener("click", () => {
+  cateringBoys = true;
+  saveToggle();
+});
+
+boysNo.addEventListener("click", () => {
+  cateringBoys = false;
+  saveToggle();
+});
+
+function saveToggle(){
+  localStorage.setItem("cateringBoys", cateringBoys);
+  updateToggleUI();
+}
+
+function updateToggleUI(){
+  if(cateringBoys){
+    boysYes.classList.add("active");
+    boysNo.classList.remove("active");
+  } else {
+    boysNo.classList.add("active");
+    boysYes.classList.remove("active");
+  }
+}
 
 </script>
 
