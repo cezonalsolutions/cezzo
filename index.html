@@ -30,6 +30,8 @@ body{
   background:#ffffff;
   font-family:'Outfit',sans-serif;
   color:#fff;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mainText{
@@ -214,7 +216,7 @@ overflow:hidden;
 
 #main{
   display:none;
-  height:100vh;
+ min-height:100vh;
   justify-content:center;
   align-items:center;
   flex-direction:column;
@@ -250,6 +252,7 @@ overflow:hidden;
 
 #home{
   display:none;
+  height:auto;
  min-height:100vh;
   padding:15px;
   background:#ffffff;   /* ✅ white background */
