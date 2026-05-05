@@ -23,14 +23,13 @@
 <link rel="stylesheet"
 href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
   overflow-y:auto; 
   background:#ffffff;
   font-family:'Outfit',sans-serif;
   color:#fff;
-  overflow-y:auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .mainText{
@@ -215,7 +214,7 @@ overflow:hidden;
 
 #main{
   display:none;
- min-height:100vh;
+  height:100vh;
   justify-content:center;
   align-items:center;
   flex-direction:column;
@@ -251,7 +250,6 @@ overflow:hidden;
 
 #home{
   display:none;
-  height:auto;
  min-height:100vh;
   padding:15px;
   background:#ffffff;   /* ✅ white background */
@@ -349,11 +347,9 @@ input, textarea{
   padding:14px 8px 14px 0; /* ✅ left gap removed */
 
   max-width:100%;
- touch-action: pan-x;  
+
   scrollbar-width:none;
   scroll-behavior:smooth;
-  -webkit-overflow-scrolling: touch;
-
 }
 
 .categories::-webkit-scrollbar{
@@ -1416,7 +1412,7 @@ padding-top:55px; /* DELETE THIS */
   display:flex;
   gap:12px;
   padding:12px 10px;
-touch-action: pan-x; 
+
   overflow-x:auto;
   overflow-y:hidden;
 -webkit-overflow-scrolling:touch;
@@ -1541,9 +1537,7 @@ touch-action: pan-x;
 
   text-decoration: line-through;   /* ✅ ADD THIS */
 }
-* {
-  -webkit-tap-highlight-color: transparent;
-}
+
 /* POPUP FULL SCREEN */
 .popup{
   position:fixed;
@@ -1566,7 +1560,6 @@ left:0;
   transition:all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 
   pointer-events:none;
-  -webkit-overflow-scrolling: touch;
 }
 #popup .topIcons,
 #popup .dots,
@@ -2352,13 +2345,14 @@ left:0;
 #productPopup {
   z-index: 11000;
 }
-html, body {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+/* 🔒 Prevent background scrolling when popup is open */
+html.popup-open,
 body.popup-open{
-  overflow:hidden;
+  overflow:hidden !important;
+  position:fixed;
+  width:100%;
+  height:100%;
+  scrollbar-width:none; /* Firefox */
 }
 
 body.popup-open::-webkit-scrollbar{
