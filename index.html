@@ -413,12 +413,14 @@ input, textarea{
   background:#fff;
   transition:0.4s;
 
-  margin: -15px;     /* ✅ remove side gaps */
-  padding: 15px;     /* keep spacing inside */
-padding-top:55px; /* DELETE THIS */
-  padding-bottom:10px;
+  margin:-15px;
+  padding:15px;
 
-  border-radius:0;   /* ❌ remove rounded corners */
+  /* ✅ SAFE WAY */
+  padding-top: calc(15px + 55px);
+
+  padding-bottom:10px;
+  border-radius:0;
 }
 #success{
   animation:slideDown 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
