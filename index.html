@@ -410,32 +410,6 @@ input, textarea{
   text-align:center;
   white-space:nowrap;
 }
-.bottomNav{
-  background:red !important;
-  opacity:0.5 !important;
-}
-
-.cartBar{
-  background:blue !important;
-  opacity:0.5 !important;
-}
-
-.miniCart{
-  background:green !important;
-  opacity:0.5 !important;
-}
-
-.popup{
-  background:rgba(255,0,255,0.15) !important;
-}
-
-.leaves,
-.fruitRain,
-.confettiContainer,
-.homeFloat,
-.balloonContainer{
-  background:rgba(255,255,0,0.2) !important;
-}
 #topSection{
   background:#fff;
   transition:0.4s;
@@ -2203,17 +2177,30 @@ left:0;
 }
 
 /* GRID */
-.midGrid{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr); /* ✅ ALWAYS 4 per row */
-  gap:10px;
-}
+
 .midCategory{
   margin:14px 10px 8px;  /* little more space */
 }
 /* ITEM */
+.midGrid{
+  display:flex;
+  gap:10px;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  -webkit-overflow-scrolling:touch;
+
+  scrollbar-width:none;
+}
+
+.midGrid::-webkit-scrollbar{
+  display:none;
+}
+
 .midItem{
-  width:100%;        /* ❌ remove 23% */
+  min-width:80px;
+  flex-shrink:0;
   text-align:center;
 }
 /* IMAGE */
@@ -2378,10 +2365,7 @@ left:0;
 html.popup-open,
 body.popup-open{
   overflow:hidden !important;
-  position:fixed;
-  width:100%;
-  height:100%;
-  scrollbar-width:none; /* Firefox */
+  scrollbar-width:none;
 }
 
 body.popup-open::-webkit-scrollbar{
@@ -3189,21 +3173,7 @@ font-weight:600;
   border-color:#0f5c5c;
   box-shadow:0 0 0 2px rgba(15,92,92,0.1);
 }
-.productCard img,
-.productCard2 img,
-.pName,
-.pName2,
-.brand2,
-.pPrice,
-.pPrice2{
-  pointer-events:none;
-}
 
-.addBtn,
-.addBtn2,
-.cartControl{
-  pointer-events:auto;
-}
 /* BUTTON */
 #applyPromoBtn{
   background:#0f5c5c;
@@ -5114,7 +5084,6 @@ scroll-behavior:smooth;
   <div class="contentRight">
     <img src="cat/image1.webp" alt="fresh">
   </div>
-  
 </div>
 
 <div id="productSection">
