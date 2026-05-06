@@ -407,7 +407,10 @@ input, textarea{
   height:96%;
   object-fit:contain;
 }
-
+body{
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
 /* TEXT */
 .catText{
   font-size:11px;
@@ -415,6 +418,10 @@ input, textarea{
   color:#444;
   text-align:center;
   white-space:nowrap;
+}
+#contentSection{
+  position: relative;
+  z-index: 4;
 }
 #topSection{
   background:#fff;
@@ -428,6 +435,9 @@ input, textarea{
 
   padding-bottom:10px;
   border-radius:0;
+}
+#topSection{
+  overflow: visible;   /* 🔥 VERY IMPORTANT */
 }
 #success{
   animation:slideDown 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
