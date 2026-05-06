@@ -2177,30 +2177,17 @@ left:0;
 }
 
 /* GRID */
-
+.midGrid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr); /* ✅ ALWAYS 4 per row */
+  gap:10px;
+}
 .midCategory{
   margin:14px 10px 8px;  /* little more space */
 }
 /* ITEM */
-.midGrid{
-  display:flex;
-  gap:10px;
-
-  overflow-x:auto;
-  overflow-y:hidden;
-
-  -webkit-overflow-scrolling:touch;
-
-  scrollbar-width:none;
-}
-
-.midGrid::-webkit-scrollbar{
-  display:none;
-}
-
 .midItem{
-  min-width:80px;
-  flex-shrink:0;
+  width:100%;        /* ❌ remove 23% */
   text-align:center;
 }
 /* IMAGE */
