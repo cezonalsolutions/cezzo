@@ -6805,7 +6805,21 @@ Please use Cash on Delivery.
 </div>
 </div>
 
-
+<div id="debugBox"
+style="
+position:fixed;
+top:10px;
+left:10px;
+z-index:999999;
+background:black;
+color:lime;
+padding:10px;
+font-size:12px;
+max-width:90%;
+word-break:break-word;
+">
+debug
+</div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -15066,6 +15080,32 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
+
+const debug = document.getElementById("debugBox");
+
+document.querySelectorAll('.productGrid').forEach(grid=>{
+
+  grid.addEventListener('touchstart', e=>{
+    debug.innerHTML = "TOUCHSTART: " + e.target.className;
+  });
+
+  grid.addEventListener('touchmove', e=>{
+    debug.innerHTML = "TOUCHMOVE";
+  });
+
+  grid.addEventListener('scroll', e=>{
+    debug.innerHTML = "SCROLLING";
+  });
+
+});
+
+document.addEventListener('touchmove', e=>{
+  debug.innerHTML =
+    "PAGE TOUCH: " +
+    e.target.className;
+},{passive:true});
+
+
 </script>
 </body>
 </html>
