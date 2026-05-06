@@ -418,7 +418,7 @@ input, textarea{
   padding:15px;
 
   /* ✅ SAFE WAY */
-  padding-top: calc(15px + 52px);
+  padding-top: calc(15px + 55px);
 
   padding-bottom:10px;
   border-radius:0;
@@ -2352,7 +2352,10 @@ left:0;
 html.popup-open,
 body.popup-open{
   overflow:hidden !important;
-  scrollbar-width:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  scrollbar-width:none; /* Firefox */
 }
 
 body.popup-open::-webkit-scrollbar{
