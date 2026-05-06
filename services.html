@@ -1537,6 +1537,313 @@ body{
   color:#fff;
   border-color:#0f5c5c;
 }
+.cameraSection{
+  margin-top:20px;
+}
+
+.cameraTitle{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:14px;
+  color:#111;
+}
+
+.cameraWrap{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.cameraItem{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+
+.cameraItem i{
+  font-size:20px;
+  color:#ff4d6d;
+}
+
+.cameraItem p{
+  font-size:14px;
+  font-weight:500;
+  color:#222;
+  line-height:1.4;
+}
+.shootInfoSection{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  margin-top:24px;
+}
+
+.shootInfoCard{
+  position:relative;
+  overflow:hidden;
+
+  padding:24px 20px;
+  border-radius:24px;
+
+  color:#fff;
+
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+.shootInfoCard h3{
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:12px;
+  line-height:1.3;
+}
+
+.shootInfoCard p{
+  font-size:14px;
+  line-height:1.7;
+  opacity:0.96;
+}
+
+/* THEMES */
+
+.weddingTheme{
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+}
+
+.casualTheme{
+  background:linear-gradient(135deg,#5b86ff,#7f9cff);
+}
+
+.fashionTheme{
+  background:linear-gradient(135deg,#8e44ad,#b06ab3);
+}
+
+.eventTheme{
+  background:linear-gradient(135deg,#ff9966,#ff5e62);
+}
+
+.droneTheme{
+  background:linear-gradient(135deg,#11998e,#38ef7d);
+}
+/* FULL POPUP */
+.bookingPopup{
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:#fff;
+
+  z-index:999999;
+
+  display:none;
+  flex-direction:column;
+
+  overflow-y:auto;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+/* HEADER */
+.bookingHeader{
+  position:sticky;
+  top:0;
+
+  background:#fff;
+
+  padding:18px 16px;
+  padding-top:55px;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  border-bottom:1px solid #eee;
+
+  z-index:10;
+}
+
+/* CLOSE */
+.bookingClose{
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  background:#f5f5f5;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:18px;
+  color:#222;
+
+  cursor:pointer;
+}
+
+/* TITLE */
+.bookingHeader h2{
+  font-size:20px;
+  font-weight:700;
+  color:#111;
+}
+
+/* CONTENT */
+.bookingContent{
+  padding:18px 16px 30px;
+}
+
+/* FIELD */
+.bookingField{
+  margin-bottom:18px;
+}
+
+/* LABEL */
+.bookingField label{
+  display:block;
+
+  font-size:14px;
+  font-weight:600;
+
+  margin-bottom:8px;
+
+  color:#222;
+}
+
+/* INPUT */
+.bookingField input,
+.bookingField textarea{
+  width:100%;
+
+  padding:14px;
+
+  border-radius:14px;
+  border:1px solid #e4e4e4;
+
+  font-size:14px;
+
+  outline:none;
+  box-sizing:border-box;
+
+  font-family:'Outfit',sans-serif;
+}
+
+/* TEXTAREA */
+.bookingField textarea{
+  min-height:110px;
+  resize:none;
+}
+
+/* DETECT BUTTON */
+.detectBtn{
+  width:100%;
+
+  border:none;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  font-size:14px;
+  font-weight:600;
+
+  margin-bottom:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+/* ORDER BUTTON */
+.placeOrderBtn{
+  width:100%;
+
+  border:none;
+
+  background:#ff4d6d;
+  color:#fff;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  font-size:16px;
+  font-weight:700;
+}
+/* SELECT FIELDS */
+
+.bookingField select{
+
+  width:100%;
+
+  padding:14px 16px;
+
+  border:none;
+
+  outline:none;
+
+  border-radius:14px;
+
+  background:#f5f5f5;
+
+  font-size:15px;
+
+  color:#222;
+
+  margin-top:8px;
+
+  font-family:inherit;
+
+  transition:0.3s;
+
+  cursor:pointer;
+
+}
+
+
+
+/* FOCUS EFFECT */
+
+.bookingField select:focus{
+
+  background:#fff;
+
+  box-shadow:0 0 0 2px #ff4d6d33;
+
+}
+
+
+
+/* OPTION STYLE */
+
+.bookingField select option{
+
+  color:#222;
+
+}
+
+
+
+/* HIDDEN FIELDS */
+
+#decorationTypeField,
+#eventTypeField{
+
+  display:none;
+
+}
 </style>
 </head>
 
@@ -2049,7 +2356,7 @@ body{
   <div class="whatItem"><i class="fa-solid fa-wand-magic-sparkles"></i> Decoration Setup</div>
   <div class="whatItem"><i class="fa-solid fa-truck-fast"></i> Free Setup & Delivery</div>
 </div>
-    <button class="popupBook">Book Now</button>
+    <button class="popupBook" id="balloonBookBtn">Book Now</button>
 
   </div>
 
@@ -2205,7 +2512,7 @@ Entrance Decoration </span>
   </div>
 
 </div>
-    <button class="popupBook">Book Now</button>
+    <button class="popupBook" id="flowerBookBtn">Book Now</button>
 
   </div>
 
@@ -2358,7 +2665,7 @@ Building Decoration</span>
   </div>
 
 </div>
-    <button class="popupBook">Book Now</button>
+   <button class="popupBook" id="ledBookBtn">Book Now</button>
 
   </div>
 
@@ -2521,7 +2828,7 @@ Home Decoration</span>
 
 </div>
 
-    <button class="popupBook">Book Now</button>
+   <button class="popupBook" id="housewarmBookBtn">Book Now</button>
 
   </div>
 
@@ -2715,7 +3022,7 @@ Home Decoration</span>
 
 </div>
 
-    <button class="popupBook">Book Now</button>
+   <button class="popupBook" id="templeBookBtn">Book Now</button>
 
   </div>
 
@@ -2869,7 +3176,7 @@ Home Decoration</span>
 
 </div>
 
-    <button class="popupBook">Book Now</button>
+    <button class="popupBook" id="supriseBookBtn">Book Now</button>
 
   </div>
 
@@ -3079,7 +3386,7 @@ Home Decoration</span>
 
 </div>
 
-    <button class="popupBook">Book Now</button>
+   <button class="popupBook" id="marriageBookBtn">Book Now</button>
 
   </div>
 
@@ -3241,7 +3548,7 @@ Home Decoration</span>
 
 </div>
   
-    <button class="popupBook">Book Now</button>
+   <button class="popupBook" id="receptionBookBtn">Book Now</button>
 
   </div>
 
@@ -3405,7 +3712,7 @@ Home Decoration</span>
 
 </div>
 
-<button class="popupBook">Book Beautician Now</button>
+<button class="popupBook" id="femaleBookBtn">Book Now</button>
   </div>
 
 </div>
@@ -3557,7 +3864,7 @@ Home Decoration</span>
 
 </div>
 
-<button class="popupBook">Book Now</button>
+<button class="popupBook" id="maleBookBtn">Book Now</button>
   </div>
 
 </div>
@@ -4265,6 +4572,531 @@ Home Decoration</span>
 </div>
 
 
+<!-- photo shoot-->
+<div id="photoPopup" class="popupPage">
+
+  <!-- HEADER -->
+  <div class="popupHeader">
+    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
+    <div class="popupTitle">
+  <span>Photo Shoot</span>
+  <small>All Type of Photo Shhot</small>
+</div>
+  </div>
+
+  <!-- IMAGE SCROLL -->
+  <div class="popupSlider" id="slider1">
+    <img src="photoshoot/1.webp">
+    <img src="photoshoot/3.webp">
+    <img src="photoshoot/2.webp">
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots" id="dots1"></div>
+
+  <!-- CONTENT -->
+  <div class="popupContent">
+
+    <div class="popupPrice">
+  <span>Starting from</span>
+  ₹1000
+</div>
+
+<div class="trustRow">
+
+  <div class="trustItem">
+  <i class="fa-solid fa-shield-halved"></i>
+  <span>100% Secured</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-circle-check"></i>
+  <span>Verified Services</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-thumbs-up"></i>
+  <span>Trusted Quality</span>
+</div>
+
+</div>
+    <!-- SAMPLE -->
+    <div class="sampleTitle">Our Samples</div>
+
+    <div class="sampleScroll">
+  <img src="photoshoot/2.webp" onclick="openImage(this)">
+   <img src="photoshoot/3.webp" onclick="openImage(this)">
+   <img src="photoshoot/4.webp" onclick="openImage(this)">
+   <img src="photoshoot/5.webp" onclick="openImage(this)">
+   <img src="photoshoot/6.webp" onclick="openImage(this)">
+   <img src="photoshoot/7.webp" onclick="openImage(this)">
+  
+  
+  
+  
+  
+ 
+
+</div>
+
+<!-- CAMERA & SHOOT TYPES -->
+<div class="cameraSection">
+
+  <div class="cameraTitle">
+    <span>Camera & Shoot Types</span>
+  </div>
+
+  <div class="cameraWrap">
+
+    <div class="cameraItem">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <p>iPhone Cinematic Photoshoot & Reel Coverage</p>
+    </div>
+
+    <div class="cameraItem">
+      <i class="fa-solid fa-camera-retro"></i>
+      <p>Professional DSLR Camera Photography</p>
+    </div>
+
+    <div class="cameraItem">
+      <i class="fa-solid fa-helicopter"></i>
+      <p>Drone Aerial Photography & Video Coverage</p>
+    </div>
+
+  </div>
+
+</div>
+    <!-- DETAILS -->
+<div class="serviceTypeHeader">
+  <i class="fa-solid fa-tags"></i>
+  <span>Service Type</span>
+</div>
+
+<div class="hwTypeWrap">
+
+  <div class="hwItem">Wedding Photoshoot</div>
+  <div class="hwItem">Pre-Wedding Photoshoot</div>
+  <div class="hwItem">Couple Photoshoot</div>
+  <div class="hwItem">Engagement Photography</div>
+  <div class="hwItem">Fashion & Portfolio Shoot</div>
+  <div class="hwItem">Birthday & Event Photoshoot</div>
+  <div class="hwItem">Outdoor & Indoor Photography</div>
+  <div class="hwItem">Cinematic Video Shoot</div>
+
+</div>
+<!-- PHOTOSHOOT INFO SECTION -->
+<div class="shootInfoSection">
+
+  <div class="shootInfoCard weddingTheme">
+    <h3>Wedding & Couple Photoshoots</h3>
+
+    <p>
+      Capture every beautiful emotion with professional wedding,
+      pre-wedding and couple photography sessions designed to
+      create timeless memories with cinematic quality.
+    </p>
+  </div>
+
+  <div class="shootInfoCard casualTheme">
+    <h3>Birthday & Casual Photoshoots</h3>
+
+    <p>
+      Celebrate special moments with creative birthday,
+      casual and personal photoshoots perfect for social media,
+      memories and event celebrations.
+    </p>
+  </div>
+
+  <div class="shootInfoCard fashionTheme">
+    <h3>Fashion & Portfolio Shoots</h3>
+
+    <p>
+      Professional portfolio and fashion photography sessions
+      crafted for models, influencers, creators and personal
+      branding with stylish cinematic editing.
+    </p>
+  </div>
+
+  <div class="shootInfoCard eventTheme">
+    <h3>Event & Party Photography</h3>
+
+    <p>
+      Cover birthdays, engagements, receptions, corporate events
+      and celebrations with high-quality photography and cinematic
+      video coverage for unforgettable memories.
+    </p>
+  </div>
+
+  <div class="shootInfoCard droneTheme">
+    <h3>Drone & Cinematic Coverage</h3>
+
+    <p>
+      Experience premium aerial drone photography and cinematic
+      reel shoots that add a creative and professional touch
+      to weddings, events and outdoor sessions.
+    </p>
+  </div>
+
+</div>
+
+<div class="whatGetHeaderNew">
+  <div class="iconBox">
+    <i class="fa-solid fa-gift"></i>
+  </div>
+  <div class="textBox">
+  <span>Package Includes</span>
+</div>
+</div>
+
+<div class="whatGetList">
+
+  <div class="whatItem">
+    <i class="fa-solid fa-camera"></i>
+    Professional Wedding & Event Photoshoots
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-image"></i>
+    Pre-Wedding & Couple Photography Sessions
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-video"></i>
+    Cinematic Video & Reel Shoot Coverage
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-location-dot"></i>
+    Indoor & Outdoor Shoot Locations
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-user-group"></i>
+    Family, Friends & Group Photography
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    Professional Editing & Color Enhancement
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-clock"></i>
+    On-time Service with Professional Support
+  </div>
+
+</div>
+<button class="popupBook" id="photoBookBtn">Book Now</button>
+  </div>
+
+</div>
+
+
+<div id="videoPopup" class="popupPage">
+
+  <!-- HEADER -->
+  <div class="popupHeader">
+    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
+    <div class="popupTitle">
+  <span>Video Shoot</span>
+  <small>All Type of Video Shhot</small>
+</div>
+  </div>
+
+  <!-- IMAGE SCROLL -->
+  <div class="popupSlider" id="slider1">
+    <img src="videoshoot/1.webp">
+    <img src="videoshoot/2.webp">
+    <img src="videoshoot/3.webp">
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots" id="dots1"></div>
+
+  <!-- CONTENT -->
+  <div class="popupContent">
+
+    <div class="popupPrice">
+  <span>Starting from</span>
+  ₹1000
+</div>
+
+<div class="trustRow">
+
+  <div class="trustItem">
+  <i class="fa-solid fa-shield-halved"></i>
+  <span>100% Secured</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-circle-check"></i>
+  <span>Verified Services</span>
+</div>
+
+<div class="trustItem">
+  <i class="fa-solid fa-thumbs-up"></i>
+  <span>Trusted Quality</span>
+</div>
+
+</div>
+    <!-- SAMPLE -->
+    <div class="sampleTitle">Our Samples</div>
+
+    <div class="sampleScroll">
+  <img src="videoshoot/4.webp" onclick="openImage(this)">
+ <img src="videoshoot/3.webp" onclick="openImage(this)">
+
+   <img src="videoshoot/2.webp" onclick="openImage(this)">
+
+   <img src="videoshoot/1.webp" onclick="openImage(this)">
+
+   <img src="videoshoot/5.webp" onclick="openImage(this)">
+
+   <img src="videoshoot/6.webp" onclick="openImage(this)">
+
+   <img src="videoshoot/7.webp" onclick="openImage(this)">
+
+  
+  
+  
+  
+  
+  
+ 
+
+</div>
+
+<!-- CAMERA & SHOOT TYPES -->
+<div class="cameraSection">
+
+  <div class="cameraTitle">
+    <span>Shoot Types</span>
+  </div>
+
+  <div class="cameraWrap">
+
+    <div class="cameraItem">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <p>iPhone Cinematic Photoshoot & Reel Coverage</p>
+    </div>
+
+    <div class="cameraItem">
+      <i class="fa-solid fa-camera-retro"></i>
+      <p>Professional DSLR Camera Photography</p>
+    </div>
+
+    <div class="cameraItem">
+      <i class="fa-solid fa-helicopter"></i>
+      <p>Drone Aerial Photography & Video Coverage</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PHOTOSHOOT INFO SECTION -->
+<div class="shootInfoSection">
+
+  <div class="shootInfoCard weddingTheme">
+    <h3>Wedding & Couple Photoshoots</h3>
+
+    <p>
+      Capture every beautiful emotion with professional wedding,
+      pre-wedding and couple photography sessions designed to
+      create timeless memories with cinematic quality.
+    </p>
+  </div>
+
+  <div class="shootInfoCard casualTheme">
+    <h3>Birthday & Casual Photoshoots</h3>
+
+    <p>
+      Celebrate special moments with creative birthday,
+      casual and personal photoshoots perfect for social media,
+      memories and event celebrations.
+    </p>
+  </div>
+
+  <div class="shootInfoCard fashionTheme">
+    <h3>Fashion & Portfolio Shoots</h3>
+
+    <p>
+      Professional portfolio and fashion photography sessions
+      crafted for models, influencers, creators and personal
+      branding with stylish cinematic editing.
+    </p>
+  </div>
+
+  <div class="shootInfoCard eventTheme">
+    <h3>Event & Party Photography</h3>
+
+    <p>
+      Cover birthdays, engagements, receptions, corporate events
+      and celebrations with high-quality photography and cinematic
+      video coverage for unforgettable memories.
+    </p>
+  </div>
+
+  <div class="shootInfoCard droneTheme">
+    <h3>Drone & Cinematic Coverage</h3>
+
+    <p>
+      Experience premium aerial drone photography and cinematic
+      reel shoots that add a creative and professional touch
+      to weddings, events and outdoor sessions.
+    </p>
+  </div>
+
+</div>
+    <!-- DETAILS -->
+<div class="serviceTypeHeader">
+  <i class="fa-solid fa-tags"></i>
+  <span>Service Type</span>
+</div>
+
+<div class="hwTypeWrap">
+
+  <div class="hwItem">Wedding Photoshoot</div>
+  <div class="hwItem">Pre-Wedding Photoshoot</div>
+  <div class="hwItem">Couple Photoshoot</div>
+  <div class="hwItem">Engagement Photography</div>
+  <div class="hwItem">Fashion & Portfolio Shoot</div>
+  <div class="hwItem">Birthday & Event Photoshoot</div>
+  <div class="hwItem">Outdoor & Indoor Photography</div>
+  <div class="hwItem">Cinematic Video Shoot</div>
+
+</div>
+
+<div class="whatGetHeaderNew">
+  <div class="iconBox">
+    <i class="fa-solid fa-gift"></i>
+  </div>
+  <div class="textBox">
+  <span>Package Includes</span>
+</div>
+</div>
+
+<div class="whatGetList">
+
+  <div class="whatItem">
+    <i class="fa-solid fa-camera"></i>
+    Professional Wedding & Event Photoshoots
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-image"></i>
+    Pre-Wedding & Couple Photography Sessions
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-video"></i>
+    Cinematic Video & Reel Shoot Coverage
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-location-dot"></i>
+    Indoor & Outdoor Shoot Locations
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-user-group"></i>
+    Family, Friends & Group Photography
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    Professional Editing & Color Enhancement
+  </div>
+
+  <div class="whatItem">
+    <i class="fa-solid fa-clock"></i>
+    On-time Service with Professional Support
+  </div>
+
+</div>
+<button class="popupBook" id="videoBookBtn">Book Now</button>
+  </div>
+
+</div>
+
+
+<!-- BOOKING POPUP -->
+<div id="bookingPopup" class="bookingPopup">
+
+  <!-- HEADER -->
+  <div class="bookingHeader">
+
+    <div class="bookingClose" onclick="closeBookingPopup()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <h2>Book Service</h2>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="bookingContent">
+
+    <!-- SERVICE -->
+    <div class="bookingField">
+      <label>Service Type</label>
+      <input type="text" id="selectedService" placeholder="Selected Service" readonly>
+    </div>
+
+    <!-- NAME -->
+    <div class="bookingField">
+      <label>Your Name</label>
+      <input type="text" id="customerName" placeholder="Enter your name">
+    </div>
+
+    <!-- MOBILE -->
+    <div class="bookingField">
+      <label>Mobile Number</label>
+      <input type="tel" id="customerMobile" placeholder="Enter mobile number">
+    </div>
+<!-- DECORATION TYPE -->
+<div class="bookingField" id="decorationTypeField">
+  <label>Decoration Type</label>
+
+  <select id="decorationType">
+    <option value="">Select Decoration</option>
+  </select>
+</div>
+
+<!-- EVENT TYPE -->
+<div class="bookingField" id="eventTypeField">
+  <label>Event Type</label>
+
+  <select id="eventType">
+    <option value="">Select Event</option>
+  </select>
+</div>
+    <!-- LOCATION -->
+    <div class="bookingField">
+      <label>Address</label>
+
+      <button class="detectBtn" onclick="detectLocation()">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        Detect Your Address
+      </button>
+
+      <textarea id="customerAddress"
+        placeholder="Your address will appear here"></textarea>
+    </div>
+
+    <!-- ORDER BUTTON -->
+    <button class="placeOrderBtn">
+      Order Now
+    </button>
+
+  </div>
+
+</div>
+
+
+
+
+
 
 
 
@@ -4602,6 +5434,248 @@ function updateToggleUI(){
   }
 }
 
+
+
+/* OPEN BOOKING POPUP */
+/* OPEN BOOKING POPUP */
+
+function openBookingPopup(serviceName){
+
+  document.getElementById("bookingPopup").style.display = "flex";
+
+  document.getElementById("selectedService").value = serviceName;
+
+  document.body.classList.add("popup-open");
+
+
+  /* FIELDS */
+
+  const decorationField =
+  document.getElementById("decorationTypeField");
+
+  const eventField =
+  document.getElementById("eventTypeField");
+
+  const decorationSelect =
+  document.getElementById("decorationType");
+
+  const eventSelect =
+  document.getElementById("eventType");
+
+
+  /* RESET */
+
+  decorationField.style.display = "none";
+
+  eventField.style.display = "none";
+
+  decorationSelect.innerHTML =
+  `<option value="">Select Decoration</option>`;
+
+  eventSelect.innerHTML =
+  `<option value="">Select Event</option>`;
+
+
+  /* ONLY EVENT TYPE */
+
+  if(
+
+    serviceName === "Balloon Decoration" ||
+    serviceName === "Flower Decoration" ||
+    serviceName === "LED Decoration" ||
+    serviceName === "House Warming Decoration" ||
+    serviceName === "Male Makeup" ||
+    serviceName === "Female Makeup" ||
+    serviceName === "Photo Shoot" ||
+    serviceName === "Video Shooting"
+
+  ){
+
+    eventField.style.display = "block";
+
+
+    let events = [
+
+      "Birthday",
+      "Anniversary",
+      "Wedding",
+      "Reception",
+      "Baby Shower",
+      "Engagement",
+      "House Warming",
+      "Party"
+
+    ];
+
+
+    events.forEach(item=>{
+
+      eventSelect.innerHTML +=
+      `<option value="${item}">${item}</option>`;
+
+    });
+
+  }
+
+
+
+  /* TEMPLE + SURPRISE */
+
+  else if(
+
+    serviceName === "Temple Decoration" ||
+    serviceName === "Surprise Room Setup"
+
+  ){
+
+    decorationField.style.display = "block";
+
+    eventField.style.display = "block";
+
+
+    let decorations = [
+
+      "Wall Decoration",
+      "Stage Decoration",
+      "Room Decoration",
+      "Full Decoration"
+
+    ];
+
+
+    let events = [
+
+      "Birthday",
+      "Anniversary",
+      "Proposal",
+      "Wedding",
+      "Festival"
+
+    ];
+
+
+    decorations.forEach(item=>{
+
+      decorationSelect.innerHTML +=
+      `<option value="${item}">${item}</option>`;
+
+    });
+
+
+    events.forEach(item=>{
+
+      eventSelect.innerHTML +=
+      `<option value="${item}">${item}</option>`;
+
+    });
+
+  }
+
+}
+
+
+
+/* CLOSE */
+
+function closeBookingPopup(){
+
+  document.getElementById("bookingPopup").style.display = "none";
+
+  document.body.classList.remove("popup-open");
+
+}
+
+
+
+/* LOCATION DETECT */
+
+function detectLocation(){
+
+  if(navigator.geolocation){
+
+    navigator.geolocation.getCurrentPosition(
+
+      async function(position){
+
+        let lat = position.coords.latitude;
+
+        let lon = position.coords.longitude;
+
+        try{
+
+          let response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+          );
+
+          let data = await response.json();
+
+          document.getElementById("customerAddress").value =
+          data.display_name;
+
+        }
+
+        catch(err){
+
+          document.getElementById("customerAddress").placeholder =
+          "Enter your address";
+
+        }
+
+      },
+
+      function(){
+
+        document.getElementById("customerAddress").placeholder =
+        "Enter your address";
+
+      }
+
+    );
+
+  }
+
+  else{
+
+    document.getElementById("customerAddress").placeholder =
+    "Enter your address";
+
+  }
+
+}
+
+
+
+/* BUTTON LINKS */
+
+document.getElementById("balloonBookBtn")
+.addEventListener("click",()=>openBookingPopup("Balloon Decoration"));
+
+document.getElementById("flowerBookBtn")
+.addEventListener("click",()=>openBookingPopup("Flower Decoration"));
+
+document.getElementById("ledBookBtn")
+.addEventListener("click",()=>openBookingPopup("LED Decoration"));
+
+document.getElementById("housewarmBookBtn")
+.addEventListener("click",()=>openBookingPopup("House Warming Decoration"));
+
+document.getElementById("templeBookBtn")
+.addEventListener("click",()=>openBookingPopup("Temple Decoration"));
+
+document.getElementById("supriseBookBtn")
+.addEventListener("click",()=>openBookingPopup("Surprise Room Setup"));
+
+document.getElementById("femaleBookBtn")
+.addEventListener("click",()=>openBookingPopup("Female Makeup"));
+
+document.getElementById("maleBookBtn")
+.addEventListener("click",()=>openBookingPopup("Male Makeup"));
+
+document.getElementById("photoBookBtn")
+.addEventListener("click",()=>openBookingPopup("Photo Shoot"));
+
+document.getElementById("videoBookBtn")
+.addEventListener("click",()=>openBookingPopup("Video Shooting"));
 </script>
 
 </body>
