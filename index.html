@@ -414,13 +414,17 @@ input, textarea{
   background:#fff;
   transition:0.4s;
 
-  margin:-15px;
-  padding:15px;
+  margin:0 -15px 0 -15px;
 
-  /* ✅ SAFE WAY */
-  padding-top: calc(15px + 55px);
-
+  padding-left:15px;
+  padding-right:15px;
   padding-bottom:10px;
+
+  padding-top:55px;
+
+  position:relative;
+  z-index:1;
+
   border-radius:0;
 }
 #success{
