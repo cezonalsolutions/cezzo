@@ -488,7 +488,16 @@ input, textarea{
   width:100px;
   height:auto;
 }
-
+.leaves{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:2;
+}
 /* keep text above */
 .contentLeft,
 .contentRight{
@@ -5056,7 +5065,7 @@ scroll-behavior:smooth;
 </div>
 </div>
 <div id="contentSection">
- 
+  <div class="leaves"></div>
   <div class="contentLeft">
     <h2>Fresh Groceries</h2>
     <p>Get farm fresh items delivered in minutes</p>
@@ -5065,7 +5074,7 @@ scroll-behavior:smooth;
   <div class="contentRight">
     <img src="cat/image1.webp" alt="fresh">
   </div>
-
+  
 </div>
 
 <div id="productSection">
