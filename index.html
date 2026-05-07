@@ -1085,11 +1085,7 @@ input, textarea{
     #ffffff
   );
 }
-*{
-  transform:none !important;
-  animation:none !important;
-  transition:none !important;
-}
+
 /* container */
 .balloonContainer{
   position:absolute;
@@ -4794,9 +4790,6 @@ scroll-behavior:smooth;
 
 .suggestTag:hover{
   background:#e5e7eb;
-}
-*{
-  outline:1px solid red !important;
 }
 </style>
 </head>
@@ -15058,17 +15051,6 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
-document.addEventListener("touchstart", function(e){
-
-  console.log(
-    "TOUCHED:",
-    e.target,
-    getComputedStyle(e.target).position,
-    e.target.id,
-    e.target.className
-  );
-
-});
 </script>
 </body>
 </html>
