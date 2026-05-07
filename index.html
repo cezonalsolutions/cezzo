@@ -15051,6 +15051,20 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
+document.addEventListener("touchstart", function(e){
+
+  const el = document.elementFromPoint(
+    e.touches[0].clientX,
+    e.touches[0].clientY
+  );
+
+  console.log("TOUCH TARGET:", el);
+
+  if(el){
+    el.style.outline = "4px solid red";
+  }
+
+});
 </script>
 </body>
 </html>
