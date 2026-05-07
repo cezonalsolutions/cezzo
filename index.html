@@ -4791,6 +4791,93 @@ scroll-behavior:smooth;
 .suggestTag:hover{
   background:#e5e7eb;
 }
+#fullSkeleton{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:999999;
+  overflow:auto;
+  padding:14px;
+}
+
+.skBanner{
+  width:100%;
+  height:180px;
+  border-radius:16px;
+  background:#eee;
+  margin-bottom:20px;
+}
+
+.skRow{
+  display:flex;
+  gap:14px;
+  margin-bottom:25px;
+}
+
+.skCircle{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#eee;
+  flex-shrink:0;
+}
+
+.skProducts{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+}
+
+.skCard{
+  min-width:110px;
+}
+
+.skImg{
+  width:110px;
+  height:110px;
+  border-radius:14px;
+  background:#eee;
+}
+
+.skLine{
+  height:12px;
+  border-radius:10px;
+  background:#eee;
+  margin-top:10px;
+}
+
+.skLine.small{
+  width:60%;
+}
+
+.shimmer{
+  position:relative;
+  overflow:hidden;
+}
+
+.shimmer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-150%;
+  width:60%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.9),
+    transparent
+  );
+
+  animation:shimmerMove 1s infinite;
+}
+
+@keyframes shimmerMove{
+  100%{
+    left:160%;
+  }
+}
 </style>
 </head>
 
@@ -4982,7 +5069,43 @@ scroll-behavior:smooth;
 
 
 
+<div id="fullSkeleton">
 
+  <!-- banner -->
+  <div class="skBanner shimmer"></div>
+
+  <!-- categories -->
+  <div class="skRow">
+    <div class="skCircle shimmer"></div>
+    <div class="skCircle shimmer"></div>
+    <div class="skCircle shimmer"></div>
+    <div class="skCircle shimmer"></div>
+  </div>
+
+  <!-- products -->
+  <div class="skProducts">
+
+    <div class="skCard">
+      <div class="skImg shimmer"></div>
+      <div class="skLine shimmer"></div>
+      <div class="skLine small shimmer"></div>
+    </div>
+
+    <div class="skCard">
+      <div class="skImg shimmer"></div>
+      <div class="skLine shimmer"></div>
+      <div class="skLine small shimmer"></div>
+    </div>
+
+    <div class="skCard">
+      <div class="skImg shimmer"></div>
+      <div class="skLine shimmer"></div>
+      <div class="skLine small shimmer"></div>
+    </div>
+
+  </div>
+
+</div>
 
 <!-- HOME -->
 <div id="home">
@@ -15051,7 +15174,15 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
+window.addEventListener("load", ()=>{
 
+  setTimeout(()=>{
+
+    document.getElementById("fullSkeleton").style.display = "none";
+
+  },1500);
+
+});
 </script>
 </body>
 </html>
