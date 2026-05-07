@@ -4791,47 +4791,44 @@ scroll-behavior:smooth;
 .suggestTag:hover{
   background:#e5e7eb;
 }
-#fullSkeleton{
-  position:fixed;
-  inset:0;
-  background:#fff;
-  z-index:999999;
-  overflow:auto;
-  padding:14px;
+/* 🔥 hide real products initially */
+.productGrid{
+  opacity:0;
+  transition:0.4s;
 }
 
-.skBanner{
-  width:100%;
-  height:180px;
-  border-radius:16px;
+/* 🔥 skeleton wrapper */
+.skeletonGrid{
+  padding-top:10px;
+}
+
+/* 🔥 heading skeleton */
+.skeletonTitle{
+  width:120px;
+  height:18px;
+  border-radius:10px;
   background:#eee;
-  margin-bottom:20px;
+  margin:10px;
 }
 
-.skRow{
+/* 🔥 products row */
+.skeletonProducts{
   display:flex;
-  gap:14px;
-  margin-bottom:25px;
-}
-
-.skCircle{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:#eee;
-  flex-shrink:0;
-}
-
-.skProducts{
-  display:flex;
-  gap:14px;
+  gap:12px;
   overflow-x:auto;
+  padding:12px 10px;
 }
 
+.skeletonProducts::-webkit-scrollbar{
+  display:none;
+}
+
+/* 🔥 product card */
 .skCard{
   min-width:110px;
 }
 
+/* 🔥 image */
 .skImg{
   width:110px;
   height:110px;
@@ -4839,6 +4836,7 @@ scroll-behavior:smooth;
   background:#eee;
 }
 
+/* 🔥 lines */
 .skLine{
   height:12px;
   border-radius:10px;
@@ -4850,6 +4848,7 @@ scroll-behavior:smooth;
   width:60%;
 }
 
+/* 🔥 shimmer */
 .shimmer{
   position:relative;
   overflow:hidden;
@@ -5069,43 +5068,7 @@ scroll-behavior:smooth;
 
 
 
-<div id="fullSkeleton">
 
-  <!-- banner -->
-  <div class="skBanner shimmer"></div>
-
-  <!-- categories -->
-  <div class="skRow">
-    <div class="skCircle shimmer"></div>
-    <div class="skCircle shimmer"></div>
-    <div class="skCircle shimmer"></div>
-    <div class="skCircle shimmer"></div>
-  </div>
-
-  <!-- products -->
-  <div class="skProducts">
-
-    <div class="skCard">
-      <div class="skImg shimmer"></div>
-      <div class="skLine shimmer"></div>
-      <div class="skLine small shimmer"></div>
-    </div>
-
-    <div class="skCard">
-      <div class="skImg shimmer"></div>
-      <div class="skLine shimmer"></div>
-      <div class="skLine small shimmer"></div>
-    </div>
-
-    <div class="skCard">
-      <div class="skImg shimmer"></div>
-      <div class="skLine shimmer"></div>
-      <div class="skLine small shimmer"></div>
-    </div>
-
-  </div>
-
-</div>
 
 <!-- HOME -->
 <div id="home">
@@ -15174,15 +15137,97 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
-window.addEventListener("load", ()=>{
 
-  setTimeout(()=>{
+document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
 
-    document.getElementById("fullSkeleton").style.display = "none";
+  // 🔥 find product grid
+  const grid = section.querySelector(".productGrid");
 
-  },1500);
+  if(!grid) return;
+
+  // 🔥 hide products
+  grid.style.opacity = "0";
+
+  // 🔥 skeleton
+  const skel = document.createElement("div");
+
+  skel.className = "skeletonGrid";
+
+  skel.innerHTML = `
+
+    <div class="skeletonTitle shimmer"></div>
+
+    <div class="skeletonProducts">
+
+      <div class="skCard">
+        <div class="skImg shimmer"></div>
+        <div class="skLine shimmer"></div>
+        <div class="skLine small shimmer"></div>
+      </div>
+
+      <div class="skCard">
+        <div class="skImg shimmer"></div>
+        <div class="skLine shimmer"></div>
+        <div class="skLine small shimmer"></div>
+      </div>
+
+      <div class="skCard">
+        <div class="skImg shimmer"></div>
+        <div class="skLine shimmer"></div>
+        <div class="skLine small shimmer"></div>
+      </div>
+
+    </div>
+
+  `;
+
+  // 🔥 insert skeleton
+  section.insertBefore(skel, grid);
 
 });
+
+
+const observer = new IntersectionObserver(entries=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+      const section = entry.target;
+
+      const grid =
+        section.querySelector(".productGrid");
+
+      const skel =
+        section.querySelector(".skeletonGrid");
+
+      setTimeout(()=>{
+
+        // 🔥 show products
+        grid.style.opacity = "1";
+
+        // 🔥 remove skeleton
+        if(skel){
+          skel.remove();
+        }
+
+      },800);
+
+    }
+
+  });
+
+},{ threshold:0.15 });
+
+
+document.querySelectorAll(".productSectionWithHeading")
+.forEach(section=>{
+
+  observer.observe(section);
+
+});
+
+
 </script>
 </body>
 </html>
