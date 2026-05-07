@@ -8730,48 +8730,28 @@ async function loadProducts5(){
 // 🔥 FIXED HALF AREA BLOCK
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
 
-  // ✅ VERY IMPORTANT → allow + click
-  if(e.target === addBtn){
+
+
+  card.onclick = function(e){
+
+  // ✅ don't open popup when clicking cart controls
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
     return;
   }
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ block only top half
-  if(clickY < half){
-    e.stopPropagation();
-  }
-
-});
-
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup normally
   openPopup({
-  ...item,
-  table: item.table || "all_products"
-});
-});
+    ...item,
+    table: item.table || "all_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -10128,48 +10108,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 FIXED HALF AREA BLOCK
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  // ✅ VERY IMPORTANT → allow + click
-  if(e.target === addBtn){
+  // ✅ prevent popup on cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
     return;
   }
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ block only top half
-  if(clickY < half){
-    e.stopPropagation();
-  }
-
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
 
+};
     grid.appendChild(card);
   });
   initAllUI();
@@ -10233,49 +10190,25 @@ const addBtn = card.querySelector(".addBtn2");
 
 // 🔥 FIXED HALF AREA BLOCK
 const imgWrap = addBtn.parentElement;
+card.onclick = function(e){
 
-imgWrap.addEventListener("click", function(e){
-
-  // ✅ VERY IMPORTANT → allow + click
-  if(e.target === addBtn){
+  // ❌ don't open popup on cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
     return;
   }
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ block only top half
-  if(clickY < half){
-    e.stopPropagation();
-  }
-
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
 
+};
     grid.appendChild(card);
   });
   initAllUI();
@@ -10416,47 +10349,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 FIXED HALF AREA BLOCK
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  // ✅ VERY IMPORTANT → allow + click
-  if(e.target === addBtn){
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
     return;
   }
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ block only top half
-  if(clickY < half){
-    e.stopPropagation();
-  }
-
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -11977,50 +11888,25 @@ const addBtn = card.querySelector(".addBtn2");
 
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
+card.onclick = function(e){
 
-imgWrap.addEventListener("click", function(e){
-
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -12088,49 +11974,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+   card.onclick = function(e){
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -12198,49 +12060,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -12307,49 +12145,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -12418,49 +12232,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
@@ -12528,50 +12318,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
 
+};
     grid.appendChild(card);
   });
   initAllUI();
@@ -12636,49 +12401,25 @@ const addBtn = card.querySelector(".addBtn2");
 // 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
 const imgWrap = addBtn.parentElement;
 
-imgWrap.addEventListener("click", function(e){
+card.onclick = function(e){
 
-  const rect = this.getBoundingClientRect();
-  const clickY = e.clientY - rect.top;
-
-  const half = rect.height / 2;
-
-  // ❌ TOP HALF → ONLY block popup (NOT everything)
-  if(clickY < half){
-
-    // IMPORTANT → DO NOT stop everything
-    // only prevent card click (popup)
-    if(e.target.closest(".addBtn2")){
-      return; // allow + button
-    }
-
-    e.stopPropagation();  // ❌ stops popup only
+  // ❌ prevent popup when clicking cart buttons
+  if(
+    e.target.closest(".cartControl") ||
+    e.target.closest(".addBtn2") ||
+    e.target.closest(".plus") ||
+    e.target.closest(".minus")
+  ){
+    return;
   }
 
-});
-   card.addEventListener("click", function(e){
-
-      // ❌ block + button
-      if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img = card.querySelector(".imgWrap2");
-      const rect = img.getBoundingClientRect();
-
-      const clickY = e.clientY - rect.top;
-      const half = rect.height / 2;
-
-      // 🔴 top half of image → no popup
-      if(clickY < half){
-        return;
-      }
-
+  // ✅ open popup
   openPopup({
-  ...item,
-  table: item.table || "grocery_products"
-});
-});
+    ...item,
+    table: item.table || "grocery_products"
+  });
+
+};
 
     grid.appendChild(card);
   });
