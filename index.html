@@ -15615,8 +15615,16 @@ document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
 document.querySelectorAll(".midCategory")
 .forEach(section=>{
 
-  // 🔥 create wrapper
-  const wrapper = document.createElement("div");
+  // 🔥 skip first visible sections
+  const rect = section.getBoundingClientRect();
+
+  if(rect.top < window.innerHeight + 200){
+    return;
+  }
+
+  // 🔥 create skeleton
+  const wrapper =
+  document.createElement("div");
 
   wrapper.className = "midSkeletonWrap";
 
@@ -15653,14 +15661,15 @@ document.querySelectorAll(".midCategory")
     </div>
   `;
 
-  // 🔥 insert BEFORE section
+  // 🔥 insert skeleton
   section.parentNode.insertBefore(
     wrapper,
     section
   );
 
-  // 🔥 hide only this section initially
-  section.style.display = "none";
+  // 🔥 use opacity instead of display none
+  section.style.opacity = "0";
+  section.style.transition = "0.4s";
 
   const midObserver =
   new IntersectionObserver(entries=>{
@@ -15669,11 +15678,13 @@ document.querySelectorAll(".midCategory")
 
       if(entry.isIntersecting){
 
-        // 🔥 show section
-        section.style.display = "block";
+        // 🔥 show real content
+        section.style.opacity = "1";
 
-        // 🔥 remove skeleton
-        wrapper.remove();
+        // 🔥 remove shimmer
+        setTimeout(()=>{
+          wrapper.remove();
+        },200);
 
         midObserver.unobserve(section);
 
@@ -15682,7 +15693,8 @@ document.querySelectorAll(".midCategory")
     });
 
   },{
-    threshold:0.2
+    threshold:0.05,
+    rootMargin:"300px 0px"
   });
 
   midObserver.observe(section);
