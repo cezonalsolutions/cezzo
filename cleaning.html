@@ -44,7 +44,7 @@ html, body{
 }
 
 .locRow i{
-  color:#2e7d32;   
+  color:#2e7d32;
   font-size:16px;
 }
 
@@ -62,356 +62,197 @@ html, body{
 /* BANNER */
 .banner{
   width:100%;
-  padding:0 15px 4px;
+  padding:0 15px 15px;
 }
 
 .banner img{
   width:100%;
-  height:250px;        /* ✅ natural height */
-  object-fit:contain; /* ✅ show full image */
+  height:250px;
+  object-fit:contain;
   border-radius:12px;
 }
-
-/* TITLE */
-.pageTitle{
-  padding:8px 15px;     
-  font-size:18px;
+/* OUR SERVICES */
+.ourServices{
+  width:100%;
+  text-align:center;
+  font-size:22px;
   font-weight:700;
   color:#111;
+  padding:10px 0 20px;
 }
-/* LIST */
-.serviceList{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding:12px;
+/* SERVICES GRID */
+.servicesGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  padding:0 14px 30px;
 }
 
 /* CARD */
-.serviceCardFull{
-  position:relative;
-  width:100%;
-  height:160px;           /* 🔥 fixed height */
-  border-radius:14px;
+.serviceCard{
+  background:#ffffff;
+  border:1px solid #eaeaea;
+  border-radius:18px;
   overflow:hidden;
-}
 
-/* IMAGE */
-.serviceCardFull img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* OVERLAY */
-.overlay{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.4),
-    rgba(0,0,0,0.6)
-  );
-
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-
-  padding:12px;
-  color:#fff;
-}
-
-/* TEXT */
-.serviceTitle{
-  font-size:16px;
-  font-weight:700;
-}
-
-.servicePrice{
-  font-size:13px;
-  margin-top:2px;
-}
-
-/* BUTTON */
-.bookBtn{
-  margin-top:6px;
-  padding:6px 12px;
-  background:#fff;
-  color:#111;
-  border:none;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:600;
-}
-/* POINT LIST */
-.servicePoints{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:6px;
-}
-
-/* 🔥 BOX STYLE */
-.servicePoints span{
-  background:rgba(255,255,255,0.25);   /* transparent white */
-  backdrop-filter:blur(6px);           /* glass effect */
-  color:#fff;
-  font-size:11px;
-  padding:4px 8px;
-  border-radius:8px;
-
-  border:1px solid rgba(255,255,255,0.4);
-}
-/* 🔥 FORCE LOCK SCROLL */
-body.popup-open {
-  position:fixed;
-  width:100%;
-  overflow:hidden;
-}
-
-/* POPUP */
-.fullPopup{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#fff;
-  z-index:99999;
-
-  display:none;
-  flex-direction:column;
-}
-
-/* HEADER */
-.popupHeader{
-  padding:55px 15px 12px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;   /* 🔥 KEY FIX */
-
-  font-size:16px;
-  font-weight:600;
-
-  border-bottom:1px solid #eee;
-}
-.sliderContainer{
-  position:relative;   /* 🔥 IMPORTANT FIX */
-}
-/* BACK ICON */
-.popupHeader i{
-  font-size:16px;
-
-  width:36px;
-  height:36px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:rgba(0,0,0,0.08);   /* light shade */
-  
-  cursor:pointer;
-}
-
-/* TITLE RIGHT SIDE */
-.headerTitle{
-  margin-left:auto;   /* 🔥 pushes text to right */
-}
-
-/* SLIDER */
-.slider{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-}
-
-/* ---------- SLIDER IMAGE ---------- */
-.slider img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  flex-shrink:0;
-}
-
-/* ---------- SLIDER DOTS ---------- */
-.sliderContainer{
-  position:relative;   /* 🔥 REQUIRED */
-}
-
-.dots{
-  position:absolute;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-
-  display:flex;
-  gap:6px;
-
-  padding:4px 8px;
-  background:rgba(0,0,0,0.3);
-  border-radius:20px;
-}
-
-.dot{
-  width:7px;
-  height:7px;
-  background:rgba(255,255,255,0.5);
-  border-radius:50%;
-}
-
-.dot.active{
-  background:#fff;
-}
-
-/* ---------- BODY ---------- */
-.popupBody{
-  padding:16px;
-  overflow-y:auto;
-  flex:1;
-}
-
-/* ---------- INFO BLOCK (NEW CLEAN STRUCTURE) ---------- */
-.infoBlock{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:6px;
-
-  margin-bottom:14px;
-}
-
-/* ---------- RATING ---------- */
-.ratingBox{
-  background:#111;
-  color:#fff;
-
-  padding:4px 8px;
-  border-radius:6px;
-
-  font-size:12px;
-  font-weight:600;
-}
-
-/* ---------- PREMIUM PRICE ---------- */
-.priceBox{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-
-  background:linear-gradient(135deg,#111,#333);
-  color:#fff;
-
-  padding:6px 10px;
-  border-radius:10px;
-
-  font-size:12px;
-  font-weight:600;
-}
-
-.priceLabel{
-  opacity:0.8;
-  font-size:11px;
-}
-
-.priceValue{
-  font-size:14px;
-  font-weight:700;
-}
-
-/* ---------- ICON GRID ---------- */
-.iconGrid{
-  display:flex;
-  gap:8px;
-  margin-top:16px;
-}
-
-/* ICON BOX */
-.iconBox{
-  flex:1;
-  background:#fafafa;   /* 🔥 softer premium */
-  border-radius:12px;
-  padding:12px 8px;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
 
   text-align:center;
-
-  border:1px solid #eee;   /* 🔥 subtle border */
 }
 
-.iconBox i{
-  font-size:18px;
-  margin-bottom:6px;
+/* IMAGE AREA */
+.cardImage{
+  position:relative;
+
+  background:#eaf8ff;
+
+  height:95px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.iconBox span{
+.cardImage img{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+}
+.cardName{
+  padding:10px 12px 0;
+
+  font-size:14px;
+  font-weight:700;
+  color:#111;
+
+  text-align:left;
+}
+
+/* PRICE ROW */
+.priceRow{
+  padding:6px 12px 14px;
+
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  gap:6px;
+}
+/* OLD PRICE */
+.oldPrice{
+  font-size:12px;
+  color:#999;
+  text-decoration:line-through;
+}
+
+/* NEW PRICE */
+.newPrice{
+  font-size:13px;
+  font-weight:700;
+  color:#111;
+}
+/* IMAGE AREA */
+.cardImage{
+  position:relative;
+
+  background:#eaf8ff;
+  padding:18px 10px;
+}
+
+.ratingTag{
+  position:absolute;
+  top:2px;
+  right:3px;
+
+  background:#ffffff;
+  color:#111;
+
   font-size:11px;
-  color:#333;
-}
-
-/* ---------- BENEFITS ---------- */
-.benefitsBox{
-  margin-top:18px;
-  background:#fafafa;
-  border-radius:12px;
-  padding:14px;
-
-  border:1px solid #eee;
-}
-
-.benefitsBox h4{
-  margin:0 0 10px 0;
-  font-size:14px;
   font-weight:600;
+
+  padding:4px 7px;
+
+  border-radius:20px;
+
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+/* SKELETON LOADING */
+.serviceCard{
+  position:relative;
 }
 
-.benefitItem{
-  font-size:13px;
-  margin:6px 0;
-  color:#444;
+.serviceCard.loading{
+  pointer-events:none;
 }
 
-/* ---------- BUTTON ---------- */
-.bottomBar{
-  position:sticky;
-  bottom:0;
-  background:#fff;
-  padding:10px;
-  border-top:1px solid #eee;
+/* HIDE REAL CONTENT */
+.serviceCard.loading img,
+.serviceCard.loading .ratingTag,
+.serviceCard.loading .cardName,
+.serviceCard.loading .priceRow{
+  opacity:0;
 }
 
-.bookNowFull{
-  width:100%;
-  padding:14px;
-
-  background:#111;
-  color:#fff;
-
-  border:none;
-  border-radius:12px;
-
-  font-size:14px;
-  font-weight:600;
+/* IMAGE SKELETON */
+.serviceCard.loading .cardImage{
+  position:relative;
+  background:#f1f1f1;
 }
-.shortDesc{
-  font-size:13px;
-  color:#666;
 
-  line-height:1.4;
-  max-width:90%;
+/* TEXT SKELETON */
+.serviceCard.loading::before,
+.serviceCard.loading::after{
+  content:"";
+  position:absolute;
+  left:12px;
 
-  margin-top:2px;
+  background:#f1f1f1;
+  border-radius:6px;
+}
+
+/* TITLE */
+.serviceCard.loading::before{
+  top:112px;
+  width:70%;
+  height:14px;
+}
+
+/* PRICE */
+.serviceCard.loading::after{
+  top:138px;
+  width:45%;
+  height:12px;
+}
+
+/* SHIMMER */
+.serviceCard.loading .cardImage::after,
+.serviceCard.loading::before,
+.serviceCard.loading::after{
+  overflow:hidden;
+}
+
+.serviceCard.loading .cardImage::before,
+.serviceCard.loading::before,
+.serviceCard.loading::after{
+  background-image:linear-gradient(
+    90deg,
+    #f1f1f1 0px,
+    #ffffff 40px,
+    #f1f1f1 80px
+  );
+
+  background-size:600px;
+  animation:shimmer 1.3s infinite linear;
+}
+
+/* ANIMATION */
+@keyframes shimmer{
+  0%{
+    background-position:-100px 0;
+  }
+
+  100%{
+    background-position:300px 0;
+  }
 }
 </style>
 </head>
@@ -420,12 +261,13 @@ body.popup-open {
 
 <!-- TOP -->
 <div class="topSection">
-  
+
   <div class="topGap"></div>
 
   <div class="locationBox">
     <div class="locRow">
       <i class="fa-solid fa-location-dot"></i>
+
       <div>
         <div class="city" id="city">Detecting...</div>
         <div class="address" id="address">Please wait...</div>
@@ -433,153 +275,200 @@ body.popup-open {
     </div>
   </div>
 
-  <!-- ✅ IMAGE NOW BELOW LOCATION -->
+  <!-- IMAGE -->
   <div class="banner">
     <img src="cleaning/celaning3.png">
   </div>
 
 </div>
-
-<!-- TITLE -->
-<div class="pageTitle">Cleaning Services</div>
-
-<div class="serviceList">
-
-  <!-- CARD 1 -->
-<div class="serviceCardFull" onclick="openPopup('homePopup')">
-    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
-
-    <div class="overlay">
-      <div class="serviceTitle">Home Cleaning</div>
-
-      <!-- 🔥 POINTS -->
-    <div class="servicePoints">
-  <span>Bedroom</span>
-  <span>Hall</span>
-  <span>Bathroom</span>
+<!-- OUR SERVICES -->
+<div class="ourServices">
+  Our Services
 </div>
-      <div class="servicePrice">Starting ₹499</div>
-      <button class="bookBtn">Book Now</button>
+<!-- SERVICES GRID -->
+<div class="servicesGrid">
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.5</div>
+      <img src="cleaning/bathrromclean.png">
+    </div>
+
+    <div class="cardName">Bathroom Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹999</span>
+      <span class="newPrice">₹499</span>
     </div>
   </div>
 
-  <!-- CARD 2 -->
-<div class="serviceCardFull" onclick="openPopup('kitchenPopup')">
-    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.6</div>
+      <img src="cleaning/fridgeclean.png">
+    </div>
 
-    <div class="overlay">
-      <div class="serviceTitle">Kitchen Cleaning</div>
+    <div class="cardName">Fridge Cleaning</div>
 
-      <!-- 🔥 POINTS -->
-     <div class="servicePoints">
-  <span>Bedroom</span>
-  <span>Hall</span>
-  <span>Bathroom</span>
+    <div class="priceRow">
+      <span class="oldPrice">₹799</span>
+      <span class="newPrice">₹399</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.4</div>
+      <img src="cleaning/fanclean.png">
+    </div>
+
+    <div class="cardName">Fan Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹699</span>
+      <span class="newPrice">₹299</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.7</div>
+      <img src="cleaning/packing.png">
+    </div>
+
+    <div class="cardName">Packing & Unpacking</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹1499</span>
+      <span class="newPrice">₹899</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.5</div>
+      <img src="cleaning/kitchenhelp.png">
+    </div>
+
+    <div class="cardName">Kitchen Help</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹899</span>
+      <span class="newPrice">₹499</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.3</div>
+      <img src="cleaning/sweepingclean.png">
+    </div>
+
+    <div class="cardName">Sweeping</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹1999</span>
+      <span class="newPrice">₹1299</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.8</div>
+       <img src="cleaning/landuary.png">
+    </div>
+
+    <div class="cardName">Ironing</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹599</span>
+      <span class="newPrice">₹299</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.6</div>
+      <img src="cleaning/windowclean.png">
+    </div>
+
+    <div class="cardName">Window Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹2999</span>
+      <span class="newPrice">₹1999</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.7</div>
+      <img src="cleaning/kitechclean.png">
+    </div>
+
+    <div class="cardName">Kitchen Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹1499</span>
+      <span class="newPrice">₹999</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.5</div>
+       <img src="cleaning/balconycelan.webp">
+    </div>
+
+    <div class="cardName">Balcony Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹999</span>
+      <span class="newPrice">₹599</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.9</div>
+       <img src="cleaning/fullhomeclean.png">
+    </div>
+
+    <div class="cardName">Full Home Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹4999</span>
+      <span class="newPrice">₹3499</span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="serviceCard">
+    <div class="cardImage">
+      <div class="ratingTag">⭐ 4.8</div>
+     <img src="cleaning/feestivalclean.png">
+    </div>
+
+    <div class="cardName">Festival Cleaning</div>
+
+    <div class="priceRow">
+      <span class="oldPrice">₹1999</span>
+      <span class="newPrice">₹1299</span>
+    </div>
+  </div>
+
 </div>
-
-      <div class="servicePrice">Starting ₹399</div>
-      <button class="bookBtn">Book Now</button>
-    </div>
-  </div>
-<div class="serviceCardFull">
-    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba">
-
-    <div class="overlay">
-      <div class="serviceTitle">Kitchen Cleaning</div>
-
-      <!-- 🔥 POINTS -->
-     <div class="servicePoints">
-  <span>Bedroom</span>
-  <span>Hall</span>
-  <span>Bathroom</span>
-</div>
-
-      <div class="servicePrice">Starting ₹399</div>
-      <button class="bookBtn">Book Now</button>
-    </div>
-  </div>
-
-</div>
-
-<div id="homePopup" class="fullPopup">
-
-  <!-- HEADER -->
- <div class="popupHeader">
-  <i class="fa-solid fa-arrow-left" onclick="closePopup('homePopup')"></i>
-  <span class="headerTitle">Home Cleaning</span>
-</div>
-
-  <!-- SLIDER -->
-  <div class="sliderContainer">
-    <div class="slider" id="slider">
-      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
-      <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
-    </div>
-
-    <div class="dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </div>
-<div class="popupBody">
-
-  <!-- ⭐ RATING + PRICE (LEFT SIDE STACK) -->
-  <div class="infoBlock">
-    <div class="ratingBox">⭐ 4.8</div>
-
-    <div class="priceBox">
-      <span class="priceLabel">Starting</span>
-      <span class="priceValue">₹499</span>
-    </div>
-      <div class="shortDesc">
-    Deep home cleaning including bedroom, bathroom & full sanitization.
-  </div>
-  </div>
-
-  <!-- ICON BOXES -->
-  <div class="iconGrid">
-    <div class="iconBox">
-      <i class="fa-solid fa-shield-halved"></i>
-      <span>Trusted</span>
-    </div>
-
-    <div class="iconBox">
-      <i class="fa-solid fa-bolt"></i>
-      <span>Fast Service</span>
-    </div>
-
-    <div class="iconBox">
-      <i class="fa-solid fa-star"></i>
-      <span>Top Rated</span>
-    </div>
-  </div>
-
-  <!-- BENEFITS -->
-  <div class="benefitsBox">
-    <h4>What’s Included</h4>
-
-    <div class="benefitItem">✔ Bedroom Deep Cleaning</div>
-    <div class="benefitItem">✔ Bathroom Sanitization</div>
-    <div class="benefitItem">✔ Hall Cleaning</div>
-    <div class="benefitItem">✔ Floor Mopping</div>
-    <div class="benefitItem">✔ Dust Removal</div>
-  </div>
-
-</div>
-  <!-- BUTTON -->
-  <div class="bottomBar">
-    <button class="bookNowFull">Book Now ₹499</button>
-  </div>
-
-</div>
-
-
-
-
-
-
 <script>
 
 const fullAddress = localStorage.getItem("savedAddress");
@@ -588,32 +477,35 @@ const cityEl = document.getElementById("city");
 const addressEl = document.getElementById("address");
 
 if(fullAddress){
+
   const parts = fullAddress.split(",");
+
   cityEl.innerText = parts[1]?.trim() || "Your City";
+
   addressEl.innerText = fullAddress;
-} else {
+
+}else{
+
   cityEl.innerText = "Location not set";
+
   addressEl.innerText = "Please select location";
 }
-function openPopup(id){
-  document.getElementById(id).style.display = "flex";
+window.addEventListener("DOMContentLoaded", () => {
 
-  document.body.classList.add("popup-open");
-}
+  const cards = document.querySelectorAll(".serviceCard");
 
-function closePopup(id){
-  document.getElementById(id).style.display = "none";
+  cards.forEach(card => {
+    card.classList.add("loading");
+  });
 
-  document.body.classList.remove("popup-open");
-}
-const slider = document.getElementById("slider");
-const dots = document.querySelectorAll(".dot");
+  setTimeout(() => {
 
-slider.addEventListener("scroll", () => {
-  let index = Math.round(slider.scrollLeft / slider.clientWidth);
+    cards.forEach(card => {
+      card.classList.remove("loading");
+    });
 
-  dots.forEach(d => d.classList.remove("active"));
-  if(dots[index]) dots[index].classList.add("active");
+  }, 1500);
+
 });
 </script>
 
