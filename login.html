@@ -507,7 +507,7 @@ if (!error) {
   localStorage.setItem("userMobile", mobile);
 
   sessionStorage.setItem("fromLogin","true");
-  window.location.href = "index.html";
+  window.location.replace("index.html");
 }else {
    document.getElementById("loadingScreen").style.display="none";
           console.log(error);
@@ -526,7 +526,7 @@ localStorage.getItem(
 );
 
 if(goBack){
-window.location.href=goBack;
+window.location.replace(goBack);
 }else{
 window.location.href="index.html";
 }
