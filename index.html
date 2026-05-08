@@ -6481,7 +6481,7 @@ Bite Delight Hub
   muted 
   loop 
   playsinline 
-  preload="auto">
+  preload="none">
 </video>
   </div>
 
@@ -15582,8 +15582,10 @@ if(video){
 
   });
 
-},{ threshold:0.15 });
-
+},{
+  threshold:0.7,
+  rootMargin:"0px 0px -80px 0px"
+});
 
 document.querySelectorAll(".productSectionWithHeading")
 .forEach(section=>{
@@ -15619,8 +15621,10 @@ new IntersectionObserver(entries=>{
 
   });
 
-},{ threshold:0.3 });
-
+},{
+  threshold:0.7,
+  rootMargin:"0px 0px -80px 0px"
+});
 if(optionScreen){
   optionObserver.observe(optionScreen);
 }
@@ -15734,13 +15738,22 @@ new IntersectionObserver(entries=>{
 
     if(entry.isIntersecting){
 
-      video.play().catch(()=>{});
+  // 🔥 stop observing after visible
+  videoObserver.unobserve(video);
 
-    }else{
+  if(video.readyState < 2){
 
-      video.pause();
+    video.load();
 
-    }
+  }
+
+  video.play().catch(()=>{});
+
+}else{
+
+  video.pause();
+
+}
 
   });
 
