@@ -4877,6 +4877,61 @@ scroll-behavior:smooth;
     left:160%;
   }
 }
+.videoSkeleton{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:260px;
+  border-radius:0 0 24px 24px;
+  background:#e9e9e9;
+  z-index:2;
+}
+
+#optionVideo{
+  opacity:0;
+  transition:0.5s;
+}
+.optionSkeletonGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  padding:16px;
+}
+
+.optionSkeletonCard{
+  height:180px;
+  border-radius:24px;
+  background:#e9e9e9;
+}
+
+.brandSkeleton{
+  height:90px;
+  border-radius:24px;
+  background:#e9e9e9;
+  margin:16px;
+}
+.videoWrap{
+  position:relative;
+}
+
+.videoLoader{
+  position:absolute;
+  top:10px;
+  left:0;
+  width:100%;
+  height:180px;
+  border-radius:14px;
+  background:#e9e9e9;
+  z-index:2;
+}
+.bannerSkeleton{
+  width:100%;
+  height:180px;
+  border-radius:14px;
+  background:#e9e9e9;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -4959,10 +5014,18 @@ scroll-behavior:smooth;
   <div class="optAddress" id="optShortAddress">Jubilee Hills</div>
 
 </div>
-<video id="optionVideo" autoplay muted loop playsinline>
-  <source src="cezoui.mp4" type="video/mp4">
-</video>
+<video 
+id="optionVideo"
+muted
+loop
+playsinline
+preload="none"
+poster="cat/cezzo1.webp">
 
+  <source src="cezoui.mp4" type="video/mp4">
+
+</video>
+<div id="videoSkeleton" class="videoSkeleton shimmer"></div>
 
   <div class="optionGrid">
 
@@ -5164,22 +5227,35 @@ scroll-behavior:smooth;
 
 <div id="productSection">
 
-<video
-autoplay
-muted
-loop
-playsinline
-style="
- width:100%;
- height:180px;
- object-fit:cover;
- object-position:top center; /* keeps top fully visible */
- display:block;
- border-radius:14px;
- margin-top:10px;
-">
-<source src="banner1.webm" type="video/webm">
-</video>
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:top center;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="banner1.webm" type="video/webm">
+
+    </video>
+
+  </div>
 
 </div>
 <div class="midCategory" id="freshItems">
@@ -5426,23 +5502,35 @@ style="
 
 <div id="productSection6">
 
-<video
- autoplay
- muted
- loop
- playsinline
- preload="auto"
- style="
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:top center;
-  display:block;
-  border-radius:14px;
-  margin-top:10px;
- ">
- <source src="banner2.webm" type="video/webm">
-</video>
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:top center;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="banner2.webm" type="video/webm">
+
+    </video>
+
+  </div>
 
 </div>
 <div id="productSection7" class="productSectionWithHeading">
@@ -5530,23 +5618,35 @@ style="
 
 <div id="productSection10" class="productSectionWithHeading">
 
-<video
- autoplay
- muted
- loop
- playsinline
- preload="auto"
- style="
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:top center;
-  display:block;
-  border-radius:14px;
-  margin-top:10px;
- ">
- <source src="baners/cool drinks banner.mp4" type="video/mp4">
-</video>
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:top center;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="baners/cool drinks banner.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -5774,23 +5874,35 @@ style="
 
 <div id="productSection40" class="productSectionWithHeading">
 
-<video
- autoplay
- muted
- loop
- playsinline
- preload="auto"
- style="
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:top center;
-  display:block;
-  border-radius:14px;
-  margin-top:10px;
- ">
- <source src="banners3.mp4" type="video/mp4">
-</video>
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:top center;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="banners3.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -5918,24 +6030,36 @@ style="
 
 <div id="productSection21" class="productSectionWithHeading">
 
-<video
- autoplay
- muted
- loop
- playsinline
- webkit-playsinline
- preload="auto"
- style="
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:center 70%;
-  display:block;
-  border-radius:14px;
-  margin-top:10px;
- ">
- <source src="baners/Chocbanner.mp4" type="video/mp4"">
-</video>
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:center 70%;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="baners/Chocbanner.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -6088,24 +6212,36 @@ Bite Delight Hub
 </div>
 <div id="productSection25" class="productSectionWithHeading">
 
-<video
- autoplay
- muted
- loop
- playsinline
- webkit-playsinline
- preload="auto"
- style="
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:center 70%; /* shows lower part more */
-  display:block;
-  border-radius:14px;
-  margin-top:10px;
- ">
- <source src="groceriesbanner.webm" type="video/webm">
-</video>
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:center 70%;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="groceriesbanner.webm" type="video/webm">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -15228,6 +15364,149 @@ document.querySelectorAll(".productSectionWithHeading")
 });
 
 
+const optionVideo =
+document.getElementById("optionVideo");
+
+const videoSkeleton =
+document.getElementById("videoSkeleton");
+
+const optionScreen =
+document.getElementById("optionScreen");
+
+const optionObserver =
+new IntersectionObserver(entries=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+      optionVideo.play().catch(()=>{});
+
+    }else{
+
+      optionVideo.pause();
+
+    }
+
+  });
+
+},{ threshold:0.3 });
+
+if(optionScreen){
+  optionObserver.observe(optionScreen);
+}
+
+
+// 🔥 when video ready
+optionVideo.addEventListener("loadeddata", ()=>{
+
+  optionVideo.style.opacity = "1";
+
+  if(videoSkeleton){
+    videoSkeleton.remove();
+  }
+
+});
+
+const optionGrid =
+document.querySelector(".optionGrid");
+
+const brandBlock =
+document.querySelector(".brandBlock");
+
+
+// 🔥 create skeleton
+const optionSkeleton =
+document.createElement("div");
+
+optionSkeleton.className = "optionSkeletonWrap";
+
+optionSkeleton.innerHTML = `
+
+  <div class="optionSkeletonGrid">
+
+    <div class="optionSkeletonCard shimmer"></div>
+    <div class="optionSkeletonCard shimmer"></div>
+    <div class="optionSkeletonCard shimmer"></div>
+    <div class="optionSkeletonCard shimmer"></div>
+    <div class="optionSkeletonCard shimmer"></div>
+    <div class="optionSkeletonCard shimmer"></div>
+
+  </div>
+
+  <div class="brandSkeleton shimmer"></div>
+
+`;
+
+
+// 🔥 insert before real content
+optionGrid.parentNode.insertBefore(
+  optionSkeleton,
+  optionGrid
+);
+
+
+// 🔥 hide real content initially
+optionGrid.style.opacity = "0";
+
+if(brandBlock){
+  brandBlock.style.opacity = "0";
+}
+
+
+// 🔥 when option screen visible
+setTimeout(()=>{
+
+  optionGrid.style.opacity = "1";
+
+  if(brandBlock){
+    brandBlock.style.opacity = "1";
+  }
+
+  optionSkeleton.remove();
+
+},1200);
+const lazyVideos =
+document.querySelectorAll(".lazyVideo");
+
+const videoObserver =
+new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+
+    const video = entry.target;
+
+    if(entry.isIntersecting){
+
+      video.play().catch(()=>{});
+
+    }else{
+
+      video.pause();
+
+    }
+
+  });
+
+},{ threshold:0.3 });
+
+
+lazyVideos.forEach(video=>{
+
+  videoObserver.observe(video);
+  video.addEventListener("loadeddata", ()=>{
+
+    video.style.opacity = "1";
+
+    const loader =
+      video.parentNode.querySelector(".videoLoader");
+
+    if(loader){
+      loader.remove();
+    }
+
+  });
+
+});
 </script>
 </body>
 </html>
