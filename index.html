@@ -15615,48 +15615,52 @@ document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
 document.querySelectorAll(".midCategory")
 .forEach(section=>{
 
-  // 🔥 hide original
-  section.style.opacity = "0";
+  // 🔥 create wrapper
+  const wrapper = document.createElement("div");
 
-  // 🔥 skeleton
-  const skel =
-  document.createElement("div");
+  wrapper.className = "midSkeletonWrap";
 
-  skel.className = "midSkeleton";
+  wrapper.innerHTML = `
 
-  skel.innerHTML = `
+    <div class="midSkeleton">
 
-    <div class="midSkeletonTitle shimmer"></div>
+      <div class="midSkeletonTitle shimmer"></div>
 
-    <div class="midSkeletonGrid">
+      <div class="midSkeletonGrid">
 
-      <div class="midSkeletonItem">
-        <div class="midSkeletonImg shimmer"></div>
-        <div class="midSkeletonLine shimmer"></div>
-      </div>
+        <div class="midSkeletonItem">
+          <div class="midSkeletonImg shimmer"></div>
+          <div class="midSkeletonLine shimmer"></div>
+        </div>
 
-      <div class="midSkeletonItem">
-        <div class="midSkeletonImg shimmer"></div>
-        <div class="midSkeletonLine shimmer"></div>
-      </div>
+        <div class="midSkeletonItem">
+          <div class="midSkeletonImg shimmer"></div>
+          <div class="midSkeletonLine shimmer"></div>
+        </div>
 
-      <div class="midSkeletonItem">
-        <div class="midSkeletonImg shimmer"></div>
-        <div class="midSkeletonLine shimmer"></div>
-      </div>
+        <div class="midSkeletonItem">
+          <div class="midSkeletonImg shimmer"></div>
+          <div class="midSkeletonLine shimmer"></div>
+        </div>
 
-      <div class="midSkeletonItem">
-        <div class="midSkeletonImg shimmer"></div>
-        <div class="midSkeletonLine shimmer"></div>
+        <div class="midSkeletonItem">
+          <div class="midSkeletonImg shimmer"></div>
+          <div class="midSkeletonLine shimmer"></div>
+        </div>
+
       </div>
 
     </div>
   `;
 
+  // 🔥 insert BEFORE section
   section.parentNode.insertBefore(
-    skel,
+    wrapper,
     section
   );
+
+  // 🔥 hide only this section initially
+  section.style.display = "none";
 
   const midObserver =
   new IntersectionObserver(entries=>{
@@ -15665,14 +15669,11 @@ document.querySelectorAll(".midCategory")
 
       if(entry.isIntersecting){
 
-        // 🔥 show real section
-        section.style.opacity = "1";
-        section.style.transition = "0.4s";
+        // 🔥 show section
+        section.style.display = "block";
 
         // 🔥 remove skeleton
-        setTimeout(()=>{
-          skel.remove();
-        },500);
+        wrapper.remove();
 
         midObserver.unobserve(section);
 
@@ -15681,8 +15682,7 @@ document.querySelectorAll(".midCategory")
     });
 
   },{
-    threshold:0.9,
-rootMargin:"0px"
+    threshold:0.2
   });
 
   midObserver.observe(section);
