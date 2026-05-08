@@ -422,7 +422,7 @@ input, textarea{
   padding:15px;
 
   /* ✅ SAFE WAY */
-  padding-top: calc(15px + 55px);
+  padding-top: calc(15px + 50px);
 
   padding-bottom:10px;
   border-radius:0;
@@ -4765,7 +4765,7 @@ animation:zoomLoop 12s infinite ease-in-out;
   right:10px;
 
   /* 🔥 POSITION */
-  top: calc(55px + 100px);
+  top: calc(55px + 110px);
 
   background:#fff;
   border-radius:12px;
@@ -4956,6 +4956,27 @@ scroll-behavior:smooth;
 
 .cartRecoGrid::-webkit-scrollbar{
   display:none;
+}
+.searchItem{
+  padding:12px;
+  border-bottom:1px solid #eee;
+}
+.searchFilter{
+  display:inline-block;
+  padding:8px 14px;
+  background:#f3f3f3;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+.priceTag{
+  display:inline-block;
+  background:#f2f2f2;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  margin-bottom:8px;
 }
 </style>
 </head>
@@ -7037,7 +7058,7 @@ Please use Cash on Delivery.
 </div>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/fuse.js"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -7087,10 +7108,9 @@ function getLocation(){
   // 🔥 START 30 SECOND TIMER
   locationTimeout = setTimeout(()=>{
     showOnly("locationError");
-  }, 20000);
+  }, 5000);
 
-  navigator.geolocation.getCurrentPosition(async(pos)=>{
-
+ navigator.geolocation.getCurrentPosition(async(pos)=>{
     clearTimeout(locationTimeout); // ✅ STOP TIMER
 
     const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
@@ -7120,14 +7140,18 @@ function getLocation(){
       localStorage.setItem("savedCity", city);
       localStorage.setItem("savedAddress", full);
 
-    },3000);
+    },500);
 
-  }, ()=>{
+   }, ()=>{
 
-    clearTimeout(locationTimeout); // ✅ STOP TIMER
+    clearTimeout(locationTimeout);
 
     showOnly("locationError");
 
+  },{
+    enableHighAccuracy:false,
+    timeout:5000,
+    maximumAge:60000
   });
 
 }
@@ -7214,6 +7238,7 @@ document.getElementById("saveManual").onclick = function(){
 };
 document.addEventListener("DOMContentLoaded", () => {
 
+  // PLACEHOLDER WORDS
   const words = [
     "groceries",
     "drinks",
@@ -7224,23 +7249,65 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const input = document.getElementById("searchInput");
+  const results = document.getElementById("searchResults");
 
+  // PRODUCTS
+  const products = [
+
+    {
+      name: "Rice",
+      price: 80,
+      keywords: ["rice", "biyyam", "biyam"]
+    },
+
+    {
+      name: "Milk",
+      price: 30,
+      keywords: ["milk", "paalu", "palu"]
+    },
+
+    {
+      name: "Wheat Flour",
+      price: 55,
+      keywords: ["flour", "pindi", "atta"]
+    },
+
+    {
+      name: "Ghee",
+      price: 120,
+      keywords: ["ghee", "neyyi"]
+    },
+
+    {
+      name: "Sunflower Oil",
+      price: 180,
+      keywords: ["oil", "oilu"]
+    }
+
+  ];
+
+  // FUSE SEARCH
+  const fuse = new Fuse(products, {
+    keys: ["name", "keywords"],
+    threshold: 0.4,
+    includeScore: true
+  });
+
+  // PLACEHOLDER ANIMATION
   let i = 0;
 
   function changeWord() {
 
-    // don't animate if user typing
     if (input.value.length !== 0) return;
 
-    // animate up (fade + move)
     input.style.transition = "all 0.3s ease";
     input.style.opacity = "0";
     input.style.transform = "translateY(-8px)";
 
     setTimeout(() => {
+
       input.placeholder = "Search for " + words[i];
 
-      // reset from below
       input.style.transform = "translateY(8px)";
 
       setTimeout(() => {
@@ -7255,7 +7322,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(changeWord, 2000);
 
+  // SEARCH
+let debounce;
+
+input.addEventListener("input", () => {
+
+  clearTimeout(debounce);
+
+  debounce = setTimeout(() => {
+
+    const query = input.value.toLowerCase().trim();
+
+    if (!query) {
+      results.innerHTML = "";
+      return;
+    }
+
+    // PRICE FILTER
+    const priceMatch = query.match(/(under|below|less than)\s*(\d+)/);
+
+    let maxPrice = null;
+
+    if (priceMatch) {
+      maxPrice = parseInt(priceMatch[2]);
+    }
+
+    // CLEAN QUERY
+    const cleanQuery = query
+      .replace(/(under|below|less than)\s*\d+/, "")
+      .trim();
+
+    let finalProducts = [];
+
+    // ✅ ONLY PRICE SEARCH
+    if (cleanQuery === "" && maxPrice !== null) {
+
+      finalProducts = products.filter(
+        p => p.price <= maxPrice
+      );
+
+    } else {
+
+      // ✅ NORMAL SEARCH
+      let matches = fuse.search(cleanQuery);
+
+      finalProducts = matches.map(r => r.item);
+
+      // ✅ APPLY PRICE FILTER
+      if (maxPrice !== null) {
+
+        finalProducts = finalProducts.filter(
+          p => p.price <= maxPrice
+        );
+
+      }
+
+    }
+
+    // NO RESULTS
+    if (finalProducts.length === 0) {
+
+      results.innerHTML = `
+        <div class="searchItem">
+          No products found
+        </div>
+      `;
+
+      return;
+    }
+
+    // SHOW RESULTS
+    results.innerHTML = `
+
+      ${
+        maxPrice !== null
+        ? `
+          <div class="searchFilter">
+            Under ₹${maxPrice}
+          </div>
+        `
+        : ""
+      }
+
+      ${finalProducts
+        .slice(0, 10)
+        .map(p => `
+          <div class="searchItem">
+            <h4>${p.name}</h4>
+            <p>₹${p.price}</p>
+          </div>
+        `)
+        .join("")
+      }
+
+    `;
+
+  }, 300);
+
 });
+
+
+});
+
+
+// NORMALIZE
 function normalize(text){
   return text
     .toLowerCase()
@@ -7264,6 +7434,8 @@ function normalize(text){
     .trim();
 }
 
+
+// TRANSLATION MAP
 const translateMap = {
   pindi: "flour",
   biyyam: "rice",
@@ -7272,11 +7444,18 @@ const translateMap = {
   karam: "spice",
   oil: "oil"
 };
+
+
+// SHOW SECTION
 function showOnly(id){
-  ["detecting","success","locationError","manualEntry"].forEach(sec=>{
-    document.getElementById(sec).style.display="none";
+
+  ["detecting","success","locationError","manualEntry"].forEach(sec => {
+
+    document.getElementById(sec).style.display = "none";
+
   });
-  document.getElementById(id).style.display="block";
+
+  document.getElementById(id).style.display = "block";
 }
 const categories = document.querySelectorAll(".catItem");
 
