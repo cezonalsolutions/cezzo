@@ -7068,6 +7068,53 @@ Please use Cash on Delivery.
 );
 document.addEventListener("DOMContentLoaded", ()=>{
 
+  // 🔥 RETURN FROM LOGIN
+  if(sessionStorage.getItem("fromLogin") === "true"){
+
+    sessionStorage.removeItem("fromLogin");
+
+    splash.style.display = "none";
+
+    main.style.display = "none";
+
+    optionScreen.style.display = "none";
+
+    // ✅ directly home page
+    home.style.display = "block";
+
+    return;
+  }
+
+  // 🔥 RETURN FROM INTERNAL PAGES
+  if(sessionStorage.getItem("skipIntro") === "true"){
+
+    sessionStorage.removeItem("skipIntro");
+
+    splash.style.display = "none";
+
+    main.style.display = "none";
+
+    home.style.display = "none";
+
+    // ✅ direct option screen
+    optionScreen.style.display = "block";
+
+    cityName.innerText =
+    localStorage.getItem("savedCity") || "Your Location";
+
+    shortAddress.innerText =
+    localStorage.getItem("savedAddress") || "";
+
+    document.getElementById("optCityName").innerText =
+    localStorage.getItem("savedCity") || "Your Location";
+
+    document.getElementById("optShortAddress").innerText =
+    localStorage.getItem("savedAddress") || "";
+
+    return;
+  }
+
+  // 🔥 FRESH OPEN
   splash.style.display = "flex";
 
   main.style.display = "none";
@@ -7076,38 +7123,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   setTimeout(()=>{
 
-    if(sessionStorage.getItem("skipIntro") === "true"){
+    splash.style.opacity = "0";
+    splash.style.transition = "0.6s";
 
-      sessionStorage.removeItem("skipIntro");
+    setTimeout(()=>{
 
       splash.style.display = "none";
 
-      optionScreen.style.display = "block";
+      main.style.display = "flex";
 
-      cityName.innerText =
-      localStorage.getItem("savedCity") || "Your Location";
+      showOnly("detecting");
 
-      shortAddress.innerText =
-      localStorage.getItem("savedAddress") || "";
+      getLocation();
 
-    }else{
-
-      splash.style.opacity = "0";
-      splash.style.transition = "0.6s";
-
-      setTimeout(()=>{
-
-        splash.style.display = "none";
-
-        main.style.display = "flex";
-
-        showOnly("detecting");
-
-        getLocation();
-
-      },600);
-
-    }
+    },600);
 
   },2600);
 
