@@ -535,6 +535,13 @@ input, textarea{
 
   /* ✅ KEY FIX */
   animation: fall linear infinite;
+  will-change: transform;
+
+backface-visibility:hidden;
+
+transform:translateZ(0);
+
+-webkit-transform:translateZ(0);
 }
 .leaves span:nth-child(odd){
   filter:hue-rotate(20deg);
@@ -543,16 +550,7 @@ input, textarea{
 .leaves span:nth-child(even){
   filter:hue-rotate(-20deg);
 }
-.leaves span:nth-child(1){ left:5%;  animation-duration:6s; animation-delay:-1s; }
-.leaves span:nth-child(2){ left:15%; animation-duration:8s; animation-delay:-2s; }
-.leaves span:nth-child(3){ left:25%; animation-duration:7s; animation-delay:-3s; }
-.leaves span:nth-child(4){ left:35%; animation-duration:9s; animation-delay:-4s; }
-.leaves span:nth-child(5){ left:45%; animation-duration:6s; animation-delay:-2s; }
-.leaves span:nth-child(6){ left:55%; animation-duration:10s;animation-delay:-5s; }
-.leaves span:nth-child(7){ left:65%; animation-duration:7s; animation-delay:-3s; }
-.leaves span:nth-child(8){ left:75%; animation-duration:9s; animation-delay:-4s; }
-.leaves span:nth-child(9){ left:85%; animation-duration:6s; animation-delay:-2s; }
-.leaves span:nth-child(10){ left:95%;animation-duration:8s; animation-delay:-3s; }
+
 @keyframes fall{
   0%{
     transform:translateY(-80px) translateX(0px) rotate(0deg);
@@ -5271,8 +5269,8 @@ poster="cat/cezzo1.webp">
   </div>
 </div>
 
-<div id="productSection">
-
+<div id="productSection"
+class="productSectionWithHeading">
   <div class="videoWrap">
 
     <!-- 🔥 shimmer loading -->
@@ -5548,8 +5546,8 @@ style="
 <div class="sparkleContainer"></div>
 </div>
 
-<div id="productSection6">
-
+<div id="productSection6"
+class="productSectionWithHeading">
   <div class="videoWrap">
 
     <!-- 🔥 shimmer loading -->
@@ -5572,7 +5570,7 @@ style="
  display:block;
  border-radius:14px;
  margin-top:10px;
- opacity:0;
+ opacity:1;
  transition:0.5s;
 ">
 
@@ -8303,17 +8301,35 @@ productSection62.style.display = "block";
 }
   });
 });
-const leafContainer = document.querySelector(".leaves");
+window.addEventListener("load", ()=>{
 
-for(let i=0; i<25; i++){
-  const leaf = document.createElement("span");
+  const leafContainer =
+  document.querySelector(".leaves");
 
-  leaf.style.left = Math.random() * 100 + "%";
-  leaf.style.animationDuration = (6 + Math.random()*6) + "s";
-  leaf.style.animationDelay = "0s"; // ✅ start immediately
+  if(!leafContainer) return;
 
-  leafContainer.appendChild(leaf);
-}
+  leafContainer.innerHTML = "";
+
+  for(let i=0; i<25; i++){
+
+    const leaf =
+    document.createElement("span");
+
+    leaf.style.left =
+    Math.random() * 100 + "%";
+
+    leaf.style.animationDuration =
+    (6 + Math.random()*6) + "s";
+
+    // 🔥 iPhone fix
+    leaf.style.animationDelay =
+    (-Math.random()*10) + "s";
+
+    leafContainer.appendChild(leaf);
+
+  }
+
+});
 // default load
 document.querySelector(".catItem").click();
 
@@ -15829,18 +15845,39 @@ if(playPromise !== undefined){
 lazyVideos.forEach(video=>{
 
   videoObserver.observe(video);
+  function removeLoader(video){
+
+  video.style.opacity = "1";
+
+  const loader =
+  video.parentNode.querySelector(".videoLoader");
+
+  if(loader){
+
+    loader.style.opacity = "0";
+
+    setTimeout(()=>{
+      loader.remove();
+    },200);
+
+  }
+
+}
+
+// 🔥 if already loaded
+if(video.readyState >= 2){
+
+  removeLoader(video);
+
+}else{
+
   video.addEventListener("loadeddata", ()=>{
 
-    video.style.opacity = "1";
+    removeLoader(video);
 
-    const loader =
-      video.parentNode.querySelector(".videoLoader");
+  }, { once:true });
 
-    if(loader){
-      loader.remove();
-    }
-
-  });
+}
 
 });
 </script>
