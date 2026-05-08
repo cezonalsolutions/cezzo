@@ -31,6 +31,10 @@ body{
   font-family:'Outfit',sans-serif;
   color:#fff;
 }
+html,
+body{
+  overscroll-behavior-y:none;
+}
 
 .mainText{
   animation:fadeUp 0.6s ease;
@@ -4379,7 +4383,10 @@ button:active{
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 
-  padding-bottom:10px;   /* 🔥 IMPORTANT: space for bottom bar */
+  overscroll-behavior-y:none;
+  touch-action:pan-y;
+
+  padding-bottom:10px;
 }
 
 .optionHeader{
