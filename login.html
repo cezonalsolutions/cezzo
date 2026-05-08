@@ -506,8 +506,7 @@ if (!error) {
   localStorage.setItem("userName", nameValue);
   localStorage.setItem("userMobile", mobile);
 
-  sessionStorage.setItem("skipIntro", "true");
-
+  sessionStorage.setItem("fromLogin","true");
   window.location.href = "index.html";
 }else {
    document.getElementById("loadingScreen").style.display="none";
@@ -520,8 +519,7 @@ if (!error) {
       window.goBack = function(){
 
    // same as login success skip intro
-   sessionStorage.setItem("skipIntro","true");
-
+   sessionStorage.setItem("fromLogin","true");
    let goBack=
 localStorage.getItem(
 "redirectAfterLogin"
