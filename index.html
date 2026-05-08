@@ -4978,44 +4978,6 @@ scroll-behavior:smooth;
   font-size:12px;
   margin-bottom:8px;
 }
-.midSkeleton{
-  padding:14px 16px;
-}
-
-.midSkeletonTitle{
-  width:120px;
-  height:18px;
-  border-radius:10px;
-  background:#eee;
-  margin-bottom:18px;
-}
-
-.midSkeletonGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-
-.midSkeletonItem{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.midSkeletonImg{
-  width:72px;
-  height:72px;
-  border-radius:18px;
-  background:#eee;
-}
-
-.midSkeletonLine{
-  width:60px;
-  height:10px;
-  border-radius:10px;
-  background:#eee;
-  margin-top:10px;
-}
 </style>
 </head>
 
@@ -15612,94 +15574,7 @@ document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
   section.insertBefore(skel, grid);
 
 });
-document.querySelectorAll(".midCategory")
-.forEach(section=>{
 
-  // 🔥 skip first visible sections
-  const rect = section.getBoundingClientRect();
-
-  if(rect.top < window.innerHeight + 200){
-    return;
-  }
-
-  // 🔥 create skeleton
-  const wrapper =
-  document.createElement("div");
-
-  wrapper.className = "midSkeletonWrap";
-
-  wrapper.innerHTML = `
-
-    <div class="midSkeleton">
-
-      <div class="midSkeletonTitle shimmer"></div>
-
-      <div class="midSkeletonGrid">
-
-        <div class="midSkeletonItem">
-          <div class="midSkeletonImg shimmer"></div>
-          <div class="midSkeletonLine shimmer"></div>
-        </div>
-
-        <div class="midSkeletonItem">
-          <div class="midSkeletonImg shimmer"></div>
-          <div class="midSkeletonLine shimmer"></div>
-        </div>
-
-        <div class="midSkeletonItem">
-          <div class="midSkeletonImg shimmer"></div>
-          <div class="midSkeletonLine shimmer"></div>
-        </div>
-
-        <div class="midSkeletonItem">
-          <div class="midSkeletonImg shimmer"></div>
-          <div class="midSkeletonLine shimmer"></div>
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  // 🔥 insert skeleton
-  section.parentNode.insertBefore(
-    wrapper,
-    section
-  );
-
-  // 🔥 use opacity instead of display none
-  section.style.opacity = "0";
-  section.style.transition = "0.4s";
-
-  const midObserver =
-  new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-      if(entry.isIntersecting){
-
-        // 🔥 show real content
-        section.style.opacity = "1";
-
-        // 🔥 remove shimmer
-        setTimeout(()=>{
-          wrapper.remove();
-        },200);
-
-        midObserver.unobserve(section);
-
-      }
-
-    });
-
-  },{
-    threshold:0.05,
-    rootMargin:"300px 0px"
-  });
-
-  midObserver.observe(section);
-
-});
 
 const observer = new IntersectionObserver(entries=>{
 
