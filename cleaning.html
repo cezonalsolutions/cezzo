@@ -254,6 +254,294 @@ html, body{
     background-position:300px 0;
   }
 }
+/* FULL POPUP */
+.servicePopup{
+  position:fixed;
+  inset:0;
+
+  background:#f4f7fb;
+
+  z-index:99999;
+
+  overflow-y:auto;
+
+  animation:popupFade .3s ease;
+}
+
+/* OPEN ANIMATION */
+@keyframes popupFade{
+
+  from{
+    opacity:0;
+    transform:translateY(24px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* TOP */
+.popupTop{
+  position:absolute;
+
+  top:18px;
+  left:18px;
+
+  z-index:20;
+}
+
+/* BACK BUTTON */
+.backBtn{
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.95);
+
+  backdrop-filter:blur(10px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:0 6px 20px rgba(0,0,0,0.14);
+
+  transition:.2s;
+
+  cursor:pointer;
+}
+
+.backBtn:active{
+  transform:scale(.95);
+}
+
+.backBtn i{
+  font-size:17px;
+  color:#111;
+}
+
+/* IMAGE */
+.popupImage{
+  position:relative;
+}
+
+.popupImage img{
+  width:100%;
+  height:330px;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+/* CONTENT */
+.popupContent{
+  position:relative;
+
+  margin-top:-28px;
+
+  background:#fff;
+
+  border-top-left-radius:30px;
+  border-top-right-radius:30px;
+
+  padding:26px 18px 120px;
+
+  min-height:calc(100vh - 280px);
+
+  box-shadow:0 -6px 24px rgba(0,0,0,0.04);
+}
+
+/* TITLE */
+.popupTitle{
+  font-size:30px;
+  font-weight:800;
+
+  color:#111;
+
+  line-height:1.2;
+
+  letter-spacing:-0.4px;
+}
+
+/* PRICE */
+.popupPrice{
+  margin-top:12px;
+
+  display:inline-flex;
+  align-items:center;
+
+  background:#e9fff1;
+
+  color:#16a34a;
+
+  padding:9px 16px;
+
+  border-radius:16px;
+
+  font-size:18px;
+  font-weight:700;
+}
+
+/* BOX */
+.infoBox{
+  margin-top:32px;
+}
+
+/* SECTION HEADING */
+.infoBox h3{
+  font-size:19px;
+  font-weight:800;
+
+  color:#111;
+
+  margin-bottom:16px;
+}
+
+/* INCLUDE / EXCLUDE */
+.infoItem{
+  display:flex;
+  align-items:flex-start;
+
+  padding:14px 15px;
+
+  background:#f8fafc;
+
+  border-radius:16px;
+
+  margin-bottom:12px;
+
+  font-size:14px;
+  color:#444;
+
+  line-height:1.6;
+
+  border:1px solid rgba(0,0,0,0.03);
+}
+
+/* FAQ CARD */
+.faqCard{
+  background:#f8fafc;
+
+  border-radius:18px;
+
+  margin-bottom:14px;
+
+  overflow:hidden;
+
+  border:1px solid rgba(0,0,0,0.03);
+}
+
+/* FAQ QUESTION */
+.faqQuestion{
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  cursor:pointer;
+
+  font-size:15px;
+  font-weight:700;
+
+  color:#111;
+}
+
+/* FAQ ICON */
+.faqQuestion i{
+  font-size:13px;
+
+  transition:.25s;
+}
+
+/* FAQ ANSWER */
+.faqDropdown{
+  max-height:0;
+
+  overflow:hidden;
+
+  transition:max-height .3s ease;
+
+  padding:0 16px;
+
+  font-size:14px;
+  color:#666;
+
+  line-height:1.7;
+}
+
+/* ACTIVE FAQ */
+.faqCard.active .faqDropdown{
+  max-height:200px;
+
+  padding:0 16px 18px;
+}
+
+.faqCard.active .faqQuestion i{
+  transform:rotate(180deg);
+}
+
+/* BOTTOM */
+.popupBottom{
+  position:fixed;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+
+  padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+
+  background:rgba(255,255,255,0.96);
+
+  backdrop-filter:blur(14px);
+
+  border-top:1px solid rgba(0,0,0,0.05);
+
+  z-index:30;
+}
+
+/* BUTTON */
+.bookNowBtn{
+  width:100%;
+  height:58px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:linear-gradient(
+    135deg,
+    #111,
+    #2d2d2d
+  );
+
+  color:#fff;
+
+  font-size:16px;
+  font-weight:700;
+
+  box-shadow:0 10px 24px rgba(0,0,0,0.16);
+
+  transition:.2s;
+
+  cursor:pointer;
+}
+
+.bookNowBtn:active{
+  transform:scale(.98);
+}
+/* STOP BACKGROUND SCROLL WHEN POPUP OPEN */
+body.popupOpen{
+  overflow:hidden;
+  height:100vh;
+  touch-action:none;
+}
 </style>
 </head>
 
@@ -277,7 +565,7 @@ html, body{
 
   <!-- IMAGE -->
   <div class="banner">
-    <img src="cleaning/celaning3.png">
+    <img src="cleaning/celaning3.webp">
   </div>
 
 </div>
@@ -292,7 +580,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.5</div>
-      <img src="cleaning/bathrromclean.png">
+      <img src="cleaning/bathrromclean.webp">
     </div>
 
     <div class="cardName">Bathroom Cleaning</div>
@@ -307,7 +595,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.6</div>
-      <img src="cleaning/fridgeclean.png">
+      <img src="cleaning/fridgeclean.webp">
     </div>
 
     <div class="cardName">Fridge Cleaning</div>
@@ -322,7 +610,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.4</div>
-      <img src="cleaning/fanclean.png">
+      <img src="cleaning/fanclean.webp">
     </div>
 
     <div class="cardName">Fan Cleaning</div>
@@ -337,7 +625,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.7</div>
-      <img src="cleaning/packing.png">
+      <img src="cleaning/packing.webp">
     </div>
 
     <div class="cardName">Packing & Unpacking</div>
@@ -352,7 +640,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.5</div>
-      <img src="cleaning/kitchenhelp.png">
+      <img src="cleaning/kitchenhelp.webp">
     </div>
 
     <div class="cardName">Kitchen Help</div>
@@ -367,7 +655,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.3</div>
-      <img src="cleaning/sweepingclean.png">
+      <img src="cleaning/sweepingclean.webp">
     </div>
 
     <div class="cardName">Sweeping</div>
@@ -382,7 +670,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.8</div>
-       <img src="cleaning/landuary.png">
+       <img src="cleaning/landuary.webp">
     </div>
 
     <div class="cardName">Ironing</div>
@@ -397,7 +685,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.6</div>
-      <img src="cleaning/windowclean.png">
+      <img src="cleaning/windowclean.webp">
     </div>
 
     <div class="cardName">Window Cleaning</div>
@@ -412,7 +700,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.7</div>
-      <img src="cleaning/kitechclean.png">
+      <img src="cleaning/kitechclean.webp">
     </div>
 
     <div class="cardName">Kitchen Cleaning</div>
@@ -442,7 +730,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.9</div>
-       <img src="cleaning/fullhomeclean.png">
+       <img src="cleaning/fullhomeclean.webp">
     </div>
 
     <div class="cardName">Full Home Cleaning</div>
@@ -457,7 +745,7 @@ html, body{
   <div class="serviceCard">
     <div class="cardImage">
       <div class="ratingTag">⭐ 4.8</div>
-     <img src="cleaning/feestivalclean.png">
+     <img src="cleaning/feestivalclean.webp">
     </div>
 
     <div class="cardName">Festival Cleaning</div>
@@ -505,6 +793,257 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
   }, 1500);
+
+});
+const popupData = {
+
+  "Bathroom Cleaning": {
+    popupImage:"./clean/bathrromclean.webp",
+    include:["Floor cleaning","Tiles wash","Mirror cleaning"],
+    exclude:["Plumbing","Painting"],
+    faq1:"How much time required?",
+    ans1:"Usually 1 hour.",
+    faq2:"Materials included?",
+    ans2:"Yes all materials included."
+  },
+
+  "Fridge Cleaning": {
+        popupImage:"./clean/fridgeclean.webp",
+    include:["Tray cleaning","Deep sanitize","Odor removal"],
+    exclude:["Repair","Gas refill"],
+    faq1:"Need empty fridge?",
+    ans1:"Yes recommended.",
+    faq2:"Inside cleaning included?",
+    ans2:"Yes complete cleaning included."
+  },
+
+  "Fan Cleaning": {
+    popupImage:"./clean/fanclean.webp",
+    include:["Dust removal","Blade cleaning","Dry wipe"],
+    exclude:["Motor repair","Electrical repair"],
+    faq1:"Need ladder?",
+    ans1:"No we bring tools.",
+    faq2:"Water wash included?",
+    ans2:"No dry cleaning only."
+  },
+
+  "Packing & Unpacking": {
+    popupImage:"./clean/packing.webp",
+    include:["Safe packing","Box setup","Item arrangement"],
+    exclude:["Transport","Heavy lifting"],
+    faq1:"Boxes included?",
+    ans1:"No boxes charged separately.",
+    faq2:"Fragile packing available?",
+    ans2:"Yes available."
+  },
+
+  "Kitchen Help": {
+popupImage:"./clean/kitech clean.webp",
+    include:["Preparation help","Cleaning help","Basic support"],
+    exclude:["Cooking","Dish washing"],
+    faq1:"Can cook food?",
+    ans1:"No support only.",
+    faq2:"Daily service available?",
+    ans2:"Yes available."
+  },
+
+  "Sweeping": {
+   popupImage:"./clean/swepping.webp",
+    include:["Dust cleaning","Floor sweeping","Basic cleanup"],
+    exclude:["Mopping","Deep cleaning"],
+    faq1:"Mop included?",
+    ans1:"No sweeping only.",
+    faq2:"Tools included?",
+    ans2:"Yes."
+  },
+
+  "Ironing": {
+   popupImage:"./clean/landuary.webp",
+    include:["Steam iron","Cloth folding","Quick service"],
+    exclude:["Dry wash","Washing"],
+    faq1:"Pickup available?",
+    ans1:"Yes in selected areas.",
+    faq2:"Express service available?",
+    ans2:"Yes."
+  },
+
+  "Window Cleaning": {
+    popupImage:"./clean/windowclean.webp",
+    include:["Glass cleaning","Frame wipe","Dust cleaning"],
+    exclude:["Broken repair","Painting"],
+    faq1:"Outside cleaning included?",
+    ans1:"Yes if reachable.",
+    faq2:"Chemical free cleaning?",
+    ans2:"Yes safe materials used."
+  },
+
+  "Kitchen Cleaning": {
+   popupImage:"./clean/kitech clean.webp",
+    include:["Stove cleaning","Sink wash","Platform cleaning"],
+    exclude:["Pest control","Repair"],
+    faq1:"Oil stains removable?",
+    ans1:"Yes deep cleaning done.",
+    faq2:"Utensils included?",
+    ans2:"Basic utensils only."
+  },
+
+  "Balcony Cleaning": {
+    popupImage:"./clean/balconyclean.webp",
+    include:["Dust cleaning","Railing wash","Floor cleaning"],
+    exclude:["Plant care","Painting"],
+    faq1:"Water wash included?",
+    ans1:"Yes.",
+    faq2:"High rise cleaning?",
+    ans2:"Only safe accessible areas."
+  },
+
+  "Full Home Cleaning": {
+    popupImage:"./clean/fullhomeclean.webp",
+    include:["Bedroom cleaning","Kitchen cleaning","Hall cleaning"],
+    exclude:["Electrical work","Pest control"],
+    faq1:"How much time needed?",
+    ans1:"4-6 hours.",
+    faq2:"Team size?",
+    ans2:"2-4 professionals."
+  },
+
+  "Festival Cleaning": {
+    popupImage:"./clean/festival clean.webp",
+    include:["Dust cleaning","Decor cleaning","Floor wash"],
+    exclude:["Decoration setup","Painting"],
+    faq1:"Same day service?",
+    ans1:"Depends on availability.",
+    faq2:"Deep cleaning included?",
+    ans2:"Yes."
+  }
+
+};
+
+document.querySelectorAll(".serviceCard").forEach(card => {
+
+  card.addEventListener("click", () => {
+
+    const title = card.querySelector(".cardName").innerText;
+
+    const price = card.querySelector(".newPrice").innerText;
+
+    const data = popupData[title];
+
+    const popup = document.createElement("div");
+
+    popup.className = "servicePopup active";
+
+    popup.innerHTML = `
+
+      <div class="popupTop">
+
+        <div class="backBtn">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+      </div>
+
+      <div class="popupImage">
+        <img src="${data.popupImage}">
+      </div>
+
+      <div class="popupContent">
+
+        <div class="popupTitle">
+          ${title}
+        </div>
+
+        <div class="popupPrice">
+          ${price}
+        </div>
+
+        <div class="infoBox">
+
+          <h3>Included</h3>
+
+          ${data.include.map(item => `
+            <div class="infoItem">✔ ${item}</div>
+          `).join("")}
+
+        </div>
+
+        <div class="infoBox">
+
+          <h3>Not Included</h3>
+
+          ${data.exclude.map(item => `
+            <div class="infoItem">✖ ${item}</div>
+          `).join("")}
+
+        </div>
+
+        <div class="infoBox">
+
+          <h3>FAQ</h3>
+
+          <div class="faqCard">
+
+            <div class="faqQuestion">
+              <span>${data.faq1}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <div class="faqDropdown">
+              ${data.ans1}
+            </div>
+
+          </div>
+
+          <div class="faqCard">
+
+            <div class="faqQuestion">
+              <span>${data.faq2}</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <div class="faqDropdown">
+              ${data.ans2}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="popupBottom">
+
+        <button class="bookNowBtn">
+          Book Now
+        </button>
+
+      </div>
+
+    `;
+
+    document.body.appendChild(popup);
+
+   document.body.classList.add("popupOpen");
+    popup.querySelector(".backBtn").addEventListener("click", () => {
+
+      popup.remove();
+
+      document.body.classList.remove("popupOpen");
+    });
+
+    popup.querySelectorAll(".faqQuestion").forEach(question => {
+
+      question.addEventListener("click", () => {
+
+        const card = question.parentElement;
+
+        card.classList.toggle("active");
+
+      });
+
+    });
+
+  });
 
 });
 </script>
