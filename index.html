@@ -4978,90 +4978,6 @@ scroll-behavior:smooth;
   font-size:12px;
   margin-bottom:8px;
 }
-.popupSkeleton{
-  padding:15px;
-}
-
-.shimmer{
-  position:relative;
-  overflow:hidden;
-  background:#f2f2f2;
-}
-
-.shimmer::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-150px;
-  width:120px;
-  height:100%;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.7),
-    transparent
-  );
-
-  animation:shimmer 1.2s infinite;
-}
-
-@keyframes shimmer{
-  100%{
-    left:100%;
-  }
-}
-
-.skImage{
-  width:100%;
-  height:260px;
-  border-radius:18px;
-}
-
-.skDots{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin:12px 0;
-}
-
-.skDots span{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#e5e5e5;
-}
-
-.skLine{
-  height:18px;
-  border-radius:8px;
-  margin-top:14px;
-}
-
-.skLine.small{
-  width:60%;
-  height:14px;
-}
-
-.skPrice{
-  width:120px;
-  height:22px;
-  border-radius:8px;
-  margin-top:18px;
-}
-
-.skBtn{
-  width:100%;
-  height:46px;
-  border-radius:12px;
-  margin-top:18px;
-}
-
-.skBox{
-  width:100%;
-  height:80px;
-  border-radius:14px;
-  margin-top:14px;
-}
 </style>
 </head>
 
@@ -8682,439 +8598,298 @@ async function loadProducts(){
 
 }
 function openPopup(item){
-
 lockBodyScroll();
+  const table = item.table || "all_products";
 
-const table = item.table || "all_products";
+  const popup = document.getElementById("popup");
+  const dataDiv = document.getElementById("popupData");
 
-const popup = document.getElementById("popup");
-const dataDiv = document.getElementById("popupData");
+  const images = [item.image1, item.image2, item.image3].filter(Boolean);
 
-const images = [
-  item.image1,
-  item.image2,
-  item.image3
-].filter(Boolean);
-
-
-// ✅ SHOW POPUP
-popup.style.display = "flex";
-
-
-// ✅ SKELETON LOADING
-dataDiv.innerHTML = `
-
-<div class="popupSkeleton">
-
-  <div class="skImage shimmer"></div>
-
-  <div class="skDots">
-    <span class="shimmer"></span>
-    <span class="shimmer"></span>
-    <span class="shimmer"></span>
-  </div>
-
-  <div class="skLine shimmer"></div>
-
-  <div class="skLine small shimmer"></div>
-
-  <div class="skPrice shimmer"></div>
-
-  <div class="skBtn shimmer"></div>
-
-  <div class="skBox shimmer"></div>
-
-  <div class="skBox shimmer"></div>
-
-</div>
-
-`;
-
-
-// ✅ LOAD REAL CONTENT
-setTimeout(()=>{
-
-dataDiv.innerHTML = `
-
-<!-- TOP ICONS -->
+  dataDiv.innerHTML = `
+    <!-- TOP ICONS -->
 <div class="topIcons">
-
   <div class="iconBtn" onclick="closePopup()">
-    <i class="fa-solid fa-chevron-down"></i>
-  </div>
-
+  <i class="fa-solid fa-chevron-down"></i>
 </div>
-
-
-<!-- IMAGE -->
-<div class="imageSlider" id="slider">
-
-  ${images.map(img => `
-    <img src="${img}">
-  `).join("")}
-
 </div>
+    <!-- IMAGE -->
+    <div class="imageSlider" id="slider">
 
+      
+      ${images.map(img => `<img src="${img}">`).join("")}
 
-<!-- DOTS -->
-<div class="dots">
+    </div>
 
-  ${images.map((_,i)=> `
-    <div class="dot ${i===0?"active":""}"></div>
-  `).join("")}
+    <!-- DOTS -->
+    <div class="dots">
+      ${images.map((_,i)=> `<div class="dot ${i===0?"active":""}"></div>`).join("")}
+    </div>
 
-</div>
+    <div class="popupContent">
 
-
-<div class="popupContent">
-
-
-<div class="nameTopRow">
+   <div class="nameTopRow">
 
   <div class="nameRow">
-
     <h2>${item.name}</h2>
-
-    <span class="brandInline">
-      ${item.brand || ""}
-    </span>
-
+    <span class="brandInline">${item.brand || ""}</span>
   </div>
 
   <div class="ratingBox">
-    <i class="fa-solid fa-star"></i>
-    ${item.rating || "0"}
+    <i class="fa-solid fa-star"></i> ${item.rating || "0"}
   </div>
 
 </div>
+<div class="shortDesc">${item.short_desc || ""}</div>
 
-
-<div class="shortDesc">
-  ${item.short_desc || ""}
-</div>
-
-
+      <!-- PRICE + ADD -->
+    <!-- QUANTITY -->
 <div class="qtyText">
   ${item.quantity} ${item.unit}
 </div>
 
-
+<!-- PRICE + ADD -->
 <div class="topRow">
-
   <div class="priceRow">
-
     ₹${item.discount_price}
-
-    <span class="strike">
-      ₹${item.original_price}
-    </span>
-
+    <span class="strike">₹${item.original_price}</span>
   </div>
 
-  <div class="popupCartControl"
-    data-id="${item.id}"
-    data-table="${table}">
-
-    <button class="addBigBtn">
-      ADD
-    </button>
-
-  </div>
-
+  <div class="popupCartControl" 
+     data-id="${item.id}" 
+     data-table="${table}">
+  <button class="addBigBtn">ADD</button>
 </div>
-
+</div>
 
 <div class="infoBox">
 
-${
-(item.popup_info || []).map(info => `
+  ${
+    (item.popup_info || []).map(info => `
+      <div class="infoItem">
 
-  <div class="infoItem">
+        <div class="emoji">
+          ${info.emoji || ""}
+        </div>
 
-    <div class="emoji">
-      ${info.emoji || ""}
-    </div>
+        <div class="infoText">
+          ${info.title || ""}
+          <br>
+          <span>${info.sub || ""}</span>
+        </div>
 
-    <div class="infoText">
-
-      ${info.title || ""}
-
-      <br>
-
-      <span>
-        ${info.sub || ""}
-      </span>
-
-    </div>
-
-  </div>
-
-`).join("")
-}
+      </div>
+    `).join("")
+  }
 
 </div>
+      <!-- RATING -->
+      
+     
 
+      <!-- INGREDIENTS -->
+     <div class="box">
+  <b>Ingredients</b>
 
-<!-- INGREDIENTS -->
-<div class="box">
+  <table class="ingTable">
+    ${
+      (() => {
+        let arr = [];
 
-<b>Ingredients</b>
+        try {
+          arr = JSON.parse(item.ingredients || "[]");
+        } catch(e) {
+          return "<tr><td>-</td></tr>";
+        }
 
-<table class="ingTable">
+        let rows = "";
 
-${
-(() => {
+        for(let i = 0; i < arr.length; i += 2){
+          rows += `
+            <tr>
+              <td>${arr[i] || ""}</td>
+              <td>${arr[i+1] || ""}</td>
+            </tr>
+          `;
+        }
 
-let arr = [];
-
-try{
-  arr = JSON.parse(item.ingredients || "[]");
-}catch(e){
-  return "<tr><td>-</td></tr>";
-}
-
-let rows = "";
-
-for(let i=0; i<arr.length; i+=2){
-
-rows += `
-
-<tr>
-  <td>${arr[i] || ""}</td>
-  <td>${arr[i+1] || ""}</td>
-</tr>
-
-`;
-
-}
-
-return rows;
-
-})()
-}
-
-</table>
+        return rows;
+      })()
+    }
+  </table>
 
 </div>
+ <!-- LONG DESC -->
+      <div class="box">
+        <b>Description</b><br>
+        ${item.long_desc || "-"}
+      </div>
 
+      <!-- HOW TO USE -->
+     <div class="box">
+  <b>${item.use_title || "How to Use"}</b>
 
-<!-- DESCRIPTION -->
-<div class="box">
-
-<b>Description</b><br>
-
-${item.long_desc || "-"}
-
+  <ul class="pointList">
+    ${
+      (item.how_to_use || "")
+        .split(",")
+        .map(i => `<li>${i.trim()}</li>`)
+        .join("")
+    }
+  </ul>
 </div>
 
+      <!-- BENEFITS -->
+     <div class="box">
+  <b>Benefits</b>
 
-<!-- HOW TO USE -->
-<div class="box">
-
-<b>${item.use_title || "How to Use"}</b>
-
-<ul class="pointList">
-
-${
-(item.how_to_use || "")
-.split(",")
-.map(i => `<li>${i.trim()}</li>`)
-.join("")
-}
-
-</ul>
-
-</div>
-
-
-<!-- BENEFITS -->
-<div class="box">
-
-<b>Benefits</b>
-
-<div class="benefitList">
-
-${
-(item.benefits || "")
-.split(",")
-.map(i => `
-
-<div class="benefitItem">
-
-  <span class="tick">✔</span>
-
-  <span>${i.trim()}</span>
-
-</div>
-
-`).join("")
-}
-
-</div>
-
-</div>
-
-
-<!-- ADDITIONAL INFO -->
-<div class="infoPanelNew">
-
-<b>Additional Info</b>
-
-<div class="infoListNew">
-
-${
-(item.additional_info || "")
-.split(",")
-.map(i => {
-
-const parts = i.split(":");
-
-return `
-
-<div class="infoRowNew">
-
-  <div class="infoKeyNew">
-    ${parts[0] || ""}
-  </div>
-
-  <div class="infoValNew">
-    ${parts[1] || ""}
+  <div class="benefitList">
+    ${
+      (item.benefits || "")
+        .split(",")
+        .map(i => `
+          <div class="benefitItem">
+            <span class="tick">✔</span>
+            <span>${i.trim()}</span>
+          </div>
+        `).join("")
+    }
   </div>
 
 </div>
 
-`;
+      <!-- ADDITIONAL -->
+     <div class="infoPanelNew">
+  <b>Additional Info</b>
 
-}).join("")
-}
-
+  <div class="infoListNew">
+    ${
+      (item.additional_info || "")
+        .split(",")
+        .map(i => {
+          const parts = i.split(":");
+          return `
+            <div class="infoRowNew">
+              <div class="infoKeyNew">${parts[0] || ""}</div>
+              <div class="infoValNew">${parts[1] || ""}</div>
+            </div>
+          `;
+        }).join("")
+    }
+  </div>
 </div>
-
-</div>
-
-
 <div class="buyNowWrap">
-
-<button class="buyNowBtn" id="buyNowBtn">
-
-Buy Now • ₹${item.discount_price}
-
-<span>
-₹${item.original_price}
-</span>
-
+  <button class="buyNowBtn" id="buyNowBtn">
+  Buy Now • ₹${item.discount_price}
+  <span>₹${item.original_price}</span>
 </button>
-
 </div>
+    </div>
 
-</div>
+  `;
 
-`;
+  popup.style.display = "flex";
+  const buyBtn = document.getElementById("buyNowBtn");
 
+if(buyBtn){
+  buyBtn.onclick = function(){
 
-// ✅ SHOW ANIMATION
+    console.log("🛒 Buy Now clicked");
+
+    const key = table + "_" + item.id;
+
+    let cart = JSON.parse(localStorage.getItem("cart") || "{}");
+
+    cart[key] = (cart[key] || 0) + 1;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    console.log("✅ Added to cart:", key);
+
+    // 🔥 update everything
+    renderCartItems();   // popup
+    updateCartBar();     // 🔥 FIX → cart bar
+
+    // 🔥 close product popup
+    closePopup();
+
+    // 🔥 open cart popup
+    document.getElementById("cartPopup").classList.add("show");
+    document.body.classList.add("popup-open");
+  };
+}
+
 requestAnimationFrame(()=>{
   popup.classList.add("show");
 });
 
+console.log("✅ Popup opened");
 
-// ✅ BUY NOW
-const buyBtn = document.getElementById("buyNowBtn");
+const preview = document.getElementById("imgPreview");
+const previewImg = document.getElementById("previewImg");
 
-if(buyBtn){
+const imgs = document.querySelectorAll("#slider img");
 
-buyBtn.onclick = function(){
+console.log("Images found:", imgs.length);
 
-const key = table + "_" + item.id;
+imgs.forEach((img, i) => {
 
-let cart = JSON.parse(
-  localStorage.getItem("cart") || "{}"
-);
+  console.log("Binding image", i, img.src);
 
-cart[key] = (cart[key] || 0) + 1;
+  img.onclick = function(){
+    console.log("🔥 IMAGE CLICKED:", this.src);
 
-localStorage.setItem(
-  "cart",
-  JSON.stringify(cart)
-);
+    if(!preview || !previewImg){
+      console.log("❌ preview elements missing");
+      return;
+    }
 
-renderCartItems();
+    // 🔥 set image
+    previewImg.src = this.src;
 
-updateCartBar();
+    // 🔥 open overlay (clean way)
+    preview.classList.add("active");
 
-closePopup();
-
-document
-.getElementById("cartPopup")
-.classList.add("show");
-
-document.body.classList.add("popup-open");
-
-};
-
-}
-
-
-// ✅ IMAGE PREVIEW
-const preview =
-document.getElementById("imgPreview");
-
-const previewImg =
-document.getElementById("previewImg");
-
-const imgs =
-document.querySelectorAll("#slider img");
-
-imgs.forEach((img)=>{
-
-img.onclick = function(){
-
-if(!preview || !previewImg) return;
-
-previewImg.src = this.src;
-
-preview.classList.add("active");
-
-};
+    console.log("✅ Preview opened");
+  };
 
 });
-
-
-// ✅ DOTS
-setTimeout(()=>{
-
-const slider =
-document.getElementById("slider");
-
-const dots =
-document.querySelectorAll(".dot");
-
-if(!slider) return;
-
-slider.addEventListener("scroll", ()=>{
-
-const index = Math.round(
-slider.scrollLeft / slider.clientWidth
-);
-
-dots.forEach(d =>
-d.classList.remove("active")
-);
-
-if(dots[index]){
-  dots[index].classList.add("active");
-}
-
-});
-
-},100);
-
-
 initAllUI();
+  // 🔥 DOTS WORKING
+  setTimeout(()=>{
+    const slider = document.getElementById("slider");
+    const dots = document.querySelectorAll(".dot");
 
-}, 400);
+    slider.addEventListener("scroll", () => {
 
+      const index = Math.round(slider.scrollLeft / slider.clientWidth);
+
+      dots.forEach(d => d.classList.remove("active"));
+
+      if(dots[index]){
+        dots[index].classList.add("active");
+      }
+
+    });
+
+  },100);
 }
+function closePopup(){
+  popup.classList.remove("show");
+
+  setTimeout(()=>{
+    popup.style.display = "none";
+    unlockBodyScroll();
+  },300);
+  
+}
+loadProducts();
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    updateCartBar();   // 🔥 FORCE LOAD AFTER EVERYTHING READY
+  }, 300);
+});
+
 async function loadProducts2(){
 
   const { data } = await supabase
