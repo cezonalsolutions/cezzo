@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Outfit',sans-serif;
+  background:#fff;
+  overflow-x:hidden;
+  padding-bottom:70px;
+}
+
+/* TOP SPACE */
+.topGap{
+  height:50px;
+}
+
+/* LOCATION */
+.locationBox{
+  padding:0 16px 12px;
+}
+
+.locRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.locRow i{
+  font-size:16px;
+  color:#0f5c5c;
+  flex-shrink:0;
+}
+
+.city{
+  font-size:15px;
+  font-weight:700;
+  color:#111;
+}
+
+.address{
+  font-size:11px;
+  color:#777;
+  margin-top:2px;
+  line-height:1.4;
+}
+
+.videoBox{
+  width:100%;
+  overflow:hidden;
+  padding:0 16px;
+  box-sizing:border-box;
+}
+
+.videoBox img{
+  width:100%;
+  height:190px;
+
+  object-fit:cover;
+  display:block;
+
+  border-radius:22px;
+}
+
+/* HEADER */
+.cateringHeader{
+  padding:18px 16px 14px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+}
+
+.cateringHeader span{
+  font-size:11px;
+  letter-spacing:2px;
+  color:#888;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.cateringHeader i{
+  color:#0f5c5c;
+}
+
+.cateringHeader h2{
+  margin:6px 0 0;
+
+  font-size:26px;
+  font-weight:700;
+
+  color:#111;
+}
+
+/* CARD */
+/* CATERING */
+.cateringWrap{
+  padding:0 16px;
+}
+
+.cateringGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+/* CARD */
+.cateringCard{
+  position:relative;
+
+  height:170px;
+
+  border-radius:22px;
+  overflow:hidden;
+
+  cursor:pointer;
+
+  box-shadow:0 6px 18px rgba(0,0,0,0.10);
+}
+
+.cateringCard img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+  display:block;
+}
+
+/* OVERLAY */
+.cateringOverlay{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+
+  padding:12px;
+
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.78),
+    rgba(0,0,0,0.08)
+  );
+
+  box-sizing:border-box;
+}
+
+.cateringTitle{
+  color:#fff;
+
+  font-size:15px;
+  font-weight:700;
+
+  margin-bottom:10px;
+
+  line-height:1.3;
+}
+
+/* BUTTON */
+.bookNow{
+  border:none;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  padding:9px 10px;
+
+  border-radius:10px;
+
+  font-size:11px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .cateringGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:480px){
+
+  .cateringCard{
+    height:165px;
+  }
+
+  .cateringTitle{
+    font-size:14px;
+  }
+
+}
+
+
+
+/* NAV */
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+
+  width:100%;
+  height:62px;
+
+  background:#fff;
+
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+
+  border-top:1px solid #eee;
+
+  z-index:999;
+}
+
+.navItem{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  color:#888;
+  font-size:10px;
+}
+
+.navItem.active{
+  color:#0f5c5c;
+}
+
+.navItem i{
+  font-size:18px;
+  margin-bottom:3px;
+}
+
+/* FOOTER */
+.footerBlock{
+  margin-top:20px;
+  padding:16px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:#fafafa;
+  border-top:1px solid #eee;
+}
+
+.footerLeft{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.footerIcon{
+  color:#0f5c5c;
+  font-size:18px;
+}
+
+.footerName{
+  font-size:16px;
+  font-weight:700;
+}
+
+.footerRight{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.footerRow{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  font-size:11px;
+  color:#666;
+}
+
+.footerRow i{
+  color:#0f5c5c;
+}
+
+/* POPUP */
+.popupPage{
+  position:fixed;
+  inset:0;
+
+  background:#fff;
+
+  z-index:9999;
+
+  display:none;
+
+  overflow-y:auto;
+
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+
+.popupPage::-webkit-scrollbar{
+  display:none;
+}
+
+/* POPUP HEADER */
+.popupHeader{
+  position:sticky;
+  top:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:52px 16px 14px;
+
+  background:#fff;
+
+  border-bottom:1px solid #eee;
+
+  z-index:50;
+}
+
+.closeBtn{
+  width:38px;
+  height:38px;
+
+  min-width:38px;
+  min-height:38px;
+
+  border-radius:50%;
+
+  background:#f3f3f3;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:16px;
+  color:#111;
+
+  flex-shrink:0;
+
+  cursor:pointer;
+}
+
+.popupTitle{
+  text-align:right;
+  margin-left:auto;
+}
+
+.popupTitle span{
+  display:block;
+  font-size:18px;
+  font-weight:700;
+  color:#111;
+}
+
+.popupTitle small{
+  font-size:11px;
+  color:#777;
+}
+
+/* LIST */
+.riceWrap{
+  padding:14px;
+}
+
+.riceSideHead{
+  font-size:20px;
+  font-weight:700;
+  margin:22px 4px 14px;
+  color:#111;
+}
+
+/* FOOD CARD */
+.riceItem{
+  display:flex;
+  gap:12px;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:12px;
+  margin-bottom:14px;
+
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+
+.riceThumb{
+  width:92px;
+  height:92px;
+
+  border-radius:14px;
+
+  object-fit:cover;
+
+  flex-shrink:0;
+}
+
+.riceInfo{
+  flex:1;
+  min-width:0;
+}
+
+.riceName{
+  margin:0 0 5px;
+
+  font-size:15px;
+  font-weight:700;
+
+  color:#111;
+}
+
+.riceText{
+  margin:0 0 10px;
+
+  font-size:12px;
+  line-height:1.5;
+
+  color:#666;
+}
+
+.riceRow{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.riceAdd{
+  border:none;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  padding:8px 14px;
+
+  border-radius:10px;
+
+  font-size:12px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.riceAdd.active{
+  background:#e53935;
+}
+
+/* BOX */
+.ricePlateBox,
+.riceBillBox{
+  margin-top:18px;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:16px;
+
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+
+.ricePlateTitle,
+.riceBillTitle{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+/* TOGGLE */
+.riceToggleRow{
+  display:flex;
+  gap:10px;
+}
+
+.riceToggleBtn{
+  flex:1;
+
+  border:none;
+
+  padding:12px;
+
+  border-radius:12px;
+
+  background:#f3f3f3;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.riceToggleBtn.active{
+  background:#0f5c5c;
+  color:#fff;
+}
+
+/* INPUT */
+.ricePlateInput{
+  width:100%;
+
+  padding:14px;
+
+  border-radius:12px;
+  border:1px solid #ddd;
+
+  font-size:15px;
+
+  outline:none;
+  box-sizing:border-box;
+}
+
+/* BILL */
+.riceBillRow,
+.riceBillTotal{
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:10px;
+
+  font-size:14px;
+}
+
+.riceBillTotal{
+  margin-top:14px;
+  padding-top:14px;
+
+  border-top:1px solid #eee;
+
+  font-size:16px;
+  font-weight:700;
+
+  color:#0f5c5c;
+}
+
+/* BOOK */
+.riceBookNow{
+  width:100%;
+
+  margin-top:20px;
+
+  border:none;
+
+  background:#0f5c5c;
+  color:#fff;
+
+  padding:16px;
+
+  border-radius:16px;
+
+  font-size:16px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  box-shadow:0 6px 20px rgba(15,92,92,0.25);
+}
+
+/* SHAKE */
+.shake{
+  animation:shake .35s;
+}
+
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  50%{transform:translateX(5px)}
+  75%{transform:translateX(-5px)}
+  100%{transform:translateX(0)}
+}
+.cateringSub{
+  color:rgba(255,255,255,0.82);
+
+  font-size:11px;
+  font-weight:400;
+
+  margin-top:-4px;
+  margin-bottom:8px;
+
+  line-height:1.3;
+}
+.cardRating{
+  position:absolute;
+  top:4px;
+  right:6px;
+
+  display:flex;
+  align-items:center;
+  gap:4px;
+
+  background:#fff;
+
+  padding:5px 8px;
+
+  border-radius:30px;
+
+  font-size:11px;
+  font-weight:700;
+
+  color:#111;
+
+  z-index:5;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+
+.cardRating i{
+  color:#ffb400;
+  font-size:10px;
+}
+/* =========================
+   FULL CARD SHIMMER
+========================= */
+
+.lazyCard{
+  position:relative;
+  overflow:hidden;
+
+  background:#f2f2f2;
+}
+
+/* shimmer */
+.lazyCard::before{
+  content:"";
+
+  position:absolute;
+  top:0;
+  left:-140px;
+
+  width:120px;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.75),
+    transparent
+  );
+
+  animation:fullCardShimmer 1.2s infinite;
+
+  z-index:20;
+}
+
+@keyframes fullCardShimmer{
+  100%{
+    left:130%;
+  }
+}
+
+/* hide content before load */
+.lazyCard img,
+.lazyCard .cardRating,
+.lazyCard .cateringOverlay{
+  opacity:0;
+}
+
+/* loaded card */
+.lazyCard.loaded::before{
+  display:none;
+}
+
+.lazyCard.loaded img,
+.lazyCard.loaded .cardRating,
+.lazyCard.loaded .cateringOverlay{
+  opacity:1;
+  transition:opacity .35s ease;
+}
+
+/* image */
+.lazy-card-img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+  display:block;
+}
+</style>
+</head>
+
+<body>
+<div class="topSection">
+  
+<div class="topGap"></div>
+
+<!-- LOCATION -->
+<div class="locationBox">
+  <div class="locRow">
+    <i class="fa-solid fa-location-dot"></i>
+    <div>
+      <div class="city" id="city">Your City</div>
+      <div class="address" id="address">Loading location...</div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- IMAGE SECTION -->
+<div class="videoBox">
+
+  <img
+    src="neww/sevice banner.jpeg"
+    alt="Catering Banner">
+
+</div>
+
+
+
+
+
+ 
+
+  
+
+ 
+
+
+
+<div class="cateringHeader">
+
+  <span>
+    <i class="fa-solid fa-sparkles"></i>
+    PREMIUM EVENT SERVICES
+  </span>
+
+  <h2>Choose Your Service</h2>
+
+</div>
+<div class="cateringWrap">
+
+  <div class="cateringGrid">
+
+    <!-- CARD 1 -->
+    <div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+
+      <img
+  data-src="neww/catringse.jpg"
+  class="lazy-card-img">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.6
+  </div>
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Catering Services
+        </div>
+        <div class="cateringSub">
+  Food Booking
+</div>
+
+
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.7
+  </div>
+     <img
+  data-src="neww/photo.png"
+  class="lazy-card-img">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+            Photo Shoot
+        </div>
+ <div class="cateringSub">
+  Photo Shooting
+</div>
+
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.5
+  </div>
+      <img
+  data-src="neww/video.jpg"
+  class="lazy-card-img">
+
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Video Shoot
+        </div>
+ <div class="cateringSub">
+  Video Shooting
+</div>
+
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+<!-- CARD 4 -->
+     <div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.8
+  </div>
+     <img
+  data-src="neww/fmakeup.webp"
+  class="lazy-card-img">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Female Makup
+        </div>
+<div class="cateringSub">
+  Female Beauty
+</div>
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+<!-- CARD 5 -->
+<div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.8
+  </div>
+      <img
+  data-src="neww/malemakeup.jpeg"
+  class="lazy-card-img">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Male Makup
+        </div>
+<div class="cateringSub">
+  Male Beauty
+</div>
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+    
+    <!-- CARD 6 -->
+<div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.8
+  </div>
+     <img
+  data-src="neww/ballonsdec.webp"
+  class="lazy-card-img">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Balloon Decoration
+        </div>
+<div class="cateringSub">
+  Grab It Now
+</div>
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+    
+      <!-- CARD 7 -->
+<div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.8
+  </div>
+     <img
+  data-src="neww/flowerdec.jpg"
+  class="lazy-card-img">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Flower Decoration
+        </div>
+<div class="cateringSub">
+  Grab It Now
+</div>
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+
+      <!-- CARD 8 -->
+<div class="cateringCard lazyCard"
+         onclick="openPopup('vegPopup')">
+ <div class="cardRating">
+    <i class="fa-solid fa-star"></i>
+    4.8
+  </div>
+      <img
+  data-src="neww/superise.jpg"
+  class="lazy-card-img">
+      <div class="cateringOverlay">
+        <div class="cateringTitle">
+          Suprise Decorations
+        </div>
+<div class="cateringSub">
+  Grab It Now
+</div>
+        <button class="bookNow">
+          Book Now
+        </button>
+      </div>
+
+    </div>
+
+
+
+
+    
+  </div>
+
+</div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- NAVBAR -->
+<div class="bottomNav">
+  <div class="navItem" id="homeBtn">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
+  </div>
+
+  <div class="navItem active">
+    <i class="fa-solid fa-screwdriver-wrench"></i>
+    <span>Services</span>
+  </div>
+
+  <div class="navItem">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span>Cart</span>
+  </div>
+
+  <div class="navItem">
+    <i class="fa-solid fa-user"></i>
+    <span>Profile</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="footerBlock">
+
+  <!-- LEFT -->
+  <div class="footerLeft">
+    <i class="fa-solid fa-bag-shopping footerIcon"></i>
+    <div class="footerName">CEZZO</div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="footerRight">
+
+    <div class="footerRow">
+      <i class="fa-regular fa-clock"></i>
+      <span>Everything in Minutes</span>
+    </div>
+
+    <div class="footerRow">
+      <i class="fa-solid fa-heart"></i>
+      <span>Made with ❤️ in India</span>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- veg popup -->
+
+<div id="vegPopup" class="popupPage">
+
+  <!-- HEADER -->
+  <div class="popupHeader">
+    <i class="fa-solid fa-arrow-left closeBtn" onclick="closePopup(this)"></i>
+    <div class="popupTitle">
+  <span>Veg Catering</span>
+  <small>Food Booking</small>
+</div>
+  </div>
+
+ 
+ <div class="riceWrap">
+
+  <!-- Card 1 -->
+  <div class="riceItem" data-price="12" data-type="veg">
+    <img src="veg catering/1.webp" class="riceThumb" alt="Plain Rice">
+    <div class="riceInfo">
+      <h3 class="riceName">Plain Rice</h3>
+      <p class="riceText">Freshly cooked steamed rice, soft and perfect to pair with curries and dals.</p>
+      <div class="riceRow">
+        <button class="riceAdd">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="riceItem" data-price="13" data-type="veg">
+    <img src="veg catering/2.webp" class="riceThumb" alt="Veg Biryani">
+    <div class="riceInfo">
+      <h3 class="riceName">Veg Biryani</h3>
+      <p class="riceText">Aromatic basmati rice cooked with fresh vegetables, spices, and rich flavors.</p>
+      <div class="riceRow">
+        <button class="riceAdd">Add</button>
+      </div>
+    </div>
+  </div>
+
+  
+<!-- Card 3 -->
+<div class="riceItem" data-price="11" data-type="veg">
+  <img src="veg catering/3.webp" class="riceThumb" alt="Veg Pulao">
+  <div class="riceInfo">
+    <h3 class="riceName">Veg Pulao</h3>
+    <p class="riceText">Fragrant basmati rice cooked with mixed vegetables and mild spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4 -->
+<div class="riceItem" data-price="12"data-type="veg">
+  <img src="veg catering/4.webp" class="riceThumb" alt="Lemon Rice">
+  <div class="riceInfo">
+    <h3 class="riceName">Lemon Rice</h3>
+    <p class="riceText">Tangy and flavorful rice with lemon juice, peanuts, and curry leaves.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 5 -->
+<div class="riceItem" data-price="13" data-type="veg">
+  <img src="veg catering/5.webp" class="riceThumb" alt="Green Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Green Biryani</h3>
+    <p class="riceText">Herb-infused biryani made with fresh mint, coriander, and aromatic spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 6 -->
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="veg catering/6.webp" class="riceThumb" alt="Coconut Rice">
+  <div class="riceInfo">
+    <h3 class="riceName">Coconut Rice</h3>
+    <p class="riceText">South Indian style rice mixed with fresh coconut and mild seasoning.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 7 -->
+<div class="riceItem"data-price="13" data-type="veg">
+  <img src="veg catering/7.webp" class="riceThumb" alt="Paneer Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Paneer Curry</h3>
+    <p class="riceText">Soft paneer cubes cooked in rich and creamy spiced gravy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 8 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/8.webp" class="riceThumb" alt="Dal with Mango">
+  <div class="riceInfo">
+    <h3 class="riceName">Dal + Mango</h3>
+    <p class="riceText">Traditional dal cooked with raw mango for a tangy and homely taste.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 9 -->
+<div class="riceItem"data-price="11" data-type="veg">
+  <img src="veg catering/9.webp" class="riceThumb" alt="Punugulu">
+  <div class="riceInfo">
+    <h3 class="riceName">Pun Makhana</h3>
+    <p class="riceText">Crispy deep-fried snack made from dosa batter, perfect for starters.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 10 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/10.webp" class="riceThumb" alt="Meal Maker Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Meal Maker Curry</h3>
+    <p class="riceText">Protein-rich soya chunks cooked in spicy and flavorful gravy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 11 -->
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="veg catering/11.webp" class="riceThumb" alt="Potato Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Potato Curry</h3>
+    <p class="riceText">Simple and tasty potato curry with traditional spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 12 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/12.webp" class="riceThumb" alt="Tomato Cashew Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Tomato Cashew Curry</h3>
+    <p class="riceText">Rich tomato-based curry blended with crunchy cashews for extra flavor.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 13 -->
+<div class="riceItem" data-price="11" data-type="veg">
+  <img src="veg catering/13.webp" class="riceThumb" alt="Dondakaya Fry">
+  <div class="riceInfo">
+    <h3 class="riceName">Dondakaya Fry</h3>
+    <p class="riceText">Crispy ivy gourd fry with spices, a perfect side dish for meals.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 14 -->
+<div class="riceItem"data-price="13" data-type="veg">
+  <img src="veg catering/14.webp" class="riceThumb" alt="Potato Fry">
+  <div class="riceInfo">
+    <h3 class="riceName">Potato Fry</h3>
+    <p class="riceText">Crispy fried potatoes tossed with spices for a perfect side dish.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 15 -->
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="veg catering/15.webp" class="riceThumb" alt="Cabbage Fry">
+  <div class="riceInfo">
+    <h3 class="riceName">Cabbage Fry</h3>
+    <p class="riceText">Lightly sautéed cabbage with spices, simple and flavorful.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 16 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/16.webp" class="riceThumb" alt="Brinjal Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Brinjal Curry</h3>
+    <p class="riceText">Delicious eggplant curry cooked in traditional masala gravy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 17 -->
+<div class="riceItem" data-price="11" data-type="veg">
+  <img src="veg catering/17.webp" class="riceThumb" alt="Ladies Finger Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Ladies Finger Curry</h3>
+    <p class="riceText">Soft okra cooked in a mildly spiced and flavorful curry base.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 18 -->
+<div class="riceItem" data-price="13" data-type="veg">
+  <img src="veg catering/18.webp" class="riceThumb" alt="Ladies Finger Fry">
+  <div class="riceInfo">
+    <h3 class="riceName">Ladies Finger Fry</h3>
+    <p class="riceText">Crispy fried okra with spices, a crunchy and tasty side.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 19 -->
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="veg catering/19.webp" class="riceThumb" alt="Tomato Dal">
+  <div class="riceInfo">
+    <h3 class="riceName">Tomato Dal</h3>
+    <p class="riceText">Tangy and comforting dal cooked with fresh tomatoes and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 20 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/20.webp" class="riceThumb" alt="Raw Mango Cashew Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Raw Mango Cashew Curry</h3>
+    <p class="riceText">Tangy raw mango cooked with rich cashews for a unique flavorful curry.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 21 -->
+<div class="riceItem" data-price="11" data-type="veg">
+  <img src="veg catering/21.webp" class="riceThumb" alt="Pumpkin Pulusu">
+  <div class="riceInfo">
+    <h3 class="riceName">Pumpkin Pulusu</h3>
+    <p class="riceText">Sweet and tangy pumpkin stew made in traditional Andhra style.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 22 -->
+<div class="riceItem" data-price="13" data-type="veg">
+  <img src="veg catering/22.webp" class="riceThumb" alt="Sambar">
+  <div class="riceInfo">
+    <h3 class="riceName">Sambar</h3>
+    <p class="riceText">Classic South Indian lentil curry with vegetables and aromatic spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 23 -->
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="veg catering/23.webp" class="riceThumb" alt="Rasam">
+  <div class="riceInfo">
+    <h3 class="riceName">Rasam</h3>
+    <p class="riceText">Spicy and tangy soup made with tamarind, pepper, and herbs.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 24 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/24.webp" class="riceThumb" alt="Appadam">
+  <div class="riceInfo">
+    <h3 class="riceName">Appadam</h3>
+    <p class="riceText">Crispy papad served as a crunchy side with meals.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 25 -->
+<div class="riceItem"data-price="8" data-type="veg">
+  <img src="veg catering/25.webp" class="riceThumb" alt="Mango Pickle">
+  <div class="riceInfo">
+    <h3 class="riceName">Mango Pickle</h3>
+    <p class="riceText">Spicy and tangy traditional mango pickle, perfect with rice meals.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 26 -->
+<div class="riceItem" data-price="5" data-type="veg">
+  <img src="veg catering/26.webp" class="riceThumb" alt="Dosakaya Pickle">
+  <div class="riceInfo">
+    <h3 class="riceName">Dosakaya Pickle</h3>
+    <p class="riceText">Andhra-style yellow cucumber pickle with a rich, tangy flavor.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 35 -->
+<div class="riceItem"data-price="8" data-type="veg">
+  <img src="veg catering/35.webp" class="riceThumb" alt="Curd">
+  <div class="riceInfo">
+    <h3 class="riceName">Curd</h3>
+    <p class="riceText">Fresh and creamy curd, a perfect cooling addition to your meal.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="riceSideHead">Sweets</div>
+
+
+<!-- Card 27 -->
+<div class="riceItem" data-price="11" data-type="veg">
+  <img src="veg catering/27.webp" class="riceThumb" alt="Bread Halwa">
+  <div class="riceInfo">
+    <h3 class="riceName">Bread Halwa</h3>
+    <p class="riceText">Rich and soft halwa made with bread, ghee, and dry fruits.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 28 -->
+<div class="riceItem" data-price="11" data-type="veg">
+  <img src="veg catering/28.webp" class="riceThumb" alt="Gulab Jamun">
+  <div class="riceInfo">
+    <h3 class="riceName">Gulab Jamun</h3>
+    <p class="riceText">Soft milk-based dumplings soaked in sweet sugar syrup.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 29 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/29.webp" class="riceThumb" alt="Carrot Halwa">
+  <div class="riceInfo">
+    <h3 class="riceName">Carrot Halwa</h3>
+    <p class="riceText">Delicious dessert made with fresh carrots, milk, and ghee.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 30 -->
+<div class="riceItem"data-price="12" data-type="veg">
+  <img src="veg catering/30.webp" class="riceThumb" alt="Papaya Halwa">
+  <div class="riceInfo">
+    <h3 class="riceName">Papaya Halwa</h3>
+    <p class="riceText">Smooth and unique halwa made from ripe papaya and sugar.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 31 -->
+<div class="riceItem"data-price="13" data-type="veg">
+  <img src="veg catering/31.webp" class="riceThumb" alt="Bobbatlu">
+  <div class="riceInfo">
+    <h3 class="riceName">Bobbatlu</h3>
+    <p class="riceText">Traditional sweet flatbread stuffed with jaggery and dal filling.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="riceSideHead">Starters</div>
+
+<!-- Card 32 -->
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="veg catering/32.webp" class="riceThumb" alt="Boorelu">
+  <div class="riceInfo">
+    <h3 class="riceName">Boorelu</h3>
+    <p class="riceText">Crispy sweet dumplings filled with jaggery and dal mixture.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 33 -->
+<div class="riceItem"data-price="11" data-type="veg">
+  <img src="veg catering/33.webp" class="riceThumb" alt="Mirchi Bajji">
+  <div class="riceInfo">
+    <h3 class="riceName">Mirchi Bajji</h3>
+    <p class="riceText">Spicy green chilies dipped in batter and deep fried to perfection.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card 34 -->
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="veg catering/34.webp" class="riceThumb" alt="Medu Vada">
+  <div class="riceInfo">
+    <h3 class="riceName">Medu Vada</h3>
+    <p class="riceText">Crispy outside, soft inside lentil fritters, a classic South Indian snack.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceSideHead">Non Veg</div>
+<div class="riceItem" data-price="40" data-type="veg">
+  <img src="nonveg catering/1.webp" class="riceThumb" alt="Chicken 65">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken 65</h3>
+    <p class="riceText">Spicy deep-fried chicken tossed in traditional South Indian masala.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="35" data-type="veg">
+  <img src="nonveg catering/2.webp" class="riceThumb" alt="Chicken Leg Piece">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Leg Piece</h3>
+    <p class="riceText">Juicy fried chicken leg piece marinated with flavorful spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="nonveg catering/3.webp" class="riceThumb" alt="Egg Bajji">
+  <div class="riceInfo">
+    <h3 class="riceName">Egg Bajji</h3>
+    <p class="riceText">Boiled egg coated in spicy batter and deep fried crispy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/4.webp" class="riceThumb" alt="Chicken Lollipop">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Lollipop</h3>
+    <p class="riceText">Crispy chicken wings tossed in spicy and tangy sauce.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="40" data-type="veg">
+  <img src="nonveg catering/5.webp" class="riceThumb" alt="Chicken Dum Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Dum Biryani</h3>
+    <p class="riceText">Aromatic basmati rice cooked with tender chicken and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="40" data-type="veg">
+  <img src="nonveg catering/6.webp" class="riceThumb" alt="Chicken Fry Piece Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Fry Piece Biryani</h3>
+    <p class="riceText">Biryani served with crispy fried chicken pieces.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/7.webp" class="riceThumb" alt="Chicken Pulao">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Pulao</h3>
+    <p class="riceText">Lightly spiced rice cooked with chicken and herbs.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="nonveg catering/8.webp" class="riceThumb" alt="Plain Rice">
+  <div class="riceInfo">
+    <h3 class="riceName">Plain Rice</h3>
+    <p class="riceText">Steamed white rice served fresh and hot.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="45" data-type="veg">
+  <img src="nonveg catering/9.webp" class="riceThumb" alt="Prawn Biryani">
+  <div class="riceInfo">
+    <h3 class="riceName">Prawn Biryani</h3>
+    <p class="riceText">Flavorful biryani made with fresh prawns and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="20" data-type="veg">
+  <img src="nonveg catering/10.webp" class="riceThumb" alt="Chicken Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Curry</h3>
+    <p class="riceText">Rich and spicy chicken curry cooked in traditional style.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/11.webp" class="riceThumb" alt="Mutton Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Mutton Curry</h3>
+    <p class="riceText">Tender mutton cooked in thick spicy gravy.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/12.webp" class="riceThumb" alt="Fish Curry">
+  <div class="riceInfo">
+    <h3 class="riceName">Fish Curry</h3>
+    <p class="riceText">Spicy and tangy fish curry cooked in traditional Andhra style.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="32" data-type="veg">
+  <img src="nonveg catering/13.webp" class="riceThumb" alt="Gongura Chicken">
+  <div class="riceInfo">
+    <h3 class="riceName">Gongura Chicken</h3>
+    <p class="riceText">Chicken cooked with tangy gongura leaves and spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="12" data-type="veg">
+  <img src="nonveg catering/14.webp" class="riceThumb" alt="Sambar">
+  <div class="riceInfo">
+    <h3 class="riceName">Sambar</h3>
+    <p class="riceText">Traditional lentil soup with vegetables and aromatic spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="10" data-type="veg">
+  <img src="nonveg catering/15.webp" class="riceThumb" alt="Rasam">
+  <div class="riceInfo">
+    <h3 class="riceName">Rasam</h3>
+    <p class="riceText">Hot and tangy South Indian soup with pepper and tamarind.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="8" data-type="veg">
+  <img src="nonveg catering/16.webp" class="riceThumb" alt="Appadam">
+  <div class="riceInfo">
+    <h3 class="riceName">Appadam</h3>
+    <p class="riceText">Crispy fried papad to complement your meal.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="9" data-type="veg">
+  <img src="nonveg catering/17.webp" class="riceThumb" alt="Curd">
+  <div class="riceInfo">
+    <h3 class="riceName">Curd</h3>
+    <p class="riceText">Fresh and creamy curd to complete your meal.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="30" data-type="veg">
+  <img src="nonveg catering/18.webp" class="riceThumb" alt="Chicken Pickle">
+  <div class="riceInfo">
+    <h3 class="riceName">Chicken Pickle</h3>
+    <p class="riceText">Spicy homemade chicken pickle with rich flavors.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="34" data-type="veg">
+  <img src="nonveg catering/19.webp" class="riceThumb" alt="Prawn Pickle">
+  <div class="riceInfo">
+    <h3 class="riceName">Prawn Pickle</h3>
+    <p class="riceText">Tangy and spicy prawn pickle packed with flavor.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+<div class="riceItem" data-price="31" data-type="veg">
+  <img src="nonveg catering/20.webp" class="riceThumb" alt="Fish Special">
+  <div class="riceInfo">
+    <h3 class="riceName">Fish Special</h3>
+    <p class="riceText">Fresh fish cooked or fried with rich coastal spices.</p>
+    <div class="riceRow">
+      <button class="riceAdd">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="ricePlateBox">
+
+  <div class="ricePlateTitle">Catering Boys Required?</div>
+
+  <div class="riceToggleRow">
+    <button class="riceToggleBtn active" id="boysYes">Yes</button>
+    <button class="riceToggleBtn" id="boysNo">No</button>
+  </div>
+
+</div>
+<div class="ricePlateBox">
+
+  <h3 class="ricePlateTitle">Number of Plates</h3>
+
+  <input 
+  type="number" 
+  id="plateCount" 
+  class="ricePlateInput" 
+  placeholder="Minimum 20 plates"
+  min="20"
+>
+
+</div>
+<div class="riceBillBox">
+
+  <div class="riceBillTitle">TOTAL BILL</div>
+
+  <div class="riceBillRow">
+    <span>Total Items</span>
+    <span id="totalItems">0</span>
+  </div>
+
+  <div class="riceBillRow">
+    <span>Total Plates</span>
+    <span id="totalPlates">0</span>
+  </div>
+
+  <div class="riceBillRow">
+  <span>Additional Charges</span>
+  <span id="extraChargeText">₹100</span>
+</div>
+
+  <div class="riceBillTotal">
+    <span>Total Amount</span>
+    <span id="totalAmount">₹0</span>
+  </div>
+
+</div>
+<button class="riceBookNow">Book Now</button>
+
+</div>
+</div>
+</div>
+
+
+  
+ 
+
+
+<script>
+const fullAddress =
+localStorage.getItem("savedAddress");
+
+if(fullAddress){
+
+  const parts = fullAddress.split(",");
+
+  document.getElementById("city").innerText =
+  parts[1]?.trim() || "Your City";
+
+  document.getElementById("address").innerText =
+  fullAddress;
+
+}else{
+
+  document.getElementById("city").innerText =
+  "Your City";
+
+  document.getElementById("address").innerText =
+  "Searching For Location";
+
+}
+
+/* =========================
+   POPUP OPEN / CLOSE
+========================= */
+
+let scrollPosition = 0;
+
+function openPopup(id){
+
+  scrollPosition = window.scrollY;
+
+  const popup = document.getElementById(id);
+
+  popup.style.display = "block";
+
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollPosition}px`;
+  document.body.style.width = "100%";
+}
+
+function closePopup(el){
+
+  const popup = el.closest(".popupPage");
+
+  if(popup){
+    popup.style.display = "none";
+  }
+
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+
+  window.scrollTo(0, scrollPosition);
+}
+
+
+/* =========================
+   CART SYSTEM
+========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  let cart = JSON.parse(
+    localStorage.getItem("riceCart")
+  ) || [];
+
+  const items =
+  document.querySelectorAll(".riceItem");
+
+  items.forEach((item) => {
+
+    const btn =
+    item.querySelector(".riceAdd");
+
+    const name =
+    item.querySelector(".riceName").textContent;
+
+    const price =
+    parseInt(item.dataset.price);
+
+    // restore state
+    if(cart.some(i => i.name === name)){
+
+      btn.textContent = "Remove";
+      btn.classList.add("active");
+
+    }
+
+    btn.addEventListener("click", () => {
+
+      if(btn.classList.contains("active")){
+
+        btn.textContent = "Add";
+        btn.classList.remove("active");
+
+        cart = cart.filter(i => i.name !== name);
+
+      } else {
+
+        btn.textContent = "Remove";
+        btn.classList.add("active");
+
+        if(!cart.some(i => i.name === name)){
+
+          cart.push({ name, price });
+
+        }
+
+      }
+
+      localStorage.setItem(
+        "riceCart",
+        JSON.stringify(cart)
+      );
+
+      updateBill();
+
+    });
+
+  });
+
+});
+
+
+/* =========================
+   BILL CALCULATION
+========================= */
+
+const plateInput =
+document.getElementById("plateCount");
+
+const totalItems =
+document.getElementById("totalItems");
+
+const totalPlates =
+document.getElementById("totalPlates");
+
+const totalAmount =
+document.getElementById("totalAmount");
+
+const extraChargeText =
+document.getElementById("extraChargeText");
+
+const bookBtn =
+document.querySelector(".riceBookNow");
+
+const EXTRA_CHARGE = 100;
+const FREE_LIMIT = 5000;
+const MIN_PLATES = 20;
+
+function updateBill(){
+
+  let cart = JSON.parse(
+    localStorage.getItem("riceCart")
+  ) || [];
+
+  let plates =
+  parseInt(plateInput.value) || 0;
+
+  totalItems.textContent = cart.length;
+
+  if(cart.length === 0){
+
+    totalPlates.textContent = 0;
+    totalAmount.textContent = "₹0";
+    extraChargeText.textContent = "₹0";
+
+    return;
+  }
+
+  if(plates < MIN_PLATES){
+
+    totalPlates.textContent =
+    "Minimum 20";
+
+    totalAmount.textContent = "₹0";
+
+    extraChargeText.textContent = "₹0";
+
+    return;
+  }
+
+  totalPlates.textContent = plates;
+
+  let perPlate =
+  cart.reduce((sum, item) => {
+
+    return sum + item.price;
+
+  }, 0);
+
+  let baseTotal = perPlate * plates;
+
+  let extra =
+  baseTotal >= FREE_LIMIT
+  ? 0
+  : EXTRA_CHARGE;
+
+  let finalTotal =
+  baseTotal + extra;
+
+  totalAmount.textContent =
+  "₹" + finalTotal;
+
+  extraChargeText.textContent =
+  extra === 0
+  ? "FREE"
+  : "₹100";
+}
+
+plateInput.addEventListener(
+  "input",
+  updateBill
+);
+
+updateBill();
+
+
+/* =========================
+   BOOK NOW
+========================= */
+
+bookBtn.addEventListener("click", () => {
+
+  let cart = JSON.parse(
+    localStorage.getItem("riceCart")
+  ) || [];
+
+  let plates =
+  parseInt(plateInput.value) || 0;
+
+  if(cart.length === 0){
+
+    shake(bookBtn);
+    return;
+  }
+
+  if(plates < MIN_PLATES){
+
+    shake(plateInput);
+    return;
+  }
+
+  bookBtn.textContent = "Booked ✓";
+
+  bookBtn.style.background =
+  "#4caf50";
+
+});
+
+
+/* =========================
+   SHAKE EFFECT
+========================= */
+
+function shake(el){
+
+  el.classList.add("shake");
+
+  setTimeout(() => {
+
+    el.classList.remove("shake");
+
+  }, 400);
+
+}
+
+/* =========================
+   FULL CARD LAZY LOAD
+========================= */
+
+const fullCardObserver =
+new IntersectionObserver((entries)=>{
+
+  entries.forEach(entry=>{
+
+    if(!entry.isIntersecting) return;
+
+    const card = entry.target;
+
+    const img =
+    card.querySelector(".lazy-card-img");
+
+    if(img && img.dataset.src){
+
+      img.src = img.dataset.src;
+
+      img.onload = ()=>{
+
+        card.classList.add("loaded");
+
+      };
+
+    }
+
+    fullCardObserver.unobserve(card);
+
+  });
+
+},{
+  rootMargin:"150px"
+});
+
+/* observe cards */
+document
+.querySelectorAll(".lazyCard")
+.forEach(card=>{
+
+  fullCardObserver.observe(card);
+
+});
+
+</script>
+</html>
