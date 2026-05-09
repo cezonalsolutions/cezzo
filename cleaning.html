@@ -298,6 +298,8 @@ html, body{
   width:46px;
   height:46px;
 
+  margin-top:27px; /* top gap */
+
   border-radius:50%;
 
   background:rgba(255,255,255,0.95);
@@ -634,16 +636,25 @@ body{
   position:sticky;
   top:0;
   width:100%;
-  min-height:65px;
+  min-height:75px;
+
+  padding-top:49px; /* top gap */
+
   background:#fff;
+
   display:flex;
   align-items:center;
   gap:14px;
-  padding:0 16px;
+
+  padding-left:16px;
+  padding-right:16px;
+
   border-bottom:1px solid #ececec;
+
   z-index:100;
   flex-shrink:0;
 }
+
 
 .bookingBack{
   width:40px;
@@ -1924,7 +1935,7 @@ bookBtn.addEventListener("click", () => {
       </div>
 
       <div class="bookingHeading">
-        Book Service
+        Booking 
       </div>
 
     </div>
