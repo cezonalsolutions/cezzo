@@ -1119,6 +1119,441 @@ body{
 
   line-height:1.4;
 }
+/* =========================
+   BOOKING POPUP
+========================= */
+/* =========================
+   BOOKING POPUP
+========================= */
+
+.bookingPopup{
+  position:fixed;
+  inset:0;
+
+  background:#f4f6f8;
+
+  z-index:999999;
+
+  display:none;
+
+  overflow-y:auto;
+
+  font-family:inherit;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.bookingTop{
+  position:sticky;
+  top:0;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:16px;
+
+  background:rgba(244,246,248,0.96);
+
+  backdrop-filter:blur(10px);
+
+  z-index:100;
+}
+
+.bookingTop h2{
+  margin:0;
+
+  font-size:19px;
+  font-weight:800;
+
+  color:#111;
+}
+
+.bookingBack{
+  width:42px;
+  height:42px;
+
+  border-radius:14px;
+
+  background:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:15px;
+
+  color:#111;
+
+  box-shadow:
+  0 3px 12px rgba(0,0,0,0.06);
+
+  cursor:pointer;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.bookingContent{
+  padding:8px 16px 110px;
+}
+
+
+/* =========================
+   SERVICE CARD
+========================= */
+
+.bookingSelected{
+  position:relative;
+
+  overflow:hidden;
+
+  background:linear-gradient(
+    135deg,
+    #0f5c5c,
+    #167979
+  );
+
+  border-radius:24px;
+
+  padding:20px;
+
+  margin-bottom:22px;
+
+  color:#fff;
+}
+
+.bookingSelected::after{
+  content:"";
+
+  position:absolute;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,0.08);
+
+  right:-20px;
+  top:-20px;
+}
+
+.bookingLabel{
+  font-size:11px;
+
+  font-weight:600;
+
+  opacity:.8;
+
+  letter-spacing:1px;
+
+  margin-bottom:8px;
+
+  text-transform:uppercase;
+}
+
+.bookingService{
+  font-size:22px;
+  font-weight:800;
+
+  line-height:1.3;
+}
+
+
+/* =========================
+   FIELD
+========================= */
+
+.bookingField{
+  margin-bottom:18px;
+}
+
+.bookingField label{
+  display:block;
+
+  font-size:13px;
+  font-weight:700;
+
+  margin-bottom:10px;
+
+  color:#222;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+.bookingField input,
+.bookingField textarea{
+  width:100%;
+
+  border:none;
+
+  outline:none;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:15px 16px;
+
+  font-size:14px;
+
+  color:#111;
+
+  box-sizing:border-box;
+
+  box-shadow:
+  0 3px 14px rgba(0,0,0,0.05);
+}
+
+
+/* =========================
+   SERVICE DROPDOWN
+========================= */
+
+.bookingField select{
+  width:100%;
+
+  border:none;
+
+  outline:none;
+
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  background:#fff;
+
+  border-radius:20px;
+
+  padding:0 50px 0 18px;
+
+  height:58px;
+
+  font-size:14px;
+  font-weight:600;
+
+  color:#111;
+
+  box-sizing:border-box;
+
+  box-shadow:
+  0 3px 14px rgba(0,0,0,0.05);
+
+  cursor:pointer;
+
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%230f5c5c' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 7 9 12 14 7'/%3E%3C/svg%3E");
+
+  background-repeat:no-repeat;
+
+  background-position:right 18px center;
+
+  background-size:15px;
+}
+
+
+/* OPTION */
+
+.bookingField select option{
+  color:#111;
+
+  background:#fff;
+
+  font-size:14px;
+}
+
+
+/* =========================
+   TEXTAREA
+========================= */
+
+.bookingField textarea{
+  min-height:110px;
+
+  resize:none;
+}
+
+
+/* =========================
+   BILL CARD
+========================= */
+
+.popupPlanBox{
+  background:#fff;
+
+  border-radius:24px;
+
+  padding:20px;
+
+  margin-top:22px;
+
+  box-shadow:
+  0 4px 18px rgba(0,0,0,0.05);
+}
+
+.popupPlanTitle{
+  font-size:12px;
+  font-weight:800;
+
+  color:#888;
+
+  letter-spacing:1px;
+
+  margin-bottom:18px;
+}
+
+
+/* =========================
+   ROWS
+========================= */
+
+.riceBillRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:14px;
+
+  font-size:14px;
+
+  color:#444;
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+.riceBillTotal{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-top:18px;
+
+  padding-top:16px;
+
+  border-top:1px dashed #ddd;
+
+  font-size:18px;
+  font-weight:800;
+
+  color:#111;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.confirmBookingBtn{
+  width:100%;
+
+  border:none;
+
+  background:linear-gradient(
+    135deg,
+    #0f5c5c,
+    #178080
+  );
+
+  color:#fff;
+
+  padding:17px;
+
+  border-radius:20px;
+
+  font-size:15px;
+  font-weight:800;
+
+  margin-top:24px;
+
+  cursor:pointer;
+
+  box-shadow:
+  0 10px 24px rgba(15,92,92,0.18);
+}
+/* =========================
+   EVENT SCHEDULING TITLE
+========================= */
+
+.bookingScheduleTitle{
+  width:100%;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:16px 18px;
+
+  margin-top:24px;
+  margin-bottom:18px;
+
+  font-size:15px;
+  font-weight:800;
+
+  color:#111;
+
+  box-sizing:border-box;
+
+  box-shadow:
+  0 4px 16px rgba(0,0,0,0.05);
+
+  border-left:4px solid #0f5c5c;
+}
+
+
+/* =========================
+   DATE + TIME INPUTS
+========================= */
+
+.bookingField input[type="date"],
+.bookingField input[type="time"]{
+  width:100%;
+
+  height:58px;
+
+  border:none;
+
+  outline:none;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:0 18px;
+
+  font-size:14px;
+  font-weight:600;
+
+  color:#111;
+
+  box-sizing:border-box;
+
+  box-shadow:
+  0 4px 16px rgba(0,0,0,0.05);
+
+  appearance:none;
+  -webkit-appearance:none;
+}
+
+
+/* ICON FIX */
+
+.bookingField input[type="date"]::-webkit-calendar-picker-indicator,
+.bookingField input[type="time"]::-webkit-calendar-picker-indicator{
+  opacity:.9;
+
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -2365,103 +2800,180 @@ body{
 
     </div>
     <!-- FAQ -->
+<!-- FAQ -->
 <div class="faqWrap">
 
   <div class="faqTitle">
     Frequently Asked Questions
   </div>
 
-  <!-- FAQ 1 -->
-  <div class="faqItem">
+  <div id="faqContainer"></div>
 
-    <div class="faqQuestion">
-      How many photos will I receive?
-      <i class="fa-solid fa-plus"></i>
-    </div>
+</div>
+ 
 
-    <div class="faqAnswer">
-      Basic shoots include 25 edited HD photos. Premium packages include more based on booking type.
-    </div>
+  
 
-  </div>
+ 
 
-  <!-- FAQ 2 -->
-  <div class="faqItem">
+ 
 
-    <div class="faqQuestion">
-      When will photos be delivered?
-      <i class="fa-solid fa-plus"></i>
-    </div>
+    <!-- BUTTON -->
+    <button class="popupBookBtn"
+        id="popupBookBtn"
+        onclick="openBookingPopup()">
 
-    <div class="faqAnswer">
-      Edited photos are usually delivered within 1 to 3 days directly to your mobile.
-    </div>
+  Book Now
 
-  </div>
-
-  <!-- FAQ 3 -->
-  <div class="faqItem">
-
-    <div class="faqQuestion">
-      Do you provide reels editing?
-      <i class="fa-solid fa-plus"></i>
-    </div>
-
-    <div class="faqAnswer">
-      Yes, cinematic reels and social media edits are available in selected packages.
-    </div>
-
-  </div>
-
-  <!-- FAQ 4 -->
-  <div class="faqItem">
-
-    <div class="faqQuestion">
-      Is outdoor photography available?
-      <i class="fa-solid fa-plus"></i>
-    </div>
-
-    <div class="faqAnswer">
-      Yes, outdoor shoots, beach shoots and pre wedding photography are available.
-    </div>
-
-  </div>
-
-  <!-- FAQ 5 -->
-  <div class="faqItem">
-
-    <div class="faqQuestion">
-      Can I select my own photo style?
-      <i class="fa-solid fa-plus"></i>
-    </div>
-
-    <div class="faqAnswer">
-      Yes, candid, cinematic, traditional and Instagram style edits are available.
-    </div>
-
-  </div>
-
-  <!-- FAQ 6 -->
-  <div class="faqItem">
-
-    <div class="faqQuestion">
-      Is advance payment required?
-      <i class="fa-solid fa-plus"></i>
-    </div>
-
-    <div class="faqAnswer">
-      Small advance payment is required to confirm your booking slot.
-    </div>
+</button>
 
   </div>
 
 </div>
 
-    <!-- BUTTON -->
-    <button class="popupBookBtn"
-            id="popupBookBtn">
+<!-- BOOKING POPUP -->
+<div id="bookingPopup"
+     class="bookingPopup">
 
-      Book Now
+  <!-- TOP -->
+  <div class="bookingTop">
+
+    <div class="bookingBack"
+         onclick="closeBookingPopup()">
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+    </div>
+
+    <h2>
+      Booking Details
+    </h2>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="bookingContent">
+
+    <!-- SERVICE -->
+    <div class="bookingSelected">
+
+      <div class="bookingLabel">
+        Your Booking
+      </div>
+
+      <div class="bookingService"
+           id="selectedService">
+
+        Photo Shoot
+
+      </div>
+
+    </div>
+
+    <!-- SERVICE TYPE -->
+    <div class="bookingField">
+
+      <label>
+        Type Of Service
+      </label>
+
+      <select id="bookingType"
+              onchange="updateBookingBill()">
+
+      </select>
+
+    </div>
+
+    <!-- MOBILE -->
+    <div class="bookingField">
+
+      <label>
+        Mobile Number
+      </label>
+
+      <input type="tel"
+             id="bookingMobile"
+             placeholder="Enter mobile number">
+
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="bookingField">
+
+      <label>
+        Address
+      </label>
+
+      <textarea id="bookingAddress"
+                placeholder="Enter full address"></textarea>
+
+    </div>
+    <!-- EVENT SCHEDULING -->
+<div class="bookingScheduleTitle">
+
+  Event Scheduling
+
+</div>
+
+<!-- EVENT DATE -->
+<div class="bookingField">
+
+  <label>
+    Event Date
+  </label>
+
+  <input type="date"
+         id="eventDate">
+
+</div>
+
+<!-- EVENT TIME -->
+<div class="bookingField">
+
+  <label>
+    Event Time
+  </label>
+
+  <input type="time"
+         id="eventTime">
+
+</div>
+
+    <!-- BILL -->
+    <div class="popupPlanBox">
+
+      <div class="popupPlanTitle">
+        BILL DETAILS
+      </div>
+
+      <div class="riceBillRow">
+        <span>Your Service</span>
+        <span id="billServicePrice">
+          ₹0
+        </span>
+      </div>
+
+      <div class="riceBillRow">
+        <span>Platform Charges</span>
+        <span>
+          ₹30
+        </span>
+      </div>
+
+      <div class="riceBillTotal">
+        <span>Total</span>
+        <span id="finalBookingTotal">
+          ₹0
+        </span>
+      </div>
+
+    </div>
+
+    <!-- BUTTON -->
+    <button class="confirmBookingBtn"
+            onclick="placeBooking()">
+
+      Confirm Booking
 
     </button>
 
@@ -2794,15 +3306,12 @@ document
 
 const serviceData = {
 
-  
-photo:{
+  photo:{
   title:"Photo Shoot",
 
   image:"neww/photo.webp",
 
   mini:"CAPTURE EVERY MEMORY",
-
-  
 
   price:"Starting From ₹600",
 
@@ -2812,19 +3321,21 @@ photo:{
 
   planText:"Includes 25 edited HD photos, mobile delivery, basic color correction and instant sharing support directly to your mobile.",
 
+  feature1:"Verified Service",
+  icon1:"fa-solid fa-circle-check",
+
+  feature2:"HD Quality",
+  icon2:"fa-solid fa-camera",
+
+  feature3:"Edited Photos",
+  icon3:"fa-solid fa-images",
+
   box1:"Wedding Photography",
 
   price1:"Starting From ₹4999",
 
   text1:"Full wedding coverage with candid moments, couple portraits, family photos and cinematic premium editing.",
-feature1:"Verified Service",
-icon1:"fa-solid fa-circle-check",
 
-feature2:"HD Quality",
-icon2:"fa-solid fa-camera",
-
-feature3:"Edited Photos",
-icon3:"fa-solid fa-images",
   box2:"Birthday & Events",
 
   price2:"Starting From ₹1499",
@@ -2846,115 +3357,575 @@ icon3:"fa-solid fa-images",
   extraTitle:"Professional Photography Experience",
 
   extraText:"Capture every special moment with professional photography, natural candid shots and premium editing quality. From birthdays and weddings to pre wedding shoots, every photo is delivered with HD clarity, cinematic colors and modern editing styles perfect for memories and social media sharing.",
-  btn:"Book Professional Shoot"
+
+  btn:"Book Professional Shoot",
+
+  faqs:[
+
+    {
+      q:"How many photos will I receive?",
+      a:"Basic shoots include 25 edited HD photos and premium packages include more based on the event type."
+    },
+
+    {
+      q:"Do you provide cinematic editing?",
+      a:"Yes, cinematic editing, color correction and premium retouching are included."
+    },
+
+    {
+      q:"Can I book for birthdays and parties?",
+      a:"Yes, birthday events, surprise parties and private celebrations are covered."
+    },
+
+    {
+      q:"Do you provide pre wedding shoots?",
+      a:"Yes, outdoor cinematic pre wedding photography packages are available."
+    },
+
+    {
+      q:"How will photos be delivered?",
+      a:"Edited photos are shared directly to your mobile with HD quality delivery."
+    },
+
+    {
+      q:"Are candid photos included?",
+      a:"Yes, natural candid photography and emotional moments are captured professionally."
+    }
+
+  ]
 },
   video:{
-    title:"Video Shoot",
-    image:"neww/video.webp",
-    desc:"Professional cinematic video shooting services.",
+  title:"Video Shoot",
 
-    box1:"4K Video",
-    text1:"High quality cinematic event recordings.",
+  image:"neww/video.webp",
 
-    box2:"Drone Support",
-    text2:"Aerial shots available for premium events.",
+  mini:"CINEMATIC VIDEO EXPERIENCE",
 
-    box3:"Reels Editing",
-    text3:"Instagram reels and short cinematic edits.",
+  price:"Starting From ₹1200",
 
-    box4:"Full Coverage",
-    text4:"Complete event recording with highlights."
-  },
+  desc:"Professional cinematic video shooting service for weddings, birthdays, surprise events and premium celebrations with smooth editing and high quality visuals.",
+
+  planPrice:"₹1200 Basic Video Shoot",
+
+  planText:"Includes short cinematic video coverage, HD export, basic editing and mobile delivery support.",
+
+  feature1:"4K Recording",
+  icon1:"fa-solid fa-video",
+
+  feature2:"HD Export",
+  icon2:"fa-solid fa-display",
+
+  feature3:"Cinematic Editing",
+  icon3:"fa-solid fa-film",
+
+  box1:"Wedding Video Shoot",
+
+  price1:"Starting From ₹7999",
+
+  text1:"Full wedding cinematic video coverage with emotional moments, couple entries and premium editing.",
+
+  box2:"Birthday & Events",
+
+  price2:"Starting From ₹2499",
+
+  text2:"Creative birthday and event video shoots with highlight edits and social media ready clips.",
+
+  box3:"Instagram Reels",
+
+  price3:"Included Free",
+
+  text3:"Short cinematic reels, transitions and trendy edits perfect for Instagram and social sharing.",
+
+  box4:"Highlight Video",
+
+  price4:"Included Free",
+
+  text4:"Edited highlight videos with music, smooth transitions and cinematic storytelling moments.",
+
+  extraTitle:"Professional Cinematic Video Shooting",
+
+  extraText:"Capture your celebrations with cinematic video quality, smooth camera movements and premium editing styles. From wedding highlights to birthday reels, every video is created with professional storytelling and HD clarity for a modern premium experience.",
+
+  btn:"Book Video Shoot",
+
+  faqs:[
+
+    {
+      q:"Do you provide cinematic editing?",
+      a:"Yes, cinematic editing with transitions, color grading and premium effects is included in selected packages."
+    },
+
+    {
+      q:"Will I receive reels for Instagram?",
+      a:"Yes, short reels and vertical social media videos can also be provided."
+    },
+
+    {
+      q:"Can you shoot birthday events?",
+      a:"Yes, birthday parties, surprise events and private celebrations are covered."
+    },
+
+    {
+      q:"How long will final videos take?",
+      a:"Edited videos are usually delivered within 3 to 7 days depending on project size."
+    },
+
+    {
+      q:"Will videos be shared to mobile?",
+      a:"Yes, videos are delivered directly to your mobile and cloud sharing is also available."
+    },
+
+    {
+      q:"Do you provide HD quality export?",
+      a:"Yes, all final videos are delivered in high quality HD format."
+    }
+
+  ]
+},
 
   female:{
-    title:"Female Makeup",
-    image:"neww/fmake.webp",
-    desc:"Luxury bridal and beauty makeup services.",
+  title:"Female Makeup",
 
-    box1:"Bridal Makeup",
-    text1:"Professional bridal makeup with premium products.",
+  image:"neww/fmake.webp",
 
-    box2:"Party Makeup",
-    text2:"Elegant makeup for parties and functions.",
+  mini:"PREMIUM BEAUTY EXPERIENCE",
 
-    box3:"Hair Styling",
-    text3:"Modern hairstyle and beauty finishing support.",
+  price:"Starting From ₹999",
 
-    box4:"Home Service",
-    text4:"Makeup artists available at your location."
-  },
+  desc:"Professional female makeup services for bridal events, parties, receptions and premium celebrations with modern beauty styling and luxury finishing.",
+
+  planPrice:"₹999 Basic Makeup",
+
+  planText:"Includes basic makeup, beauty finishing, hairstyle support and premium product application at your location.",
+
+  feature1:"Bridal Makeup",
+  icon1:"fa-solid fa-crown",
+
+  feature2:"Hair Styling",
+  icon2:"fa-solid fa-scissors",
+
+  feature3:"Home Service",
+  icon3:"fa-solid fa-house",
+
+  box1:"Bridal Makeup",
+
+  price1:"Starting From ₹5999",
+
+  text1:"Luxury bridal makeup with premium products, skin finishing and long lasting elegant looks.",
+
+  box2:"Party Makeup",
+
+  price2:"Starting From ₹1499",
+
+  text2:"Modern party makeup styles perfect for birthdays, receptions and premium events.",
+
+  box3:"Hair Styling",
+
+  price3:"Included Free",
+
+  text3:"Professional hairstyle support with curls, straightening and bridal finishing styles.",
+
+  box4:"Home Service",
+
+  price4:"Available",
+
+  text4:"Professional makeup artists can visit your location for easy and comfortable service.",
+
+  extraTitle:"Professional Female Beauty Services",
+
+  extraText:"Enhance your special moments with premium makeup artistry, elegant beauty finishing and modern styling support. From bridal makeup to party looks, every service is designed to provide luxury beauty experience with professional products and long lasting perfection.",
+
+  btn:"Book Makeup Service",
+
+  faqs:[
+
+    {
+      q:"Do you provide bridal makeup?",
+      a:"Yes, bridal makeup packages with premium products and luxury finishing are available."
+    },
+
+    {
+      q:"Is home service available?",
+      a:"Yes, professional makeup artists can visit your location."
+    },
+
+    {
+      q:"Which makeup brands are used?",
+      a:"Premium branded beauty products are used for better skin safety and quality."
+    },
+
+    {
+      q:"Do you provide hairstyle support?",
+      a:"Yes, hairstyle and beauty finishing support are included in selected packages."
+    },
+
+    {
+      q:"Can I book for parties and functions?",
+      a:"Yes, party makeup, reception makeup and function makeup services are available."
+    },
+
+    {
+      q:"How long will makeup last?",
+      a:"Premium long lasting products are used to maintain makeup quality for extended hours."
+    }
+
+  ]
+},
 
   male:{
-    title:"Male Makeup",
-    image:"neww/malemk.webp",
-    desc:"Professional grooming and beauty services for men.",
+  title:"Male Makeup",
 
-    box1:"Face Grooming",
-    text1:"Premium facial and skin grooming services.",
+  image:"neww/malemk.webp",
 
-    box2:"Hair Styling",
-    text2:"Modern hairstyles and stylish finishing.",
+  mini:"PREMIUM MEN GROOMING",
 
-    box3:"Event Ready",
-    text3:"Perfect look preparation for weddings and shoots.",
+  price:"Starting From ₹799",
 
-    box4:"Professional Artists",
-    text4:"Experienced male beauty experts available."
-  },
+  desc:"Professional male grooming and beauty services designed for weddings, parties, photoshoots and premium events with stylish finishing and modern looks.",
 
-  balloon:{
-    title:"Balloon Decoration",
-    image:"neww/bal.webp",
-    desc:"Creative balloon decorations for all celebrations.",
+  planPrice:"₹799 Basic Grooming",
 
-    box1:"Birthday Decor",
-    text1:"Beautiful birthday balloon decoration themes.",
+  planText:"Includes face grooming, hairstyle finishing, beard styling and premium skin care support.",
 
-    box2:"Romantic Setup",
-    text2:"Surprise room decoration with balloons.",
+  feature1:"Face Grooming",
+  icon1:"fa-solid fa-user",
 
-    box3:"Custom Colors",
-    text3:"Choose your favorite balloon color themes.",
+  feature2:"Hair Styling",
+  icon2:"fa-solid fa-scissors",
 
-    box4:"Quick Setup",
-    text4:"Fast decoration setup at your location."
-  },
+  feature3:"Professional Look",
+  icon3:"fa-solid fa-star",
+
+  box1:"Face Grooming",
+
+  price1:"Starting From ₹799",
+
+  text1:"Premium facial grooming, skin care and stylish finishing for a clean professional look.",
+
+  box2:"Hair Styling",
+
+  price2:"Starting From ₹499",
+
+  text2:"Modern hairstyles, hair setting and stylish finishing support for all occasions.",
+
+  box3:"Wedding Ready",
+
+  price3:"Starting From ₹1999",
+
+  text3:"Special grooming and stylish preparation for weddings, receptions and premium shoots.",
+
+  box4:"Professional Artists",
+
+  price4:"Available",
+
+  text4:"Experienced male grooming artists available for premium styling and beauty support.",
+
+  extraTitle:"Professional Male Grooming Experience",
+
+  extraText:"Upgrade your style with premium grooming services designed for modern looks and confident appearance. From hairstyle finishing to skin grooming and wedding preparation, every service is delivered with professional care and stylish results.",
+
+  btn:"Book Grooming Service",
+
+  faqs:[
+
+    {
+      q:"Do you provide wedding grooming?",
+      a:"Yes, premium wedding grooming packages are available for men."
+    },
+
+    {
+      q:"Is beard styling included?",
+      a:"Yes, beard styling and finishing support are available."
+    },
+
+    {
+      q:"Can I book for photoshoots?",
+      a:"Yes, male grooming for photoshoots and premium events is available."
+    },
+
+    {
+      q:"Do you provide hairstyle support?",
+      a:"Yes, stylish hair setting and finishing are included in selected packages."
+    },
+
+    {
+      q:"Are skin care products used?",
+      a:"Yes, premium skin friendly grooming products are used."
+    },
+
+    {
+      q:"Is home service available?",
+      a:"Yes, selected grooming services are available at your location."
+    }
+
+  ]
+},
+
+ balloon:{
+  title:"Balloon Decoration",
+
+  image:"neww/bal.webp",
+
+  mini:"CREATIVE EVENT DECORATION",
+
+  price:"Starting From ₹699",
+
+  desc:"Creative balloon decoration services for birthdays, surprise parties, romantic setups and premium celebrations with customized themes and stylish arrangements.",
+
+  planPrice:"₹699 Basic Decoration",
+
+  planText:"Includes balloon setup, simple backdrop decoration and customized color theme support.",
+
+  feature1:"Custom Themes",
+  icon1:"fa-solid fa-wand-magic-sparkles",
+
+  feature2:"Birthday Decor",
+  icon2:"fa-solid fa-cake-candles",
+
+  feature3:"Quick Setup",
+  icon3:"fa-solid fa-bolt",
+
+  box1:"Birthday Decoration",
+
+  price1:"Starting From ₹1499",
+
+  text1:"Beautiful birthday balloon decorations with customized themes, backdrop setup and stylish arrangements.",
+
+  box2:"Romantic Setup",
+
+  price2:"Starting From ₹1999",
+
+  text2:"Romantic room decoration with balloons, lights and surprise celebration setup.",
+
+  box3:"Custom Colors",
+
+  price3:"Included Free",
+
+  text3:"Choose your favorite balloon colors, themes and decoration styles for your event.",
+
+  box4:"Home Decoration",
+
+  price4:"Available",
+
+  text4:"Professional decoration setup available directly at your home or event location.",
+
+  extraTitle:"Premium Balloon Decoration Experience",
+
+  extraText:"Make your celebrations more colorful and memorable with creative balloon decoration setups designed for birthdays, surprises and premium events. Every setup is arranged with modern themes, elegant styling and customized decoration ideas for a perfect celebration experience.",
+
+  btn:"Book Decoration Service",
+
+  faqs:[
+
+    {
+      q:"Do you provide birthday decorations?",
+      a:"Yes, birthday balloon decoration packages with custom themes are available."
+    },
+
+    {
+      q:"Can I choose balloon colors?",
+      a:"Yes, customized color themes and decoration styles are available."
+    },
+
+    {
+      q:"Do you decorate at home?",
+      a:"Yes, home decoration service is available for birthdays and surprise events."
+    },
+
+    {
+      q:"Are lights included in decoration?",
+      a:"Yes, lights and additional decorative items are included in selected packages."
+    },
+
+    {
+      q:"How much time does setup take?",
+      a:"Most balloon decorations are completed within 1 to 2 hours."
+    },
+
+    {
+      q:"Can I book romantic surprise decoration?",
+      a:"Yes, romantic room decoration and surprise setups are available."
+    }
+
+  ]
+},
 
   flower:{
-    title:"Flower Decoration",
-    image:"neww/flow.webp",
-    desc:"Premium flower decorations for luxury events.",
+  title:"Flower Decoration",
 
-    box1:"Wedding Decor",
-    text1:"Beautiful flower stage and mandap decoration.",
+  image:"neww/flow.webp",
 
-    box2:"Fresh Flowers",
-    text2:"Premium fresh flowers with rich fragrance.",
+  mini:"LUXURY FLOWER DECORATION",
 
-    box3:"Luxury Themes",
-    text3:"Elegant flower arrangements for events.",
+  price:"Starting From ₹1499",
 
-    box4:"Custom Designs",
-    text4:"Customized decoration based on your needs."
-  },
+  desc:"Premium flower decoration services for weddings, receptions, engagements and luxury celebrations with elegant floral arrangements and customized themes.",
 
+  planPrice:"₹1499 Basic Flower Decor",
+
+  planText:"Includes fresh flower arrangements, simple backdrop setup and elegant floral decoration support.",
+
+  feature1:"Fresh Flowers",
+  icon1:"fa-solid fa-seedling",
+
+  feature2:"Luxury Decor",
+  icon2:"fa-solid fa-gem",
+
+  feature3:"Custom Themes",
+  icon3:"fa-solid fa-wand-magic-sparkles",
+
+  box1:"Wedding Decoration",
+
+  price1:"Starting From ₹9999",
+
+  text1:"Luxury wedding flower decoration with stage setup, mandap decoration and elegant floral arrangements.",
+
+  box2:"Reception Decor",
+
+  price2:"Starting From ₹4999",
+
+  text2:"Premium reception flower themes with modern floral styling and romantic arrangements.",
+
+  box3:"Fresh Flower Setup",
+
+  price3:"Included Free",
+
+  text3:"Fresh flowers with rich fragrance and premium quality arrangements for every celebration.",
+
+  box4:"Custom Floral Designs",
+
+  price4:"Available",
+
+  text4:"Customized flower decoration themes based on your event style and preferences.",
+
+  extraTitle:"Premium Floral Decoration Experience",
+
+  extraText:"Transform your celebrations into elegant luxury events with fresh flower decorations, premium floral styling and customized arrangements. From wedding stages to romantic setups, every decoration is designed with modern themes and premium floral creativity.",
+
+  btn:"Book Flower Decoration",
+
+  faqs:[
+
+    {
+      q:"Do you provide wedding flower decoration?",
+      a:"Yes, luxury wedding and mandap flower decoration services are available."
+    },
+
+    {
+      q:"Are fresh flowers used?",
+      a:"Yes, fresh premium quality flowers are used for all decorations."
+    },
+
+    {
+      q:"Can I choose flower colors and themes?",
+      a:"Yes, customized floral themes and color combinations are available."
+    },
+
+    {
+      q:"Do you decorate reception stages?",
+      a:"Yes, reception stage flower decoration services are available."
+    },
+
+    {
+      q:"How early should I book?",
+      a:"Advance booking is recommended for large wedding and premium floral events."
+    },
+
+    {
+      q:"Is home flower decoration available?",
+      a:"Yes, flower decoration for homes and private events is also available."
+    }
+
+  ]
+},
   surprise:{
-    title:"Surprise Decoration",
-    image:"neww/sup.webp",
-    desc:"Romantic and customized surprise decoration services.",
+  title:"Surprise Decoration",
 
-    box1:"Birthday Surprise",
-    text1:"Romantic birthday room decoration ideas.",
+  image:"neww/sup.webp",
 
-    box2:"Couple Setup",
-    text2:"Luxury surprise decorations for couples.",
+  mini:"ROMANTIC SURPRISE EXPERIENCE",
 
-    box3:"LED Decor",
-    text3:"Creative lighting and decoration setup.",
+  price:"Starting From ₹999",
 
-    box4:"Instant Booking",
-    text4:"Quick booking and same day decoration support."
-  }
+  desc:"Creative surprise decoration services for birthdays, anniversaries, proposals and romantic celebrations with customized themes and luxury setups.",
+
+  planPrice:"₹999 Basic Surprise Setup",
+
+  planText:"Includes balloon decoration, lighting setup, romantic theme arrangement and personalized decoration support.",
+
+  feature1:"Romantic Setup",
+  icon1:"fa-solid fa-heart",
+
+  feature2:"LED Decoration",
+  icon2:"fa-solid fa-lightbulb",
+
+  feature3:"Custom Themes",
+  icon3:"fa-solid fa-wand-magic-sparkles",
+
+  box1:"Birthday Surprise",
+
+  price1:"Starting From ₹1499",
+
+  text1:"Creative birthday surprise room decoration with balloons, lights and personalized celebration themes.",
+
+  box2:"Couple Decoration",
+
+  price2:"Starting From ₹2499",
+
+  text2:"Luxury romantic decoration setups designed specially for couples and anniversary celebrations.",
+
+  box3:"LED & Candle Decor",
+
+  price3:"Included Free",
+
+  text3:"Elegant LED lighting, candles and decorative arrangements for premium romantic atmosphere.",
+
+  box4:"Same Day Booking",
+
+  price4:"Available",
+
+  text4:"Quick booking and fast decoration setup support available for urgent surprise events.",
+
+  extraTitle:"Premium Surprise Decoration Experience",
+
+  extraText:"Create unforgettable moments with customized surprise decorations designed for birthdays, anniversaries and romantic celebrations. From luxury room setups to creative lighting and balloon themes, every decoration is crafted for a memorable premium experience.",
+
+  btn:"Book Surprise Decoration",
+
+  faqs:[
+
+    {
+      q:"Do you provide birthday surprise decoration?",
+      a:"Yes, birthday surprise room decoration services are available with customized themes."
+    },
+
+    {
+      q:"Can I book romantic couple decoration?",
+      a:"Yes, luxury romantic decoration setups for couples and anniversaries are available."
+    },
+
+    {
+      q:"Are lights and candles included?",
+      a:"Yes, LED lights and decorative candle setups are included in selected packages."
+    },
+
+    {
+      q:"Do you provide same day decoration?",
+      a:"Yes, quick booking and same day setup support are available based on availability."
+    },
+
+    {
+      q:"Can I customize decoration themes?",
+      a:"Yes, customized colors, themes and decoration styles are available."
+    },
+
+    {
+      q:"Is home decoration service available?",
+      a:"Yes, decorations can be arranged directly at your home or event location."
+    }
+
+  ]
+}
 
 };
 
@@ -3002,7 +3973,30 @@ function openServicePopup(type){
   document.getElementById("popupBookBtn")
   .innerText = data.btn || "Book Now";
 
+/* =========================
+   FEATURES
+========================= */
 
+document.getElementById("featureText1")
+.innerText = data.feature1 || "";
+
+document.getElementById("featureText2")
+.innerText = data.feature2 || "";
+
+document.getElementById("featureText3")
+.innerText = data.feature3 || "";
+
+
+/* ICONS */
+
+document.getElementById("featureIcon1")
+.className = data.icon1 || "";
+
+document.getElementById("featureIcon2")
+.className = data.icon2 || "";
+
+document.getElementById("featureIcon3")
+.className = data.icon3 || "";
   /* =========================
      HERO IMAGE SHIMMER
   ========================= */
@@ -3088,34 +4082,64 @@ function openServicePopup(type){
      FAQ CONTENT
   ========================= */
 
-  const faqQuestions =
-  document.querySelectorAll(".faqQuestion span");
+  
+/* =========================
+   FAQ CONTENT
+========================= */
 
-  const faqAnswers =
-  document.querySelectorAll(".faqAnswer");
+const faqContainer =
+document.getElementById("faqContainer");
 
-  if(data.faqs){
+faqContainer.innerHTML = "";
 
-    data.faqs.forEach((faq,index)=>{
 
-      if(faqQuestions[index]){
+/* create different faqs */
 
-        faqQuestions[index].innerText =
-        faq.q;
+if(data.faqs){
 
-      }
+  data.faqs.forEach(faq=>{
 
-      if(faqAnswers[index]){
+    faqContainer.innerHTML += `
 
-        faqAnswers[index].innerText =
-        faq.a;
+      <div class="faqItem">
 
-      }
+        <div class="faqQuestion">
 
-    });
+          <span>${faq.q}</span>
 
-  }
+          <i class="fa-solid fa-plus"></i>
 
+        </div>
+
+        <div class="faqAnswer">
+
+          ${faq.a}
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+/* FAQ DROPDOWN */
+
+document
+.querySelectorAll(".faqQuestion")
+.forEach(item=>{
+
+  item.onclick = ()=>{
+
+    item.parentElement
+    .classList.toggle("active");
+
+  };
+
+});
 
   /* =========================
      OPEN POPUP
@@ -3174,5 +4198,296 @@ document
   });
 
 });
+
+/* =========================
+   BOOKING DATA
+========================= */
+
+const bookingPackages = {
+
+  photo:[
+    {
+      name:"Normal Shoot",
+      price:500
+    },
+    {
+      name:"Birthday Shoot",
+      price:1000
+    },
+    {
+      name:"Outdoor Shoot",
+      price:1200
+    },
+    {
+      name:"Wedding Shoot",
+      price:2000
+    },
+    {
+      name:"Function Shoot",
+      price:2300
+    }
+  ],
+
+  video:[
+    {
+      name:"Birthday Video",
+      price:2000
+    },
+    {
+      name:"Party Shoot",
+      price:3000
+    },
+    {
+      name:"Wedding Video",
+      price:14000
+    }
+  ],
+
+  male:[
+    {
+      name:"Casual Makeup",
+      price:500
+    },
+    {
+      name:"Party Makeup",
+      price:1000
+    },
+    {
+      name:"Wedding Makeup",
+      price:2000
+    }
+  ],
+
+  female:[
+    {
+      name:"Party Makeup",
+      price:1500
+    },
+    {
+      name:"Function Makeup",
+      price:18000
+    },
+    {
+      name:"Wedding Ready",
+      price:25000
+    }
+  ],
+
+  balloon:[
+    {
+      name:"Birthday Decoration",
+      price:1200
+    },
+    {
+      name:"Romantic Decoration",
+      price:2000
+    },
+    {
+      name:"Baby Shower Decoration",
+      price:2500
+    }
+  ],
+
+  flower:[
+    {
+      name:"Stage Decoration",
+      price:3000
+    },
+    {
+      name:"Wedding Decoration",
+      price:8000
+    },
+    {
+      name:"Luxury Flower Setup",
+      price:12000
+    }
+  ],
+
+  surprise:[
+    {
+      name:"Room Surprise",
+      price:1500
+    },
+    {
+      name:"Couple Surprise",
+      price:2500
+    },
+    {
+      name:"Luxury Surprise Setup",
+      price:5000
+    }
+  ]
+
+};
+
+
+/* =========================
+   CURRENT SERVICE
+========================= */
+
+let currentBookingType = "";
+
+
+/* =========================
+   OPEN BOOKING POPUP
+========================= */
+
+function openBookingPopup(){
+
+  const serviceName =
+  document.getElementById("popupTitle")
+  .innerText;
+
+  document.getElementById("selectedService")
+  .innerText = serviceName;
+
+  const bookingPopup =
+  document.getElementById("bookingPopup");
+
+  bookingPopup.style.display =
+  "block";
+
+  /* detect type */
+
+  if(serviceName.includes("Photo")){
+
+    currentBookingType = "photo";
+
+  }else if(serviceName.includes("Video")){
+
+    currentBookingType = "video";
+
+  }else if(serviceName.includes("Male")){
+
+    currentBookingType = "male";
+
+  }else if(serviceName.includes("Female")){
+
+    currentBookingType = "female";
+
+  }else if(serviceName.includes("Balloon")){
+
+    currentBookingType = "balloon";
+
+  }else if(serviceName.includes("Flower")){
+
+    currentBookingType = "flower";
+
+  }else{
+
+    currentBookingType = "surprise";
+
+  }
+
+  loadBookingOptions();
+
+}
+
+
+/* =========================
+   LOAD OPTIONS
+========================= */
+
+function loadBookingOptions(){
+
+  const select =
+  document.getElementById("bookingType");
+
+  select.innerHTML = "";
+
+  bookingPackages[currentBookingType]
+  .forEach(item=>{
+
+    select.innerHTML += `
+
+      <option value="${item.price}">
+        ${item.name}
+      </option>
+
+    `;
+
+  });
+
+  updateBookingBill();
+
+}
+
+
+/* =========================
+   UPDATE BILL
+========================= */
+
+function updateBookingBill(){
+
+  const select =
+  document.getElementById("bookingType");
+
+  const servicePrice =
+  parseInt(select.value);
+
+  const total =
+  servicePrice + 30;
+
+  document.getElementById(
+    "billServicePrice"
+  ).innerText =
+  "₹" + servicePrice;
+
+  document.getElementById(
+    "finalBookingTotal"
+  ).innerText =
+  "₹" + total;
+
+}
+
+
+/* =========================
+   CLOSE POPUP
+========================= */
+
+function closeBookingPopup(){
+
+  document.getElementById(
+    "bookingPopup"
+  ).style.display = "none";
+
+}
+
+
+/* =========================
+   PLACE BOOKING
+========================= */
+
+function placeBooking(){
+
+  const mobile =
+  document.getElementById(
+    "bookingMobile"
+  ).value;
+
+  const address =
+  document.getElementById(
+    "bookingAddress"
+  ).value;
+  const eventDate =
+document.getElementById("eventDate")
+.value;
+
+const eventTime =
+document.getElementById("eventTime")
+.value;
+if(
+  mobile.trim() === "" ||
+  address.trim() === "" ||
+  eventDate === "" ||
+  eventTime === ""
+){
+  alert("Please fill all details");
+  return;
+}
+
+  alert("Booking Confirmed Successfully ✓");
+
+}
 </script>
 </html>
