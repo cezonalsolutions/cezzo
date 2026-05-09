@@ -1142,9 +1142,7 @@ body{
 }
 
 
-/* =========================
-   TOP BAR
-========================= */
+
 
 .bookingTop{
   position:sticky;
@@ -1553,6 +1551,127 @@ body{
   opacity:.9;
 
   cursor:pointer;
+}
+/* =========================
+   SHAKE EFFECT
+========================= */
+
+.shake{
+  animation:shakeAnim .35s linear;
+}
+
+@keyframes shakeAnim{
+
+  0%{
+    transform:translateX(0);
+  }
+
+  25%{
+    transform:translateX(-6px);
+  }
+
+  50%{
+    transform:translateX(6px);
+  }
+
+  75%{
+    transform:translateX(-4px);
+  }
+
+  100%{
+    transform:translateX(0);
+  }
+
+}
+/* =========================
+   SUCCESS POPUP
+========================= */
+
+.successPopup{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,0.38);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:9999999;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:.3s;
+}
+
+
+/* SHOW */
+
+.successPopup.show{
+  opacity:1;
+  visibility:visible;
+}
+
+
+/* BOX */
+
+.successBox{
+  width:220px;
+
+  background:#fff;
+
+  border-radius:30px;
+
+  padding:34px 20px;
+
+  text-align:center;
+
+  transform:scale(.8);
+
+  transition:.35s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* ANIMATION */
+
+.successPopup.show .successBox{
+  transform:scale(1);
+}
+
+
+/* ICON */
+
+.successIcon{
+  width:82px;
+  height:82px;
+
+  margin:0 auto 18px;
+
+  border-radius:50%;
+
+  background:#17a34a;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#fff;
+
+  font-size:34px;
+
+  box-shadow:
+  0 12px 30px rgba(23,163,74,.28);
+}
+
+
+/* TITLE */
+
+.successTitle{
+  font-size:24px;
+  font-weight:800;
+
+  color:#111;
 }
 </style>
 </head>
@@ -2976,6 +3095,29 @@ body{
       Confirm Booking
 
     </button>
+
+  </div>
+
+</div>
+<!-- SUCCESS POPUP -->
+<div id="successPopup"
+     class="successPopup">
+
+  <div class="successBox">
+
+    <!-- ICON -->
+    <div class="successIcon">
+
+      <i class="fa-solid fa-check"></i>
+
+    </div>
+
+    <!-- TITLE -->
+    <div class="successTitle">
+
+      Order Placed
+
+    </div>
 
   </div>
 
@@ -4457,36 +4599,139 @@ function closeBookingPopup(){
 /* =========================
    PLACE BOOKING
 ========================= */
+/* =========================
+   PLACE BOOKING
+========================= */
 
 function placeBooking(){
 
   const mobile =
   document.getElementById(
     "bookingMobile"
-  ).value;
+  );
 
   const address =
   document.getElementById(
     "bookingAddress"
-  ).value;
+  );
+
   const eventDate =
-document.getElementById("eventDate")
-.value;
+  document.getElementById(
+    "eventDate"
+  );
 
-const eventTime =
-document.getElementById("eventTime")
-.value;
-if(
-  mobile.trim() === "" ||
-  address.trim() === "" ||
-  eventDate === "" ||
-  eventTime === ""
-){
-  alert("Please fill all details");
-  return;
-}
+  const eventTime =
+  document.getElementById(
+    "eventTime"
+  );
 
-  alert("Booking Confirmed Successfully ✓");
+  let hasError = false;
+
+
+  /* MOBILE */
+
+  if(mobile.value.trim() === ""){
+
+    mobile.classList.add("shake");
+
+    hasError = true;
+
+    setTimeout(()=>{
+
+      mobile.classList.remove("shake");
+
+    },400);
+
+  }
+
+
+  /* ADDRESS */
+
+  if(address.value.trim() === ""){
+
+    address.classList.add("shake");
+
+    hasError = true;
+
+    setTimeout(()=>{
+
+      address.classList.remove("shake");
+
+    },400);
+
+  }
+
+
+  /* EVENT DATE */
+
+  if(eventDate.value === ""){
+
+    eventDate.classList.add("shake");
+
+    hasError = true;
+
+    setTimeout(()=>{
+
+      eventDate.classList.remove("shake");
+
+    },400);
+
+  }
+
+
+  /* EVENT TIME */
+
+  if(eventTime.value === ""){
+
+    eventTime.classList.add("shake");
+
+    hasError = true;
+
+    setTimeout(()=>{
+
+      eventTime.classList.remove("shake");
+
+    },400);
+
+  }
+
+
+  /* STOP */
+
+  if(hasError){
+
+    return;
+
+  }
+
+
+  /* SUCCESS */
+
+ /* =========================
+   SUCCESS POPUP
+========================= */
+
+const successPopup =
+document.getElementById(
+  "successPopup"
+);
+
+successPopup.classList.add(
+  "show"
+);
+
+
+/* AUTO CLOSE */
+
+setTimeout(()=>{
+
+  successPopup.classList.remove(
+    "show"
+  );
+
+  closeBookingPopup();
+
+},4000);
 
 }
 </script>
