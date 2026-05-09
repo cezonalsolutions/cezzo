@@ -1586,23 +1586,30 @@ body{
 /* =========================
    SUCCESS POPUP
 ========================= */
+/* =========================
+   SUCCESS POPUP
+========================= */
 
 .successPopup{
   position:fixed;
   inset:0;
 
-  background:rgba(0,0,0,0.38);
+  background:#ffffff;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  z-index:9999999;
+  flex-direction:column;
+
+  overflow:hidden;
+
+  z-index:99999999;
 
   opacity:0;
   visibility:hidden;
 
-  transition:.3s;
+  transition:.35s;
 }
 
 
@@ -1614,43 +1621,112 @@ body{
 }
 
 
-/* BOX */
+/* =========================
+   RIBBONS
+========================= */
 
-.successBox{
+.successPopup::before,
+.successPopup::after{
+  content:"";
+
+  position:absolute;
+
   width:220px;
-
-  background:#fff;
-
-  border-radius:30px;
-
-  padding:34px 20px;
-
-  text-align:center;
-
-  transform:scale(.8);
-
-  transition:.35s cubic-bezier(.2,.8,.2,1);
-}
-
-
-/* ANIMATION */
-
-.successPopup.show .successBox{
-  transform:scale(1);
-}
-
-
-/* ICON */
-
-.successIcon{
-  width:82px;
-  height:82px;
-
-  margin:0 auto 18px;
+  height:220px;
 
   border-radius:50%;
 
-  background:#17a34a;
+  background:
+  radial-gradient(
+    rgba(23,163,74,.15),
+    transparent 70%
+  );
+
+  animation:floatRibbon 4s linear infinite;
+}
+
+.successPopup::before{
+  top:-60px;
+  left:-60px;
+}
+
+.successPopup::after{
+  bottom:-60px;
+  right:-60px;
+
+  animation-delay:1.5s;
+}
+
+
+/* FLOAT */
+
+@keyframes floatRibbon{
+
+  0%{
+    transform:translateY(0) scale(1);
+  }
+
+  50%{
+    transform:translateY(20px) scale(1.08);
+  }
+
+  100%{
+    transform:translateY(0) scale(1);
+  }
+
+}
+
+
+/* =========================
+   SUCCESS BOX
+========================= */
+
+.successBox{
+  position:relative;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  transform:translateY(50px) scale(.8);
+
+  opacity:0;
+
+  transition:
+  transform .55s cubic-bezier(.2,.8,.2,1),
+  opacity .45s;
+}
+
+
+/* SHOW ANIMATION */
+
+.successPopup.show .successBox{
+  transform:translateY(0) scale(1);
+
+  opacity:1;
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.successIcon{
+  position:relative;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  background:linear-gradient(
+    135deg,
+    #17a34a,
+    #25c15b
+  );
 
   display:flex;
   align-items:center;
@@ -1658,20 +1734,166 @@ body{
 
   color:#fff;
 
-  font-size:34px;
+  font-size:50px;
+
+  margin-bottom:28px;
 
   box-shadow:
-  0 12px 30px rgba(23,163,74,.28);
+  0 22px 50px rgba(23,163,74,.28);
+
+  animation:popIcon .7s ease;
+}
+
+
+/* ICON RING */
+
+.successIcon::after{
+  content:"";
+
+  position:absolute;
+
+  inset:-12px;
+
+  border-radius:50%;
+
+  border:3px solid rgba(23,163,74,.18);
+
+  animation:ringPulse 1.6s infinite;
+}
+
+
+/* POP */
+
+@keyframes popIcon{
+
+  0%{
+    transform:scale(.4);
+  }
+
+  70%{
+    transform:scale(1.08);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+
+/* RING */
+
+@keyframes ringPulse{
+
+  0%{
+    transform:scale(.9);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1.2);
+    opacity:0;
+  }
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.successTitle{
+  font-size:34px;
+  font-weight:900;
+
+  color:#111;
+
+  letter-spacing:-1px;
+
+  animation:fadeUp .8s ease;
+}
+
+
+/* TEXT ANIMATION */
+
+@keyframes fadeUp{
+
+  0%{
+    transform:translateY(25px);
+    opacity:0;
+  }
+
+  100%{
+    transform:translateY(0);
+    opacity:1;
+  }
+
+}
+/* =========================
+   EVENT BOX
+========================= */
+
+.riceEventBox{
+  margin-top:18px;
+
+  background:#fff;
+
+  border-radius:24px;
+
+  padding:18px;
+
+  box-shadow:
+  0 4px 18px rgba(0,0,0,0.05);
 }
 
 
 /* TITLE */
 
-.successTitle{
-  font-size:24px;
+.riceEventTitle{
+  margin:0 0 16px;
+
+  font-size:16px;
   font-weight:800;
 
   color:#111;
+}
+
+
+/* INPUT */
+
+.riceEventInput{
+  width:100%;
+
+  height:56px;
+
+  border:none;
+
+  outline:none;
+
+  background:#f6f7f8;
+
+  border-radius:18px;
+
+  padding:0 16px;
+
+  font-size:14px;
+  font-weight:600;
+
+  color:#111;
+
+  box-sizing:border-box;
+
+  margin-bottom:14px;
+
+  appearance:none;
+  -webkit-appearance:none;
+}
+
+
+/* LAST */
+
+.riceEventInput:last-child{
+  margin-bottom:0;
 }
 </style>
 </head>
@@ -1955,16 +2177,19 @@ body{
     <i class="fa-solid fa-screwdriver-wrench"></i>
     <span>Services</span>
   </div>
+<div class="navItem"
+     onclick="window.location.href='help.html'">
 
-  <div class="navItem">
-    <i class="fa-solid fa-cart-shopping"></i>
-    <span>Cart</span>
-  </div>
+  <i class="fa-solid fa-headset"></i>
 
-  <div class="navItem">
-    <i class="fa-solid fa-user"></i>
-    <span>Profile</span>
-  </div>
+  <span>Help</span>
+
+</div>
+ <div class="navItem">
+  <i class="fa-solid fa-calendar-check"></i>
+  <span>Bookings</span>
+</div>
+  
 </div>
 
 
@@ -2674,6 +2899,28 @@ body{
 >
 
 </div>
+<!-- EVENT SCHEDULING -->
+<div class="riceEventBox">
+
+  <h3 class="riceEventTitle">
+    Event Scheduling
+  </h3>
+
+  <!-- DATE -->
+  <input
+    type="date"
+    id="eventDate"
+    class="riceEventInput"
+  >
+
+  <!-- TIME -->
+  <input
+    type="time"
+    id="eventTime"
+    class="riceEventInput"
+  >
+
+</div>
 <div class="riceBillBox">
 
   <div class="riceBillTitle">TOTAL BILL</div>
@@ -3346,6 +3593,9 @@ updateBill();
 /* =========================
    BOOK NOW
 ========================= */
+/* =========================
+   BOOK NOW
+========================= */
 
 bookBtn.addEventListener("click", () => {
 
@@ -3356,11 +3606,17 @@ bookBtn.addEventListener("click", () => {
   let plates =
   parseInt(plateInput.value) || 0;
 
+
+  /* EMPTY CART */
+
   if(cart.length === 0){
 
     shake(bookBtn);
     return;
   }
+
+
+  /* MIN PLATES */
 
   if(plates < MIN_PLATES){
 
@@ -3368,13 +3624,91 @@ bookBtn.addEventListener("click", () => {
     return;
   }
 
-  bookBtn.textContent = "Booked ✓";
 
-  bookBtn.style.background =
-  "#4caf50";
+  /* EVENT DATE */
+
+  const eventDate =
+  document.getElementById(
+    "eventDate"
+  );
+
+  if(eventDate.value === ""){
+
+    shake(eventDate);
+    return;
+  }
+
+
+  /* EVENT TIME */
+
+  const eventTime =
+  document.getElementById(
+    "eventTime"
+  );
+
+  if(eventTime.value === ""){
+
+    shake(eventTime);
+    return;
+  }
+
+
+  /* =========================
+     CHECK LOGIN
+  ========================= */
+
+  const username =
+  localStorage.getItem(
+    "userName"
+  );
+
+  const mobile =
+  localStorage.getItem(
+    "userMobile"
+  );
+
+
+  /* NOT LOGIN */
+
+  if(!username || !mobile){
+
+    localStorage.setItem(
+      "redirectAfterLogin",
+      "service.html"
+    );
+
+    window.location.href =
+    "login.html";
+
+    return;
+  }
+
+
+  /* =========================
+     SUCCESS POPUP
+  ========================= */
+
+  const successPopup =
+  document.getElementById(
+    "successPopup"
+  );
+
+  successPopup.classList.add(
+    "show"
+  );
+
+
+  /* AUTO CLOSE */
+
+  setTimeout(()=>{
+
+    successPopup.classList.remove(
+      "show"
+    );
+
+  },4000);
 
 });
-
 
 /* =========================
    SHAKE EFFECT
@@ -4698,14 +5032,47 @@ function placeBooking(){
 
   /* STOP */
 
-  if(hasError){
+ /* STOP */
 
-    return;
+if(hasError){
 
-  }
+  return;
+
+}
 
 
-  /* SUCCESS */
+/* =========================
+   CHECK LOGIN
+========================= */
+
+const username =
+localStorage.getItem(
+  "userName"
+);
+
+const userMobile =
+localStorage.getItem(
+  "userMobile"
+);
+
+
+/* NOT LOGGED IN */
+
+if(!username || !userMobile){
+
+  localStorage.setItem(
+    "redirectAfterLogin",
+    "service.html"
+  );
+
+  window.location.href =
+  "login.html";
+
+  return;
+}
+
+
+
 
  /* =========================
    SUCCESS POPUP
@@ -4734,5 +5101,14 @@ setTimeout(()=>{
 },4000);
 
 }
+document.getElementById("homeBtn").addEventListener("click", function(){
+
+  // 🔥 skip intro next time
+  sessionStorage.setItem("skipIntro", "true");
+
+  // 🔥 redirect to home page
+  window.location.href = "index.html";
+
+});
 </script>
 </html>
