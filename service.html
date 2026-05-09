@@ -923,22 +923,7 @@ body{
   margin-bottom:10px;
 }
 
-.popupTag{
-  display:inline-flex;
 
-  background:#f3f3f3;
-  color:#111;
-
-  padding:7px 12px;
-
-  border-radius:30px;
-
-  font-size:11px;
-  font-weight:600;
-
-  margin-left:8px;
-  margin-bottom:16px;
-}
 
 .popupExtra{
   margin-bottom:20px;
@@ -1002,6 +987,137 @@ body{
   color:#0f5c5c;
 
   margin-bottom:8px;
+}
+/* =========================
+   FAQ
+========================= */
+
+.faqWrap{
+  margin-top:10px;
+}
+
+.faqTitle{
+  font-size:22px;
+  font-weight:700;
+
+  color:#111;
+
+  margin-bottom:14px;
+}
+
+.faqItem{
+  background:#fff;
+
+  border-radius:18px;
+
+  margin-bottom:12px;
+
+  overflow:hidden;
+
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+
+.faqQuestion{
+  padding:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:10px;
+
+  font-size:14px;
+  font-weight:600;
+
+  color:#111;
+
+  cursor:pointer;
+}
+
+.faqQuestion i{
+  font-size:12px;
+
+  transition:.3s;
+}
+
+.faqAnswer{
+  max-height:0;
+
+  overflow:hidden;
+
+  padding:0 16px;
+
+  font-size:13px;
+  line-height:1.7;
+
+  color:#666;
+
+  transition:.35s ease;
+}
+
+.faqItem.active .faqAnswer{
+  max-height:180px;
+
+  padding:0 16px 16px;
+}
+
+.faqItem.active .faqQuestion i{
+  transform:rotate(45deg);
+}
+/* =========================
+   FEATURES
+========================= */
+
+.popupFeatures{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin:22px 0;
+}
+
+.popupFeature{
+  flex:1;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  padding:14px 10px;
+
+  text-align:center;
+
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);
+}
+
+.popupFeatureIcon{
+  width:42px;
+  height:42px;
+
+  margin:0 auto 10px;
+
+  border-radius:50%;
+
+  background:#f4f8f8;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#0f5c5c;
+
+  font-size:16px;
+}
+
+.popupFeatureText{
+  font-size:12px;
+  font-weight:700;
+
+  color:#111;
+
+  line-height:1.4;
 }
 </style>
 </head>
@@ -2034,6 +2150,8 @@ body{
 </div>
 </div>
 </div>
+
+
 <!-- SERVICE POPUP -->
 <div id="servicePopup" class="servicePopup">
 
@@ -2089,12 +2207,7 @@ body{
 
       </div>
 
-      <div class="popupTag"
-           id="popupTag">
-
-        Trending Service
-
-      </div>
+      
 
     </div>
 
@@ -2134,6 +2247,63 @@ body{
       </p>
 
     </div>
+   <!-- FEATURES -->
+<div class="popupFeatures">
+
+  <!-- ITEM -->
+  <div class="popupFeature">
+
+    <div class="popupFeatureIcon">
+      <i id="featureIcon1"
+         class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <div class="popupFeatureText"
+         id="featureText1">
+
+      Verified Service
+
+    </div>
+
+  </div>
+
+  <!-- ITEM -->
+  <div class="popupFeature">
+
+    <div class="popupFeatureIcon">
+      <i id="featureIcon2"
+         class="fa-solid fa-camera"></i>
+    </div>
+
+    <div class="popupFeatureText"
+         id="featureText2">
+
+      HD Quality
+
+    </div>
+
+  </div>
+
+  <!-- ITEM -->
+  <div class="popupFeature">
+
+    <div class="popupFeatureIcon">
+      <i id="featureIcon3"
+         class="fa-solid fa-images"></i>
+    </div>
+
+    <div class="popupFeatureText"
+         id="featureText3">
+
+      Edited Photos
+
+    </div>
+
+  </div>
+
+</div>
+  
+
 
     <!-- BOX 1 -->
     <div class="serviceBox">
@@ -2194,6 +2364,98 @@ body{
       </p>
 
     </div>
+    <!-- FAQ -->
+<div class="faqWrap">
+
+  <div class="faqTitle">
+    Frequently Asked Questions
+  </div>
+
+  <!-- FAQ 1 -->
+  <div class="faqItem">
+
+    <div class="faqQuestion">
+      How many photos will I receive?
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="faqAnswer">
+      Basic shoots include 25 edited HD photos. Premium packages include more based on booking type.
+    </div>
+
+  </div>
+
+  <!-- FAQ 2 -->
+  <div class="faqItem">
+
+    <div class="faqQuestion">
+      When will photos be delivered?
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="faqAnswer">
+      Edited photos are usually delivered within 1 to 3 days directly to your mobile.
+    </div>
+
+  </div>
+
+  <!-- FAQ 3 -->
+  <div class="faqItem">
+
+    <div class="faqQuestion">
+      Do you provide reels editing?
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="faqAnswer">
+      Yes, cinematic reels and social media edits are available in selected packages.
+    </div>
+
+  </div>
+
+  <!-- FAQ 4 -->
+  <div class="faqItem">
+
+    <div class="faqQuestion">
+      Is outdoor photography available?
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="faqAnswer">
+      Yes, outdoor shoots, beach shoots and pre wedding photography are available.
+    </div>
+
+  </div>
+
+  <!-- FAQ 5 -->
+  <div class="faqItem">
+
+    <div class="faqQuestion">
+      Can I select my own photo style?
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="faqAnswer">
+      Yes, candid, cinematic, traditional and Instagram style edits are available.
+    </div>
+
+  </div>
+
+  <!-- FAQ 6 -->
+  <div class="faqItem">
+
+    <div class="faqQuestion">
+      Is advance payment required?
+      <i class="fa-solid fa-plus"></i>
+    </div>
+
+    <div class="faqAnswer">
+      Small advance payment is required to confirm your booking slot.
+    </div>
+
+  </div>
+
+</div>
 
     <!-- BUTTON -->
     <button class="popupBookBtn"
@@ -2540,7 +2802,7 @@ photo:{
 
   mini:"CAPTURE EVERY MEMORY",
 
-  tag:"Trending Service",
+  
 
   price:"Starting From ₹600",
 
@@ -2555,7 +2817,14 @@ photo:{
   price1:"Starting From ₹4999",
 
   text1:"Full wedding coverage with candid moments, couple portraits, family photos and cinematic premium editing.",
+feature1:"Verified Service",
+icon1:"fa-solid fa-circle-check",
 
+feature2:"HD Quality",
+icon2:"fa-solid fa-camera",
+
+feature3:"Edited Photos",
+icon3:"fa-solid fa-images",
   box2:"Birthday & Events",
 
   price2:"Starting From ₹1499",
@@ -2576,8 +2845,7 @@ photo:{
 
   extraTitle:"Professional Photography Experience",
 
-  extraText:"Our photography service focuses on real emotions, natural lighting and premium cinematic quality instead of traditional basic shoots. From close up portraits to full event coverage, every memory is captured with modern editing, cinematic framing and premium clarity similar to real professional photography apps.",
-
+  extraText:"Capture every special moment with professional photography, natural candid shots and premium editing quality. From birthdays and weddings to pre wedding shoots, every photo is delivered with HD clarity, cinematic colors and modern editing styles perfect for memories and social media sharing.",
   btn:"Book Professional Shoot"
 },
   video:{
@@ -2694,88 +2962,164 @@ photo:{
 /* =========================
    OPEN SERVICE POPUP
 ========================= */
-
 function openServicePopup(type){
 
   const data = serviceData[type];
 
   if(!data) return;
 
+
+  /* =========================
+     BASIC CONTENT
+  ========================= */
+
+  document.getElementById("popupMini")
+  .innerText = data.mini || "PREMIUM SERVICE";
+
   document.getElementById("popupTitle")
-  .innerText = data.title;
+  .innerText = data.title || "";
 
   document.getElementById("popupDesc")
-  .innerText = data.desc;
+  .innerText = data.desc || "";
+
+  document.getElementById("popupPrice")
+  .innerText = data.price || "";
+
+  
+
+  document.getElementById("popupPlanPrice")
+  .innerText = data.planPrice || "";
+
+  document.getElementById("popupPlanText")
+  .innerText = data.planText || "";
+
+  document.getElementById("popupExtraTitle")
+  .innerText = data.extraTitle || "";
+
+  document.getElementById("popupExtraText")
+  .innerText = data.extraText || "";
+
+  document.getElementById("popupBookBtn")
+  .innerText = data.btn || "Book Now";
+
+
+  /* =========================
+     HERO IMAGE SHIMMER
+  ========================= */
 
   const popupImg =
-document.getElementById("popupImage");
+  document.getElementById("popupImage");
 
-const popupWrap =
-document.querySelector(".popupHeroWrap");
+  const popupWrap =
+  document.querySelector(".popupHeroWrap");
 
-/* reset shimmer */
-popupWrap.classList.remove("loaded");
+  popupWrap.classList.remove("loaded");
 
-popupImg.classList.remove("loaded");
+  popupImg.classList.remove("loaded");
 
-/* lazy load image */
-popupImg.src = data.image;
+  popupImg.src = data.image;
 
-popupImg.onload = ()=>{
+  popupImg.onload = ()=>{
 
-  popupWrap.classList.add("loaded");
+    popupWrap.classList.add("loaded");
 
-  popupImg.classList.add("loaded");
+    popupImg.classList.add("loaded");
 
-};
+  };
+
+
+  /* =========================
+     BOX 1
+  ========================= */
 
   document.querySelectorAll(".serviceBox h3")[0]
-  .innerText = data.box1;
+  .innerText = data.box1 || "";
+
+  document.querySelectorAll(".servicePrice")[0]
+  .innerText = data.price1 || "";
 
   document.querySelectorAll(".serviceBox p")[0]
-  .innerText = data.text1;
+  .innerText = data.text1 || "";
+
+
+  /* =========================
+     BOX 2
+  ========================= */
 
   document.querySelectorAll(".serviceBox h3")[1]
-  .innerText = data.box2;
-document.getElementById("popupPrice")
-.innerText = data.price;
+  .innerText = data.box2 || "";
 
-document.getElementById("popupTag")
-.innerText = data.tag;
+  document.querySelectorAll(".servicePrice")[1]
+  .innerText = data.price2 || "";
 
-document.getElementById("popupExtraTitle")
-.innerText = data.extraTitle;
-
-document.getElementById("popupExtraText")
-.innerText = data.extraText;
   document.querySelectorAll(".serviceBox p")[1]
-  .innerText = data.text2;
-document.getElementById("popupPlanPrice")
-.innerText = data.planPrice;
-document.querySelectorAll(".servicePrice")[0]
-.innerText = data.price1;
+  .innerText = data.text2 || "";
 
-document.querySelectorAll(".servicePrice")[1]
-.innerText = data.price2;
 
-document.querySelectorAll(".servicePrice")[2]
-.innerText = data.price3;
+  /* =========================
+     BOX 3
+  ========================= */
 
-document.querySelectorAll(".servicePrice")[3]
-.innerText = data.price4;
-document.getElementById("popupPlanText")
-.innerText = data.planText;
   document.querySelectorAll(".serviceBox h3")[2]
-  .innerText = data.box3;
+  .innerText = data.box3 || "";
+
+  document.querySelectorAll(".servicePrice")[2]
+  .innerText = data.price3 || "";
 
   document.querySelectorAll(".serviceBox p")[2]
-  .innerText = data.text3;
+  .innerText = data.text3 || "";
+
+
+  /* =========================
+     BOX 4
+  ========================= */
 
   document.querySelectorAll(".serviceBox h3")[3]
-  .innerText = data.box4;
+  .innerText = data.box4 || "";
+
+  document.querySelectorAll(".servicePrice")[3]
+  .innerText = data.price4 || "";
 
   document.querySelectorAll(".serviceBox p")[3]
-  .innerText = data.text4;
+  .innerText = data.text4 || "";
+
+
+  /* =========================
+     FAQ CONTENT
+  ========================= */
+
+  const faqQuestions =
+  document.querySelectorAll(".faqQuestion span");
+
+  const faqAnswers =
+  document.querySelectorAll(".faqAnswer");
+
+  if(data.faqs){
+
+    data.faqs.forEach((faq,index)=>{
+
+      if(faqQuestions[index]){
+
+        faqQuestions[index].innerText =
+        faq.q;
+
+      }
+
+      if(faqAnswers[index]){
+
+        faqAnswers[index].innerText =
+        faq.a;
+
+      }
+
+    });
+
+  }
+
+
+  /* =========================
+     OPEN POPUP
+  ========================= */
 
   document.getElementById("servicePopup")
   .style.display = "block";
@@ -2812,5 +3156,23 @@ document
 });
 
 
+/* =========================
+   FAQ DROPDOWN
+========================= */
+
+document
+.querySelectorAll(".faqQuestion")
+.forEach(item=>{
+
+  item.addEventListener("click",()=>{
+
+    const faq =
+    item.parentElement;
+
+    faq.classList.toggle("active");
+
+  });
+
+});
 </script>
 </html>
