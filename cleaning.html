@@ -542,6 +542,425 @@ body.popupOpen{
   height:100vh;
   touch-action:none;
 }
+.benefitsWrap{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:12px;
+}
+
+.benefitItem{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#f5f7ff;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:500;
+  color:#222;
+}
+
+.benefitItem i{
+  color:#4f46e5;
+  font-size:14px;
+}
+.bottomBar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:70px;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+  z-index:999;
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
+}
+
+.bottomItem{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  text-decoration:none;
+  color:#777;
+  font-size:12px;
+  font-weight:500;
+  flex:1;
+}
+
+.bottomItem i{
+  font-size:20px;
+}
+
+.bottomItem.active{
+  color:#4f46e5;
+}
+
+.bottomItem.active i{
+  color:#4f46e5;
+}
+
+body{
+  padding-bottom:90px;
+}
+.bookingPopup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:#f8f9ff;
+  z-index:99999;
+  overflow-y:auto;
+  overflow-x:hidden;
+  transform:translateX(100%);
+  transition:0.35s ease;
+  display:flex;
+  flex-direction:column;
+}
+
+.bookingPopup.active{
+  transform:translateX(0);
+}
+
+/* TOP BAR */
+.bookingTop{
+  position:sticky;
+  top:0;
+  width:100%;
+  min-height:65px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:0 16px;
+  border-bottom:1px solid #ececec;
+  z-index:100;
+  flex-shrink:0;
+}
+
+.bookingBack{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#f3f4f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+  color:#111;
+  cursor:pointer;
+  flex-shrink:0;
+}
+
+.bookingHeading{
+  font-size:18px;
+  font-weight:700;
+  color:#111827;
+}
+
+/* CONTENT */
+.bookingContent{
+  flex:1;
+  padding:18px;
+  padding-bottom:110px;
+  overflow-y:auto;
+}
+
+/* SERVICE CARD */
+.selectedService{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.selectedService span{
+  font-size:13px;
+  color:#6b7280;
+}
+
+.selectedService h2{
+  margin-top:6px;
+  font-size:22px;
+  font-weight:700;
+  color:#4f46e5;
+  line-height:1.3;
+}
+
+/* FORM */
+.bookingForm{
+  background:#fff;
+  padding:18px;
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.bookingForm label{
+  font-size:14px;
+  font-weight:600;
+  color:#111827;
+}
+
+.bookingForm input,
+.bookingForm textarea{
+  width:100%;
+  border:none;
+  outline:none;
+  background:#f3f4f6;
+  padding:15px;
+  border-radius:14px;
+  font-size:14px;
+  color:#111;
+}
+
+.bookingForm textarea{
+  min-height:120px;
+  resize:none;
+}
+
+.bookingForm input:focus,
+.bookingForm textarea:focus{
+  border:2px solid #4f46e5;
+  background:#fff;
+}
+
+/* REMEMBER BOX */
+.rememberBox{
+  margin-top:22px;
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.rememberBox h3{
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:16px;
+  color:#111827;
+}
+
+.rememberItem{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:14px;
+  color:#4b5563;
+  line-height:1.6;
+  margin-bottom:14px;
+}
+
+/* BOTTOM BUTTON */
+.bookingBottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+  box-shadow:0 -2px 12px rgba(0,0,0,0.08);
+  z-index:100;
+}
+
+.confirmBookingBtn{
+  width:100%;
+  height:54px;
+  border:none;
+  border-radius:16px;
+  background:#4f46e5;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.confirmBookingBtn:active{
+  transform:scale(0.98);
+}
+
+/* SCROLLBAR */
+.bookingPopup::-webkit-scrollbar{
+  width:0;
+}
+.billBox{
+  margin-top:22px;
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.billBox h3{
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:18px;
+  color:#111827;
+}
+
+.billRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:14px;
+  color:#4b5563;
+  padding:12px 0;
+  border-bottom:1px solid #f1f1f1;
+}
+
+.billRow:last-child{
+  border-bottom:none;
+}
+
+.totalBill{
+  margin-top:8px;
+  padding-top:16px;
+  font-size:16px;
+  font-weight:700;
+  color:#111827;
+}
+.successPopup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:linear-gradient(180deg,#ffffff,#f5f7ff);
+  z-index:999999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(30px);
+  transition:0.45s ease;
+  overflow:hidden;
+}
+
+.successPopup.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.successContent{
+  width:100%;
+  padding:30px;
+  text-align:center;
+  transform:scale(0.85);
+  transition:0.45s ease;
+}
+
+.successPopup.show .successContent{
+  transform:scale(1);
+}
+
+/* SUCCESS ICON */
+.successCircle{
+  position:relative;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  background:#4f46e5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  box-shadow:
+    0 15px 40px rgba(79,70,229,0.35),
+    0 0 0 15px rgba(79,70,229,0.08);
+  animation:successPop 0.7s ease;
+}
+
+.successCircle::before{
+  content:"";
+  position:absolute;
+  inset:-14px;
+  border-radius:50%;
+  border:3px solid rgba(79,70,229,0.18);
+  animation:ringAnim 1.8s linear infinite;
+}
+
+.successCircle i{
+  color:#fff;
+  font-size:58px;
+}
+
+/* TEXT */
+.successContent h2{
+  margin-top:34px;
+  font-size:32px;
+  font-weight:800;
+  color:#111827;
+  letter-spacing:-0.5px;
+}
+
+.successContent p{
+  margin-top:14px;
+  font-size:16px;
+  line-height:1.7;
+  color:#6b7280;
+  padding:0 15px;
+}
+
+/* ANIMATIONS */
+@keyframes successPop{
+
+  0%{
+    transform:scale(0);
+  }
+
+  60%{
+    transform:scale(1.12);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+@keyframes ringAnim{
+
+  0%{
+    transform:scale(0.9);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1.2);
+    opacity:0;
+  }
+
+}
+.shake{
+  animation:shakeAnim 0.35s linear;
+  border:2px solid #ef4444 !important;
+}
+
+@keyframes shakeAnim{
+
+  0%{ transform:translateX(0); }
+
+  25%{ transform:translateX(-6px); }
+
+  50%{ transform:translateX(6px); }
+
+  75%{ transform:translateX(-6px); }
+
+  100%{ transform:translateX(0); }
+
+}
 </style>
 </head>
 
@@ -757,6 +1176,31 @@ body.popupOpen{
   </div>
 
 </div>
+
+<!-- Bottom Navigation -->
+<div class="bottomBar">
+
+  <div class="bottomItem" id="homeBtn">
+  <i class="fa-solid fa-house"></i>
+  <span>Home</span>
+</div>
+
+  <a href="clean.html" class="bottomItem active">
+    <i class="fa-solid fa-broom"></i>
+    <span>Clean</span>
+  </a>
+<a href="help.html" class="bottomItem">
+  <i class="fa-solid fa-headset"></i>
+    <span>Help</span>
+  </a>
+  <a href="booking.html" class="bottomItem">
+    <i class="fa-solid fa-calendar-check"></i>
+    <span>Booking</span>
+  </a>
+
+  
+
+</div>
 <script>
 
 const fullAddress = localStorage.getItem("savedAddress");
@@ -797,125 +1241,556 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 const popupData = {
 
-  "Bathroom Cleaning": {
-    popupImage:"./clean/bathrromclean.webp",
-    include:["Floor cleaning","Tiles wash","Mirror cleaning"],
-    exclude:["Plumbing","Painting"],
-    faq1:"How much time required?",
-    ans1:"Usually 1 hour.",
-    faq2:"Materials included?",
-    ans2:"Yes all materials included."
-  },
+ "Bathroom Cleaning": {
+  popupImage:"./clean/bathrromclean.webp",
+
+  include:[
+    "Floor deep cleaning",
+    "Tiles scrubbing & wash",
+    "Mirror & glass cleaning",
+    "Wash basin cleaning",
+    "Toilet seat sanitization",
+    "Shower area cleaning",
+    "Tap & fittings polishing",
+    "Exhaust fan dust removal",
+    "Bucket & mug cleaning"
+  ],
+
+  exclude:[
+    "Plumbing repairs",
+    "Painting work",
+    "Water leakage fixing",
+    "Drain blockage removal",
+    "Electrical repairs"
+  ],
+
+  faq1:"How much time is required?",
+  ans1:"Usually 1 to 2 hours depending on bathroom size and condition.",
+
+  faq2:"Are cleaning materials included?",
+  ans2:"Yes, all cleaning chemicals, brushes, and tools are included.",
+
+  faq3:"Do you use safe chemicals?",
+  ans3:"Yes, we use professional-grade and bathroom-safe cleaning products.",
+
+  faq4:"Will hard water stains be removed?",
+  ans4:"Yes, we try to remove maximum hard water and soap stains during deep cleaning.",
+
+  faq5:"Do I need to provide water or electricity?",
+  ans5:"Yes, running water and a power connection are required for the service.",
+
+  benefits:[
+    "99.9% germ removal",
+    "Fresh smell & hygienic bathroom",
+    "Deep stain removal",
+    "Shiny tiles & fittings",
+    "Professional equipment used"
+  ]
+},
 
   "Fridge Cleaning": {
-        popupImage:"./clean/fridgeclean.webp",
-    include:["Tray cleaning","Deep sanitize","Odor removal"],
-    exclude:["Repair","Gas refill"],
-    faq1:"Need empty fridge?",
-    ans1:"Yes recommended.",
-    faq2:"Inside cleaning included?",
-    ans2:"Yes complete cleaning included."
-  },
+  popupImage:"./clean/fridgeclean.webp",
 
-  "Fan Cleaning": {
-    popupImage:"./clean/fanclean.webp",
-    include:["Dust removal","Blade cleaning","Dry wipe"],
-    exclude:["Motor repair","Electrical repair"],
-    faq1:"Need ladder?",
-    ans1:"No we bring tools.",
-    faq2:"Water wash included?",
-    ans2:"No dry cleaning only."
-  },
+  include:[
+    "Tray & shelf cleaning",
+    "Deep interior sanitization",
+    "Odor removal treatment",
+    "Freezer compartment cleaning",
+    "Door rubber cleaning",
+    "Exterior body cleaning",
+    "Vegetable tray cleaning",
+    "Food stain removal"
+  ],
+
+  exclude:[
+    "Repair services",
+    "Gas refill",
+    "Compressor work",
+    "Electrical issues",
+    "Parts replacement"
+  ],
+
+  faq1:"Do I need to empty the fridge before cleaning?",
+  ans1:"Yes, removing food items helps us clean every corner properly.",
+
+  faq2:"Is freezer cleaning included?",
+  ans2:"Yes, both fridge and freezer sections are cleaned completely.",
+
+  faq3:"Will bad smell be removed?",
+  ans3:"Yes, we use deodorizing cleaners to reduce unpleasant odors.",
+
+  faq4:"How much time does the service take?",
+  ans4:"Usually around 1 to 1.5 hours depending on fridge condition.",
+
+  faq5:"Are cleaning materials included?",
+  ans5:"Yes, all cleaning products and tools are included.",
+
+  benefits:[
+    "Fresh and hygienic fridge",
+    "Removes stains & spills",
+    "Bad odor reduction",
+    "Improves cleanliness",
+    "Professional deep cleaning"
+  ]
+},
+
+ "Fan Cleaning": {
+  popupImage:"./clean/fanclean.webp",
+
+  include:[
+    "Dust removal",
+    "Fan blade cleaning",
+    "Dry cloth wiping",
+    "Ceiling dust cleaning",
+    "Rod & body cleaning",
+    "Speed dust removal",
+    "Surface stain cleaning"
+  ],
+
+  exclude:[
+    "Motor repair",
+    "Electrical repair",
+    "Fan installation",
+    "Wiring work",
+    "Parts replacement"
+  ],
+
+  faq1:"Do I need to provide a ladder?",
+  ans1:"No, our team brings all required cleaning tools.",
+
+  faq2:"Is water wash included?",
+  ans2:"No, only safe dry cleaning is performed to protect the motor.",
+
+  faq3:"Will dust inside blades be cleaned?",
+  ans3:"Yes, blades and outer fan areas are cleaned thoroughly.",
+
+  faq4:"How much time does it take?",
+  ans4:"Usually 15 to 30 minutes per fan depending on dust condition.",
+
+  faq5:"Is cleaning safe for electrical parts?",
+  ans5:"Yes, we use dry cleaning methods to avoid electrical damage.",
+
+  benefits:[
+    "Dust-free fan blades",
+    "Cleaner airflow",
+    "Improved room hygiene",
+    "Professional safe cleaning",
+    "Quick & mess-free service"
+  ]
+},
 
   "Packing & Unpacking": {
-    popupImage:"./clean/packing.webp",
-    include:["Safe packing","Box setup","Item arrangement"],
-    exclude:["Transport","Heavy lifting"],
-    faq1:"Boxes included?",
-    ans1:"No boxes charged separately.",
-    faq2:"Fragile packing available?",
-    ans2:"Yes available."
-  },
+  popupImage:"./clean/packing.webp",
+
+  include:[
+    "Safe item packing",
+    "Unpacking assistance",
+    "Box arrangement",
+    "Kitchen item packing",
+    "Clothes & household packing",
+    "Fragile item wrapping",
+    "Room-wise item arrangement",
+    "Bubble wrapping support"
+  ],
+
+  exclude:[
+    "Transportation service",
+    "Heavy lifting",
+    "Truck loading",
+    "Furniture dismantling",
+    "Packing material cost"
+  ],
+
+  faq1:"Are packing boxes included?",
+  ans1:"No, packing boxes and materials are charged separately if required.",
+
+  faq2:"Is fragile item packing available?",
+  ans2:"Yes, careful packing for fragile items like glass and decor is available.",
+
+  faq3:"Do you provide unpacking service also?",
+  ans3:"Yes, we help unpack and arrange items at the destination.",
+
+  faq4:"How much time does the service take?",
+  ans4:"Service time depends on the number of household items and rooms.",
+
+  faq5:"Do I need to arrange packing materials?",
+  ans5:"You can arrange them yourself or request materials from our team at extra cost.",
+
+  benefits:[
+    "Safe & organized packing",
+    "Reduces moving stress",
+    "Professional handling",
+    "Proper fragile item care",
+    "Quick unpacking assistance"
+  ]
+},
 
   "Kitchen Help": {
-popupImage:"./clean/kitech clean.webp",
-    include:["Preparation help","Cleaning help","Basic support"],
-    exclude:["Cooking","Dish washing"],
-    faq1:"Can cook food?",
-    ans1:"No support only.",
-    faq2:"Daily service available?",
-    ans2:"Yes available."
-  },
+  popupImage:"./clean/kitech clean.webp",
 
-  "Sweeping": {
-   popupImage:"./clean/swepping.webp",
-    include:["Dust cleaning","Floor sweeping","Basic cleanup"],
-    exclude:["Mopping","Deep cleaning"],
-    faq1:"Mop included?",
-    ans1:"No sweeping only.",
-    faq2:"Tools included?",
-    ans2:"Yes."
-  },
+  include:[
+    "Kitchen preparation help",
+    "Vegetable cutting support",
+    "Basic kitchen assistance",
+    "Counter cleaning help",
+    "Ingredient arrangement",
+    "Storage organization",
+    "Light kitchen cleaning",
+    "General support work"
+  ],
 
-  "Ironing": {
-   popupImage:"./clean/landuary.webp",
-    include:["Steam iron","Cloth folding","Quick service"],
-    exclude:["Dry wash","Washing"],
-    faq1:"Pickup available?",
-    ans1:"Yes in selected areas.",
-    faq2:"Express service available?",
-    ans2:"Yes."
-  },
+  exclude:[
+    "Cooking service",
+    "Dish washing",
+    "Deep kitchen cleaning",
+    "Grocery shopping",
+    "Heavy appliance cleaning"
+  ],
+
+  faq1:"Can the helper cook food?",
+  ans1:"No, this service provides kitchen assistance and support only.",
+
+  faq2:"Is daily service available?",
+  ans2:"Yes, daily and regular kitchen help services are available.",
+
+  faq3:"Can helpers cut vegetables and prepare ingredients?",
+  ans3:"Yes, basic food preparation support is included.",
+
+  faq4:"How many hours can I book?",
+  ans4:"You can book flexible timings based on your kitchen support needs.",
+
+  faq5:"Do helpers bring cleaning materials?",
+  ans5:"Basic support is provided, but household materials should be available at home.",
+
+  benefits:[
+    "Helpful kitchen assistance",
+    "Saves preparation time",
+    "Keeps kitchen organized",
+    "Flexible daily support",
+    "Professional helper service"
+  ]
+},
+
+ "Sweeping": {
+  popupImage:"./clean/swepping.webp",
+
+  include:[
+    "Floor sweeping",
+    "Dust removal",
+    "Basic floor cleanup",
+    "Room sweeping",
+    "Corner dust cleaning",
+    "Daily maintenance cleaning",
+    "Dry waste collection",
+    "Surface dust sweeping"
+  ],
+
+  exclude:[
+    "Mopping service",
+    "Deep cleaning",
+    "Bathroom cleaning",
+    "Furniture shifting",
+    "Wet stain removal"
+  ],
+
+  faq1:"Is mopping included in this service?",
+  ans1:"No, this service includes sweeping only.",
+
+  faq2:"Are cleaning tools included?",
+  ans2:"Yes, basic sweeping tools are included.",
+
+  faq3:"How much time does the service take?",
+  ans3:"Usually 30 minutes to 1 hour depending on area size.",
+
+  faq4:"Can I book daily sweeping service?",
+  ans4:"Yes, daily and regular sweeping services are available.",
+
+  faq5:"Is furniture moving included?",
+  ans5:"No, heavy furniture moving is not included in this service.",
+
+  benefits:[
+    "Dust-free floors",
+    "Quick daily cleaning",
+    "Improves room cleanliness",
+    "Professional sweeping service",
+    "Clean and fresh environment"
+  ]
+},
+"Ironing": {
+  popupImage:"./clean/landuary.webp",
+
+  include:[
+    "Steam ironing",
+    "Cloth folding",
+    "Quick ironing service",
+    "Shirt ironing",
+    "Pant & dress ironing",
+    "Wrinkle removal",
+    "Neat cloth finishing",
+    "Daily wear ironing"
+  ],
+
+  exclude:[
+    "Dry cleaning",
+    "Cloth washing",
+    "Stain removal",
+    "Fabric repair",
+    "Heavy curtain ironing"
+  ],
+
+  faq1:"Is pickup and delivery available?",
+  ans1:"Yes, pickup and delivery are available in selected areas.",
+
+  faq2:"Is express ironing service available?",
+  ans2:"Yes, fast and same-day service may be available based on location.",
+
+  faq3:"Do you use steam ironing?",
+  ans3:"Yes, professional steam ironing is included for better finishing.",
+
+  faq4:"Can all types of clothes be ironed?",
+  ans4:"Most regular clothes can be ironed, except highly delicate fabrics.",
+
+  faq5:"How are clothes returned after ironing?",
+  ans5:"Clothes are neatly folded and arranged after service.",
+
+  benefits:[
+    "Wrinkle-free clothes",
+    "Professional cloth finishing",
+    "Quick & convenient service",
+    "Neatly folded garments",
+    "Saves time and effort"
+  ]
+},
 
   "Window Cleaning": {
-    popupImage:"./clean/windowclean.webp",
-    include:["Glass cleaning","Frame wipe","Dust cleaning"],
-    exclude:["Broken repair","Painting"],
-    faq1:"Outside cleaning included?",
-    ans1:"Yes if reachable.",
-    faq2:"Chemical free cleaning?",
-    ans2:"Yes safe materials used."
-  },
+  popupImage:"./clean/windowclean.webp",
 
-  "Kitchen Cleaning": {
-   popupImage:"./clean/kitech clean.webp",
-    include:["Stove cleaning","Sink wash","Platform cleaning"],
-    exclude:["Pest control","Repair"],
-    faq1:"Oil stains removable?",
-    ans1:"Yes deep cleaning done.",
-    faq2:"Utensils included?",
-    ans2:"Basic utensils only."
-  },
+  include:[
+    "Glass cleaning",
+    "Window frame wiping",
+    "Dust removal",
+    "Sliding track cleaning",
+    "Finger mark removal",
+    "Interior window cleaning",
+    "Basic exterior cleaning",
+    "Mirror shine finishing"
+  ],
+
+  exclude:[
+    "Broken glass repair",
+    "Painting work",
+    "High-rise exterior cleaning",
+    "Window installation",
+    "Silicone or fitting repair"
+  ],
+
+  faq1:"Is outside window cleaning included?",
+  ans1:"Yes, outside cleaning is included if the area is safely reachable.",
+
+  faq2:"Are chemical-free materials used?",
+  ans2:"Yes, safe and surface-friendly cleaning materials are used.",
+
+  faq3:"Will window tracks be cleaned?",
+  ans3:"Yes, basic dust and dirt cleaning for tracks is included.",
+
+  faq4:"How much time does the service take?",
+  ans4:"Usually 30 minutes to 1 hour depending on the number of windows.",
+
+  faq5:"Do you clean large glass panels?",
+  ans5:"Yes, large reachable glass panels and doors can also be cleaned.",
+
+  benefits:[
+    "Crystal clear windows",
+    "Dust-free glass surfaces",
+    "Improves room brightness",
+    "Professional streak-free finish",
+    "Fresh and clean appearance"
+  ]
+},
+
+ "Kitchen Cleaning": {
+  popupImage:"./clean/kitech clean.webp",
+
+  include:[
+    "Stove cleaning",
+    "Sink washing",
+    "Kitchen platform cleaning",
+    "Oil & grease removal",
+    "Cabinet exterior cleaning",
+    "Tile wiping",
+    "Countertop sanitization",
+    "Basic utensil cleaning"
+  ],
+
+  exclude:[
+    "Pest control service",
+    "Repair work",
+    "Chimney servicing",
+    "Deep appliance repair",
+    "Gas pipeline work"
+  ],
+
+  faq1:"Can oil and grease stains be removed?",
+  ans1:"Yes, deep cleaning is done to remove maximum oil and grease stains.",
+
+  faq2:"Are utensils included in cleaning?",
+  ans2:"Yes, only basic daily-use utensils are included.",
+
+  faq3:"Do you clean kitchen tiles and counters?",
+  ans3:"Yes, tiles, countertops, and sink areas are cleaned thoroughly.",
+
+  faq4:"How much time does the service take?",
+  ans4:"Usually 1 to 3 hours depending on kitchen size and condition.",
+
+  faq5:"Are cleaning materials included?",
+  ans5:"Yes, all required cleaning liquids and tools are included.",
+
+  benefits:[
+    "Grease-free kitchen",
+    "Clean & hygienic cooking area",
+    "Removes tough stains",
+    "Fresh and organized kitchen",
+    "Professional deep cleaning service"
+  ]
+},
 
   "Balcony Cleaning": {
-    popupImage:"./clean/balconyclean.webp",
-    include:["Dust cleaning","Railing wash","Floor cleaning"],
-    exclude:["Plant care","Painting"],
-    faq1:"Water wash included?",
-    ans1:"Yes.",
-    faq2:"High rise cleaning?",
-    ans2:"Only safe accessible areas."
-  },
+  popupImage:"./clean/balconyclean.webp",
+
+  include:[
+    "Dust cleaning",
+    "Railing washing",
+    "Balcony floor cleaning",
+    "Corner dirt removal",
+    "Cobweb cleaning",
+    "Tile wiping",
+    "Surface stain cleaning",
+    "Basic water wash"
+  ],
+
+  exclude:[
+    "Plant care service",
+    "Painting work",
+    "High-rise exterior cleaning",
+    "Drain repair",
+    "Furniture shifting"
+  ],
+
+  faq1:"Is water washing included?",
+  ans1:"Yes, balcony floor and surface water washing is included.",
+
+  faq2:"Do you clean high-rise balconies?",
+  ans2:"Only safely accessible balcony areas are cleaned.",
+
+  faq3:"Will cobwebs and dust be removed?",
+  ans3:"Yes, cobwebs, dust, and corner dirt are cleaned properly.",
+
+  faq4:"How much time does the service take?",
+  ans4:"Usually 30 minutes to 1 hour depending on balcony size.",
+
+  faq5:"Are cleaning materials included?",
+  ans5:"Yes, all required cleaning tools and materials are included.",
+
+  benefits:[
+    "Dust-free balcony",
+    "Clean railings & floors",
+    "Fresh outdoor space",
+    "Professional cleaning service",
+    "Improves overall cleanliness"
+  ]
+},
 
   "Full Home Cleaning": {
-    popupImage:"./clean/fullhomeclean.webp",
-    include:["Bedroom cleaning","Kitchen cleaning","Hall cleaning"],
-    exclude:["Electrical work","Pest control"],
-    faq1:"How much time needed?",
-    ans1:"4-6 hours.",
-    faq2:"Team size?",
-    ans2:"2-4 professionals."
-  },
+  popupImage:"./clean/fullhomeclean.webp",
+
+  include:[
+    "Bedroom cleaning",
+    "Kitchen deep cleaning",
+    "Hall cleaning",
+    "Bathroom cleaning",
+    "Floor sweeping & mopping",
+    "Dust removal",
+    "Window & glass cleaning",
+    "Balcony cleaning"
+  ],
+
+  exclude:[
+    "Electrical work",
+    "Pest control",
+    "Plumbing repairs",
+    "Painting work",
+    "Furniture repair"
+  ],
+
+  faq1:"How much time is needed for full home cleaning?",
+  ans1:"Usually 4 to 6 hours depending on house size and condition.",
+
+  faq2:"How many professionals will come?",
+  ans2:"Generally 2 to 4 trained professionals are assigned.",
+
+  faq3:"Are cleaning materials included?",
+  ans3:"Yes, all required cleaning chemicals and tools are included.",
+
+  faq4:"Does the service include bathroom and kitchen cleaning?",
+  ans4:"Yes, complete kitchen and bathroom cleaning is included.",
+
+  faq5:"Can I book for apartments and independent houses?",
+  ans5:"Yes, the service is available for both apartments and individual homes.",
+
+  benefits:[
+    "Complete home deep cleaning",
+    "Fresh & hygienic environment",
+    "Professional cleaning team",
+    "Saves time and effort",
+    "Dust and stain removal"
+  ]
+},
 
   "Festival Cleaning": {
-    popupImage:"./clean/festival clean.webp",
-    include:["Dust cleaning","Decor cleaning","Floor wash"],
-    exclude:["Decoration setup","Painting"],
-    faq1:"Same day service?",
-    ans1:"Depends on availability.",
-    faq2:"Deep cleaning included?",
-    ans2:"Yes."
-  }
+  popupImage:"./clean/festival clean.webp",
+
+  include:[
+    "Dust cleaning",
+    "Decoration area cleaning",
+    "Floor washing",
+    "Living room cleaning",
+    "Entrance cleaning",
+    "Cobweb removal",
+    "Surface wiping",
+    "Festival preparation cleaning"
+  ],
+
+  exclude:[
+    "Decoration setup",
+    "Painting work",
+    "Electrical decoration installation",
+    "Pest control",
+    "Furniture repair"
+  ],
+
+  faq1:"Is same-day service available?",
+  ans1:"Same-day service depends on slot and staff availability.",
+
+  faq2:"Is deep cleaning included?",
+  ans2:"Yes, deep cleaning for important areas is included.",
+
+  faq3:"Do you clean before and after festivals?",
+  ans3:"Yes, both pre-festival and post-festival cleaning services are available.",
+
+  faq4:"Are cleaning materials included?",
+  ans4:"Yes, all required cleaning materials and tools are included.",
+
+  faq5:"How much time does the service take?",
+  ans5:"Usually 2 to 5 hours depending on home size and cleaning requirements.",
+
+  benefits:[
+    "Fresh and festival-ready home",
+    "Dust-free clean environment",
+    "Professional deep cleaning",
+    "Saves preparation time",
+    "Comfortable and hygienic space"
+  ]
+}
 
 };
 
@@ -979,37 +1854,47 @@ document.querySelectorAll(".serviceCard").forEach(card => {
 
         <div class="infoBox">
 
-          <h3>FAQ</h3>
+  <h3>Benefits</h3>
 
-          <div class="faqCard">
+  <div class="benefitsWrap">
 
-            <div class="faqQuestion">
-              <span>${data.faq1}</span>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
+    ${data.benefits.map(item => `
+      <div class="benefitItem">
+        <i class="fa-solid fa-star"></i>
+        <span>${item}</span>
+      </div>
+    `).join("")}
 
-            <div class="faqDropdown">
-              ${data.ans1}
-            </div>
+  </div>
 
-          </div>
+</div>
 
-          <div class="faqCard">
+       <div class="infoBox">
 
-            <div class="faqQuestion">
-              <span>${data.faq2}</span>
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
+  <h3>FAQ</h3>
 
-            <div class="faqDropdown">
-              ${data.ans2}
-            </div>
+  ${Object.keys(data)
+    .filter(key => key.startsWith("faq"))
+    .map((faqKey, index) => `
+      
+      <div class="faqCard">
 
-          </div>
+        <div class="faqQuestion">
+          <span>${data[faqKey]}</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
 
+        <div class="faqDropdown">
+          ${data[`ans${index + 1}`]}
         </div>
 
       </div>
+
+    `).join("")}
+
+</div>
+
+</div>
 
       <div class="popupBottom">
 
@@ -1022,6 +1907,176 @@ document.querySelectorAll(".serviceCard").forEach(card => {
     `;
 
     document.body.appendChild(popup);
+    const bookBtn = popup.querySelector(".bookNowBtn");
+
+bookBtn.addEventListener("click", () => {
+
+  const bookingPopup = document.createElement("div");
+
+  bookingPopup.className = "bookingPopup active";
+
+  bookingPopup.innerHTML = `
+
+    <div class="bookingTop">
+
+      <div class="bookingBack">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+
+      <div class="bookingHeading">
+        Book Service
+      </div>
+
+    </div>
+
+    <div class="bookingContent">
+
+      <div class="selectedService">
+        <span>Selected Service</span>
+        <h2>${title}</h2>
+      </div>
+
+      <div class="bookingForm">
+
+        <label>Mobile Number</label>
+        <input type="tel" placeholder="Enter mobile number">
+
+        <label>Address</label>
+        <textarea placeholder="Enter full address"></textarea>
+
+      </div>
+
+      <div class="rememberBox">
+
+        <h3>Things to Remember</h3>
+
+        <div class="rememberItem">
+          ✔ Please be available during service time
+        </div>
+
+        <div class="rememberItem">
+          ✔ Keep water and power connection available
+        </div>
+
+        <div class="rememberItem">
+          ✔ Service timing may vary based on condition
+        </div>
+
+        <div class="rememberItem">
+          ✔ Extra work may include additional charges
+        </div>
+
+      </div>
+<div class="billBox">
+
+  <h3>Bill Details</h3>
+
+  <div class="billRow">
+    <span>Service Charge</span>
+    <span>${price}</span>
+  </div>
+
+  <div class="billRow">
+    <span>Platform Fee</span>
+    <span>₹30</span>
+  </div>
+
+  <div class="billRow">
+    <span>Visiting Charge</span>
+    <span>Free</span>
+  </div>
+
+  <div class="billRow totalBill">
+    <span>Total Amount</span>
+    <span>${price}</span>
+  </div>
+
+</div>
+    </div>
+
+    <div class="bookingBottom">
+
+      <button class="confirmBookingBtn">
+        Confirm Booking
+      </button>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(bookingPopup);
+bookingPopup.querySelector(".confirmBookingBtn")
+.addEventListener("click", () => {
+
+  const mobileInput = bookingPopup.querySelector("input");
+  const addressInput = bookingPopup.querySelector("textarea");
+
+  // CHECK EMPTY
+  if(
+    mobileInput.value.trim() === "" ||
+    addressInput.value.trim() === ""
+  ){
+
+    // SHAKE EFFECT
+    mobileInput.classList.add("shake");
+    addressInput.classList.add("shake");
+
+    setTimeout(() => {
+      mobileInput.classList.remove("shake");
+      addressInput.classList.remove("shake");
+    }, 500);
+
+    return;
+  }
+
+  // SUCCESS POPUP
+  const successPopup = document.createElement("div");
+
+  successPopup.className = "successPopup";
+
+  successPopup.innerHTML = `
+
+    <div class="successContent">
+
+      <div class="successCircle">
+        <i class="fa-solid fa-check"></i>
+      </div>
+
+      <h2>Booking Confirmed</h2>
+
+      
+
+    </div>
+
+  `;
+
+  document.body.appendChild(successPopup);
+
+  setTimeout(() => {
+    successPopup.classList.add("show");
+  }, 50);
+
+  setTimeout(() => {
+
+    successPopup.classList.remove("show");
+
+    setTimeout(() => {
+      successPopup.remove();
+      bookingPopup.remove();
+      popup.remove();
+    }, 400);
+
+  }, 4000);
+
+});
+  bookingPopup.querySelector(".bookingBack")
+  .addEventListener("click", () => {
+
+    bookingPopup.remove();
+
+  });
+
+});
 
    document.body.classList.add("popupOpen");
     popup.querySelector(".backBtn").addEventListener("click", () => {
@@ -1046,6 +2101,17 @@ document.querySelectorAll(".serviceCard").forEach(card => {
   });
 
 });
+
+document.getElementById("homeBtn").addEventListener("click", function(){
+
+  // skip intro next time
+  sessionStorage.setItem("skipIntro", "true");
+
+  // redirect home
+  window.location.href = "index.html";
+
+});
+
 </script>
 
 </body>
