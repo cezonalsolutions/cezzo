@@ -17044,6 +17044,75 @@ if(video.readyState >= 2){
 }
 
 });
+(() => {
+
+  document.querySelectorAll('.productGrid').forEach(g => {
+
+    let startX = 0;
+    let startY = 0;
+
+    let startScroll = 0;
+
+    let locked = null;
+
+    g.style.touchAction = 'pan-y';
+
+    g.addEventListener('touchstart', e => {
+
+      const t = e.touches[0];
+
+      startX = t.clientX;
+      startY = t.clientY;
+
+      startScroll = g.scrollLeft;
+
+      locked = null;
+
+      console.log('touchstart');
+
+    }, { passive:true });
+
+    g.addEventListener('touchmove', e => {
+
+      const t = e.touches[0];
+
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+
+      /* detect direction */
+      if (locked === null) {
+
+        if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+
+          locked =
+            Math.abs(dx) > Math.abs(dy)
+              ? 'horizontal'
+              : 'vertical';
+
+          console.log('LOCKED:', locked);
+        }
+      }
+
+      /* vertical page scroll */
+      if (locked === 'vertical') {
+        return;
+      }
+
+      /* horizontal product scroll */
+      if (locked === 'horizontal') {
+
+        e.preventDefault();
+
+        g.scrollLeft = startScroll - dx;
+
+        console.log('scrollLeft:', g.scrollLeft);
+      }
+
+    }, { passive:false });
+
+  });
+
+})();
 </script>
 </body>
 </html>
