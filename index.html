@@ -5018,6 +5018,67 @@ scroll-behavior:smooth;
   font-size:12px;
   margin-bottom:8px;
 }
+/* IOS HORIZONTAL SCROLL FIX */
+
+.leaves,
+.leaves *,
+
+.fruitRain,
+.fruitRain *,
+
+.confettiContainer,
+.confettiContainer *,
+
+.rain,
+.rain *,
+
+.homeFloat,
+.homeFloat *,
+
+.balloonContainer,
+.balloonContainer *,
+
+.lightning,
+.sparkle,
+.glow{
+  pointer-events:none !important;
+}
+
+/* prevent animated overlays blocking touch */
+#contentSection,
+#freshSection,
+#offerSection,
+#coolSection,
+#skinSection,
+#homeSection,
+#chocoSection,
+#grocerySection{
+  isolation:isolate;
+}
+
+/* actual horizontal slider fix */
+.productGrid{
+  position:relative;
+  z-index:9999;
+
+  display:flex;
+  flex-wrap:nowrap;
+
+  overflow-x:auto !important;
+  overflow-y:hidden;
+
+  -webkit-overflow-scrolling:touch;
+
+  touch-action:pan-x;
+
+  overscroll-behavior-x:contain;
+}
+
+/* cards */
+.productCard,
+.productCard2{
+  flex:0 0 auto;
+}
 </style>
 </head>
 
