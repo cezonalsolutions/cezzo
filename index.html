@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CEZOO</title>
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/roxborough-cf">
+
 <link href="https://fonts.googleapis.com/css2?family=B612:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,172 +45,180 @@ body{
 .subText{
   animation:fade 1s ease;
 }
-
-/* SPLASH (UNCHANGED) */
+/* SPLASH */
 #splash{
   position:fixed;
-  width:100%;
-  height:100vh;
+  inset:0;
 
-  background:#90caf9;
+  background:#5e3984;
 
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+
   overflow:hidden;
-}
-/* TAGLINE */
-.tagline{
-  margin-top:12px;
-  font-family:'B612', sans-serif;
 
-  font-size:15px;
-  font-weight:500;
+  z-index:999999;
 
-  opacity:0;
-  animation:fade 1s forwards;
-  animation-delay:0.5s;
-
-  /* 🔥 APPLY GRADIENT TO FULL TEXT */
-  background:linear-gradient(135deg,#ff6a00,#ffb347);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  /* smooth exit */
+  animation:splashHide 1s ease forwards;
+  animation-delay:3.3s;
 }
 
-/* OPTIONAL: slight emphasis */
-.tagline span{
-  font-weight:700;
-  font-size:16px;
-  margin-right:4px;
-}
-.miniRow{
-  display:flex;
-  align-items:center;
-  padding:10px;
-  border-bottom:1px solid #eee;
-
-  position:relative;   /* 🔥 THIS IS THE REAL FIX */
-}
-
-/* soft light glow */
-#splash::before{
-  content:"";
-  position:absolute;
-  width:350px;
-  height:350px;
-
-  background:radial-gradient(circle,rgba(255,255,255,0.5),transparent);
-  filter:blur(70px);
-
-  top:20%;
-  left:50%;
-  transform:translateX(-50%);
-}
-#mapBox2{
-height:300px;
-margin:15px;
-border-radius:18px;
-overflow:hidden;
-}
-.sideHeading {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: #0a50f3;
-  margin-bottom: 10px;
-  margin-left: 10px; /* move right */
-}
 /* LOGO */
 .logo{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
+  display:flex;
+  align-items:flex-end;
 
-  font-size:52px;
-  font-weight:700;
-  font-family: "Times New Roman", Times, serif;  /* 🔥 cezoo font */
+  font-family:'Roxborough CF', serif;
+
   line-height:1;
 
   opacity:0;
-  transform:scale(0.9);
-  animation:logoEntry 0.8s ease forwards;
+  transform:scale(1.4);
+
+  animation:premiumReveal 2s cubic-bezier(.19,1,.22,1) forwards;
 }
 
-.logo span{
-  display:inline-block;
-}
-
-/* 🔵 C */
+/* C */
 .logo .c{
-  background:linear-gradient(135deg,#42a5f5,#1e88e5);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  font-size:40px;
+  font-weight:600;
+
+  color:#f7f4fb;
+
+  position:relative;
+  top:-3px;
+
+  letter-spacing:-0.5px;
+
+  margin-right:1px;
 }
 
-/* 🟢 e */
-.logo .e{
-  background:linear-gradient(135deg,#66bb6a,#2e7d32);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+/* ezoo */
+.logo .rest{
+  font-size:40px;
+  font-weight:500;
+
+  color:#f4eff8;
+
+  margin-left:1px;
+  margin-bottom:4px;
+
+  letter-spacing:.2px;
 }
 
-/* 🟠 z */
-.logo .z{
-  background:linear-gradient(135deg,#ffb74d,#ef6c00);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+/* TAGLINE */
+.tagline{
+  margin-top:12px;
+
+  font-family:'Inter', sans-serif;
+  font-size:13px;
+  font-weight:500;
+
+  color:rgba(255,255,255,0.72);
+
+  letter-spacing:.3px;
+
+  opacity:0;
+
+  animation:softFade 1.2s ease forwards;
+  animation-delay:1s;
 }
 
-/* 🟠 first o */
-.logo .o{
-  background:linear-gradient(135deg,#ffa726,#f4511e);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.tagline span{
+  color:#ffffff;
+  font-weight:600;
 }
 
-/* 🔥 LAST O (SPECIAL) */
-.logo .o2{
-  background:linear-gradient(135deg,#7c4dff,#00e5ff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+/* LOADER */
+.loader{
+  position:absolute;
+  bottom:70px;
 
-  animation:colorShift 3s ease infinite;
+  width:110px;
+  height:1.5px;
+
+  background:rgba(255,255,255,0.08);
+
+  overflow:hidden;
+  border-radius:20px;
+
+  opacity:0;
+
+  animation:softFade 1s ease forwards;
+  animation-delay:1.3s;
 }
 
-/* ENTRY */
-@keyframes logoEntry{
-  to{
+.loader::after{
+  content:"";
+
+  position:absolute;
+  left:-40%;
+
+  width:40%;
+  height:100%;
+
+  background:rgba(255,255,255,0.75);
+
+  animation:loading 1.2s infinite;
+}
+
+/* LOGO PREMIUM ENTRY */
+@keyframes premiumReveal{
+  0%{
+    opacity:0;
+    transform:scale(1.4);
+    filter:blur(8px);
+  }
+
+  60%{
+    opacity:1;
+    transform:scale(.96);
+    filter:blur(0);
+  }
+
+  100%{
     opacity:1;
     transform:scale(1);
+    filter:blur(0);
   }
 }
 
-/* FLOAT (SOFT) */
-.logo span{
-  animation:float 3s ease-in-out infinite;
+/* SOFT FADE */
+@keyframes softFade{
+  to{
+    opacity:1;
+  }
 }
 
-.logo span:nth-child(2){animation-delay:0.1s;}
-.logo span:nth-child(3){animation-delay:0.2s;}
-.logo span:nth-child(4){animation-delay:0.3s;}
-.logo span:nth-child(5){animation-delay:0.4s;}
+/* LOADER */
+@keyframes loading{
+  0%{
+    left:-40%;
+  }
 
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-4px);} /* softer */
+  100%{
+    left:100%;
+  }
 }
 
-/* 🔥 GRADIENT SHIFT FOR LAST O */
-@keyframes colorShift{
-  0%{filter:hue-rotate(0deg);}
-  100%{filter:hue-rotate(360deg);}
+/* SPLASH EXIT */
+@keyframes splashHide{
+  0%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(1.04);
+
+    visibility:hidden;
+    pointer-events:none;
+  }
 }
-/* logo splahs */
-
-
-
-
 .loader{
   position:absolute;bottom:70px;width:140px;height:2px;background:#222;overflow:hidden;
 }
@@ -225,8 +235,8 @@ overflow:hidden;
   flex-direction:column;
   text-align:center;
 
-  background:#000;   /* ✅ BLACK */
-  color:#fff;        /* ✅ WHITE TEXT */
+  background:#5e3984;   /* ✅ BLACK */
+  color:#5e3984;        /* ✅ WHITE TEXT */
 }
 
 /* 🔍 */
@@ -3420,7 +3430,9 @@ font-weight:600;
   font-size:11px;
   color:#555;
 }
-
+h2{
+  color:#e5e5e5 !important;
+}
 /* button */
 .giftBtnNew{
   background:#0f5c5c;
@@ -4982,16 +4994,20 @@ scroll-behavior:smooth;
 <body>
 
 <!-- SPLASH -->
+<!-- SPLASH -->
 <div id="splash">
- <div class="logo">
-  <span class="c">C</span>
-  <span class="e">E</span>
-  <span class="z">Z</span>
-  <span class="o">Z</span>
-  <span class="o2">O</span>  <!-- 🔥 last o -->
-</div>
-  <div class="tagline"><span>Delivery in</span>Minutes</div>
+
+  <div class="logo">
+    <span class="c">C</span>
+    <span class="rest">ezoo</span>
+  </div>
+
+  <div class="tagline">
+    <span>Delivery in</span> Minutes
+  </div>
+
   <div class="loader"></div>
+
 </div>
 
 <!-- MAIN -->
