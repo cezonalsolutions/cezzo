@@ -4814,17 +4814,9 @@ scroll-behavior:smooth;
 }
 
 /* 🔥 skeleton wrapper */
+/* 🔥 skeleton wrapper */
 .skeletonGrid{
   padding-top:10px;
-}
-
-/* 🔥 heading skeleton */
-.skeletonTitle{
-  width:120px;
-  height:18px;
-  border-radius:10px;
-  background:#eee;
-  margin:10px;
 }
 
 /* 🔥 products row */
@@ -4839,6 +4831,112 @@ scroll-behavior:smooth;
   display:none;
 }
 
+/* 🔥 FULL PRODUCT CARD */
+.productSkeleton{
+  width:95px;
+  min-width:95px;
+  flex-shrink:0;
+}
+
+/* IMAGE */
+.psImg{
+  width:100%;
+  height:80px;
+
+  border-radius:12px;
+
+  background:#ececec;
+}
+
+/* QTY */
+.psQty{
+  width:42px;
+  height:11px;
+
+  border-radius:6px;
+
+  margin-top:10px;
+
+  background:#ececec;
+}
+
+/* TITLE */
+.psLine{
+  width:85%;
+  height:10px;
+
+  border-radius:6px;
+
+  margin-top:10px;
+
+  background:#ececec;
+}
+
+.psLine.small{
+  width:55%;
+  margin-top:6px;
+}
+
+/* BOTTOM */
+.psBottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-top:10px;
+}
+
+/* PRICE */
+.psPrice{
+  width:34px;
+  height:12px;
+
+  border-radius:6px;
+
+  background:#ececec;
+}
+
+/* BUTTON */
+.psBtn{
+  width:24px;
+  height:24px;
+
+  border-radius:8px;
+
+  background:#ececec;
+}
+
+/* SHIMMER */
+.shimmer{
+  position:relative;
+  overflow:hidden;
+}
+
+.shimmer::before{
+  content:"";
+
+  position:absolute;
+  top:0;
+  left:-150%;
+
+  width:70%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.8),
+    transparent
+  );
+
+  animation:shimmerMove 1.1s infinite;
+}
+
+@keyframes shimmerMove{
+  100%{
+    left:170%;
+  }
+}
 /* 🔥 product card */
 .skCard{
   min-width:110px;
@@ -16730,43 +16828,58 @@ document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
 
   if(!grid) return;
 
-  // 🔥 hide products
+  // 🔥 hide products initially
   grid.style.opacity = "0";
+  grid.style.transition = "opacity .35s ease";
 
-  // 🔥 skeleton
+  // 🔥 count real product cards
+  const totalCards =
+    grid.querySelectorAll(
+      ".productCard,.productCard2"
+    ).length || 4;
+
+  // 🔥 create skeleton wrapper
   const skel = document.createElement("div");
 
   skel.className = "skeletonGrid";
 
+  // 🔥 generate skeleton cards dynamically
+  let cardsHTML = "";
+
+  for(let i=0; i<totalCards; i++){
+
+    cardsHTML += `
+
+      <div class="productSkeleton">
+
+        <div class="psImg shimmer"></div>
+
+        <div class="psQty shimmer"></div>
+
+        <div class="psLine shimmer"></div>
+
+        <div class="psLine small shimmer"></div>
+
+        <div class="psBottom">
+
+          <div class="psPrice shimmer"></div>
+
+          <div class="psBtn shimmer"></div>
+
+        </div>
+
+      </div>
+
+    `;
+  }
+
   skel.innerHTML = `
-
-    <div class="skeletonTitle shimmer"></div>
-
     <div class="skeletonProducts">
-
-      <div class="skCard">
-        <div class="skImg shimmer"></div>
-        <div class="skLine shimmer"></div>
-        <div class="skLine small shimmer"></div>
-      </div>
-
-      <div class="skCard">
-        <div class="skImg shimmer"></div>
-        <div class="skLine shimmer"></div>
-        <div class="skLine small shimmer"></div>
-      </div>
-
-      <div class="skCard">
-        <div class="skImg shimmer"></div>
-        <div class="skLine shimmer"></div>
-        <div class="skLine small shimmer"></div>
-      </div>
-
+      ${cardsHTML}
     </div>
-
   `;
 
-  // 🔥 insert skeleton
+  // 🔥 insert skeleton before products
   section.insertBefore(skel, grid);
 
 });
@@ -16786,12 +16899,50 @@ const observer = new IntersectionObserver(entries=>{
       const skel =
         section.querySelector(".skeletonGrid");
 
+      // 🔥 prevent multiple triggers
+      observer.unobserve(section);
+
       setTimeout(()=>{
 
-  // 🔥 show products
-  grid.style.opacity = "1";
+        // 🔥 show products smoothly
+        grid.style.opacity = "1";
 
-},800);
+        // 🔥 fade skeleton
+        if(skel){
+
+          skel.style.transition =
+            "opacity .35s ease";
+
+          skel.style.opacity = "0";
+
+          setTimeout(()=>{
+            skel.remove();
+          },350);
+
+        }
+
+      },800);
+
+    }
+
+  });
+
+},{
+  threshold:0.15,
+  rootMargin:"200px 0px"
+});
+
+
+document
+.querySelectorAll(".productSectionWithHeading")
+.forEach(section=>{
+
+  observer.observe(section);
+
+});
+
+
+
 
 
 // 🔥 wait for video load before removing skeleton
