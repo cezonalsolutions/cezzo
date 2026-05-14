@@ -4988,6 +4988,9 @@ scroll-behavior:smooth;
   font-size:12px;
   margin-bottom:8px;
 }
+#optionScreen{
+  display:none !important;
+}
 </style>
 </head>
 
@@ -5682,7 +5685,35 @@ style="
 
 <div id="productSection10" class="productSectionWithHeading">
 
- 
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+    <video
+    class="lazyVideo"
+    muted
+    loop
+    playsinline
+    preload="none"
+    style="
+     width:100%;
+     height:180px;
+     object-fit:cover;
+     object-position:top center;
+     display:block;
+     border-radius:14px;
+     margin-top:10px;
+     opacity:0;
+     transition:0.5s;
+    ">
+
+    <source src="baners/cool drinks banner.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -5910,7 +5941,37 @@ style="
 
 <div id="productSection40" class="productSectionWithHeading">
 
- 
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+   <video
+class="lazyVideo"
+autoplay
+muted
+playsinline
+webkit-playsinline
+loop
+preload="metadata"
+style="
+ width:100%;
+ height:180px;
+ object-fit:cover;
+ object-position:top center;
+ display:block;
+ border-radius:14px;
+ margin-top:10px;
+ opacity:0;
+ transition:0.5s;
+">
+
+    <source src="banners3.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -6166,7 +6227,37 @@ style="
 
 <div id="productSection21" class="productSectionWithHeading">
 
-  
+  <div class="videoWrap">
+
+    <!-- 🔥 shimmer loading -->
+    <div class="videoLoader shimmer"></div>
+
+    <!-- 🔥 video -->
+   <video
+class="lazyVideo"
+autoplay
+muted
+playsinline
+webkit-playsinline
+loop
+preload="metadata"
+style="
+ width:100%;
+ height:180px;
+ object-fit:cover;
+ object-position:top center;
+ display:block;
+ border-radius:14px;
+ margin-top:10px;
+ opacity:0;
+ transition:0.5s;
+">
+
+    <source src="baners/Chocbanner.mp4" type="video/mp4">
+
+    </video>
+
+  </div>
 
 </div>
 
@@ -7159,8 +7250,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     home.style.display = "none";
 
     // ✅ direct option screen
-    optionScreen.style.display = "block";
-
+home.style.display = "block";
     cityName.innerText =
     localStorage.getItem("savedCity") || "Your Location";
 
@@ -7230,8 +7320,7 @@ function getLocation(){
 
     setTimeout(()=>{
       main.style.display="none";
-      document.getElementById("optionScreen").style.display="flex";
-
+home.style.display="block";
       document.getElementById("optCityName").innerText = city;
       document.getElementById("optShortAddress").innerText = full;
 
@@ -16431,27 +16520,16 @@ setInterval(()=>{
 
 function goHome(){
 
-  // 🔝 scroll top
   window.scrollTo(0,0);
 
-  // ❌ hide HOME (all grocery UI)
-  const home = document.getElementById("home");
-  if(home) home.style.display = "none";
+  const home =
+  document.getElementById("home");
 
-  // ❌ hide MAIN (location screen if visible)
-  const main = document.getElementById("main");
-  if(main) main.style.display = "none";
+  if(home){
+    home.style.display = "block";
+  }
 
-  // ❌ hide any popup if open
-  const popup = document.getElementById("orderPopup");
-  if(popup) popup.style.display = "none";
-
-  // ✅ show OPTION SCREEN
-  const option = document.getElementById("optionScreen");
-  if(option) option.style.display = "block";
 }
-// 🔥 NORMALIZE FUNCTION
-
 
 const input = document.querySelector(".searchBar input");
 const resultsBox = document.getElementById("searchResults");
