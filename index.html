@@ -18239,129 +18239,36 @@ document
 
 });
 
-const observer =
-new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries=>{
 
   entries.forEach(entry=>{
 
     if(entry.isIntersecting){
 
-      const section =
-      entry.target;
+      const section = entry.target;
 
       const grid =
-      section.querySelector(
-        ".productGrid,.dealGrid"
-      );
+        section.querySelector(".productGrid");
 
       const skel =
-      section.querySelector(
-        ".skeletonGrid"
-      );
+        section.querySelector(".skeletonGrid");
 
-      if(!grid){
+     requestAnimationFrame(()=>{
 
-        observer.unobserve(section);
+  requestAnimationFrame(()=>{
 
-        return;
+    // 🔥 show products after render
+    grid.style.opacity = "1";
 
-      }
-
-      // 🔥 wait all images
-      const images =
-      grid.querySelectorAll("img");
-
-      let loaded = 0;
-
-      // no images
-      if(images.length === 0){
-
-        showGrid();
-
-        return;
-
-      }
-
-      images.forEach(img=>{
-
-        if(img.complete){
-
-          loaded++;
-
-          checkDone();
-
-        }else{
-
-          img.addEventListener(
-            "load",
-            ()=>{
-
-              loaded++;
-
-              checkDone();
-
-            },
-            { once:true }
-          );
-
-          img.addEventListener(
-            "error",
-            ()=>{
-
-              loaded++;
-
-              checkDone();
-
-            },
-            { once:true }
-          );
-
-        }
-
-      });
-
-      function checkDone(){
-
-        if(loaded >= images.length){
-
-          requestAnimationFrame(()=>{
-
-            requestAnimationFrame(()=>{
-
-              showGrid();
-
-            });
-
-          });
-
-        }
-
-      }
-
-      function showGrid(){
-
-        grid.style.opacity = "1";
-
-        grid.style.transition =
-        ".25s";
-
-        if(skel){
-
-          skel.remove();
-
-        }
-
-      }
-
-      observer.unobserve(section);
-
+    // 🔥 remove shimmer after products visible
+    if(skel){
+      skel.remove();
     }
 
   });
 
-},{
-  threshold:0.2
 });
+      observer.unobserve(section);
 
 
 
