@@ -8596,7 +8596,6 @@ const productSection67 = document.getElementById("productSection67");
 const productSection68 = document.getElementById("productSection68");
 const productSection69 = document.getElementById("productSection69");
 const productSection70 = document.getElementById("productSection70");
-const productSection71 = document.getElementById("productSection71");
 const productSection72 = document.getElementById("productSection72");
 const productSection73 = document.getElementById("productSection73");
 const productSection74 = document.getElementById("productSection74");
@@ -8698,7 +8697,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -8796,7 +8795,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -8897,7 +8896,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -8996,7 +8995,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -9095,7 +9094,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -9194,7 +9193,7 @@ productSection67.style.display = "block";
 productSection68.style.display = "block";
 productSection69.style.display = "block";
 productSection70.style.display = "block";
-productSection71.style.display = "block";
+
 productSection72.style.display = "block";
 productSection73.style.display = "block";
 productSection74.style.display = "block";
@@ -9290,7 +9289,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -9388,7 +9387,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -9484,7 +9483,7 @@ productSection67.style.display = "none";
 productSection68.style.display = "none";
 productSection69.style.display = "none";
 productSection70.style.display = "none";
-productSection71.style.display = "none";
+
 productSection72.style.display = "none";
 productSection73.style.display = "none";
 productSection74.style.display = "none";
@@ -12884,6 +12883,9 @@ async function loadProducts47(){
 }
 
 loadProducts47(); //chnage
+
+
+
 async function loadProducts81(){
 
   const { data } = await supabase
@@ -13287,22 +13289,44 @@ dealIds.forEach(id=>{
    LIVE CHECK
 ========================================= */
 
+/* 🔥 ONLY LOCK SYSTEM */
+
+clearInterval(window.dealInterval81);
+
+window.dealInterval81 =
 setInterval(()=>{
 
   try{
 
-    updateDealUnlock81();
+    const active =
+    document.querySelector(".catItem.active")
+    ?.innerText
+    ?.trim();
+
+    const sec =
+    document.getElementById(
+      "productSection81"
+    );
+
+    if(!sec) return;
+
+    // 🔥 ALWAYS HIDE FIRST
+    sec.style.display = "none";
+
+    // 🔥 SHOW ONLY IN ALL
+    if(active === "All"){
+
+      sec.style.display = "block";
+
+      updateDealUnlock81();
+
+    }
 
   }catch(e){
 
-    // 🔥 avoid console spam
-
   }
 
-},300);
-
-
-
+},50);
 
 
 
