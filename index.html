@@ -6660,8 +6660,7 @@ Bite Delight Hub
   <p>Home</p>
 </div>
 
-  <div class="navItem" onclick="window.location.href='categories.html'">
-  <img src="catergrois.webp">
+<div class="navItem" onclick="smoothNavigate('categories.html')">  <img src="catergrois.webp">
   <p>Categories</p>
 </div>
 
@@ -8859,12 +8858,12 @@ navItems.forEach(item=>{
     }
 
     if(text.toLowerCase().includes("categories")){
-  window.location.href = "categories.html";
+smoothNavigate("categories.html");
   return;
 }
 
     if(text.toLowerCase().includes("help")){
-  window.location.href = "help.html";
+smoothNavigate("help.html");
 }
 
     if(text.includes("Video")){
@@ -15579,8 +15578,7 @@ localStorage.setItem(
 "yes"
 );
 
-window.location.href="login.html";
- }
+smoothNavigate("login.html"); }
 
 });
 document.getElementById(
@@ -15605,8 +15603,7 @@ localStorage.getItem(
 /* if not logged in */
 if(!userName || !userMobile){
 
-window.location.href=
-"login.html";
+smoothNavigate("login.html");
 
 return;
 
@@ -15683,6 +15680,8 @@ navigator.geolocation.getCurrentPosition(function(pos){
 let lat=pos.coords.latitude;
 let lng=pos.coords.longitude;
 
+recipientLatitude = lat;
+recipientLongitude = lng;
 setTimeout(function(){
 
 if(recipientMap){
@@ -15714,8 +15713,10 @@ marker.on('dragend',function(){
 
 let p=marker.getLatLng();
 
-showAddress(p.lat,p.lng);
+recipientLatitude = p.lat;
+recipientLongitude = p.lng;
 
+showAddress(p.lat,p.lng);
 });
 
 },300);
@@ -15761,6 +15762,8 @@ navigator.geolocation.getCurrentPosition(function(pos){
 let lat=pos.coords.latitude;
 let lng=pos.coords.longitude;
 
+userLatitude = lat;
+userLongitude = lng;
 document.getElementById("userMap").src=
 "https://www.google.com/maps?q="
 +lat+","+lng+
@@ -16084,8 +16087,6 @@ document.getElementById(
 
 
 
-let deliveryFee=0;
-
 
 
 let mapAddress=
@@ -16096,7 +16097,30 @@ isRecipient
 : document.getElementById(
 "userAddress"
 ).innerText;
+let itemsTotal =
+parseFloat(
+document.getElementById("billItemsTotal")
+.innerText
+.replace(/[^\d.]/g,'')
+);
 
+let handlingFee =
+parseFloat(
+document.getElementById("billHandling")
+.innerText
+.replace(/[^\d.]/g,'')
+);
+
+let deliveryFee =
+parseFloat(
+document.getElementById("billDelivery")
+.innerText
+.replace(/[^\d.]/g,'')
+);
+
+let giftAdded =
+document.getElementById("billGiftRow")
+.style.display !== "none";
 
 
 const {error}=await supabase
@@ -16161,6 +16185,15 @@ isRecipient
 map_address:
 mapAddress,
 
+latitude:
+isRecipient
+? recipientLatitude
+: userLatitude,
+
+longitude:
+isRecipient
+? recipientLongitude
+: userLongitude,
 
 payment_method:
 payMethod,
@@ -16168,7 +16201,14 @@ payMethod,
 
 delivery_fee:
 deliveryFee,
+items_total:
+itemsTotal,
 
+handling_fee:
+handlingFee,
+
+gift_added:
+giftAdded ? true : false,
 
 total_amount:
 finalTotal,
@@ -17226,6 +17266,215 @@ window.addEventListener("popstate", function(){
   }
 
 });
+
+
+
+
+/* =====================================================
+   GLOBAL SMOOTH PAGE CACHE + PERFORMANCE FIX
+===================================================== */
+
+/* 🔥 prevent duplicate loading */
+if (!window.__APP_INITIALIZED__) {
+
+  window.__APP_INITIALIZED__ = true;
+
+  console.log("✅ Global performance fix active");
+
+
+  /* =====================================================
+     RESTORE PAGE INSTANTLY WHEN COMING BACK
+  ===================================================== */
+  window.addEventListener("pageshow", function (event) {
+
+    console.log("PAGESHOW");
+
+    // 🔥 browser back cache restore
+    if (event.persisted || performance.navigation.type === 2) {
+
+      console.log("⚡ Restored from cache");
+
+      // remove all skeletons instantly
+      document.querySelectorAll(
+        ".skeletonGrid,.optionSkeletonWrap,.videoLoader,#videoSkeleton"
+      ).forEach(el => {
+        el.remove();
+      });
+
+      // show products instantly
+      document.querySelectorAll(
+        ".productGrid,.optionGrid,.brandBlock"
+      ).forEach(el => {
+        el.style.opacity = "1";
+        el.style.visibility = "visible";
+      });
+
+      // restore videos
+      document.querySelectorAll("video").forEach(v => {
+
+        v.muted = true;
+        v.playsInline = true;
+        v.preload = "none";
+
+        const playPromise = v.play();
+
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+
+      });
+
+      // restore scroll position
+      const scrollY =
+        sessionStorage.getItem("scrollPos");
+
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY));
+      }
+
+    }
+
+  });
+
+
+  /* =====================================================
+     SAVE SCROLL POSITION
+  ===================================================== */
+  window.addEventListener("scroll", function () {
+
+    sessionStorage.setItem(
+      "scrollPos",
+      window.scrollY
+    );
+
+  });
+
+
+  /* =====================================================
+     FAST PAGE TRANSITION
+  ===================================================== */
+  document.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", function () {
+
+      document.body.classList.add("page-loading");
+
+    });
+
+  });
+
+
+  /* =====================================================
+     STOP HEAVY VIDEO LOADING
+  ===================================================== */
+  document.querySelectorAll("video").forEach(video => {
+
+    video.preload = "none";
+
+    video.muted = true;
+
+    video.playsInline = true;
+
+  });
+
+
+  /* =====================================================
+     PREVENT RE-RENDER PRODUCTS AGAIN
+  ===================================================== */
+  if (sessionStorage.getItem("productsLoaded")) {
+
+    console.log("⚡ Using cached products");
+
+    document.querySelectorAll(".skeletonGrid")
+    .forEach(el => el.remove());
+
+    document.querySelectorAll(".productGrid")
+    .forEach(el => {
+      el.style.opacity = "1";
+    });
+
+  } else {
+
+    sessionStorage.setItem(
+      "productsLoaded",
+      "true"
+    );
+
+  }
+
+
+  /* =====================================================
+     FIX BACK BUTTON POPUP BUG
+  ===================================================== */
+  window.addEventListener("popstate", function () {
+
+    document.querySelectorAll(".popup.show")
+    .forEach(p => {
+      p.classList.remove("show");
+    });
+
+    document.body.classList.remove("popup-open");
+
+  });
+
+
+  /* =====================================================
+     PREVENT MULTIPLE OBSERVER EXECUTION
+  ===================================================== */
+  const seenSections = new WeakSet();
+
+  document.querySelectorAll(
+    ".productSectionWithHeading"
+  ).forEach(section => {
+
+    if (seenSections.has(section)) return;
+
+    seenSections.add(section);
+
+  });
+
+
+  /* =====================================================
+     SAVE PAGE STATE
+  ===================================================== */
+  window.addEventListener("beforeunload", function () {
+
+    sessionStorage.setItem(
+      "lastPage",
+      location.pathname
+    );
+
+  });
+
+
+  /* =====================================================
+     MEMORY CLEANUP
+  ===================================================== */
+  window.addEventListener("pagehide", function () {
+
+    document.querySelectorAll("video").forEach(v => {
+      v.pause();
+    });
+
+  });
+
+}
+
+
+/* =====================================================
+   SAFE NAVIGATION FUNCTION
+===================================================== */
+
+function smoothNavigate(url){
+
+  document.body.classList.add("page-loading");
+
+  setTimeout(() => {
+    window.location.assign(url);
+  }, 80);
+
+}
+
 </script>
 </body>
 </html>
