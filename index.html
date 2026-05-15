@@ -18746,6 +18746,145 @@ function smoothNavigate(url){
 
 }
 
+
+
+window.addEventListener("load",()=>{
+
+  console.log(
+    "⚡ Ultra Fast Mode Enabled"
+  );
+
+  /* =====================================
+     PRELOAD ALL PRODUCT IMAGES
+  ===================================== */
+
+  setTimeout(()=>{
+
+    document
+    .querySelectorAll("img")
+    .forEach(img=>{
+
+      if(img.src){
+
+        const preload =
+        new Image();
+
+        preload.src = img.src;
+
+      }
+
+    });
+
+  },100);
+
+
+  /* =====================================
+     FORCE PRODUCT RENDER
+  ===================================== */
+
+  requestAnimationFrame(()=>{
+
+    document
+    .querySelectorAll(
+      ".productGrid,.dealGrid"
+    )
+    .forEach(grid=>{
+
+      grid.style.opacity = "1";
+
+      grid.style.visibility =
+      "visible";
+
+      grid.style.transform =
+      "translateZ(0)";
+
+    });
+
+  });
+
+
+  /* =====================================
+     PRELOAD VIDEOS
+  ===================================== */
+
+  document
+  .querySelectorAll("video")
+  .forEach(v=>{
+
+    v.preload = "auto";
+
+    v.muted = true;
+
+    v.playsInline = true;
+
+    v.play().catch(()=>{});
+
+  });
+
+
+  /* =====================================
+     FORCE CART LOAD
+  ===================================== */
+
+  setTimeout(()=>{
+
+    initAllUI?.();
+
+    updateCartBar?.();
+
+    renderMiniCart?.();
+
+    renderCartItems?.();
+
+  },200);
+
+
+  /* =====================================
+     REMOVE ALL SKELETONS FAST
+  ===================================== */
+
+  setTimeout(()=>{
+
+    document
+    .querySelectorAll(
+      ".skeletonGrid,.videoLoader,.optionSkeletonWrap"
+    )
+    .forEach(el=>{
+
+      el.remove();
+
+    });
+
+  },600);
+
+
+  /* =====================================
+     FAST CLICK RESPONSE
+  ===================================== */
+
+  document
+  .querySelectorAll("button,.cartControl")
+  .forEach(btn=>{
+
+    btn.style.touchAction =
+    "manipulation";
+
+  });
+
+
+  /* =====================================
+     FORCE GPU
+  ===================================== */
+
+  document.body.style.transform =
+  "translateZ(0)";
+
+  document.body.style.backfaceVisibility =
+  "hidden";
+
+});
+
+
 </script>
 </body>
 </html>
