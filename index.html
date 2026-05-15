@@ -15020,15 +15020,27 @@ waitAndLoadCart();
 const viewBtn = document.getElementById("viewCartBtn");
 const cartPopup = document.getElementById("cartPopup");
 
-viewBtn.addEventListener("click", (e) => {
-  
-  e.stopPropagation();
+function openPopupHistory(){
+
   history.pushState(
-  { popup:true },
-  ""
-);
+    {
+      popup:true,
+      id:Date.now()
+    },
+    ""
+  );
+
+}
+
+viewBtn.addEventListener("click", (e) => {
+
+  e.stopPropagation();
+
+  // 🔥 ADD NEW HISTORY EVERY OPEN
+  openPopupHistory();
 
   cartPopup.classList.add("show");
+
   document.body.classList.add("popup-open");
 
   document.getElementById("cartCity").innerText =
@@ -15038,10 +15050,12 @@ viewBtn.addEventListener("click", (e) => {
     document.getElementById("shortAddress").innerText;
 
   // 🔥 LOAD BOTH
-  loadCartRecommendations();   // 👈 NEW
+  loadCartRecommendations();
+
   setTimeout(() => {
     renderCartItems();
   }, 100);
+
 });
 document.querySelector(".backBtn").onclick = () => {
   cartPopup.classList.remove("show");
@@ -17195,11 +17209,11 @@ if(video.readyState >= 2){
 
 window.addEventListener("popstate", function(){
 
-  // ALL OPEN POPUPS
+  // ONLY OPEN POPUPS
   const popups =
-    document.querySelectorAll(".show");
+    document.querySelectorAll(".popup.show");
 
-  // IF ANY POPUP OPEN
+  // IF POPUP OPEN
   if(popups.length > 0){
 
     popups.forEach(p=>{
@@ -17207,9 +17221,6 @@ window.addEventListener("popstate", function(){
     });
 
     document.body.classList.remove("popup-open");
-
-    // STOP PAGE BACK
-    history.pushState({}, "");
 
     return;
   }
