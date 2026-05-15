@@ -18085,21 +18085,29 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
+document
+.querySelectorAll(
+  ".productSectionWithHeading"
+)
+.forEach(section=>{
 
-document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
-
-  // 🔥 find product grid
-  const grid = section.querySelector(".productGrid");
+  // 🔥 grid
+  const grid =
+  section.querySelector(
+    ".productGrid,.dealGrid"
+  );
 
   if(!grid) return;
 
-  // 🔥 hide products
+  // 🔥 hide products first
   grid.style.opacity = "0";
 
-  // 🔥 skeleton
-  const skel = document.createElement("div");
+  // 🔥 create skeleton
+  const skel =
+  document.createElement("div");
 
-  skel.className = "skeletonGrid";
+  skel.className =
+  "skeletonGrid";
 
   skel.innerHTML = `
 
@@ -18124,6 +18132,7 @@ document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
         <div class="skLine shimmer"></div>
         <div class="skLine small shimmer"></div>
       </div>
+
       <div class="skCard">
         <div class="skImg shimmer"></div>
         <div class="skLine shimmer"></div>
@@ -18135,41 +18144,224 @@ document.querySelectorAll(".productSectionWithHeading").forEach(section=>{
   `;
 
   // 🔥 insert skeleton
-  section.insertBefore(skel, grid);
+  section.insertBefore(
+    skel,
+    grid
+  );
+
+  // 🔥 wait for ALL IMAGES
+  const images =
+  grid.querySelectorAll("img");
+
+  let loaded = 0;
+
+  // no images
+  if(images.length === 0){
+
+    showProducts();
+
+    return;
+  }
+
+  images.forEach(img=>{
+
+    // already loaded
+    if(img.complete){
+
+      loaded++;
+
+      checkLoaded();
+
+    }else{
+
+      img.addEventListener(
+        "load",
+        ()=>{
+
+          loaded++;
+
+          checkLoaded();
+
+        },
+        { once:true }
+      );
+
+      img.addEventListener(
+        "error",
+        ()=>{
+
+          loaded++;
+
+          checkLoaded();
+
+        },
+        { once:true }
+      );
+
+    }
+
+  });
+
+  // 🔥 all loaded
+  function checkLoaded(){
+
+    if(loaded >= images.length){
+
+      requestAnimationFrame(()=>{
+
+        requestAnimationFrame(()=>{
+
+          showProducts();
+
+        });
+
+      });
+
+    }
+
+  }
+
+  // 🔥 reveal products
+  function showProducts(){
+
+    grid.style.opacity = "1";
+
+    grid.style.transition =
+    ".25s";
+
+    if(skel){
+
+      skel.remove();
+
+    }
+
+  }
 
 });
 
-
-const observer = new IntersectionObserver(entries=>{
+const observer =
+new IntersectionObserver(entries=>{
 
   entries.forEach(entry=>{
 
     if(entry.isIntersecting){
 
-      const section = entry.target;
+      const section =
+      entry.target;
 
       const grid =
-        section.querySelector(".productGrid");
+      section.querySelector(
+        ".productGrid,.dealGrid"
+      );
 
       const skel =
-        section.querySelector(".skeletonGrid");
+      section.querySelector(
+        ".skeletonGrid"
+      );
 
-     requestAnimationFrame(()=>{
+      if(!grid){
 
-  requestAnimationFrame(()=>{
+        observer.unobserve(section);
 
-    // 🔥 show products after render
-    grid.style.opacity = "1";
+        return;
 
-    // 🔥 remove shimmer after products visible
-    if(skel){
-      skel.remove();
+      }
+
+      // 🔥 wait all images
+      const images =
+      grid.querySelectorAll("img");
+
+      let loaded = 0;
+
+      // no images
+      if(images.length === 0){
+
+        showGrid();
+
+        return;
+
+      }
+
+      images.forEach(img=>{
+
+        if(img.complete){
+
+          loaded++;
+
+          checkDone();
+
+        }else{
+
+          img.addEventListener(
+            "load",
+            ()=>{
+
+              loaded++;
+
+              checkDone();
+
+            },
+            { once:true }
+          );
+
+          img.addEventListener(
+            "error",
+            ()=>{
+
+              loaded++;
+
+              checkDone();
+
+            },
+            { once:true }
+          );
+
+        }
+
+      });
+
+      function checkDone(){
+
+        if(loaded >= images.length){
+
+          requestAnimationFrame(()=>{
+
+            requestAnimationFrame(()=>{
+
+              showGrid();
+
+            });
+
+          });
+
+        }
+
+      }
+
+      function showGrid(){
+
+        grid.style.opacity = "1";
+
+        grid.style.transition =
+        ".25s";
+
+        if(skel){
+
+          skel.remove();
+
+        }
+
+      }
+
+      observer.unobserve(section);
+
     }
 
   });
 
+},{
+  threshold:0.2
 });
-      observer.unobserve(section);
 
 
 
