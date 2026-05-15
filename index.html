@@ -18085,22 +18085,29 @@ document.getElementById("cizooBtn3").onclick = function () {
 function goCleaning() {
   window.location.href = "cleaning.html";
 }
+/* =========================================
+   PRODUCT SKELETON LOADER
+========================================= */
+
 document
 .querySelectorAll(
   ".productSectionWithHeading"
 )
 .forEach(section=>{
 
-  // 🔥 grid
+  // 🔥 find product grid
   const grid =
   section.querySelector(
-    ".productGrid,.dealGrid"
+    ".productGrid"
   );
 
   if(!grid) return;
 
-  // 🔥 hide products first
+  // 🔥 hide products initially
   grid.style.opacity = "0";
+
+  grid.style.transition =
+  ".25s ease";
 
   // 🔥 create skeleton
   const skel =
@@ -18149,69 +18156,126 @@ document
     grid
   );
 
-  // 🔥 wait for ALL IMAGES
-  const images =
-  grid.querySelectorAll("img");
+});
 
-  let loaded = 0;
 
-  // no images
-  if(images.length === 0){
+/* =========================================
+   OBSERVER
+========================================= */
 
-    showProducts();
+const observer =
+new IntersectionObserver(entries=>{
 
-    return;
-  }
+  entries.forEach(entry=>{
 
-  images.forEach(img=>{
+    if(!entry.isIntersecting){
+      return;
+    }
 
-    // already loaded
-    if(img.complete){
+    const section =
+    entry.target;
 
-      loaded++;
+    const grid =
+    section.querySelector(
+      ".productGrid"
+    );
 
-      checkLoaded();
+    const skel =
+    section.querySelector(
+      ".skeletonGrid"
+    );
 
-    }else{
+    if(!grid){
 
-      img.addEventListener(
-        "load",
-        ()=>{
+      observer.unobserve(section);
 
-          loaded++;
+      return;
+    }
 
-          checkLoaded();
+    // 🔥 all images inside section
+    const images =
+    grid.querySelectorAll("img");
 
-        },
-        { once:true }
-      );
+    let loaded = 0;
 
-      img.addEventListener(
-        "error",
-        ()=>{
+    // 🔥 if no images
+    if(images.length === 0){
 
-          loaded++;
+      revealProducts();
 
-          checkLoaded();
+      return;
+    }
 
-        },
-        { once:true }
-      );
+    // 🔥 wait images
+    images.forEach(img=>{
+
+      // already loaded
+      if(
+        img.complete &&
+        img.naturalWidth > 0
+      ){
+
+        loaded++;
+
+        checkLoaded();
+
+      }else{
+
+        img.addEventListener(
+          "load",
+          ()=>{
+
+            loaded++;
+
+            checkLoaded();
+
+          },
+          { once:true }
+        );
+
+        img.addEventListener(
+          "error",
+          ()=>{
+
+            loaded++;
+
+            checkLoaded();
+
+          },
+          { once:true }
+        );
+
+      }
+
+    });
+
+    // 🔥 check all loaded
+    function checkLoaded(){
+
+      if(loaded >= images.length){
+
+        revealProducts();
+
+      }
 
     }
 
-  });
-
-  // 🔥 all loaded
-  function checkLoaded(){
-
-    if(loaded >= images.length){
+    // 🔥 reveal products
+    function revealProducts(){
 
       requestAnimationFrame(()=>{
 
         requestAnimationFrame(()=>{
 
-          showProducts();
+          // show products
+          grid.style.opacity = "1";
+
+          // remove shimmer
+          if(skel){
+
+            skel.remove();
+
+          }
 
         });
 
@@ -18219,115 +18283,30 @@ document
 
     }
 
-  }
-
-  // 🔥 reveal products
-  function showProducts(){
-
-    grid.style.opacity = "1";
-
-    grid.style.transition =
-    ".25s";
-
-    if(skel){
-
-      skel.remove();
-
-    }
-
-  }
-
-});
-
-const observer = new IntersectionObserver(entries=>{
-
-  entries.forEach(entry=>{
-
-    if(entry.isIntersecting){
-
-      const section = entry.target;
-
-      const grid =
-        section.querySelector(".productGrid");
-
-      const skel =
-        section.querySelector(".skeletonGrid");
-
-     requestAnimationFrame(()=>{
-
-  requestAnimationFrame(()=>{
-
-    // 🔥 show products after render
-    grid.style.opacity = "1";
-
-    // 🔥 remove shimmer after products visible
-    if(skel){
-      skel.remove();
-    }
-
-  });
-
-});
-      observer.unobserve(section);
-
-
-
-
-// 🔥 wait for video load before removing skeleton
-const video =
-section.querySelector(".lazyVideo");
-
-if(video){
-
-  video.addEventListener("loadeddata", ()=>{
-
-    requestAnimationFrame(()=>{
-
-  requestAnimationFrame(()=>{
-
-    // 🔥 show products after render
-    grid.style.opacity = "1";
-
-    // 🔥 remove shimmer after products visible
-    if(skel){
-      skel.remove();
-    }
-
-  });
-
-});
-
-  }, { once:true });
-
-}else{
-
-  setTimeout(()=>{
-
-    if(skel){
-      skel.remove();
-    }
-
-  },1000);
-
-}
-
-    }
+    // 🔥 stop observer
+    observer.unobserve(section);
 
   });
 
 },{
-  threshold:0.7,
-  rootMargin:"0px 0px -80px 0px"
+  threshold:0.25,
+  rootMargin:"0px 0px -50px 0px"
 });
 
-document.querySelectorAll(".productSectionWithHeading")
+
+/* =========================================
+   OBSERVE ALL SECTIONS
+========================================= */
+
+document
+.querySelectorAll(
+  ".productSectionWithHeading"
+)
 .forEach(section=>{
 
   observer.observe(section);
 
 });
-
-
 const optionVideo =
 document.getElementById("optionVideo");
 
