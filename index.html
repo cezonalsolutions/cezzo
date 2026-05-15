@@ -6210,6 +6210,46 @@ style="
 </div>
 
 
+<div id="productSection81" class="dealMainSection dealLocked">
+
+  <div class="dealTop">
+
+    <div class="dealTitle">
+      ₹1 Deals
+    </div>
+
+    <div class="dealSub">
+Shop above ₹200 to avail ₹1 deals   
+ </div>
+
+
+  </div>
+
+
+  <!-- 🔒 LOCK OVERLAY -->
+
+  <div class="dealOverlay" id="dealOverlay81">
+
+   <h3>
+  🛍️ Shop for ₹1
+</h3>
+
+    <p id="dealUnlockText">
+      Shop above ₹200 to avail ₹1 deals
+    </p>
+
+  </div>
+
+
+  <!-- PRODUCTS -->
+
+  <div class="dealScroll">
+
+    <div class="dealGrid" id="productGrid81"></div>
+
+  </div>
+
+</div>
 
 
 <div class="midCategory" id="freshItems">
@@ -6268,46 +6308,6 @@ style="
 
 </div>
 
-<div id="productSection81" class="dealMainSection dealLocked">
-
-  <div class="dealTop">
-
-    <div class="dealTitle">
-      ₹1 Deals
-    </div>
-
-    <div class="dealSub">
-Shop above ₹200 to avail ₹1 deals   
- </div>
-
-
-  </div>
-
-
-  <!-- 🔒 LOCK OVERLAY -->
-
-  <div class="dealOverlay" id="dealOverlay81">
-
-   <h3>
-  🛍️ Shop for ₹1
-</h3>
-
-    <p id="dealUnlockText">
-      Shop above ₹200 to avail ₹1 deals
-    </p>
-
-  </div>
-
-
-  <!-- PRODUCTS -->
-
-  <div class="dealScroll">
-
-    <div class="dealGrid" id="productGrid81"></div>
-
-  </div>
-
-</div>
 
 
 <div id="productSection2" class="productSectionWithHeading">
@@ -8123,7 +8123,7 @@ home.style.display = "block";
   home.style.display = "none";
   optionScreen.style.display = "none";
 
- setTimeout(()=>{
+  setTimeout(()=>{
 
   // 🔥 SHOW MAIN FIRST
   main.style.display = "flex";
@@ -8804,6 +8804,7 @@ productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
 productSection81.style.display = "none";
+
 
 
 
@@ -12882,9 +12883,7 @@ async function loadProducts47(){
   initAllUI();
 }
 
-loadProducts47();
-
-
+loadProducts47(); //chnage
 async function loadProducts81(){
 
   const { data } = await supabase
@@ -12892,25 +12891,37 @@ async function loadProducts81(){
     .select("*")
     .in("id",[11,10,9,8,7,6,4,3,2]);
 
+  const section =
+  document.getElementById("productSection81");
+
   const grid =
   document.getElementById("productGrid81");
+
+  if(!data || data.length === 0){
+
+    section.style.display = "none";
+
+    return;
+  }
+
+  section.style.display = "block";
 
   grid.innerHTML = "";
 
   data.forEach(item => {
 
-    // ✅ GLOBAL MAP
+    // 🔥 global map
     window.productMap =
     window.productMap || {};
 
-    window.productMap[
-      "offer_products_" + item.id
-    ] = item;
+   window.productMap[
+  "offer_products_" + item.id
+] = item;
 
     const card =
     document.createElement("div");
 
-    // ✅ SAME CARD UI
+    // 🔥 SAME CARD UI
     card.className = "productCard2";
 
     card.innerHTML = `
@@ -12950,6 +12961,8 @@ async function loadProducts81(){
 
       <div class="priceRow2">
 
+        <!-- 🔥 PRICE FROM SUPABASE -->
+
         <div class="pPrice2">
 
           ₹${item.discount_price}
@@ -12972,35 +12985,16 @@ async function loadProducts81(){
 
     `;
 
+    // 🔥 popup
     card.addEventListener("click", function(e){
 
-      // ❌ block + button
       if(e.target.closest(".cartControl")){
-        return;
-      }
-
-      const img =
-      card.querySelector(".imgWrap2");
-
-      const rect =
-      img.getBoundingClientRect();
-
-      const clickY =
-      e.clientY - rect.top;
-
-      const half =
-      rect.height / 2;
-
-      // 🔴 top half no popup
-      if(clickY < half){
         return;
       }
 
       openPopup({
         ...item,
-        table:
-        item.table ||
-        "offer_products"
+table:"offer_products"
       });
 
     });
@@ -13215,14 +13209,6 @@ dealIds.forEach(id=>{
   const text =
   document.getElementById("dealUnlockText");
 
-  /* ❌ STOP IF SECTION HIDDEN */
-
-if(
-  !section ||
-  section.style.display === "none"
-){
-  return;
-}
   let locked = false;
 
 
@@ -13297,49 +13283,28 @@ if(
 }
 
 
-window.dealInterval81 =
+/* =========================================
+   LIVE CHECK
+========================================= */
+
 setInterval(()=>{
 
   try{
 
-    const active =
-    document.querySelector(".catItem.active")
-    ?.innerText
-    ?.trim();
-
-    const sec =
-    document.getElementById(
-      "productSection81"
-    );
-
-    // 🔥 HIDE IN OTHER CATEGORIES
-    if(active !== "All"){
-
-      // only once
-      if(sec.style.display !== "none"){
-
-        sec.style.display = "none";
-
-      }
-
-      return;
-    }
-
-    // 🔥 SHOW ONLY IN ALL
-    if(sec.style.display !== "block"){
-
-      sec.style.display = "block";
-
-    }
-
-    // 🔥 lock system
     updateDealUnlock81();
 
   }catch(e){
 
+    // 🔥 avoid console spam
+
   }
 
 },300);
+
+
+
+
+
 
 
 
@@ -18756,8 +18721,6 @@ function smoothNavigate(url){
   }, 80);
 
 }
-
-
 
 </script>
 </body>
