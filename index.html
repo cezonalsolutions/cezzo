@@ -18349,7 +18349,70 @@ new IntersectionObserver(entries=>{
 if(optionScreen){
   optionObserver.observe(optionScreen);
 }
+/* =========================================
+   FIX REOPEN / CACHE LOAD
+========================================= */
 
+window.addEventListener(
+  "pageshow",
+  ()=>{
+
+    setTimeout(()=>{
+
+      document
+      .querySelectorAll(
+        ".productSectionWithHeading"
+      )
+      .forEach(section=>{
+
+        const grid =
+        section.querySelector(
+          ".productGrid"
+        );
+
+        const skel =
+        section.querySelector(
+          ".skeletonGrid"
+        );
+
+        if(!grid) return;
+
+        // 🔥 products already loaded
+        const hasProducts =
+        grid.children.length > 0;
+
+        const hasImages =
+        grid.querySelectorAll("img")
+        .length > 0;
+
+        if(
+          hasProducts &&
+          hasImages
+        ){
+
+          grid.style.opacity = "1";
+
+          grid.style.transform =
+          "translateY(0)";
+
+          grid.style.filter =
+          "blur(0)";
+
+          // 🔥 remove stuck shimmer
+          if(skel){
+
+            skel.remove();
+
+          }
+
+        }
+
+      });
+
+    },800);
+
+  }
+);
 
 // 🔥 when video ready
 optionVideo.addEventListener("loadeddata", ()=>{
