@@ -1015,6 +1015,7 @@ transform:translateZ(0);
 }
 #homeSection{
   display:none;
+
   height:100px;
 
   margin-left:-15px;
@@ -1023,63 +1024,208 @@ transform:translateZ(0);
   position:relative;
   overflow:hidden;
 
-  background: linear-gradient(
+  background:linear-gradient(
     to bottom,
     #E6DCD5,
     #ffffff
   );
 }
 
+
 /* container */
 .homeFloat{
   position:absolute;
+
   width:100%;
   height:100%;
+
   pointer-events:none;
 }
 
-/* icons */
-.homeFloat span{
+
+/* wires */
+.wire{
   position:absolute;
-  font-size:34px;   /* 🔼 bigger */
 
-  animation:floatHome linear infinite;
-  animation-delay:0s !important;
-}
-.homeFloat span:nth-child(odd){
-  font-size:28px;
+  top:0;
+
+  width:2px;
+
+  background:linear-gradient(
+    to bottom,
+    #444,
+    #777
+  );
+
+  transform-origin:top center;
+
+  animation:swingWire 3.5s ease-in-out infinite;
 }
 
-.homeFloat span:nth-child(even){
-  font-size:24px;
+
+/* PREMIUM GLASS BULBS */
+.bulb{
+  position:absolute;
+
+  width:20px;
+  height:20px;
+
+  border-radius:50% 50% 45% 45%;
+
+  background:
+  radial-gradient(circle at 35% 30%,
+  #fffdf5 0%,
+  #ffe082 35%,
+  #ffca28 65%,
+  #f59f00 100%);
+
+  border:1px solid rgba(255,255,255,.7);
+
+  backdrop-filter:blur(2px);
+
+  overflow:hidden;
+
+  transform-origin:top center;
+
+  animation:
+  glowBulb 2.5s ease-in-out infinite alternate,
+  swingBulb 3.5s ease-in-out infinite;
+
+  box-shadow:
+  0 0 8px rgba(255,215,100,.7),
+  0 0 20px rgba(255,215,100,.6),
+  0 0 40px rgba(255,215,100,.35);
 }
-/* positions + speed */
-.homeFloat span:nth-child(1){ left:10%; animation-duration:6s; }
-.homeFloat span:nth-child(2){ left:20%; animation-duration:7s; }
-.homeFloat span:nth-child(3){ left:30%; animation-duration:5.5s; }
-.homeFloat span:nth-child(4){ left:40%; animation-duration:6.5s; }
-.homeFloat span:nth-child(5){ left:50%; animation-duration:5.8s; }
-.homeFloat span:nth-child(6){ left:60%; animation-duration:7.2s; }
-.homeFloat span:nth-child(7){ left:70%; animation-duration:6.3s; }
-.homeFloat span:nth-child(8){ left:85%; animation-duration:5.9s; }
-.homeFloat span:nth-child(9){ left:12%; animation-duration:6.2s; }
-.homeFloat span:nth-child(10){ left:22%; animation-duration:7s; }
-.homeFloat span:nth-child(11){ left:32%; animation-duration:5.7s; }
-.homeFloat span:nth-child(12){ left:42%; animation-duration:6.8s; }
-.homeFloat span:nth-child(13){ left:52%; animation-duration:5.9s; }
-.homeFloat span:nth-child(14){ left:62%; animation-duration:7.3s; }
-.homeFloat span:nth-child(15){ left:75%; animation-duration:6.4s; }
-.homeFloat span:nth-child(16){ left:88%; animation-duration:5.8s; }
-/* floating animation */
-@keyframes floatHome{
-  0%{
-    transform:translateY(40px);   /* 👈 already visible */
+
+
+/* glossy shine */
+.bulb::before{
+  content:"";
+
+  position:absolute;
+
+  top:2px;
+  left:4px;
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.95);
+
+  filter:blur(.5px);
+}
+
+
+/* bulb cap */
+.bulb::after{
+  content:"";
+
+  position:absolute;
+
+  bottom:-4px;
+  left:5px;
+
+  width:10px;
+  height:6px;
+
+  border-radius:2px;
+
+  background:linear-gradient(
+    to bottom,
+    #555,
+    #222
+  );
+}
+
+
+/* positions */
+.wire:nth-child(1){ left:8%; height:45px; }
+.bulb:nth-child(2){ left:calc(8% - 9px); top:42px; }
+
+.wire:nth-child(3){ left:18%; height:70px; }
+.bulb:nth-child(4){ left:calc(18% - 9px); top:67px; }
+
+.wire:nth-child(5){ left:30%; height:50px; }
+.bulb:nth-child(6){ left:calc(30% - 9px); top:47px; }
+
+.wire:nth-child(7){ left:42%; height:80px; }
+.bulb:nth-child(8){ left:calc(42% - 9px); top:77px; }
+
+.wire:nth-child(9){ left:55%; height:55px; }
+.bulb:nth-child(10){ left:calc(55% - 9px); top:52px; }
+
+.wire:nth-child(11){ left:68%; height:72px; }
+.bulb:nth-child(12){ left:calc(68% - 9px); top:69px; }
+
+.wire:nth-child(13){ left:80%; height:48px; }
+.bulb:nth-child(14){ left:calc(80% - 9px); top:45px; }
+
+.wire:nth-child(15){ left:92%; height:65px; }
+.bulb:nth-child(16){ left:calc(92% - 9px); top:62px; }
+
+
+/* glowing animation */
+@keyframes glowBulb{
+
+  from{
+
+    opacity:.7;
+
+    box-shadow:
+    0 0 5px rgba(255,215,100,.5),
+    0 0 12px rgba(255,215,100,.4);
+
+  }
+
+  to{
+
     opacity:1;
+
+    box-shadow:
+    0 0 14px rgba(255,215,100,.95),
+    0 0 28px rgba(255,215,100,.7),
+    0 0 45px rgba(255,215,100,.45);
+
   }
+
+}
+
+
+/* bulb swing */
+@keyframes swingBulb{
+
+  0%{
+    transform:rotate(-4deg);
+  }
+
+  50%{
+    transform:rotate(4deg);
+  }
+
   100%{
-    transform:translateY(-20px);
-    opacity:0;
+    transform:rotate(-4deg);
   }
+
+}
+
+
+/* wire swing */
+@keyframes swingWire{
+
+  0%{
+    transform:rotate(-2deg);
+  }
+
+  50%{
+    transform:rotate(2deg);
+  }
+
+  100%{
+    transform:rotate(-2deg);
+  }
+
 }
 #chocoSection{
   display:none;
@@ -5994,29 +6140,35 @@ style="
 
 </div>
 
-
 <div id="homeSection">
 
- <div class="homeFloat">
-  <span>🛋️</span>
-  <span>🪴</span>
-  <span>🛏️</span>
-  <span>🕯️</span>
-  <span>🍽️</span>
-  <span>🪑</span>
-  <span>🚪</span>
-  <span>🧸</span>
+  <div class="homeFloat">
 
-  <!-- NEW ITEMS -->
-  <span>🪞</span>
-  <span>🧺</span>
-  <span>🧼</span>
-  <span>🪟</span>
-  <span>🛒</span>
-  <span>🧹</span>
-  <span>🪠</span>
-  <span>🧯</span>
-</div>
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+    <div class="wire"></div>
+    <div class="bulb"></div>
+
+  </div>
 
 </div>
 
@@ -16663,12 +16815,22 @@ const observer = new IntersectionObserver(entries=>{
       const skel =
         section.querySelector(".skeletonGrid");
 
-      setTimeout(()=>{
+     requestAnimationFrame(()=>{
 
-  // 🔥 show products
-  grid.style.opacity = "1";
+  requestAnimationFrame(()=>{
 
-},800);
+    // 🔥 show products after render
+    grid.style.opacity = "1";
+
+    // 🔥 remove shimmer after products visible
+    if(skel){
+      skel.remove();
+    }
+
+  });
+
+});
+      observer.unobserve(section);
 
 
 
@@ -16681,13 +16843,21 @@ if(video){
 
   video.addEventListener("loadeddata", ()=>{
 
-    setTimeout(()=>{
+    requestAnimationFrame(()=>{
 
-      if(skel){
-        skel.remove();
-      }
+  requestAnimationFrame(()=>{
 
-    },300);
+    // 🔥 show products after render
+    grid.style.opacity = "1";
+
+    // 🔥 remove shimmer after products visible
+    if(skel){
+      skel.remove();
+    }
+
+  });
+
+});
 
   }, { once:true });
 
