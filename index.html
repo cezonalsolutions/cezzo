@@ -15021,7 +15021,12 @@ const viewBtn = document.getElementById("viewCartBtn");
 const cartPopup = document.getElementById("cartPopup");
 
 viewBtn.addEventListener("click", (e) => {
+  
   e.stopPropagation();
+  history.pushState(
+  { popup:true },
+  ""
+);
 
   cartPopup.classList.add("show");
   document.body.classList.add("popup-open");
@@ -17187,6 +17192,29 @@ if(video.readyState >= 2){
   });
 
 })();
+
+window.addEventListener("popstate", function(){
+
+  // ALL OPEN POPUPS
+  const popups =
+    document.querySelectorAll(".show");
+
+  // IF ANY POPUP OPEN
+  if(popups.length > 0){
+
+    popups.forEach(p=>{
+      p.classList.remove("show");
+    });
+
+    document.body.classList.remove("popup-open");
+
+    // STOP PAGE BACK
+    history.pushState({}, "");
+
+    return;
+  }
+
+});
 </script>
 </body>
 </html>
