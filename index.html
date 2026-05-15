@@ -18105,7 +18105,11 @@ document
 
   // 🔥 hide products initially
   grid.style.opacity = "0";
+grid.style.transform =
+"translateY(12px)";
 
+grid.style.filter =
+"blur(3px)";
   grid.style.transition =
   ".25s ease";
 
@@ -18268,8 +18272,13 @@ new IntersectionObserver(entries=>{
         requestAnimationFrame(()=>{
 
           // show products
-          grid.style.opacity = "1";
+         grid.style.opacity = "1";
 
+grid.style.transform =
+"translateY(0)";
+
+grid.style.filter =
+"blur(0)";
           // remove shimmer
           if(skel){
 
