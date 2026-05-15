@@ -5143,6 +5143,649 @@ h6{
   color:#ffffff;
   margin:5px 0;
 }
+
+
+.dealMainSection{
+
+  padding:16px 10px;
+
+  background:linear-gradient(
+    180deg,
+    #fff7ef 0%,
+    #ffe8d2 100%
+  );
+
+  margin:14px 10px;
+
+  overflow:hidden;
+
+  border-radius:28px;
+
+  box-shadow:
+  0 4px 18px rgba(255,107,0,.08);
+
+  position:relative;
+
+}
+.dealMainSection::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-40px;
+  right:-40px;
+
+  width:120px;
+  height:120px;
+
+  background:rgba(255,255,255,.35);
+
+  border-radius:50%;
+
+}
+.dealLocked{
+
+  position:relative;
+
+}
+
+/* 🔥 ONLY PRODUCTS DIM */
+.dealLocked .dealScroll{
+
+  pointer-events:none;
+
+  opacity:.7;
+
+  filter:grayscale(.2);
+
+}
+
+
+/* 🔥 BG SHOULD STILL SHOW */
+.dealOverlay{
+
+  position:absolute;
+
+  inset:0;
+
+  background:rgba(255,255,255,.35);
+
+  backdrop-filter:blur(2px);
+
+  z-index:50;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  text-align:center;
+
+  padding:20px;
+
+}
+
+
+/* 🔥 TEXT */
+
+.dealOverlay h3{
+
+  font-size:22px;
+
+  margin:0;
+
+  color:#ff6b00;
+
+}
+
+
+.dealOverlay p{
+
+  margin-top:8px;
+
+  font-size:13px;
+
+  font-weight:600;
+
+  color:#444;
+
+}
+
+
+
+/* 🔥 TOP */
+
+.dealTop{
+
+  text-align:center;
+
+  margin-bottom:14px;
+
+}
+
+
+.dealTitle{
+
+  font-size:24px;
+
+  font-weight:800;
+
+  color:#ff6b00;
+
+}
+
+
+.dealSub{
+
+  font-size:13px;
+
+  color:#555;
+
+  margin-top:4px;
+
+  font-weight:600;
+
+}
+
+
+
+/* 🔥 SCROLL */
+
+.dealScroll{
+
+  overflow-x:auto;
+
+  -webkit-overflow-scrolling:touch;
+
+}
+
+
+.dealScroll::-webkit-scrollbar{
+
+  display:none;
+
+}
+
+
+
+/* 🔥 GRID */
+
+.dealGrid{
+
+  display:grid;
+
+  grid-auto-flow:column;
+
+  grid-template-rows:
+  repeat(3, auto);
+
+  gap:10px;
+
+  width:max-content;
+
+}
+
+
+
+/* 🔥 SAME PRODUCT CARD */
+
+.dealGrid .productCard2{
+
+  width:135px;
+
+  flex-shrink:0;
+
+  position:relative;
+
+}
+
+
+
+/* 🔥 ₹1 BADGE */
+
+.unlockBadge{
+
+  position:absolute;
+
+  top:6px;
+
+  left:6px;
+
+  background:#ff6b00;
+
+  color:#fff;
+
+  font-size:9px;
+
+  font-weight:700;
+
+  padding:4px 6px;
+
+  border-radius:20px;
+
+  z-index:2;
+
+}
+/* 🔥 PREMIUM UNLOCK POPUP */
+
+#dealUnlockPopup{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:999999;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.4s;
+
+  background:
+  radial-gradient(
+    circle at center,
+    rgba(255,255,255,.12),
+    rgba(0,0,0,.28)
+  );
+
+  backdrop-filter:blur(8px);
+
+}
+
+
+#dealUnlockPopup.show{
+
+  opacity:1;
+
+  pointer-events:auto;
+
+}
+
+
+
+/* 🔥 MAIN BOX */
+
+.dealUnlockBox{
+
+  width:300px;
+
+  border-radius:36px;
+
+  padding:34px 26px;
+
+  text-align:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+    145deg,
+    #fff8f1,
+    #ffffff
+  );
+
+  box-shadow:
+
+  0 25px 80px rgba(255,107,0,.18),
+
+  inset 0 1px 0 rgba(255,255,255,.8);
+
+  transform:
+  scale(.75)
+  translateY(50px);
+
+  transition:
+  transform .45s cubic-bezier(.2,.9,.2,1);
+
+}
+
+
+/* 🔥 floating glow */
+
+.dealUnlockBox::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(255,166,0,.22),
+    transparent 70%
+  );
+
+  top:-60px;
+  right:-40px;
+
+  border-radius:50%;
+
+}
+
+
+/* 🔥 active animation */
+
+#dealUnlockPopup.show .dealUnlockBox{
+
+  transform:
+  scale(1)
+  translateY(0);
+
+}
+
+
+
+/* 🔥 emoji */
+
+.unlockEmoji{
+
+  font-size:62px;
+
+  animation:
+  unlockBounce 1s infinite alternate;
+
+  filter:
+  drop-shadow(
+    0 10px 20px rgba(255,170,0,.28)
+  );
+
+}
+
+
+
+/* 🔥 title */
+
+.unlockTitle{
+
+  margin-top:18px;
+
+  font-size:30px;
+
+  font-weight:900;
+
+  color:#ff6b00;
+
+  line-height:1.05;
+
+  letter-spacing:-0.6px;
+
+}
+
+
+
+/* 🔥 subtitle */
+
+.unlockSub{
+
+  margin-top:12px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  color:#555;
+
+  line-height:1.6;
+
+}
+
+
+
+/* 🔥 button style text */
+
+.unlockAction{
+
+  margin-top:18px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:12px 18px;
+
+  border-radius:50px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #ff7b00,
+    #ff9f1a
+  );
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  box-shadow:
+  0 10px 25px rgba(255,123,0,.28);
+
+}
+
+
+
+/* 🔥 sparkle */
+
+.sparkle{
+
+  position:absolute;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:#ffd54f;
+
+  opacity:.8;
+
+  animation:
+  sparkleFloat 2.5s infinite ease-in-out;
+
+}
+
+.sparkle.s1{
+  top:18px;
+  left:24px;
+}
+
+.sparkle.s2{
+  top:42px;
+  right:34px;
+  animation-delay:.6s;
+}
+
+.sparkle.s3{
+  bottom:30px;
+  left:40px;
+  animation-delay:1s;
+}
+
+
+
+/* 🔥 animations */
+
+@keyframes unlockBounce{
+
+  from{
+    transform:
+    scale(1)
+    rotate(-4deg);
+  }
+
+  to{
+    transform:
+    scale(1.12)
+    rotate(4deg);
+  }
+
+}
+
+
+@keyframes sparkleFloat{
+
+  0%{
+    transform:
+    translateY(0)
+    scale(1);
+  }
+
+  100%{
+    transform:
+    translateY(-12px)
+    scale(1.4);
+  }
+
+}
+/* 🔥 RIBBONS */
+
+.ribbon{
+
+  position:absolute;
+
+  width:140px;
+
+  height:18px;
+
+  border-radius:40px;
+
+  opacity:.16;
+
+  filter:blur(1px);
+
+  animation:
+  ribbonFloat 5s infinite ease-in-out;
+
+}
+
+
+/* orange */
+.r1{
+
+  background:
+  linear-gradient(
+    90deg,
+    #ff7a00,
+    #ffb347
+  );
+
+  top:20px;
+  left:-40px;
+
+  transform:rotate(-28deg);
+
+}
+
+
+/* gold */
+.r2{
+
+  background:
+  linear-gradient(
+    90deg,
+    #ffc107,
+    #ffe082
+  );
+
+  top:60px;
+  right:-50px;
+
+  transform:rotate(32deg);
+
+  animation-delay:1s;
+
+}
+
+
+/* peach */
+.r3{
+
+  background:
+  linear-gradient(
+    90deg,
+    #ffb199,
+    #ff0844
+  );
+
+  bottom:30px;
+  left:-50px;
+
+  transform:rotate(24deg);
+
+  animation-delay:2s;
+
+}
+
+
+/* soft orange */
+.r4{
+
+  background:
+  linear-gradient(
+    90deg,
+    #ff9966,
+    #ff5e62
+  );
+
+  bottom:18px;
+  right:-45px;
+
+  transform:rotate(-24deg);
+
+  animation-delay:3s;
+
+}
+
+
+
+/* 🔥 floating animation */
+
+@keyframes ribbonFloat{
+
+  0%{
+
+    transform:
+    translateY(0)
+    rotate(-28deg);
+
+  }
+
+  50%{
+
+    transform:
+    translateY(-10px)
+    rotate(-24deg);
+
+  }
+
+  100%{
+
+    transform:
+    translateY(0)
+    rotate(-28deg);
+
+  }
+
+}
 </style>
 </head>
 
@@ -5475,6 +6118,50 @@ style="
   </div>
 
 </div>
+
+
+<div id="productSection81" class="dealMainSection dealLocked">
+
+  <div class="dealTop">
+
+    <div class="dealTitle">
+      ₹1 Deals
+    </div>
+
+    <div class="dealSub">
+Shop above ₹200 to avail ₹1 deals   
+ </div>
+
+
+  </div>
+
+
+  <!-- 🔒 LOCK OVERLAY -->
+
+  <div class="dealOverlay" id="dealOverlay81">
+
+   <h3>
+  🛍️ Shop for ₹1
+</h3>
+
+    <p id="dealUnlockText">
+      Shop above ₹200 to avail ₹1 deals
+    </p>
+
+  </div>
+
+
+  <!-- PRODUCTS -->
+
+  <div class="dealScroll">
+
+    <div class="dealGrid" id="productGrid81"></div>
+
+  </div>
+
+</div>
+
+
 <div class="midCategory" id="freshItems">
 
   <div class="midHeader" >
@@ -6682,7 +7369,36 @@ Bite Delight Hub
 
 </div>
 
+<div id="dealUnlockPopup">
 
+  <div class="dealUnlockBox">
+
+    <div class="ribbon r1"></div>
+<div class="ribbon r2"></div>
+<div class="ribbon r3"></div>
+<div class="ribbon r4"></div>
+    <div class="unlockEmoji">
+      🎉
+    </div>
+
+    <div class="unlockTitle">
+      ₹1 Deals Unlocked!
+    </div>
+
+    <div class="unlockSub">
+      You unlocked exclusive ₹1 offers.
+      Grab them before they’re gone.
+    </div>
+
+    <div class="unlockAction">
+      Shop Deals Now
+    </div>
+
+  </div>
+
+</div>
+
+<!-- deal mesage abobe-->
 </div>
 
 <div id="imgPreview">
@@ -6741,6 +7457,8 @@ Bite Delight Hub
 
   <div id="categoryGrid"></div>
 </div>
+
+
 
 <div id="cartPopup" class="popup">
 <div class="cartTopSection">
@@ -7230,6 +7948,8 @@ Please use Cash on Delivery.
 <i class="fa fa-lock"></i>
 100% Secured Payments
 </div>
+
+
 <!-- SUCCESS FULL SCREEN -->
 <div id="successPopup">
 
@@ -7250,6 +7970,9 @@ Please use Cash on Delivery.
   </div>
 
 </div>
+
+
+
 </div>
 
 
@@ -7800,6 +8523,8 @@ const productSection74 = document.getElementById("productSection74");
 const productSection75 = document.getElementById("productSection75");
 const productSection76 = document.getElementById("productSection76");
 const productSection77 = document.getElementById("productSection77");
+const productSection81 = document.getElementById("productSection81");
+
 
 
 
@@ -7900,6 +8625,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "block";
+
 
 
 
@@ -7996,6 +8723,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 
@@ -8095,6 +8824,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 
@@ -8192,6 +8923,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 
@@ -8289,6 +9022,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 
@@ -8386,6 +9121,8 @@ productSection74.style.display = "block";
 productSection75.style.display = "block";
 productSection76.style.display = "block";
 productSection77.style.display = "block";
+productSection81.style.display = "none";
+
 
 
 }
@@ -8480,6 +9217,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 
@@ -8576,6 +9315,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 }
@@ -8670,6 +9411,8 @@ productSection74.style.display = "none";
 productSection75.style.display = "none";
 productSection76.style.display = "none";
 productSection77.style.display = "none";
+productSection81.style.display = "none";
+
 
 
 
@@ -12061,6 +12804,430 @@ async function loadProducts47(){
 }
 
 loadProducts47(); //chnage
+async function loadProducts81(){
+
+  const { data } = await supabase
+    .from("offer_products")
+    .select("*")
+    .in("id",[11,10,9,8,7,6,4,3,2]);
+
+  const section =
+  document.getElementById("productSection81");
+
+  const grid =
+  document.getElementById("productGrid81");
+
+  if(!data || data.length === 0){
+
+    section.style.display = "none";
+
+    return;
+  }
+
+  section.style.display = "block";
+
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+    // 🔥 global map
+    window.productMap =
+    window.productMap || {};
+
+   window.productMap[
+  "offer_products_" + item.id
+] = item;
+
+    const card =
+    document.createElement("div");
+
+    // 🔥 SAME CARD UI
+    card.className = "productCard2";
+
+    card.innerHTML = `
+
+      <div class="unlockBadge">
+        ₹1 DEAL
+      </div>
+
+      <div class="imgWrap2">
+
+        <img src="${item.image1}">
+
+        <div class="cartControl"
+          data-id="${item.id}"
+          data-table="offer_products">
+
+          <div class="addBtn2">+</div>
+
+        </div>
+
+        <div class="qtyInside">
+
+          ${item.quantity}
+          ${item.unit}
+
+        </div>
+
+      </div>
+
+      <div class="pName2">
+        ${item.name}
+      </div>
+
+      <div class="brand2">
+        ${item.brand || ""}
+      </div>
+
+      <div class="priceRow2">
+
+        <!-- 🔥 PRICE FROM SUPABASE -->
+
+        <div class="pPrice2">
+
+          ₹${item.discount_price}
+
+          <span>
+            ₹${item.original_price}
+          </span>
+
+        </div>
+
+        <div class="ratingGreen">
+
+          <i class="fa-solid fa-star"></i>
+
+          ${item.rating || "0"}
+
+        </div>
+
+      </div>
+
+    `;
+
+    // 🔥 popup
+    card.addEventListener("click", function(e){
+
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      openPopup({
+        ...item,
+table:"offer_products"
+      });
+
+    });
+
+    grid.appendChild(card);
+
+  });
+
+  initAllUI();
+
+}
+
+loadProducts81();
+
+/* 🔥 unlock popup state */
+
+let dealUnlockedShown = false;
+
+function showDealUnlockPopup(){
+
+  const popup =
+  document.getElementById(
+    "dealUnlockPopup"
+  );
+
+  if(!popup) return;
+
+  popup.classList.add("show");
+
+  setTimeout(()=>{
+
+    popup.classList.remove("show");
+
+  },3000);
+
+}
+function updateDealUnlock81(){
+
+  // 🔥 cart object
+  let rawCart =
+  JSON.parse(localStorage.getItem("cart")) || {};
+
+const dealIds = [
+  "offer_products_11",
+  "offer_products_10",
+  "offer_products_9",
+  "offer_products_8",
+  "offer_products_7",
+  "offer_products_6",
+  "offer_products_4",
+  "offer_products_3",
+  "offer_products_2"
+];
+  /* =========================================
+     CALCULATE NORMAL TOTAL
+     (WITHOUT ₹1 DEAL ITEMS)
+  ========================================= */
+
+  let normalTotal = 0;
+
+  Object.keys(rawCart).forEach(key=>{
+
+    // skip ₹1 products
+    if(dealIds.includes(key)){
+      return;
+    }
+
+    const qty = rawCart[key] || 0;
+
+    // product data
+    const item =
+    window.productMap?.[key];
+
+    if(item){
+
+      normalTotal +=
+      (parseFloat(item.discount_price)||0)
+      * qty;
+
+    }
+
+  });
+
+
+  /* =========================================
+     UNLOCK LEVELS
+  ========================================= */
+
+  let allowedDeals = 0;
+
+if(normalTotal >= 200){
+
+  allowedDeals = 1;
+
+  // 🔥 show popup once
+  if(!dealUnlockedShown){
+
+    dealUnlockedShown = true;
+
+    showDealUnlockPopup();
+
+  }
+
+}else{
+
+  // reset if below 200 again
+  dealUnlockedShown = false;
+
+}  if(normalTotal >= 400) allowedDeals = 2;
+  if(normalTotal >= 600) allowedDeals = 3;
+
+
+  /* =========================================
+     COUNT CURRENT ₹1 ITEMS
+  ========================================= */
+
+  let currentDeals = 0;
+
+  dealIds.forEach(id=>{
+
+    currentDeals += rawCart[id] || 0;
+
+  });
+
+
+  /* =========================================
+     AUTO REMOVE EXTRA ₹1 ITEMS
+  ========================================= */
+
+  if(currentDeals > allowedDeals){
+
+    let removeCount =
+    currentDeals - allowedDeals;
+
+    dealIds.forEach(id=>{
+
+      if(removeCount <= 0) return;
+
+      if(rawCart[id]){
+
+        let qty = rawCart[id];
+
+        if(qty <= removeCount){
+
+          removeCount -= qty;
+
+          delete rawCart[id];
+
+        }else{
+
+          rawCart[id] =
+          qty - removeCount;
+
+          removeCount = 0;
+
+        }
+
+      }
+
+    });
+
+    // save updated cart
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(rawCart)
+    );
+
+    // refresh UI safely
+   /* 🔥 refresh cart ui */
+if(typeof updateCartUI === "function"){
+  updateCartUI();
+}
+
+
+/* 🔥 FIX + - BUTTON RESET */
+
+dealIds.forEach(id=>{
+
+  // if removed from cart
+  if(!rawCart[id]){
+
+    document.querySelectorAll(
+      `.cartControl[data-id="${
+        id.split("_")[2]
+      }"]`
+    ).forEach(control=>{
+
+      control.classList.remove("active");
+
+      control.innerHTML =
+      '<div class="addBtn2">+</div>';
+
+    });
+
+  }
+
+});
+
+  }
+
+
+  /* =========================================
+     UI
+  ========================================= */
+
+  const section =
+  document.getElementById("productSection81");
+
+  const overlay =
+  document.getElementById("dealOverlay81");
+
+  const text =
+  document.getElementById("dealUnlockText");
+
+  let locked = false;
+
+
+  // 🔒 below ₹200
+  if(normalTotal < 200){
+
+    locked = true;
+
+    text.innerHTML =
+    `Shop ₹${200-normalTotal} more to unlock`;
+
+  }
+
+  // 🔒 limit reached
+  else if(currentDeals >= allowedDeals){
+
+    locked = true;
+
+    text.innerHTML =
+    `₹${allowedDeals} deal limit reached`;
+
+  }
+
+
+  /* =========================================
+     APPLY UI
+  ========================================= */
+
+  if(section && overlay){
+
+    if(locked){
+
+      section.classList.add("dealLocked");
+
+      overlay.style.display = "flex";
+
+    }else{
+
+      section.classList.remove("dealLocked");
+
+      overlay.style.display = "none";
+
+    }
+
+  }
+
+
+  /* =========================================
+     BUTTONS
+  ========================================= */
+
+  document.querySelectorAll(
+    "#productGrid81 .cartControl"
+  ).forEach(btn=>{
+
+    if(locked){
+
+      btn.style.pointerEvents = "none";
+
+      btn.style.opacity = ".5";
+
+    }else{
+
+      btn.style.pointerEvents = "auto";
+
+      btn.style.opacity = "1";
+
+    }
+
+  });
+
+}
+
+
+/* =========================================
+   LIVE CHECK
+========================================= */
+
+setInterval(()=>{
+
+  try{
+
+    updateDealUnlock81();
+
+  }catch(e){
+
+    // 🔥 avoid console spam
+
+  }
+
+},300);
+
+
+
+
+
+
+
+
 
 
 async function loadProducts48(){
