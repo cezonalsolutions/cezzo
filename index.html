@@ -16248,7 +16248,17 @@ skel.style.display="none";
 }
   const cart = JSON.parse(localStorage.getItem("cart") || "{}");
   const keys = Object.keys(cart);
+const readyKeys = keys.filter(
+  k => getProduct(k)
+);
 
+/* wait until all products ready */
+if(readyKeys.length !== keys.length){
+
+  setTimeout(updateCartBar, 120);
+
+  return;
+}
   const bar = document.getElementById("cartBar");
   const imgBox = document.getElementById("cartImages");
   const mini = document.getElementById("miniCart");
@@ -16718,8 +16728,13 @@ if(totalItems > 10){
 
 let deliveryFee = 20;
 
-total = itemsTotal + handlingFee + deliveryFee;
+/* 🔥 FREE DELIVERY ENABLE */
+let freeDelivery = true;
 
+total =
+  itemsTotal +
+  handlingFee +
+  (freeDelivery ? 0 : deliveryFee);
 if(giftAdded){
   total += GIFT_PRICE;
 }
@@ -16740,8 +16755,27 @@ if(billHandling){
   }
 }
 
-if(billDelivery) billDelivery.innerText = `₹${deliveryFee}`;
-if(billTotal) billTotal.innerText = `₹${total}`;
+if(billDelivery){
+
+  if(freeDelivery){
+
+    billDelivery.innerHTML = `
+      <span style="
+        text-decoration:line-through;
+        color:#999;
+        margin-right:4px;
+      ">
+        ₹${deliveryFee}
+      </span>
+      FREE
+    `;
+
+  }else{
+
+    billDelivery.innerText =
+      `₹${deliveryFee}`;
+  }
+}if(billTotal) billTotal.innerText = `₹${total}`;
 const checkoutPrice = document.getElementById("checkoutPrice");
 if(checkoutPrice){
   checkoutPrice.innerText = `₹${total - discount}`;
