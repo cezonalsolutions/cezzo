@@ -19195,7 +19195,141 @@ if(popup){
   );
 
 }
+// 🔥 SMOOTH HORIZONTAL SCROLL
+// FOR BEST OFFERS
 
+setTimeout(()=>{
+
+  const best4 =
+  document.querySelector(
+    ".cartRecoGrid"
+  );
+
+  if(!best4) return;
+
+  let down4 = false;
+
+  let startX4 = 0;
+  let startY4 = 0;
+
+  let scrollLeft4 = 0;
+
+  let velocity4 = 0;
+  let lastX4 = 0;
+
+  let isHorizontal4 = false;
+
+  let momentum4;
+
+  best4.addEventListener(
+    "touchstart",
+    e => {
+
+      down4 = true;
+
+      isHorizontal4 = false;
+
+      cancelAnimationFrame(
+        momentum4
+      );
+
+      startX4 =
+      e.touches[0].pageX;
+
+      startY4 =
+      e.touches[0].pageY;
+
+      lastX4 = startX4;
+
+      scrollLeft4 =
+      best4.scrollLeft;
+
+    },
+    { passive:true }
+  );
+
+  best4.addEventListener(
+    "touchmove",
+    e => {
+
+      if(!down4) return;
+
+      const x =
+      e.touches[0].pageX;
+
+      const y =
+      e.touches[0].pageY;
+
+      const dx =
+      Math.abs(x - startX4);
+
+      const dy =
+      Math.abs(y - startY4);
+
+      // 🔥 detect direction
+      if(dx > dy){
+
+        isHorizontal4 = true;
+
+      }
+
+      // 🔥 horizontal drag only
+      if(isHorizontal4){
+
+        const move =
+        x - startX4;
+
+        velocity4 =
+        x - lastX4;
+
+        lastX4 = x;
+
+        best4.scrollLeft =
+        scrollLeft4 - move;
+
+      }
+
+    },
+    { passive:true }
+  );
+
+  best4.addEventListener(
+    "touchend",
+    () => {
+
+      down4 = false;
+
+      // 🔥 smooth momentum
+      if(isHorizontal4){
+
+        function momentum(){
+
+          best4.scrollLeft -=
+          velocity4;
+
+          velocity4 *= 0.95;
+
+          if(
+            Math.abs(velocity4) > 0.5
+          ){
+
+            momentum4 =
+            requestAnimationFrame(
+              momentum
+            );
+
+          }
+
+        }
+
+        momentum();
+
+      }
+
+    }
+  );
+
+},1000);
 
 
 </script>
