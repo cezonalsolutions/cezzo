@@ -6480,7 +6480,7 @@ style="
   <!-- COINS -->
   <img
     src="coin1.webp"
-    
+
     class="dealCoin coin1"
   >
 
@@ -10250,7 +10250,17 @@ if(buyBtn){
 }
 
 requestAnimationFrame(()=>{
+
   popup.classList.add("show");
+
+  // 🔥 ADD THIS
+  popupStack.push("popup");
+
+  history.pushState(
+    { popup:"popup" },
+    ""
+  );
+
 });
 
 console.log("✅ Popup opened");
@@ -10305,13 +10315,20 @@ initAllUI();
   },100);
 }
 function closePopup(){
-  popup.classList.remove("show");
+
+  history.back();
 
   setTimeout(()=>{
-    popup.style.display = "none";
-    unlockBodyScroll();
+
+    // 🔥 if no popup left
+    if(popupStack.length === 0){
+
+      unlockBodyScroll();
+
+    }
+
   },300);
-  
+
 }
 loadProducts();
 window.addEventListener("load", () => {
@@ -15973,11 +15990,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Close popup
-  closeBtn.addEventListener("click", () => {
-    popup.classList.remove("show");
-    unlockBodyScroll();
-  });
+ closeBtn.addEventListener("click", () => {
+
+  history.back();
+
+  setTimeout(()=>{
+
+    if(popupStack.length === 0){
+
+      unlockBodyScroll();
+
+    }
+
+  },300);
+
 });
 async function loadCategoryProducts(tableName, ids) {
   const grid = document.getElementById("categoryGrid");
@@ -16166,10 +16192,21 @@ if(Object.keys(updatedCart).length === 0){
 
   // hide popup
   const cartPopup = document.getElementById("cartPopup");
-  cartPopup.classList.remove("show");
+  history.back();
 
-  document.body.classList.remove("popup-open");
+setTimeout(()=>{
 
+  if(popupStack.length === 0){
+
+    document.body.classList.remove(
+      "popup-open"
+    );
+
+    unlockBodyScroll();
+
+  }
+
+},300);
   // also hide mini cart
   const mini = document.getElementById("miniCart");
   mini.classList.remove("show");
@@ -16534,9 +16571,12 @@ viewBtn.addEventListener("click", (e) => {
 
   e.stopPropagation();
 
-  // 🔥 ADD NEW HISTORY EVERY OPEN
-  openPopupHistory();
+  popupStack.push("cartPopup");
 
+history.pushState(
+  { popup:"cartPopup" },
+  ""
+);
   cartPopup.classList.add("show");
 
   document.body.classList.add("popup-open");
@@ -16556,8 +16596,23 @@ viewBtn.addEventListener("click", (e) => {
 
 });
 document.querySelector(".backBtn").onclick = () => {
-  cartPopup.classList.remove("show");
-  document.body.classList.remove("popup-open");
+
+  history.back();
+
+  setTimeout(()=>{
+
+    if(popupStack.length === 0){
+
+      document.body.classList.remove(
+        "popup-open"
+      );
+
+      unlockBodyScroll();
+
+    }
+
+  },300);
+
 };
 let itemsTotal = 0;
 let total = 0;
@@ -17949,7 +18004,14 @@ closeOrderPopup();
 
 if(document.getElementById("cartPopup")){
 document.getElementById("cartPopup")
-.classList.remove("show");
+.classList.add("show");
+
+popupStack.push("cartPopup");
+
+history.pushState(
+  { popup:"cartPopup" },
+  ""
+);
 }
 
 
@@ -18896,25 +18958,6 @@ if(video.readyState >= 2){
 
 })();
 
-window.addEventListener("popstate", function(){
-
-  // ONLY OPEN POPUPS
-  const popups =
-    document.querySelectorAll(".popup.show");
-
-  // IF POPUP OPEN
-  if(popups.length > 0){
-
-    popups.forEach(p=>{
-      p.classList.remove("show");
-    });
-
-    document.body.classList.remove("popup-open");
-
-    return;
-  }
-
-});
 
 
 
@@ -19052,20 +19095,44 @@ if (!window.__APP_INITIALIZED__) {
   }
 
 
-  /* =====================================================
-     FIX BACK BUTTON POPUP BUG
-  ===================================================== */
-  window.addEventListener("popstate", function () {
+ // 🔥 POPUP STACK
+let popupStack = [];
 
-    document.querySelectorAll(".popup.show")
-    .forEach(p => {
-      p.classList.remove("show");
-    });
+// 🔥 HANDLE IOS BACK SWIPE
+window.addEventListener("popstate", function(){
+
+  // no popup
+  if(popupStack.length === 0){
+    return;
+  }
+
+  // last opened popup
+  const lastPopupId =
+  popupStack.pop();
+
+  const popup =
+  document.getElementById(lastPopupId);
+
+ if(popup){
+
+  popup.classList.remove("show");
+
+  setTimeout(()=>{
+
+    popup.style.display = "none";
+
+  },300);
+
+}
+
+  // remove body lock only when all closed
+  if(popupStack.length === 0){
 
     document.body.classList.remove("popup-open");
 
-  });
+  }
 
+});
 
   /* =====================================================
      PREVENT MULTIPLE OBSERVER EXECUTION
