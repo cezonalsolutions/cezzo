@@ -3707,62 +3707,217 @@ h2{
   height:36px;
   position:relative;
 }
-
 /* 🎁 BOX */
 .giftBox{
+
   width:100%;
   height:100%;
-  background:#0f5c5c;
-  border-radius:6px;
+
   position:relative;
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+
+  border-radius:8px;
+
+  background:linear-gradient(
+    145deg,
+    #147070,
+    #0f5c5c
+  );
+
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.12),
+    0 4px 10px rgba(0,0,0,.15);
+
+  overflow:hidden;
+}
+
+
+/* ✨ SOFT SHINE */
+.giftBox::after{
+
+  content:"";
+
+  position:absolute;
+
+  top:-20%;
+  left:-40%;
+
+  width:35%;
+  height:160%;
+
+  background:rgba(255,255,255,.16);
+
+  transform:rotate(22deg);
+
+  animation:giftShine 2.8s linear infinite;
+}
+.giftAnim{
+
+  width:52px;
+  height:52px;
+
+  flex-shrink:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.giftRealImg{
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
+  display:block;
+
+  animation:giftFloat 2.8s ease-in-out infinite;
+
+  filter:
+    drop-shadow(
+      0 6px 10px rgba(0,0,0,.12)
+    );
+}
+
+@keyframes giftFloat{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-4px);
+  }
 }
 
 /* 🎀 VERTICAL RIBBON */
 .ribbonVertical{
+
   position:absolute;
+
   top:0;
   left:50%;
+
   transform:translateX(-50%);
-  width:6px;
+
+  width:7px;
   height:100%;
-  background:#ff2d2d;
+
+  background:linear-gradient(
+    180deg,
+    #ff5959,
+    #ff1f1f
+  );
+
+  box-shadow:
+    inset 1px 0 0 rgba(255,255,255,.25);
+
+  z-index:2;
 }
+
 
 /* 🎀 HORIZONTAL RIBBON */
 .ribbonHorizontal{
+
   position:absolute;
+
   top:50%;
   left:0;
+
   transform:translateY(-50%);
-  height:6px;
+
+  height:7px;
   width:100%;
-  background:#ff2d2d;
+
+  background:linear-gradient(
+    90deg,
+    #ff5959,
+    #ff1f1f
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25);
+
+  z-index:2;
 }
 
-/* 🎀 BOW (top knot) */
+
+/* 🎀 BOW */
 .ribbonBow{
+
   position:absolute;
-  top:-6px;
+
+  top:-5px;
   left:50%;
+
   transform:translateX(-50%);
+
   width:14px;
   height:10px;
 
-  background:#ff2d2d;
+  background:#ff3434;
+
   border-radius:50%;
 
+  z-index:3;
+
   box-shadow:
-    -6px 0 0 #ff2d2d,
-     6px 0 0 #ff2d2d;
+    -7px 0 0 #ff3434,
+     7px 0 0 #ff3434,
+     inset 0 1px 1px rgba(255,255,255,.25);
 
   animation:bowPop 1.8s infinite ease-in-out;
 }
 
-/* ✨ subtle animation */
+
+/* 🎀 SMALL CENTER KNOT */
+.ribbonBow::after{
+
+  content:"";
+
+  position:absolute;
+
+  top:50%;
+  left:50%;
+
+  width:5px;
+  height:5px;
+
+  background:#ff9a9a;
+
+  border-radius:50%;
+
+  transform:translate(-50%,-50%);
+}
+
+
+/* ✨ BOW ANIMATION */
 @keyframes bowPop{
-  0%,100%{ transform:translateX(-50%) scale(1); }
-  50%{ transform:translateX(-50%) scale(1.15); }
+
+  0%,100%{
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  50%{
+    transform:
+      translateX(-50%)
+      scale(1.12);
+  }
+}
+
+
+/* ✨ SHINE MOVE */
+@keyframes giftShine{
+
+  0%{
+    left:-40%;
+  }
+
+  100%{
+    left:140%;
+  }
 }
 /* Your Items — MAIN SECTION (bigger, bold, brand color) */
 #cartTitle {
@@ -6055,6 +6210,139 @@ h6{
   rotate(18deg);
 
 }
+/* WRAP */
+.cartBannerWrap{
+
+  position:relative;
+
+  margin:14px 12px 0;
+
+  overflow:hidden;
+
+  border-radius:18px;
+
+  height:140px;
+}
+
+/* SLIDER */
+.cartBannerSlider{
+
+  display:flex;
+
+  width:100%;
+  height:100%;
+
+  overflow-x:auto;
+
+  scroll-snap-type:x mandatory;
+
+  scroll-behavior:smooth;
+
+  -webkit-overflow-scrolling:touch;
+
+  scrollbar-width:none;
+}
+
+.cartBannerSlider::-webkit-scrollbar{
+  display:none;
+}
+
+/* SLIDE */
+.cartBannerSlide{
+
+  min-width:100%;
+  height:100%;
+
+  scroll-snap-align:start;
+
+  flex-shrink:0;
+}
+
+/* IMAGE */
+.cartBannerSlide img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  border-radius:18px;
+}
+
+/* DOTS */
+.cartDots{
+
+  position:absolute;
+
+  bottom:10px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  z-index:2;
+}
+
+.cartDot{
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.45);
+
+  transition:.3s;
+}
+
+.cartDot.active{
+
+  width:18px;
+
+  border-radius:20px;
+
+  background:#fff;
+}
+.cartBannerHeading{
+
+  padding:4px 16px 10px;
+}
+
+.cartBannerMini{
+
+  font-size:11px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  color:#8b5cf6;
+
+  margin-bottom:3px;
+}
+
+.cartBannerTitle{
+
+  font-size:22px;
+
+  font-weight:800;
+
+  line-height:1.1;
+
+  color:#111;
+
+  letter-spacing:-0.5px;
+}
 </style>
 </head>
 
@@ -7797,8 +8085,45 @@ Bite Delight Hub
 </div>
   <!-- 🔥 NEW SECTION (ADD HERE) -->
   <div class="cartRecoSection">
-    <div class="cartRecoHeader">Best Offers</div>
-<div id="cartRecoGrid" class="cartRecoGrid"></div> 
+    <div class="cartBannerHeading">
+
+  <div class="cartBannerMini">
+    Special for you
+  </div>
+
+  <div class="cartBannerTitle">
+    Deals you’ll love ✨
+  </div>
+
+</div>
+<div class="cartBannerWrap">
+
+  <div class="cartBannerSlider" id="cartBannerSlider">
+
+    <div class="cartBannerSlide">
+      <img src="baners/13.jpg">
+    </div>
+
+    <div class="cartBannerSlide">
+      <img src="baners/14.jpg">
+    </div>
+
+    <div class="cartBannerSlide">
+      <img src="baners/15.jpg">
+    </div>
+
+  </div>
+
+  <!-- DOTS -->
+  <div class="cartDots">
+
+    <span class="cartDot active"></span>
+    <span class="cartDot"></span>
+    <span class="cartDot"></span>
+
+  </div>
+
+</div>
  </div>
 </div>
 
@@ -7823,12 +8148,13 @@ Bite Delight Hub
 
 <div class="giftOptionNew" id="giftBox">
 
- <div class="giftAnim">
-  <div class="giftBox">
-    <div class="ribbonVertical"></div>
-    <div class="ribbonHorizontal"></div>
-    <div class="ribbonBow"></div>
-  </div>
+<div class="giftAnim">
+
+  <img
+    src="baners/gift.webp"
+    class="giftRealImg"
+  >
+
 </div>
 
   <div class="giftContent">
@@ -19556,7 +19882,76 @@ window.addEventListener('load', () => {
 
 });
 
+(() => {
 
+  const slider =
+    document.getElementById(
+      'cartBannerSlider'
+    );
+
+  const dots =
+    document.querySelectorAll(
+      '.cartDot'
+    );
+
+  if(!slider) return;
+
+  let index = 0;
+
+  const total = dots.length;
+
+  /* AUTO SLIDE */
+  setInterval(() => {
+
+    index++;
+
+    if(index >= total){
+      index = 0;
+    }
+
+    slider.scrollTo({
+      left:
+        slider.offsetWidth * index,
+
+      behavior:'smooth'
+    });
+
+    dots.forEach(d =>
+      d.classList.remove('active')
+    );
+
+    dots[index]
+    .classList.add('active');
+
+  },3000);
+
+
+  /* MANUAL SWIPE DOT UPDATE */
+
+  slider.addEventListener(
+    'scroll',
+    () => {
+
+      const i = Math.round(
+        slider.scrollLeft /
+        slider.offsetWidth
+      );
+
+      dots.forEach(d =>
+        d.classList.remove('active')
+      );
+
+      if(dots[i]){
+        dots[i]
+        .classList.add('active');
+      }
+
+      index = i;
+
+    }
+  );
+
+})();
 </script>
 </body>
 </html>
