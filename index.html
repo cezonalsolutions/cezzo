@@ -19163,11 +19163,22 @@ if(popup){
         diff > 120
       ){
 
-        popup.classList.remove("show");
+        // 🔥 instant fade
+        popup.style.opacity = "0";
+
+        popup.style.transform =
+        "translateX(100%)";
 
         setTimeout(()=>{
 
+          popup.classList.remove("show");
+
           popup.style.display = "none";
+
+          // 🔥 restore
+          popup.style.opacity = "";
+
+          popup.style.transform = "";
 
           unlockBodyScroll();
 
@@ -19175,7 +19186,7 @@ if(popup){
             "popup-open"
           );
 
-        },300);
+        },180);
 
       }
 
