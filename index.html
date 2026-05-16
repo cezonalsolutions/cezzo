@@ -5876,6 +5876,185 @@ h6{
   }
 
 }
+.dealTopPremium{
+
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:12px 14px;
+
+  border-radius:20px;
+
+  background:#fff;
+
+  margin-bottom:14px;
+
+  border:1px solid #ececec;
+
+  overflow:hidden;
+
+}
+
+
+/* LEFT */
+.dealLeftBox{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  z-index:2;
+
+}
+
+
+/* BADGE */
+.dealBadge{
+
+  width:52px;
+
+  height:52px;
+
+  border-radius:16px;
+
+  background:#5b34e6;
+
+  color:#ffe44d;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:28px;
+
+  font-weight:900;
+
+}
+
+
+/* STORE */
+.dealStore{
+
+  font-size:28px;
+
+  font-weight:800;
+
+  color:#222;
+
+  line-height:1;
+
+}
+
+
+/* RIGHT */
+.dealOfferText{
+
+  text-align:left;
+
+  z-index:2;
+
+}
+
+.dealOfferTitle{
+
+  font-size:13px;
+
+  font-weight:700;
+
+  color:#222;
+
+}
+
+.dealOfferSub{
+
+  margin-top:2px;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  color:#5b34e6;
+
+  line-height:1.3;
+
+}
+
+
+/* REAL COINS */
+.dealCoin{
+
+  position:absolute;
+
+  width:34px;
+
+  opacity:.95;
+
+  pointer-events:none;
+
+  z-index:1;
+
+}
+
+.coin1{
+
+  top:10px;
+
+  right:16px;
+
+  transform:
+  rotate(18deg);
+
+}
+
+.coin2{
+
+  bottom:8px;
+
+  right:90px;
+
+  width:28px;
+
+  transform:
+  rotate(-18deg);
+
+}
+
+
+/* SHINE */
+.dealShine{
+
+  position:absolute;
+
+  top:-40px;
+
+  right:-60px;
+
+  width:140px;
+
+  height:180px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(91,52,230,.08),
+    rgba(91,52,230,0)
+  );
+
+  transform:
+  rotate(18deg);
+
+}
 </style>
 </head>
 
@@ -6270,19 +6449,50 @@ style="
 
 
 <div id="productSection81" class="dealMainSection dealLocked">
+<div class="dealTopPremium">
 
-  <div class="dealTop">
+  <!-- LEFT -->
+  <div class="dealLeftBox">
 
-    <div class="dealTitle">
-      ₹1 Deals
+    <div class="dealBadge">
+      ₹1
     </div>
 
-    <div class="dealSub">
-Shop above ₹200 to avail ₹1 deals   
- </div>
-
+    <div class="dealStore">
+      Store
+    </div>
 
   </div>
+
+  <!-- RIGHT -->
+  <div class="dealOfferText">
+
+    <div class="dealOfferTitle">
+      Shop for ₹199 to
+    </div>
+
+    <div class="dealOfferSub">
+      get one item at ₹1
+    </div>
+
+  </div>
+
+  <!-- COINS -->
+  <img
+    src="coin1.webp"
+    
+    class="dealCoin coin1"
+  >
+
+  <img
+    src="coin1.webp"
+    class="dealCoin coin2"
+  >
+
+  <!-- SHINE -->
+  <div class="dealShine"></div>
+
+</div>
 
 
   <!-- 🔒 LOCK OVERLAY -->
@@ -6302,8 +6512,7 @@ Shop above ₹200 to avail ₹1 deals
 
   <!-- PRODUCTS -->
 
-  <div class="dealScroll" class="productSectionWithHeading">
-
+  <div class="dealScroll">
     <div class="dealGrid" id="productGrid81"></div>
 
   </div>
@@ -18116,9 +18325,9 @@ document
 
   // 🔥 find product grid
   const grid =
-  section.querySelector(
-    ".productGrid"
-  );
+section.querySelector(
+  ".productGrid, .dealGrid"
+);
 
   if(!grid) return;
 
@@ -18198,10 +18407,10 @@ new IntersectionObserver(entries=>{
     const section =
     entry.target;
 
-    const grid =
-    section.querySelector(
-      ".productGrid"
-    );
+   const grid =
+section.querySelector(
+  ".productGrid, .dealGrid"
+);
 
     const skel =
     section.querySelector(
