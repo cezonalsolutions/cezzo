@@ -6259,67 +6259,16 @@ h6{
 }
 
 /* IMAGE */
-/* IMAGE */
 .cartBannerSlide img{
 
   width:100%;
   height:100%;
 
-  display:block;
-
   object-fit:cover;
 
-  object-position:center center;
+  object-position:center;
 
-  border-radius:18px;
-
-  /* 🔥 MOBILE IMAGE QUALITY FIX */
-  image-rendering:auto;
-
-  /* 🔥 smoother scaling */
-  transform:scale(1.02);
-
-  transition:transform .5s ease;
-
-  /* 🔥 remove blur on mobile */
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-
-  will-change:transform;
-}
-
-/* OPTIONAL PREMIUM SLOW MOTION */
-.cartBannerSlide.active img{
-  transform:scale(1.06);
-}
-/* WRAP FIX */
-.cartBannerWrap{
-
-  position:relative;
-
-  margin:14px 12px 0;
-
-  overflow:hidden;
-
-  border-radius:18px;
-
-  height:150px;
-
-  /* 🔥 prevents mobile side scroll */
-  width:calc(100% - 24px);
-}
-
-/* SLIDE */
-.cartBannerSlide{
-
-  position:relative;
-
-  min-width:100%;
-  height:100%;
-
-  flex-shrink:0;
-
-  overflow:hidden;
+  display:block;
 
   border-radius:18px;
 }
@@ -6480,6 +6429,264 @@ h6{
       translateY(0)
       scale(1);
   }
+}
+.scene{
+  position:relative;
+  width:calc(100% - 24px);
+  margin:0 12px;
+  height:140px;
+  overflow:hidden;
+
+  /* ONLY TOP ROUNDED */
+  border-radius:22px 22px 0 0;
+
+  background:linear-gradient(to top,#ffcf71,#2376dd);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.28),
+    inset 0 0 10px rgba(255,255,255,.15);
+}
+
+/* SUN */
+
+.sun{
+  position:absolute;
+  top:8px;
+  right:18px;
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff176,#ff9800);
+  box-shadow:
+    0 0 35px #ff9800,
+    0 0 70px rgba(255,152,0,.6);
+  animation:sunPulse 4s infinite ease-in-out;
+}
+
+@keyframes sunPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
+
+/* CLOUDS */
+
+.cloud{
+  position:absolute;
+  width:70px;
+  height:24px;
+  background:white;
+  border-radius:50px;
+  opacity:.9;
+  transform:scale(.6);
+}
+
+.cloud::before,
+.cloud::after{
+  content:"";
+  position:absolute;
+  background:white;
+  border-radius:50%;
+}
+
+.cloud::before{
+  width:30px;
+  height:30px;
+  top:-15px;
+  left:12px;
+}
+
+.cloud::after{
+  width:40px;
+  height:40px;
+  top:-20px;
+  right:8px;
+}
+
+.cloud1{
+  top:18px;
+  left:-100px;
+  animation:cloudMove 14s linear infinite;
+}
+
+.cloud2{
+  top:45px;
+  left:-180px;
+  animation:cloudMove 18s linear infinite;
+}
+
+@keyframes cloudMove{
+  from{
+    transform:translateX(0) scale(.6);
+  }
+  to{
+    transform:translateX(700px) scale(.6);
+  }
+}
+
+/* TREES */
+
+.tree{
+  position:absolute;
+  bottom:42px;
+  width:10px;
+  height:42px;
+  background:#6d4c41;
+  transform:scale(.7);
+}
+
+.tree::before{
+  content:"";
+  position:absolute;
+  bottom:18px;
+  left:-14px;
+  width:38px;
+  height:38px;
+  background:#2e7d32;
+  border-radius:50%;
+}
+
+.t1{
+  left:-50px;
+  animation:treeMove 2.5s linear infinite;
+}
+
+.t2{
+  left:-180px;
+  animation:treeMove 3.5s linear infinite;
+}
+
+.t3{
+  left:-300px;
+  animation:treeMove 4.5s linear infinite;
+}
+
+@keyframes treeMove{
+  from{
+    transform:translateX(0) scale(.7);
+  }
+  to{
+    transform:translateX(700px) scale(.7);
+  }
+}
+
+/* ROAD */
+
+.road{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:42px;
+  background:#2b2b2b;
+}
+
+.road::before{
+  content:"";
+  position:absolute;
+  top:18px;
+  width:100%;
+  height:4px;
+  background:repeating-linear-gradient(
+    to right,
+    white 0,
+    white 35px,
+    transparent 35px,
+    transparent 70px
+  );
+  animation:roadMove .4s linear infinite;
+}
+
+@keyframes roadMove{
+  from{background-position-x:0;}
+  to{background-position-x:-70px;}
+}
+
+/* BIKE */
+
+.bike-container{
+  position:absolute;
+  bottom:4px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:5;
+  animation:bikeFloat .7s infinite ease-in-out;
+}
+
+@keyframes bikeFloat{
+  0%,100%{
+    transform:translateX(-50%) translateY(0px);
+  }
+  50%{
+    transform:translateX(-50%) translateY(-4px);
+  }
+}
+
+.bike-img{
+  width:145px;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 12px rgba(0,0,0,.35));
+  animation:bikeShake .15s infinite linear;
+}
+
+@keyframes bikeShake{
+  0%{transform:rotate(0deg);}
+  25%{transform:rotate(.3deg);}
+  50%{transform:rotate(0deg);}
+  75%{transform:rotate(-.3deg);}
+  100%{transform:rotate(0deg);}
+}
+
+/* SPEED */
+
+.speed{
+  position:absolute;
+  height:3px;
+  border-radius:20px;
+  background:linear-gradient(to right,transparent,white);
+  animation:speedRun .35s linear infinite;
+}
+
+.speed1{
+  width:70px;
+  left:-75px;
+  top:35px;
+}
+
+.speed2{
+  width:50px;
+  left:-55px;
+  top:60px;
+  animation-delay:.1s;
+}
+
+.speed3{
+  width:65px;
+  left:-70px;
+  top:85px;
+  animation-delay:.2s;
+}
+
+@keyframes speedRun{
+  from{
+    opacity:0;
+    transform:translateX(0);
+  }
+  to{
+    opacity:1;
+    transform:translateX(-40px);
+  }
+}
+
+/* GLOW */
+
+.glow{
+  position:absolute;
+  width:180px;
+  height:40px;
+  background:rgba(255,255,255,.18);
+  filter:blur(30px);
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
 }
 </style>
 </head>
@@ -8234,32 +8441,38 @@ Bite Delight Hub
   </div>
 
 </div>
-<div class="cartBannerWrap">
+<div class="scene">
 
-  <div class="cartBannerSlider" id="cartBannerSlider">
+  <!-- SUN -->
+  <div class="sun"></div>
 
-    <div class="cartBannerSlide">
-      <img src="baners/16.png">
-    </div>
+  <!-- CLOUDS -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
 
-    <div class="cartBannerSlide">
-      <img src="baners/14.jpg">
-    </div>
+  <!-- TREES -->
+  <div class="tree t1"></div>
+  <div class="tree t2"></div>
+  <div class="tree t3"></div>
 
-    <div class="cartBannerSlide">
-      <img src="baners/15.jpg">
-    </div>
+  <!-- GLOW -->
+  <div class="glow"></div>
+
+  <!-- BIKE -->
+  <div class="bike-container">
+
+    <!-- YOUR BIKE IMAGE -->
+    <img src="sam.png" class="bike-img" alt="bike">
+
+    <!-- SPEED -->
+    <div class="speed speed1"></div>
+    <div class="speed speed2"></div>
+    <div class="speed speed3"></div>
 
   </div>
 
-  <!-- DOTS -->
-  <div class="cartDots">
-
-    <span class="cartDot active"></span>
-    <span class="cartDot"></span>
-    <span class="cartDot"></span>
-
-  </div>
+  <!-- ROAD -->
+  <div class="road"></div>
 
 </div>
  </div>
