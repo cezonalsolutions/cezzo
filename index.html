@@ -19276,8 +19276,8 @@ setTimeout(()=>{
       // 🔥 horizontal drag only
       if(isHorizontal4){
 
-        const move =
-        x - startX4;
+       const move =
+(x - startX4) * 1.8;
 
         velocity4 =
         x - lastX4;
@@ -19307,7 +19307,7 @@ setTimeout(()=>{
           best4.scrollLeft -=
           velocity4;
 
-          velocity4 *= 0.95;
+          velocity4 *= 0.98;
 
           if(
             Math.abs(velocity4) > 0.5
