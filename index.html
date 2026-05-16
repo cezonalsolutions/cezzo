@@ -5784,7 +5784,18 @@ h6{
   transform:rotate(-28deg);
 
 }
+.productCard2 img{
+  display:block;
 
+  transform:translateZ(0);
+
+  backface-visibility:hidden;
+}
+
+.productGrid,
+.dealGrid{
+  transform:translateZ(0);
+}
 
 /* gold */
 .r2{
@@ -19439,6 +19450,89 @@ if(popup){
   });
 
 })();
+
+window.addEventListener('load', () => {
+
+  /* FORCE PRODUCT IMAGE RENDER */
+
+  document
+  .querySelectorAll('.productCard2 img')
+  .forEach(img => {
+
+    img.loading = 'eager';
+
+    img.style.display = 'block';
+
+    img.style.transform =
+      'translateZ(0)';
+
+    img.style.backfaceVisibility =
+      'hidden';
+
+    /* preload */
+    const preload = new Image();
+
+    preload.src = img.src;
+
+    /* safari decode */
+    if(img.decode){
+
+      img.decode()
+      .catch(()=>{});
+
+    }
+
+  });
+
+
+  /* FORCE PRICE + TEXT RENDER */
+
+  document
+  .querySelectorAll(
+    '.pPrice2,.pName2,.brand2'
+  )
+  .forEach(el => {
+
+    el.style.transform =
+      'translateZ(0)';
+
+    el.style.backfaceVisibility =
+      'hidden';
+
+  });
+
+
+  /* FORCE GRID PAINT */
+
+  requestAnimationFrame(() => {
+
+    requestAnimationFrame(() => {
+
+      document
+      .querySelectorAll(
+        '.productGrid,.dealGrid'
+      )
+      .forEach(g => {
+
+        /* force layout */
+        g.offsetHeight;
+
+        g.style.opacity = '1';
+
+        g.style.visibility =
+          'visible';
+
+        g.style.transform =
+          'translateZ(0)';
+
+      });
+
+    });
+
+  });
+
+});
+
 
 </script>
 </body>
