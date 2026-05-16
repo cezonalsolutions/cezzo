@@ -19341,6 +19341,105 @@ if(popup){
 
 })();
 
+(() => {
+
+  document.querySelectorAll(
+    '.cartRecoGrid'
+  ).forEach(g => {
+
+    console.log('CART FIX READY');
+
+    let startX = 0;
+    let startY = 0;
+
+    let currentX = 0;
+
+    let startScroll = 0;
+
+    let locked = null;
+
+    let ticking = false;
+
+    g.style.touchAction = 'pan-y';
+
+    g.style.webkitOverflowScrolling =
+      'touch';
+
+    g.addEventListener('touchstart', e => {
+
+      const t = e.touches[0];
+
+      startX = t.clientX;
+      startY = t.clientY;
+
+      currentX = t.clientX;
+
+      startScroll = g.scrollLeft;
+
+      locked = null;
+
+      ticking = false;
+
+    }, { passive:true });
+
+    g.addEventListener('touchmove', e => {
+
+      const t = e.touches[0];
+
+      currentX = t.clientX;
+
+      const dx = currentX - startX;
+      const dy = t.clientY - startY;
+
+      if (locked === null) {
+
+        if (
+          Math.abs(dx) > 12 ||
+          Math.abs(dy) > 12
+        ) {
+
+          locked =
+
+            Math.abs(dx) >
+            Math.abs(dy) * 1.4
+
+              ? 'horizontal'
+              : 'vertical';
+        }
+      }
+
+      if (locked === 'vertical') {
+        return;
+      }
+
+      if (locked === 'horizontal') {
+
+        e.preventDefault();
+
+        if (!ticking) {
+
+          requestAnimationFrame(() => {
+
+            const move =
+              currentX - startX;
+
+            g.scrollLeft =
+              startScroll - move;
+
+            ticking = false;
+
+          });
+
+          ticking = true;
+        }
+      }
+
+    }, { passive:false });
+
+  });
+
+})();
+
 </script>
 </body>
 </html>
