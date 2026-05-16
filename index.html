@@ -19125,6 +19125,66 @@ function smoothNavigate(url){
 }
 
 
+// 🔥 IOS EDGE SWIPE CLOSE POPUP
+
+const popup =
+document.getElementById("popup");
+
+if(popup){
+
+  popup.style.touchAction = "pan-y";
+
+  let startX = 0;
+
+  popup.addEventListener(
+    "touchstart",
+    e => {
+
+      startX =
+      e.touches[0].clientX;
+
+    },
+    { passive:true }
+  );
+
+  popup.addEventListener(
+    "touchend",
+    e => {
+
+      const endX =
+      e.changedTouches[0].clientX;
+
+      const diff =
+      endX - startX;
+
+      // 🔥 LEFT EDGE SWIPE
+      if(
+        startX < 40 &&
+        diff > 120
+      ){
+
+        popup.classList.remove("show");
+
+        setTimeout(()=>{
+
+          popup.style.display = "none";
+
+          unlockBodyScroll();
+
+          document.body.classList.remove(
+            "popup-open"
+          );
+
+        },300);
+
+      }
+
+    },
+    { passive:true }
+  );
+
+}
+
 
 
 </script>
