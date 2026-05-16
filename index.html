@@ -19199,6 +19199,148 @@ if(popup){
 
 
 
+(() => {
+
+  /* NORMAL PRODUCT ROWS */
+  document.querySelectorAll(
+    '.productGrid, .midGrid'
+  ).forEach(g => {
+
+    let startX = 0;
+    let startY = 0;
+
+    let startScroll = 0;
+
+    let locked = null;
+
+    g.style.touchAction = 'pan-y';
+
+    g.addEventListener('touchstart', e => {
+
+      const t = e.touches[0];
+
+      startX = t.clientX;
+      startY = t.clientY;
+
+      startScroll = g.scrollLeft;
+
+      locked = null;
+
+    }, { passive:true });
+
+    g.addEventListener('touchmove', e => {
+
+      const t = e.touches[0];
+
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+
+      /* smarter direction detection */
+      if (locked === null) {
+
+        if (
+          Math.abs(dx) > 12 ||
+          Math.abs(dy) > 12
+        ) {
+
+          locked =
+
+            Math.abs(dx) >
+            Math.abs(dy) * 1.4
+
+              ? 'horizontal'
+              : 'vertical';
+        }
+      }
+
+      /* allow page vertical scroll */
+      if (locked === 'vertical') {
+        return;
+      }
+
+      /* horizontal scroll */
+      if (locked === 'horizontal') {
+
+        e.preventDefault();
+
+        g.scrollLeft = startScroll - dx;
+      }
+
+    }, { passive:false });
+
+  });
+
+
+  /* DEAL GRID */
+  document.querySelectorAll('.dealScroll')
+  .forEach(s => {
+
+    let startX = 0;
+    let startY = 0;
+
+    let startScroll = 0;
+
+    let locked = null;
+
+    s.style.touchAction = 'pan-y';
+
+    s.addEventListener('touchstart', e => {
+
+      const t = e.touches[0];
+
+      startX = t.clientX;
+      startY = t.clientY;
+
+      startScroll = s.scrollLeft;
+
+      locked = null;
+
+    }, { passive:true });
+
+    s.addEventListener('touchmove', e => {
+
+      const t = e.touches[0];
+
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+
+      /* smarter direction detection */
+      if (locked === null) {
+
+        if (
+          Math.abs(dx) > 12 ||
+          Math.abs(dy) > 12
+        ) {
+
+          locked =
+
+            Math.abs(dx) >
+            Math.abs(dy) * 1.4
+
+              ? 'horizontal'
+              : 'vertical';
+        }
+      }
+
+      /* allow vertical page scroll */
+      if (locked === 'vertical') {
+        return;
+      }
+
+      /* horizontal deal scroll */
+      if (locked === 'horizontal') {
+
+        e.preventDefault();
+
+        s.scrollLeft = startScroll - dx;
+      }
+
+    }, { passive:false });
+
+  });
+
+})();
+
 </script>
 </body>
 </html>
