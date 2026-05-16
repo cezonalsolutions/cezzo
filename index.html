@@ -6480,7 +6480,7 @@ style="
   <!-- COINS -->
   <img
     src="coin1.webp"
-
+    
     class="dealCoin coin1"
   >
 
@@ -10250,17 +10250,7 @@ if(buyBtn){
 }
 
 requestAnimationFrame(()=>{
-
   popup.classList.add("show");
-
-  // 🔥 ADD THIS
-  popupStack.push("popup");
-
-  history.pushState(
-    { popup:"popup" },
-    ""
-  );
-
 });
 
 console.log("✅ Popup opened");
@@ -10315,20 +10305,13 @@ initAllUI();
   },100);
 }
 function closePopup(){
-
-  history.back();
+  popup.classList.remove("show");
 
   setTimeout(()=>{
-
-    // 🔥 if no popup left
-    if(popupStack.length === 0){
-
-      unlockBodyScroll();
-
-    }
-
+    popup.style.display = "none";
+    unlockBodyScroll();
   },300);
-
+  
 }
 loadProducts();
 window.addEventListener("load", () => {
@@ -15990,20 +15973,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
- closeBtn.addEventListener("click", () => {
-
-  history.back();
-
-  setTimeout(()=>{
-
-    if(popupStack.length === 0){
-
-      unlockBodyScroll();
-
-    }
-
-  },300);
-
+  // Close popup
+  closeBtn.addEventListener("click", () => {
+    popup.classList.remove("show");
+    unlockBodyScroll();
+  });
 });
 async function loadCategoryProducts(tableName, ids) {
   const grid = document.getElementById("categoryGrid");
@@ -16192,21 +16166,10 @@ if(Object.keys(updatedCart).length === 0){
 
   // hide popup
   const cartPopup = document.getElementById("cartPopup");
-  history.back();
+  cartPopup.classList.remove("show");
 
-setTimeout(()=>{
+  document.body.classList.remove("popup-open");
 
-  if(popupStack.length === 0){
-
-    document.body.classList.remove(
-      "popup-open"
-    );
-
-    unlockBodyScroll();
-
-  }
-
-},300);
   // also hide mini cart
   const mini = document.getElementById("miniCart");
   mini.classList.remove("show");
@@ -16571,12 +16534,9 @@ viewBtn.addEventListener("click", (e) => {
 
   e.stopPropagation();
 
-  popupStack.push("cartPopup");
+  // 🔥 ADD NEW HISTORY EVERY OPEN
+  openPopupHistory();
 
-history.pushState(
-  { popup:"cartPopup" },
-  ""
-);
   cartPopup.classList.add("show");
 
   document.body.classList.add("popup-open");
@@ -16596,23 +16556,8 @@ history.pushState(
 
 });
 document.querySelector(".backBtn").onclick = () => {
-
-  history.back();
-
-  setTimeout(()=>{
-
-    if(popupStack.length === 0){
-
-      document.body.classList.remove(
-        "popup-open"
-      );
-
-      unlockBodyScroll();
-
-    }
-
-  },300);
-
+  cartPopup.classList.remove("show");
+  document.body.classList.remove("popup-open");
 };
 let itemsTotal = 0;
 let total = 0;
@@ -18004,14 +17949,7 @@ closeOrderPopup();
 
 if(document.getElementById("cartPopup")){
 document.getElementById("cartPopup")
-.classList.add("show");
-
-popupStack.push("cartPopup");
-
-history.pushState(
-  { popup:"cartPopup" },
-  ""
-);
+.classList.remove("show");
 }
 
 
@@ -18958,6 +18896,25 @@ if(video.readyState >= 2){
 
 })();
 
+window.addEventListener("popstate", function(){
+
+  // ONLY OPEN POPUPS
+  const popups =
+    document.querySelectorAll(".popup.show");
+
+  // IF POPUP OPEN
+  if(popups.length > 0){
+
+    popups.forEach(p=>{
+      p.classList.remove("show");
+    });
+
+    document.body.classList.remove("popup-open");
+
+    return;
+  }
+
+});
 
 
 
@@ -19095,44 +19052,20 @@ if (!window.__APP_INITIALIZED__) {
   }
 
 
- // 🔥 POPUP STACK
-let popupStack = [];
+  /* =====================================================
+     FIX BACK BUTTON POPUP BUG
+  ===================================================== */
+  window.addEventListener("popstate", function () {
 
-// 🔥 HANDLE IOS BACK SWIPE
-window.addEventListener("popstate", function(){
-
-  // no popup
-  if(popupStack.length === 0){
-    return;
-  }
-
-  // last opened popup
-  const lastPopupId =
-  popupStack.pop();
-
-  const popup =
-  document.getElementById(lastPopupId);
-
- if(popup){
-
-  popup.classList.remove("show");
-
-  setTimeout(()=>{
-
-    popup.style.display = "none";
-
-  },300);
-
-}
-
-  // remove body lock only when all closed
-  if(popupStack.length === 0){
+    document.querySelectorAll(".popup.show")
+    .forEach(p => {
+      p.classList.remove("show");
+    });
 
     document.body.classList.remove("popup-open");
 
-  }
+  });
 
-});
 
   /* =====================================================
      PREVENT MULTIPLE OBSERVER EXECUTION
