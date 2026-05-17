@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <title>Help & Support</title>
 
@@ -182,11 +182,13 @@ if(!checkName || !checkMobile){
 // 🔥 BACK
 function goBack(){
 
-  // 🔥 skip intro next time
-  sessionStorage.setItem("skipIntro","true");
+  sessionStorage.setItem(
+    "skipIntro",
+    "true"
+  );
 
-  // 🔥 go to index page directly (no intro)
-  window.location.href = "index.html";
+  window.location.href =
+    "order.html";
 }
 
 // 🔥 Supabase safe init
