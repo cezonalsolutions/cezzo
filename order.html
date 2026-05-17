@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Orders</title>
 
 <style>
@@ -13,7 +12,13 @@ body{
   background:#f7f8fa;
   font-family:Segoe UI,sans-serif;
 }
-
+html,body{
+  overflow-x:hidden;
+  max-width:100%;
+}
+*{
+  box-sizing:border-box;
+}
 /* 🔥 HEADER */
 .header{
   display:flex;
@@ -194,6 +199,49 @@ body{
   font-size:15px;
   font-weight:600;
 }
+.accountMenu{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.menuCard{
+  background:#fff;
+  border-radius:16px;
+  padding:18px 16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  box-shadow:0 4px 14px rgba(0,0,0,0.05);
+
+  cursor:pointer;
+}
+
+.menuLeft{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  font-size:15px;
+  font-weight:600;
+}
+
+.menuLeft i{
+  width:36px;
+  height:36px;
+
+  border-radius:12px;
+
+  background:#f3f4f6;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#111;
+}
 </style>
 </head>
 
@@ -206,7 +254,7 @@ body{
   <div class="backBtn" onclick="goBack()">
     <i class="fa-solid fa-arrow-left"></i>
   </div>
-  <div class="headerTitle">My Orders</div>
+<div class="headerTitle">My Account</div>
 </div>
 
 <div class="container">
@@ -214,7 +262,82 @@ body{
 <div class="loaderWrap" id="loader">
   <div class="loader" id="iosLoader"></div>
 </div>
+<div class="accountMenu">
+
+  <div class="menuCard" onclick="openOrdersPage()">
+    <div class="menuLeft">
+      <i class="fa-solid fa-box"></i>
+      <span>Your Orders</span>
+    </div>
+
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+
+  <div class="menuCard" onclick="window.location.href='help.html'">
+
+  <div class="menuLeft">
+    <i class="fa-solid fa-headset"></i>
+    <span>Help & Support</span>
+  </div>
+
+  <i class="fa-solid fa-chevron-right"></i>
+
+</div>
+
+ <div class="menuCard" onclick="window.location.href='privacypolicy.html'">
+
+  <div class="menuLeft">
+    <i class="fa-solid fa-shield"></i>
+    <span>Privacy Policy</span>
+  </div>
+
+  <i class="fa-solid fa-chevron-right"></i>
+
+</div>
+
+<div class="menuCard" onclick="window.location.href='terms.html'">
+
+  <div class="menuLeft">
+    <i class="fa-solid fa-file-contract"></i>
+    <span>Terms & Conditions</span>
+  </div>
+
+  <i class="fa-solid fa-chevron-right"></i>
+
+</div>
+
+  <div class="menuCard">
+  <div class="menuLeft">
+    <i class="fa-solid fa-rotate-left"></i>
+    <span>Refund Policy</span>
+  </div>
+
+  <i class="fa-solid fa-chevron-right"></i>
+</div>
+
+<div class="menuCard">
+  <div class="menuLeft">
+    <i class="fa-solid fa-circle-question"></i>
+    <span>FAQ</span>
+  </div>
+
+  <i class="fa-solid fa-chevron-right"></i>
+</div>
+
+<div class="menuCard">
+  <div class="menuLeft">
+    <i class="fa-solid fa-circle-info"></i>
+    <span>About Us</span>
+  </div>
+
+  <i class="fa-solid fa-chevron-right"></i>
+</div>
+</div>
+
+<!-- 🔥 HIDDEN ORDERS -->
+<div id="ordersSection" style="display:none;">
   <div id="ordersList"></div>
+</div>
 </div>
 <!-- 🔥 ORDER DETAILS POPUP -->
 <div id="orderPopup" style="display:none; position:fixed; inset:0; background:#fff; z-index:9999; overflow-y:auto;">
@@ -276,9 +399,7 @@ var supabase = window.supabase.createClient(
 
 const mobile = localStorage.getItem("userMobile");
 
-function goBack(){
-  window.history.back();
-}
+
 
 // 🔥 LOAD PRODUCTS
 async function loadProductMap(){
@@ -716,11 +837,49 @@ function logout(){
 
 function goBack(){
 
-  // 🔥 skip intro next time
-  sessionStorage.setItem("skipIntro","true");
+  const ordersSection =
+    document.getElementById(
+      "ordersSection"
+    );
 
-  // 🔥 go to main page
-  window.location.href = "index.html";
+  const accountMenu =
+    document.querySelector(
+      ".accountMenu"
+    );
+
+  const title =
+    document.querySelector(
+      ".headerTitle"
+    );
+
+  // 🔥 IF INSIDE ORDERS
+  if(
+    ordersSection &&
+    ordersSection.style.display === "block"
+  ){
+
+    // SHOW MENU AGAIN
+    ordersSection.style.display = "none";
+
+    accountMenu.style.display = "flex";
+
+    title.innerText = "My Account";
+
+// 🔥 SHOW LOGOUT AGAIN
+document.querySelector(".logoutWrap")
+.style.display = "flex";
+
+    return;
+  }
+
+  // 🔥 OTHERWISE GO HOME
+  sessionStorage.setItem(
+    "skipIntro",
+    "true"
+  );
+
+  window.location.href =
+    "index.html";
 }
 async function cancelOrder(orderId){
 
@@ -740,7 +899,22 @@ async function cancelOrder(orderId){
   // 🔥 reload orders (clean refresh)
   location.reload();
 }
+function openOrdersPage(){
 
+  document.querySelector(".accountMenu")
+  .style.display = "none";
+
+  document.getElementById("ordersSection")
+  .style.display = "block";
+
+  document.querySelector(".headerTitle")
+  .innerText = "Your Orders";
+
+  // 🔥 HIDE LOGOUT
+  document.querySelector(".logoutWrap")
+  .style.display = "none";
+
+}
 </script>
 
 </body>
