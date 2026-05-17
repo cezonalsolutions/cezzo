@@ -1616,18 +1616,21 @@ transform:translateZ(0);
 
 /* video item special */
 .videoNav{
-  justify-content:center;
+  justify-content:flex-end;
+  padding-right:-12px;
 }
 
 /* video icon */
 .videoNav video{
-  width:46px;
-  height:30px;
-  object-fit:cover;
+  width:40px;
+  height:40px;
+
+  object-fit:contain;
+
   border-radius:6px;
+
   display:block;
 }
-
 /* OPTIONAL: make it slightly bigger than others */
 .videoNav{
   transform:translateY(-2px);
@@ -7224,6 +7227,105 @@ line-height:1.7;
 
 color:#8a6300;
 }
+.addCartBtn{
+
+  width:100%;
+
+  height:42px;
+
+  margin-top:14px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#0f172a;
+
+  color:#fff;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.2s ease;
+}
+
+.addCartBtn:active{
+  transform:scale(0.98);
+}
+@keyframes shakeBtn{
+
+  0%{ transform:translateX(0); }
+
+  25%{ transform:translateX(-6px); }
+
+  50%{ transform:translateX(6px); }
+
+  75%{ transform:translateX(-4px); }
+
+  100%{ transform:translateX(0); }
+
+}
+
+.shakeBtn{
+  animation:shakeBtn 0.35s ease;
+}
+.fileActions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.qtyBtn{
+  width:28px;
+  height:28px;
+
+  border:none;
+
+  border-radius:8px;
+
+  background:#111;
+
+  color:#fff;
+
+  font-size:16px;
+  font-weight:700;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:0.15s ease;
+}
+
+.qtyBtn:active{
+  transform:scale(0.92);
+}
+
+.copyCount{
+
+  min-width:24px;
+
+  height:28px;
+
+  padding:0 8px;
+
+  border-radius:8px;
+
+  background:#f3f4f6;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:13px;
+  font-weight:700;
+
+  color:#111;
+}
 </style>
 </head>
 
@@ -8826,7 +8928,7 @@ Bite Delight Hub
 
   <div class="navItem videoNav">
     <video 
-  src="offer.mp4" 
+  src="cat/catoff.mp4" 
   autoplay 
   muted 
   loop 
@@ -9224,8 +9326,13 @@ Bite Delight Hub
       files may delay processing.
 
     </div>
+ <button class="addCartBtn">
 
+  Add
+
+</button>
   </div>
+
 
 </div>
 
@@ -21436,9 +21543,25 @@ document
 
         </div>
 
-        <div class="removeFile">
-          <i class="fa fa-times"></i>
-        </div>
+       <div class="fileActions">
+
+  <button class="qtyBtn minusBtn">
+    -
+  </button>
+
+  <span class="copyCount">
+    1
+  </span>
+
+  <button class="qtyBtn plusBtn">
+    +
+  </button>
+
+  <div class="removeFile">
+    <i class="fa fa-times"></i>
+  </div>
+
+</div>
       `;
 
       // REMOVE
@@ -21462,7 +21585,40 @@ document
         }
 
       };
+let qty = 1;
 
+const qtyText =
+  div.querySelector(
+    ".copyCount"
+  );
+
+div
+.querySelector(".plusBtn")
+.onclick = function(e){
+
+  e.stopPropagation();
+
+  qty++;
+
+  qtyText.innerText = qty;
+
+};
+
+div
+.querySelector(".minusBtn")
+.onclick = function(e){
+
+  e.stopPropagation();
+
+  if(qty > 1){
+
+    qty--;
+
+    qtyText.innerText = qty;
+
+  }
+
+};
       fileList.appendChild(div);
 
     },1800);
@@ -21479,6 +21635,43 @@ document
   }
 
 });
+
+
+
+document
+.querySelector(".addCartBtn")
+.onclick = function(){
+
+  // 🔥 CHECK FILES
+  const files =
+    document.querySelectorAll(
+      ".fileItem"
+    );
+
+  if(files.length === 0){
+
+    const btn = this;
+
+    // 🔥 SHAKE
+    btn.classList.add(
+      "shakeBtn"
+    );
+
+    setTimeout(()=>{
+
+      btn.classList.remove(
+        "shakeBtn"
+      );
+
+    },400);
+
+    return;
+  }
+
+};
+
+
+
 </script>
 </body>
 </html>
