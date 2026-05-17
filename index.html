@@ -9001,15 +9001,18 @@ Bite Delight Hub
   <p>Xerox</p>
 </div>
 
-  <div class="navItem videoNav">
-    <video 
-  src="cat/catoff.mp4" 
-  autoplay 
-  muted 
-  loop 
-  playsinline 
-  preload="none">
-</video>
+  <div class="navItem videoNav" onclick="openGame()">
+
+  <video 
+    src="cat/catoff.mp4" 
+    autoplay 
+    muted 
+    loop 
+    playsinline 
+    preload="none">
+  </video>
+
+</div>
   </div>
 
 </div>
@@ -20689,7 +20692,11 @@ window.addEventListener("popstate", function(){
 });
 
 
+function openGame(){
 
+  window.location.href = "game.html";
+
+}
 
 /* =====================================================
    GLOBAL SMOOTH PAGE CACHE + PERFORMANCE FIX
