@@ -21535,9 +21535,9 @@ document
 
             <span>${file.name}</span>
 
-            <small>
-              ${pages} Pages • ₹${pages * 6}
-            </small>
+           <small class="priceText">
+  ${pages} Pages • ₹${pages * 6}
+</small>
 
           </div>
 
@@ -21592,9 +21592,25 @@ const qtyText =
     ".copyCount"
   );
 
+const priceText =
+  div.querySelector(
+    ".priceText"
+  );
+
+function updatePrice(){
+
+  const total =
+    pages * 6 * qty;
+
+  priceText.innerText =
+    `${pages} Pages • ₹${total}`;
+}
+
 div
 .querySelector(".plusBtn")
-.onclick = function(e){
+.addEventListener("click", function(e){
+
+  e.preventDefault();
 
   e.stopPropagation();
 
@@ -21602,7 +21618,28 @@ div
 
   qtyText.innerText = qty;
 
-};
+  updatePrice();
+
+});
+
+div
+.querySelector(".minusBtn")
+.addEventListener("click", function(e){
+
+  e.preventDefault();
+
+  e.stopPropagation();
+
+  if(qty <= 1) return;
+
+  qty--;
+
+  qtyText.innerText = qty;
+
+  updatePrice();
+
+});
+
 
 div
 .querySelector(".minusBtn")
