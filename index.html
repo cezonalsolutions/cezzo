@@ -21553,6 +21553,44 @@ document
   status.innerText = "";
 
   if(!file) return;
+  if(file.type !== "application/pdf"){
+
+  error.innerText =
+    "Only PDF documents accepted";
+
+  return;
+
+}
+  // 🔥 SAVE PDF TO LOCAL STORAGE
+const reader = new FileReader();
+
+reader.onload = function () {
+
+  const pdfData = reader.result;
+
+  // old saved files
+  let savedFiles =
+    JSON.parse(
+      localStorage.getItem("xeroxFiles")
+    ) || [];
+
+  savedFiles.push({
+    name: file.name,
+    data: pdfData,
+    type: file.type,
+    time: Date.now()
+  });
+
+  localStorage.setItem(
+    "xeroxFiles",
+    JSON.stringify(savedFiles)
+  );
+
+  console.log("✅ PDF Saved Locally");
+
+};
+
+reader.readAsDataURL(file);
 
   // PDF ONLY
   if(file.type !== "application/pdf"){
@@ -21619,8 +21657,8 @@ document
 
             <span>${file.name}</span>
 
-           <small class="priceText">
-  ${pages} Pages • ₹${pages * 6}
+          <small class="priceText">
+  ${pages} Pages • Black • ₹${pages * 5}
 </small>
 
           </div>
@@ -21662,25 +21700,46 @@ document
 
       // REMOVE
       div
-      .querySelector(".removeFile")
-      .onclick = function(){
+.querySelector(".removeFile")
+.onclick = function(){
 
-        div.remove();
+  // 🔥 REMOVE UI
+  div.remove();
 
-        // RESET
-        if(
-          fileList.children.length === 0
-        ){
+  // 🔥 REMOVE FROM LOCAL STORAGE
+  let savedFiles =
+    JSON.parse(
+      localStorage.getItem("xeroxFiles")
+    ) || [];
 
-          addBtn.classList.add(
-            "hidden"
-          );
+  savedFiles =
+    savedFiles.filter(
+      item => item.name !== file.name
+    );
 
-          status.innerText = "";
+  localStorage.setItem(
+    "xeroxFiles",
+    JSON.stringify(savedFiles)
+  );
 
-        }
+  console.log(
+    "🗑 Removed from localStorage"
+  );
 
-      };
+  // RESET
+  if(
+    fileList.children.length === 0
+  ){
+
+    addBtn.classList.add(
+      "hidden"
+    );
+
+    status.innerText = "";
+
+  }
+
+};
 let qty = 1;
 
 const qtyText =
