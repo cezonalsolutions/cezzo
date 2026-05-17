@@ -6703,8 +6703,7 @@ flex-direction:column;
 overflow-y:auto;
 overflow-x:hidden;
 
-padding:18px 18px 55px;
-
+padding:55px 18px 55px;
 animation:catPopupFade .25s ease;
 -webkit-overflow-scrolling:touch;
 }
@@ -6906,6 +6905,324 @@ transform:translateZ(0);
 .categoriesPopup{
 scroll-behavior:smooth;
 -webkit-overflow-scrolling:touch;
+}
+/* POPUP */
+.xeroxPopup{
+position:fixed;
+inset:0;
+
+background:#fff;
+
+z-index:999999;
+
+display:none;
+flex-direction:column;
+
+overflow-y:auto;
+
+padding:55px 18px 40px;
+}
+
+.xeroxPopup.show{
+display:flex;
+}
+
+/* TOP */
+.xeroxTopBar{
+display:flex;
+align-items:center;
+gap:14px;
+
+margin-bottom:28px;
+}
+
+/* CLOSE */
+.closeXerox{
+width:42px;
+height:42px;
+
+border-radius:50%;
+
+background:#111;
+color:#fff;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:24px;
+}
+
+/* TITLE */
+.xeroxTitle{
+font-size:23px;
+font-weight:800;
+
+color:#2563eb;
+}
+
+/* CONTENT */
+.xeroxContent{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* PRINTER */
+.printerBox{
+width:100%;
+height:230px;
+
+background:#f8fafc;
+
+border-radius:30px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+position:relative;
+
+overflow:hidden;
+
+margin-bottom:22px;
+}
+
+/* PRINTER IMAGE */
+.printerImg{
+width:180px;
+object-fit:contain;
+}
+
+/* SCAN */
+.scannerArea{
+position:absolute;
+inset:0;
+
+overflow:hidden;
+}
+
+.scannerArea.hidden{
+display:none;
+}
+
+/* WHITE SCAN */
+.scannerGlow{
+position:absolute;
+
+top:-120px;
+left:0;
+
+width:100%;
+height:120px;
+
+background:
+linear-gradient(
+to bottom,
+rgba(255,255,255,0),
+rgba(255,255,255,.9),
+rgba(255,255,255,0)
+);
+
+animation:scannerMove 1.5s linear infinite;
+}
+
+@keyframes scannerMove{
+0%{
+top:-120px;
+}
+100%{
+top:100%;
+}
+}
+
+/* FILE LIST */
+#fileList{
+width:100%;
+}
+
+/* FILE ITEM */
+.fileItem{
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+background:#f5f5f5;
+
+padding:14px 16px;
+
+border-radius:18px;
+
+margin-bottom:12px;
+}
+
+/* LEFT */
+.fileLeft{
+display:flex;
+align-items:center;
+gap:12px;
+
+overflow:hidden;
+}
+
+.fileLeft i{
+font-size:20px;
+color:#ef4444;
+}
+
+/* FILE DETAILS */
+.fileDetails{
+display:flex;
+flex-direction:column;
+
+overflow:hidden;
+}
+
+.fileDetails span{
+font-size:14px;
+font-weight:700;
+
+color:#111;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+
+max-width:180px;
+}
+
+.fileDetails small{
+font-size:12px;
+font-weight:600;
+
+color:#666;
+
+margin-top:2px;
+}
+
+/* REMOVE */
+.removeFile{
+width:30px;
+height:30px;
+
+border-radius:50%;
+
+background:#111;
+color:#fff;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:14px;
+
+flex-shrink:0;
+}
+
+/* BUTTONS */
+.xeroxBtnWrap{
+width:100%;
+
+display:flex;
+gap:12px;
+
+margin-top:6px;
+}
+
+/* BUTTON */
+.xeroxBtn{
+flex:1;
+
+height:54px;
+
+border:none;
+border-radius:18px;
+
+background:#111;
+color:#fff;
+
+font-size:15px;
+font-weight:700;
+}
+
+/* LIGHT */
+.lightBtn{
+background:#f3f4f6;
+color:#111;
+}
+
+.hidden{
+display:none !important;
+}
+
+/* STATUS */
+.scanStatus{
+margin-top:16px;
+
+font-size:15px;
+font-weight:700;
+
+color:#16a34a;
+
+min-height:22px;
+}
+
+/* ERROR */
+.xeroxError{
+min-height:18px;
+
+font-size:13px;
+font-weight:600;
+
+color:#e11d48;
+
+margin-top:6px;
+margin-bottom:18px;
+}
+
+/* PRICE */
+.xeroxPriceCard{
+width:100%;
+
+background:#f8fafc;
+
+border-radius:24px;
+
+padding:10px 18px;
+
+margin-bottom:22px;
+}
+
+.priceRow{
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:16px 0;
+
+border-bottom:1px solid #ececec;
+}
+
+.priceRow:last-child{
+border-bottom:none;
+}
+
+/* NOTE */
+.xeroxNote{
+width:100%;
+
+background:#fff8e7;
+
+border:1px solid #ffe7a3;
+
+border-radius:18px;
+
+padding:16px;
+
+font-size:13px;
+line-height:1.7;
+
+color:#8a6300;
 }
 </style>
 </head>
@@ -8502,7 +8819,7 @@ Bite Delight Hub
   <p>Categories</p>
 </div>
 
-  <div class="navItem" onclick="openHelp()">
+  <div class="navItem" onclick="openXeroxPopup()">
   <img src="cat/ppp.png">
   <p>Xerox</p>
 </div>
@@ -8796,6 +9113,122 @@ Bite Delight Hub
 </div>
 
 </div>
+
+<!-- XEROX POPUP -->
+<div id="xeroxPopup" class="xeroxPopup">
+
+  <!-- TOP -->
+  <div class="xeroxTopBar">
+
+    <div class="closeXerox"
+         onclick="closeXeroxPopup()">
+
+      <i class="fa fa-angle-down"></i>
+
+    </div>
+
+    <h2 class="xeroxTitle">
+      Xerox
+    </h2>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="xeroxContent">
+
+    <!-- PRINTER -->
+    <div class="printerBox">
+
+      <img src="printer.png"
+           class="printerImg">
+
+      <!-- SCAN -->
+      <div id="scannerArea"
+           class="scannerArea hidden">
+
+        <div class="scannerGlow"></div>
+
+      </div>
+
+    </div>
+
+    <!-- FILES -->
+    <div id="fileList"></div>
+
+    <!-- INPUT -->
+    <input type="file"
+           id="xeroxFile"
+           accept=".pdf,application/pdf"
+           hidden>
+
+    <!-- BUTTONS -->
+    <div class="xeroxBtnWrap">
+
+      <button class="xeroxBtn"
+              onclick="pickXeroxFile()">
+
+        Upload PDF
+
+      </button>
+
+      <button id="addMoreBtn"
+              class="xeroxBtn lightBtn hidden"
+              onclick="pickXeroxFile()">
+
+        Add More
+
+      </button>
+
+    </div>
+
+    <!-- STATUS -->
+    <div id="scanStatus"
+         class="scanStatus"></div>
+
+    <!-- ERROR -->
+    <div id="xeroxError"
+         class="xeroxError"></div>
+
+    <!-- PRICE -->
+    <div class="xeroxPriceCard">
+
+      <div class="priceRow">
+        <span>1 Page</span>
+        <b>₹6</b>
+      </div>
+
+      <div class="priceRow">
+        <span>2 Pages</span>
+        <b>₹12</b>
+      </div>
+
+      <div class="priceRow">
+        <span>5 Pages</span>
+        <b>₹30</b>
+      </div>
+
+      <div class="priceRow">
+        <span>10 Pages</span>
+        <b>₹60</b>
+      </div>
+
+    </div>
+
+    <!-- NOTE -->
+    <div class="xeroxNote">
+
+      <b>Note:</b>
+
+      Upload only correct PDF
+      documents. Wrong or edited
+      files may delay processing.
+
+    </div>
+
+  </div>
+
+</div>
+
 
 <div id="cartPopup" class="popup">
 <div class="cartTopSection">
@@ -9357,7 +9790,7 @@ Please use Cash on Delivery.
 
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -10984,8 +11417,15 @@ navItems.forEach(item=>{
 
 }
 
-    if(text.toLowerCase().includes("help")){
-smoothNavigate("help.html");
+ if(
+  text.toLowerCase().includes("help") ||
+  text.toLowerCase().includes("xerox")
+){
+
+  openXeroxPopup();
+
+  return;
+
 }
 
     if(text.includes("Video")){
@@ -20848,6 +21288,197 @@ function closeCategoriesPopup(){
   );
 
 }
+
+function openXeroxPopup(){
+
+  document
+    .getElementById("xeroxPopup")
+    .classList.add("show");
+
+  document.body.classList.add(
+    "popup-open"
+  );
+
+}
+
+function closeXeroxPopup(){
+
+  document
+    .getElementById("xeroxPopup")
+    .classList.remove("show");
+
+  document.body.classList.remove(
+    "popup-open"
+  );
+
+}
+
+function pickXeroxFile(){
+
+  // 🔥 RESET INPUT
+  const input =
+    document.getElementById(
+      "xeroxFile"
+    );
+
+  input.value = "";
+
+  input.click();
+
+}
+
+document
+.getElementById("xeroxFile")
+.addEventListener("change", async function(e){
+
+  const file = e.target.files[0];
+
+  const error =
+    document.getElementById(
+      "xeroxError"
+    );
+
+  const scanner =
+    document.getElementById(
+      "scannerArea"
+    );
+
+  const status =
+    document.getElementById(
+      "scanStatus"
+    );
+
+  const fileList =
+    document.getElementById(
+      "fileList"
+    );
+
+  const addBtn =
+    document.getElementById(
+      "addMoreBtn"
+    );
+
+  error.innerText = "";
+  status.innerText = "";
+
+  if(!file) return;
+
+  // PDF ONLY
+  if(file.type !== "application/pdf"){
+
+    error.innerText =
+      "Only PDF documents accepted";
+
+    return;
+
+  }
+
+  // 🔥 SHOW SCANNER
+  scanner.classList.remove(
+    "hidden"
+  );
+
+  try{
+
+    // 🔥 REAL PAGE COUNT
+    const buffer =
+      await file.arrayBuffer();
+
+    const pdf =
+      await pdfjsLib
+      .getDocument({
+        data: buffer
+      }).promise;
+
+    const pages =
+      pdf.numPages;
+
+    // 🔥 SCAN COMPLETE
+    setTimeout(()=>{
+
+      // HIDE SCAN
+      scanner.classList.add(
+        "hidden"
+      );
+
+      // STATUS
+      status.innerText =
+        "✅ Scan Completed";
+
+      // SHOW ADD MORE
+      addBtn.classList.remove(
+        "hidden"
+      );
+
+      // FILE CARD
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.className =
+        "fileItem";
+
+      div.innerHTML = `
+        <div class="fileLeft">
+
+          <i class="fa fa-file-pdf-o"></i>
+
+          <div class="fileDetails">
+
+            <span>${file.name}</span>
+
+            <small>
+              ${pages} Pages • ₹${pages * 6}
+            </small>
+
+          </div>
+
+        </div>
+
+        <div class="removeFile">
+          <i class="fa fa-times"></i>
+        </div>
+      `;
+
+      // REMOVE
+      div
+      .querySelector(".removeFile")
+      .onclick = function(){
+
+        div.remove();
+
+        // RESET
+        if(
+          fileList.children.length === 0
+        ){
+
+          addBtn.classList.add(
+            "hidden"
+          );
+
+          status.innerText = "";
+
+        }
+
+      };
+
+      fileList.appendChild(div);
+
+    },1800);
+
+  }catch(err){
+
+    scanner.classList.add(
+      "hidden"
+    );
+
+    error.innerText =
+      "Failed to read PDF";
+
+  }
+
+});
 </script>
 </body>
 </html>
