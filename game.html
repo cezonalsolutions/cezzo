@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fruit Game</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:linear-gradient(to bottom,#87e0ff,#d4ffb2);
+  position:fixed;
+  inset:0;
+}
+
+/* TOP IMAGE */
+
+.top-image{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-bottom-left-radius:35px;
+  border-bottom-right-radius:35px;
+  z-index:2;
+}
+
+/* FALLING FRUITS */
+
+.fruit{
+  position:absolute;
+  top:-120px;
+  user-select:none;
+  pointer-events:none;
+  animation:fall linear infinite;
+  z-index:1;
+}
+
+@keyframes fall{
+
+  0%{
+    transform:translateY(-120px) rotate(0deg);
+  }
+
+  100%{
+    transform:translateY(120vh) rotate(360deg);
+  }
+
+}
+
+/* PLAY BUTTON */
+
+.play-btn{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:16px 40px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(45deg,#ff9800,#ffeb3b);
+  color:white;
+  font-size:24px;
+  font-weight:bold;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:0 8px 20px rgba(255,150,0,0.4);
+  z-index:10;
+}
+
+/* HOW SCREEN */
+
+.how-screen{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,0.97);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:50;
+  padding:20px;
+  text-align:center;
+}
+
+/* HEADING */
+
+.how-title{
+  color:#ff9800;
+  font-size:40px;
+  font-weight:bold;
+  margin-bottom:25px;
+}
+
+/* CENTER IMAGE */
+
+.how-image{
+  width:240px;
+  max-width:90%;
+  border-radius:25px;
+  margin-bottom:25px;
+}
+
+/* POINTS */
+
+.points{
+  color:#444;
+  font-size:20px;
+  line-height:2;
+  font-weight:bold;
+  margin-bottom:35px;
+}
+
+/* TOUCH TEXT */
+
+.tap-text{
+  color:#ff9800;
+  font-size:26px;
+  font-weight:bold;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+
+  50%{
+    opacity:0.3;
+  }
+
+}
+
+/* COUNTDOWN */
+
+.countdown{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  font-size:150px;
+  color:white;
+  font-weight:bold;
+  background:rgba(0,0,0,0.2);
+  z-index:100;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .how-title{
+    font-size:32px;
+  }
+
+  .how-image{
+    width:200px;
+  }
+
+  .points{
+    font-size:18px;
+  }
+
+  .tap-text{
+    font-size:22px;
+  }
+
+  .countdown{
+    font-size:100px;
+  }
+
+}
+.points{
+  width:100%;
+  max-width:320px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:35px;
+}
+
+.point-box{
+  background:white;
+  padding:14px 18px;
+  border-radius:16px;
+  font-size:18px;
+  font-weight:bold;
+  color:#555;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  border:2px solid rgba(255,180,0,0.25);
+}
+/* GAME TIMER */
+
+.game-timer{
+  position:fixed;
+  top:20px;
+  right:20px;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:white;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  font-weight:bold;
+  color:#ff9800;
+  box-shadow:0 6px 18px rgba(0,0,0,0.12);
+  z-index:200;
+}
+
+
+
+.time-text{
+  color:#ff9800;
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:22px;
+  animation:shake 0.5s infinite;
+}
+
+/* SHAKE TEXT */
+
+@keyframes shake{
+
+  0%{
+    transform:translateX(0px);
+  }
+
+  25%{
+    transform:translateX(-4px);
+  }
+
+  50%{
+    transform:translateX(4px);
+  }
+
+  75%{
+    transform:translateX(-4px);
+  }
+
+  100%{
+    transform:translateX(0px);
+  }
+
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- TOP IMAGE -->
+
+<img 
+  src="baners/l1.png"
+  class="top-image"
+>
+
+<!-- PLAY BUTTON -->
+
+<button class="play-btn" onclick="openHow()">
+  Play Now
+</button>
+
+<!-- HOW TO PLAY SCREEN -->
+
+<div class="how-screen" id="howScreen">
+
+  <div class="how-title">
+    How To Play
+  </div>
+
+  <img 
+    src="shouting.jpg"
+    class="how-image"
+  >
+<div class="time-text">
+  ⏰ You Have Only 15 Seconds
+</div>
+ <div class="points">
+
+  <div class="point-box">
+    Shoot As You Can
+  </div>
+
+  <div class="point-box">
+    Avoid Missing Fruits
+  </div>
+
+  <div class="point-box">
+    Claim The Offer
+  </div>
+
+  <div class="point-box">
+    Score More Points
+  </div>
+
+</div>
+
+  <div class="tap-text">
+    Touch Anywhere To Start
+  </div>
+
+</div>
+
+<!-- COUNTDOWN -->
+
+<div class="countdown" id="countdown">
+  3
+</div>
+<div class="game-timer" id="gameTimer">
+  15
+</div>
+<script>
+
+/* FALLING FRUITS */
+
+const fruits = [
+'🍎','🍌','🍇','🍉',
+'🍒','🍍','🥝','🍑',
+'🍓','🥥','🍋','🍊'
+];
+
+for(let i=0;i<120;i++){
+
+  const fruit =
+    document.createElement("div");
+
+  fruit.classList.add("fruit");
+
+  fruit.innerHTML =
+    fruits[Math.floor(Math.random()*fruits.length)];
+
+  fruit.style.left =
+    Math.random()*95 + "vw";
+
+  fruit.style.fontSize =
+    (Math.random()*35 + 25) + "px";
+
+  fruit.style.animationDuration =
+    (Math.random()*5 + 3) + "s";
+
+  fruit.style.animationDelay =
+    (Math.random()*5) + "s";
+
+  document.body.appendChild(fruit);
+
+}
+
+/* OPEN HOW SCREEN */
+
+function openHow(){
+
+  document.querySelector(".play-btn")
+  .style.display = "none";
+
+  document.getElementById("howScreen")
+  .style.display = "flex";
+
+}
+
+/* TOUCH TO START */
+
+document.getElementById("howScreen")
+.addEventListener("click",startCountdown);
+
+function startCountdown(){
+
+  document.getElementById("howScreen")
+  .style.display = "none";
+
+  const countdown =
+    document.getElementById("countdown");
+
+  countdown.style.display = "flex";
+
+  let number = 3;
+
+  countdown.innerHTML = number;
+
+  const timer = setInterval(()=>{
+
+    number--;
+
+    if(number > 0){
+
+      countdown.innerHTML = number;
+
+    }else{
+
+      clearInterval(timer);
+
+      countdown.innerHTML = "1";
+
+      setTimeout(()=>{
+
+        countdown.style.display = "none";
+
+        startGameTimer();
+
+      },1000);
+
+    }
+
+  },1000);
+
+}
+
+/* 15 SECOND TIMER */
+
+function startGameTimer(){
+
+  const gameTimer =
+    document.getElementById("gameTimer");
+
+  gameTimer.style.display = "flex";
+
+  let timeLeft = 15;
+
+  gameTimer.innerHTML = timeLeft;
+
+  const gameInterval = setInterval(()=>{
+
+    timeLeft--;
+
+    gameTimer.innerHTML = timeLeft;
+
+    if(timeLeft <= 0){
+
+      clearInterval(gameInterval);
+
+      gameTimer.innerHTML = "0";
+
+      alert("Time Over!");
+
+    }
+
+  },1000);
+
+}
+</script>
+
+</body>
+</html>
