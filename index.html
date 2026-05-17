@@ -6688,6 +6688,225 @@ h6{
   left:50%;
   transform:translateX(-50%);
 }
+/* FULLSCREEN CATEGORY POPUP */
+.categoriesPopup{
+position:fixed;
+inset:0;
+
+background:#fff;
+
+z-index:999999;
+
+display:none;
+flex-direction:column;
+
+overflow-y:auto;
+overflow-x:hidden;
+
+padding:18px 18px 55px;
+
+animation:catPopupFade .25s ease;
+-webkit-overflow-scrolling:touch;
+}
+
+.categoriesPopup.show{
+display:flex;
+}
+
+/* SMOOTH OPEN */
+@keyframes catPopupFade{
+from{
+opacity:0;
+transform:translateY(18px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* TOP BAR */
+.categoriesTopBar{
+display:flex;
+align-items:center;
+gap:14px;
+
+position:sticky;
+top:0;
+
+background:#fff;
+
+z-index:20;
+
+padding-bottom:18px;
+padding-top:2px;
+}
+
+/* CLOSE BUTTON */
+.closeCategories{
+width:42px;
+height:42px;
+
+border-radius:50%;
+
+background:#111;
+color:#fff;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:24px;
+
+flex-shrink:0;
+
+box-shadow:
+0 6px 18px rgba(0,0,0,.16);
+
+cursor:pointer;
+
+transition:.18s ease;
+}
+
+.closeCategories:active{
+transform:scale(.92);
+}
+
+/* TITLE */
+.categoriesTitle{
+font-size:28px;
+font-weight:800;
+
+color:#111;
+
+letter-spacing:-0.5px;
+}
+
+/* GRID */
+.categoriesGrid{
+display:grid;
+
+grid-template-columns:
+repeat(4,minmax(0,1fr));
+
+column-gap:18px;
+row-gap:34px;
+
+width:100%;
+
+padding-top:8px;
+}
+
+/* CARD */
+.catCard{
+display:flex;
+flex-direction:column;
+align-items:center;
+
+text-align:center;
+
+transition:.18s ease;
+}
+
+.catCard:active{
+transform:scale(.94);
+}
+
+/* IMAGE */
+.catCard img{
+width:76px;
+height:76px;
+
+object-fit:cover;
+
+border-radius:24px;
+
+background:#f7f7f7;
+
+padding:9px;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,.07);
+
+transition:.2s ease;
+}
+
+.catCard:hover img{
+transform:translateY(-2px);
+}
+
+/* TEXT */
+.catCard p{
+margin-top:11px;
+
+font-size:12px;
+font-weight:600;
+
+color:#222;
+
+line-height:1.4;
+
+max-width:85px;
+}
+
+
+
+/* MOBILE */
+@media(max-width:390px){
+
+.categoriesGrid{
+column-gap:14px;
+row-gap:30px;
+}
+
+.catCard img{
+width:68px;
+height:68px;
+
+border-radius:20px;
+}
+
+.catCard p{
+font-size:11px;
+max-width:72px;
+}
+
+.categoriesTitle{
+font-size:24px;
+}
+
+}
+body.popup-open{
+overflow:hidden;
+touch-action:none;
+}
+/* PERFORMANCE BOOST */
+.categoriesPopup{
+will-change:transform,opacity;
+contain:layout style paint;
+}
+
+.categoriesGrid{
+contain:layout;
+}
+
+/* IMAGE OPTIMIZATION */
+.catCard img{
+content-visibility:auto;
+
+contain-intrinsic-size:
+76px 76px;
+
+backface-visibility:hidden;
+
+transform:translateZ(0);
+}
+
+/* SMOOTH SCROLL */
+.categoriesPopup{
+scroll-behavior:smooth;
+-webkit-overflow-scrolling:touch;
+}
 </style>
 </head>
 
@@ -8279,7 +8498,7 @@ Bite Delight Hub
   <p>Home</p>
 </div>
 
-<div class="navItem" onclick="smoothNavigate('categories.html')">  <img src="catergrois.webp">
+<div class="navItem" onclick="openCategoriesPopup()">   <img src="catergrois.webp">
   <p>Categories</p>
 </div>
 
@@ -8385,7 +8604,186 @@ Bite Delight Hub
   <div id="categoryGrid"></div>
 </div>
 
+<div id="categoriesPopup" class="categoriesPopup">
 
+  <!-- TOP BAR -->
+  <div class="categoriesTopBar">
+
+    <!-- CLOSE BUTTON -->
+    <div class="closeCategories"
+         onclick="closeCategoriesPopup()">
+
+      <i class="fa fa-angle-down"></i>
+
+    </div>
+
+    <!-- TITLE -->
+    <h2 class="categoriesTitle">
+      Categories
+    </h2>
+
+  </div>
+
+  <!-- GRID -->
+  <div class="categoriesGrid">
+
+  <div class="catCard">
+    <img src="fresh.webp" loading="lazy" decoding="async">
+    <p>Vegetables</p>
+  </div>
+
+  <div class="catCard">
+    <img src="fruits.webp" loading="lazy" decoding="async">
+    <p>Fruits</p>
+  </div>
+
+  <div class="catCard">
+    <img src="vegetables.webp" loading="lazy" decoding="async">
+    <p>Dairy</p>
+  </div>
+
+  <div class="catCard">
+    <img src="milk.webp" loading="lazy" decoding="async">
+    <p>Meat & SeaFood</p>
+  </div>
+
+  <div class="catCard">
+    <img src="snacks.webp" loading="lazy" decoding="async">
+    <p>Oil's</p>
+  </div>
+
+  <div class="catCard">
+    <img src="drinks.webp" loading="lazy" decoding="async">
+    <p>Rice</p>
+  </div>
+
+  <div class="catCard">
+    <img src="bakery.webp" loading="lazy" decoding="async">
+    <p>Atta</p>
+  </div>
+
+  <div class="catCard">
+    <img src="rice.webp" loading="lazy" decoding="async">
+    <p>Masalas</p>
+  </div>
+
+  <div class="catCard">
+    <img src="atta.webp" loading="lazy" decoding="async">
+    <p>Snacks</p>
+  </div>
+
+  <div class="catCard">
+    <img src="oil.webp" loading="lazy" decoding="async">
+    <p>Salt</p>
+  </div>
+
+  <div class="catCard">
+    <img src="beauty.webp" loading="lazy" decoding="async">
+    <p>Nuts</p>
+  </div>
+
+  <div class="catCard">
+    <img src="cleaning.webp" loading="lazy" decoding="async">
+    <p>Powders</p>
+  </div>
+
+  <div class="catCard">
+    <img src="home.webp" loading="lazy" decoding="async">
+    <p>Baby Care</p>
+  </div>
+
+  <div class="catCard">
+    <img src="frozen.webp" loading="lazy" decoding="async">
+    <p>Hair care</p>
+  </div>
+
+  <div class="catCard">
+    <img src="baby.webp" loading="lazy" decoding="async">
+    <p>Skin Care</p>
+  </div>
+
+  <div class="catCard">
+    <img src="pet.webp" loading="lazy" decoding="async">
+    <p>Makeup</p>
+  </div>
+
+  <div class="catCard">
+    <img src="tea.webp" loading="lazy" decoding="async">
+    <p>Oral Care</p>
+  </div>
+
+  <div class="catCard">
+    <img src="coffee.webp" loading="lazy" decoding="async">
+    <p>Gromming</p>
+  </div>
+
+  <div class="catCard">
+    <img src="icecream.webp" loading="lazy" decoding="async">
+    <p>Baby Care</p>
+  </div>
+
+  <div class="catCard">
+    <img src="chocolate.webp" loading="lazy" decoding="async">
+    <p>Fragrances</p>
+  </div>
+
+  <div class="catCard">
+    <img src="stationary.webp" loading="lazy" decoding="async">
+    <p>Furnishing</p>
+  </div>
+
+  <div class="catCard">
+    <img src="meat.webp" loading="lazy" decoding="async">
+    <p>Kitchen</p>
+  </div>
+
+  <div class="catCard">
+    <img src="fish.webp" loading="lazy" decoding="async">
+    <p>Cleaning</p>
+  </div>
+
+  <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Clothing</p>
+  </div>
+
+   <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Appliances</p>
+  </div>
+   <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Stationary</p>
+  </div>
+
+  <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Puja</p>
+  </div>
+  <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Toys</p>
+  </div>
+   <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Breads & Egg</p>
+  </div>
+   <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Milk Shakes</p>
+  </div> 
+  <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Breakfast Needs</p>
+  </div>
+   <div class="catCard">
+    <img src="offers.webp" loading="lazy" decoding="async">
+    <p>Juices & Salads</p>
+  </div>
+
+</div>
+
+</div>
 
 <div id="cartPopup" class="popup">
 <div class="cartTopSection">
@@ -10566,9 +10964,12 @@ navItems.forEach(item=>{
       window.scrollTo({top:0, behavior:"smooth"});
     }
 
-    if(text.toLowerCase().includes("categories")){
-smoothNavigate("categories.html");
+   if(text.toLowerCase().includes("categories")){
+
+  openCategoriesPopup();
+
   return;
+
 }
 
     if(text.toLowerCase().includes("help")){
@@ -19667,7 +20068,7 @@ if (!window.__APP_INITIALIZED__) {
     console.log("PAGESHOW");
 
     // 🔥 browser back cache restore
-    if (event.persisted || performance.navigation.type === 2) {
+if (event.persisted) {
 
       console.log("⚡ Restored from cache");
 
@@ -20385,6 +20786,56 @@ window.cartBarAnim = function(){
   });
 
 };
+
+let categoriesPreloaded = false;
+
+function openCategoriesPopup(){
+
+  const popup =
+    document.getElementById(
+      "categoriesPopup"
+    );
+
+  popup.classList.add("show");
+
+  // 🔥 LOCK BODY
+  document.body.classList.add(
+    "popup-open"
+  );
+
+  // 🔥 PRELOAD IMAGES ONLY ONCE
+  if(!categoriesPreloaded){
+
+    document
+      .querySelectorAll(
+        ".catCard img"
+      )
+      .forEach(img=>{
+
+        const preload =
+          new Image();
+
+        preload.src = img.src;
+
+      });
+
+    categoriesPreloaded = true;
+  }
+
+}
+
+function closeCategoriesPopup(){
+
+  document
+    .getElementById("categoriesPopup")
+    .classList.remove("show");
+
+  // 🔥 UNLOCK BODY
+  document.body.classList.remove(
+    "popup-open"
+  );
+
+}
 </script>
 </body>
 </html>
