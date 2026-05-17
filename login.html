@@ -507,30 +507,44 @@ if (!error) {
   localStorage.setItem("userMobile", mobile);
 
   sessionStorage.setItem("fromLogin","true");
-  window.location.replace("index.html");
-}else {
-   document.getElementById("loadingScreen").style.display="none";
-          console.log(error);
-          shake(p);
-        }
-      };
-
-
-      window.goBack = function(){
-
-   // same as login success skip intro
-   sessionStorage.setItem("fromLogin","true");
-   let goBack=
-localStorage.getItem(
-"redirectAfterLogin"
-);
-
-if(goBack){
-window.location.replace(goBack);
+if(history.length > 1){
+  history.back();
 }else{
-window.location.href="index.html";
+  window.location.href = "index.html";
 }
 }
+else {
+
+  document.getElementById(
+    "loadingScreen"
+  ).style.display = "none";
+
+  console.log(error);
+
+  shake(p);
+
+}
+
+};
+
+
+window.goBack = function(){
+
+  // preserve app state
+  sessionStorage.setItem(
+    "fromLogin",
+    "true"
+  );
+
+  // 🔥 go back to previous page
+ if(history.length > 1){
+  history.back();
+}else{
+  window.location.href = "index.html";
+}
+
+}
+
     </script>
   </body>
 </html>
