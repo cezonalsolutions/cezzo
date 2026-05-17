@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<title>FAQ</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  overflow-x:hidden;
+  width:100%;
+}
+
+body{
+  margin:0;
+  padding-top:55px;
+  font-family:"Segoe UI",sans-serif;
+  background:#f7f8fa;
+}
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+
+  background:#fff;
+
+  margin:0 10px;
+
+  width:calc(100% - 20px);
+
+  border-radius:12px;
+
+  padding:12px 14px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  z-index:10;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.title{
+  font-weight:600;
+  font-size:15px;
+}
+
+/* LANG */
+#langSelect{
+
+  border:none;
+
+  background:#f3f4f6;
+
+  padding:8px 10px;
+
+  border-radius:10px;
+
+  font-size:13px;
+
+  outline:none;
+
+  appearance:none;
+  -webkit-appearance:none;
+
+  background-image:url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
+
+  background-repeat:no-repeat;
+
+  background-position:right 8px center;
+
+  background-size:14px;
+
+  padding-right:28px;
+}
+
+/* CONTENT */
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px;
+}
+
+.top-image{
+  width:100%;
+  height:160px;
+
+  object-fit:cover;
+
+  border-radius:12px;
+
+  margin-bottom:16px;
+}
+
+.intro{
+  font-size:14px;
+  color:#555;
+  line-height:1.7;
+
+  margin-bottom:20px;
+}
+
+/* FAQ */
+.faqCard{
+  background:#fff;
+
+  padding:16px;
+
+  border-radius:14px;
+
+  margin-bottom:14px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.q{
+  font-weight:700;
+  margin-bottom:8px;
+  font-size:15px;
+}
+
+.a{
+  font-size:14px;
+  color:#555;
+  line-height:1.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+  <div class="nav-left">
+
+    <div onclick="goBack()">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>
+
+    <div class="title" id="pageTitle">
+      FAQ
+    </div>
+
+  </div>
+
+  <select id="langSelect"
+  onchange="changeLang(this.value)">
+
+    <option value="en">EN</option>
+    <option value="te">తెలుగు</option>
+    <option value="hi">हिंदी</option>
+
+  </select>
+
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+<img src="faq.svg"
+class="top-image">
+
+<div class="intro"
+id="introText"></div>
+
+<div id="faqContainer"></div>
+
+</div>
+
+<script>
+
+const translations = {
+
+en:{
+
+  title:"FAQ",
+
+  intro:
+  "Find answers to the most common questions about orders, delivery, refunds, payments, and support.",
+
+  faq:[
+
+    {
+      q:"How long does delivery take?",
+      a:"Most orders are delivered within 10-30 minutes depending on your location and product availability."
+    },
+
+    {
+      q:"Can I cancel my order?",
+      a:"Yes. Orders can be cancelled before they are packed or dispatched."
+    },
+
+    {
+      q:"What payment methods are supported?",
+      a:"We support UPI, Debit/Credit Cards, Wallets, and Cash on Delivery."
+    },
+
+    {
+      q:"What if payment is deducted but order failed?",
+      a:"The amount is usually refunded automatically within a few business days."
+    },
+
+    {
+      q:"How can I contact support?",
+      a:"You can use the Help & Support page inside the app anytime."
+    },
+
+    {
+      q:"What if I receive damaged products?",
+      a:"You can contact support for refund or replacement assistance."
+    },
+
+    {
+      q:"Can I change delivery address after ordering?",
+      a:"Address changes may not be possible after packing or dispatch."
+    },
+
+    {
+      q:"Do you provide refunds?",
+      a:"Yes. Refunds are available for eligible damaged, missing, or incorrect items."
+    },
+
+    {
+      q:"Why is my order delayed?",
+      a:"Delays may happen due to weather conditions, traffic, or high order demand."
+    },
+
+    {
+      q:"How do I track my order?",
+      a:"You can check order status inside Your Orders section."
+    }
+
+  ]
+
+},
+
+te:{
+
+  title:"తరచుగా అడిగే ప్రశ్నలు",
+
+  intro:
+  "ఆర్డర్లు, డెలివరీ, రిఫండ్లు మరియు సపోర్ట్ గురించి సాధారణ ప్రశ్నలకు సమాధానాలు ఇక్కడ ఉన్నాయి.",
+
+  faq:[
+
+    {
+      q:"డెలివరీకి ఎంత సమయం పడుతుంది?",
+      a:"సాధారణంగా 10-30 నిమిషాల్లో డెలివరీ జరుగుతుంది."
+    },
+
+    {
+      q:"ఆర్డర్ క్యాన్సిల్ చేయవచ్చా?",
+      a:"అవును. ప్యాక్ లేదా డిస్పాచ్ కాకముందు క్యాన్సిల్ చేయవచ్చు."
+    },
+
+    {
+      q:"ఏ పేమెంట్ పద్ధతులు అందుబాటులో ఉన్నాయి?",
+      a:"UPI, కార్డులు, COD మరియు వాలెట్లు అందుబాటులో ఉన్నాయి."
+    },
+
+    {
+      q:"పేమెంట్ కట్ అయి ఆర్డర్ ఫెయిల్ అయితే?",
+      a:"కొన్ని రోజుల్లో ఆటోమేటిక్‌గా రిఫండ్ అవుతుంది."
+    },
+
+    {
+      q:"సపోర్ట్‌ను ఎలా సంప్రదించాలి?",
+      a:"యాప్‌లోని Help & Support ద్వారా సంప్రదించవచ్చు."
+    },
+
+    {
+      q:"డ్యామేజ్ అయిన ఉత్పత్తులు వస్తే?",
+      a:"రిఫండ్ లేదా రీప్లేస్‌మెంట్ కోసం సపోర్ట్‌ను సంప్రదించండి."
+    },
+
+    {
+      q:"ఆర్డర్ తర్వాత అడ్రస్ మార్చవచ్చా?",
+      a:"ప్యాకింగ్ తర్వాత అడ్రస్ మార్పు సాధ్యం కాకపోవచ్చు."
+    },
+
+    {
+      q:"రిఫండ్లు ఇస్తారా?",
+      a:"అవును. అర్హత కలిగిన సమస్యలకు రిఫండ్ అందుబాటులో ఉంటుంది."
+    },
+
+    {
+      q:"ఆర్డర్ ఆలస్యం ఎందుకు అవుతుంది?",
+      a:"వాతావరణం లేదా ట్రాఫిక్ కారణంగా ఆలస్యం కావచ్చు."
+    },
+
+    {
+      q:"ఆర్డర్ స్టేటస్ ఎలా చూడాలి?",
+      a:"Your Orders సెక్షన్‌లో చూడవచ్చు."
+    }
+
+  ]
+
+},
+
+hi:{
+
+  title:"सामान्य प्रश्न",
+
+  intro:
+  "ऑर्डर, डिलीवरी, रिफंड और सपोर्ट से जुड़े सामान्य सवालों के जवाब यहाँ मिलेंगे।",
+
+  faq:[
+
+    {
+      q:"डिलीवरी में कितना समय लगता है?",
+      a:"अधिकतर ऑर्डर 10-30 मिनट में डिलीवर होते हैं।"
+    },
+
+    {
+      q:"क्या मैं ऑर्डर कैंसिल कर सकता हूँ?",
+      a:"हाँ। पैक या डिस्पैच होने से पहले कैंसिल कर सकते हैं।"
+    },
+
+    {
+      q:"कौन-कौन से पेमेंट तरीके उपलब्ध हैं?",
+      a:"UPI, कार्ड, COD और वॉलेट उपलब्ध हैं।"
+    },
+
+    {
+      q:"पेमेंट कट गया लेकिन ऑर्डर फेल हो गया?",
+      a:"कुछ दिनों में ऑटोमेटिक रिफंड मिल जाता है।"
+    },
+
+    {
+      q:"सपोर्ट से कैसे संपर्क करें?",
+      a:"ऐप के Help & Support सेक्शन का उपयोग करें।"
+    },
+
+    {
+      q:"अगर खराब प्रोडक्ट मिले तो?",
+      a:"रिफंड या रिप्लेसमेंट के लिए सपोर्ट से संपर्क करें।"
+    },
+
+    {
+      q:"क्या ऑर्डर के बाद पता बदल सकते हैं?",
+      a:"पैकिंग के बाद पता बदलना संभव नहीं हो सकता।"
+    },
+
+    {
+      q:"क्या रिफंड मिलता है?",
+      a:"हाँ। योग्य मामलों में रिफंड उपलब्ध है।"
+    },
+
+    {
+      q:"ऑर्डर लेट क्यों होता है?",
+      a:"मौसम, ट्रैफिक या अधिक ऑर्डर के कारण देरी हो सकती है।"
+    },
+
+    {
+      q:"ऑर्डर स्टेटस कैसे देखें?",
+      a:"Your Orders सेक्शन में देख सकते हैं।"
+    }
+
+  ]
+
+}
+
+};
+
+function renderFAQ(lang){
+
+  const t =
+    translations[lang];
+
+  document.getElementById(
+    "pageTitle"
+  ).innerText = t.title;
+
+  document.getElementById(
+    "introText"
+  ).innerText = t.intro;
+
+  const container =
+    document.getElementById(
+      "faqContainer"
+    );
+
+  container.innerHTML = "";
+
+  t.faq.forEach(item=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className =
+      "faqCard";
+
+    div.innerHTML = `
+      <div class="q">
+        ${item.q}
+      </div>
+
+      <div class="a">
+        ${item.a}
+      </div>
+    `;
+
+    container.appendChild(div);
+
+  });
+
+  localStorage.setItem(
+    "appLang",
+    lang
+  );
+
+}
+
+function changeLang(lang){
+  renderFAQ(lang);
+}
+
+window.onload = ()=>{
+
+  const lang =
+    localStorage.getItem(
+      "appLang"
+    ) || "en";
+
+  document.getElementById(
+    "langSelect"
+  ).value = lang;
+
+  renderFAQ(lang);
+
+};
+
+function goBack(){
+
+  sessionStorage.setItem(
+    "skipIntro",
+    "true"
+  );
+
+  window.location.href =
+    "order.html";
+}
+
+</script>
+
+</body>
+</html>
