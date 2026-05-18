@@ -781,6 +781,61 @@ clip-path:
   }
 
 }
+.saved-coupon{
+
+  position:absolute;
+
+  left:50%;
+  bottom:120px;
+
+  transform:translateX(-50%);
+
+  background:
+    rgba(255,255,255,0.22);
+
+  backdrop-filter:
+    blur(10px);
+
+  padding:12px 22px;
+
+  border-radius:18px;
+
+  border:
+    1px solid rgba(255,255,255,0.4);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.12);
+
+  text-align:center;
+
+  z-index:20;
+
+  display:none;
+
+  min-width:220px;
+}
+
+.saved-title{
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  color:#ff5722;
+
+  margin-bottom:5px;
+}
+
+.saved-code{
+
+  font-size:24px;
+
+  font-weight:900;
+
+  color:#ff9800;
+
+  letter-spacing:2px;
+}
 </style>
 </head>
 
@@ -794,7 +849,17 @@ clip-path:
 >
 
 <!-- PLAY BUTTON -->
+<div class="saved-coupon" id="savedCouponBox">
 
+  <div class="saved-title">
+    Saved Coupon
+  </div>
+
+  <div class="saved-code" id="savedCouponCode">
+    SAVE20
+  </div>
+
+</div>
 <button class="play-btn" onclick="openHow()">
   Play Now
 </button>
@@ -1139,8 +1204,7 @@ let gameRunning = false;
 /* 15 SECOND TIMER */
 /* 15 SECOND TIMER */
 function startGameTimer(){
-  window.highestScore = 0;
-
+ window.highestScore = 1;
   /* CLEAR OLD COUPON */
 
   localStorage.removeItem(
@@ -1493,7 +1557,13 @@ if(score >= 100){
 
       scoreText.innerHTML =
         Math.floor(score);
+/* SAVE LIVE HIGHEST */
 
+window.highestScore =
+  Math.max(
+    window.highestScore,
+    Math.floor(score)
+  );
       /* WATER LEVEL */
 
       const level =
@@ -1814,6 +1884,33 @@ const finalScore =
     }
 
   },1000);
+
+}
+/* SHOW SAVED COUPON */
+
+const savedCoupon =
+  localStorage.getItem(
+    "savedCoupon"
+  );
+
+if(savedCoupon){
+
+  document.getElementById(
+    "savedCouponBox"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "savedCouponCode"
+  ).innerHTML =
+    savedCoupon;
+
+}else{
+
+  document.getElementById(
+    "savedCouponBox"
+  ).style.display =
+    "none";
 
 }
 </script>
