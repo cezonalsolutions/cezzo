@@ -1339,13 +1339,13 @@ if(volume > smoothVolume){
 
 if(score < 40){
 
-  if(volume > 55){
+  if(volume > 65){
 
-    score += 2.5;
+    score += 0.9;
 
   }else{
 
-    score -= 0.8;
+    score -= 0.18;
 
   }
 
@@ -1355,15 +1355,39 @@ if(score < 40){
 
 else if(score < 70){
 
-  if(volume > 65){
+  if(volume > 75){
 
-    score += 2;
+    score += 0.7;
 
   }
 
-  else if(volume > 50){
+  else if(volume > 60){
 
-    score += 1;
+    score += 0.35;
+
+  }
+
+  else{
+
+    score -= 0.1;
+
+  }
+
+}
+
+/* HARD */
+
+else if(score < 90){
+
+  if(volume > 85){
+
+    score += 0.45;
+
+  }
+
+  else if(volume > 72){
+
+    score += 0.18;
 
   }
 
@@ -1375,54 +1399,29 @@ else if(score < 70){
 
 }
 
-/* HARD */
-
-else if(score < 90){
-
-  if(volume > 75){
-
-    score += 1.5;
-
-  }
-
-  else if(volume > 65){
-
-    score += 0.7;
-
-  }
-
-  else{
-
-    score -= 0.18;
-
-  }
-
-}
-
 /* VERY HARD 90-100 */
 
 else{
 
-  if(volume > 90){
+  if(volume > 95){
 
-    score += 1.2;
+    score += 0.22;
 
   }
 
-  else if(volume > 82){
+  else if(volume > 88){
 
-    score += 0.4;
+    score += 0.08;
 
   }
 
   else{
 
-    score -= 0.25;
+    score -= 0.16;
 
   }
 
 }
-
 
 
 
