@@ -7878,7 +7878,24 @@ style="
   </div>
 
 </div>
+<div id="productSection92" class="productSectionWithHeading">
+  
+  <div class="sideHeading">
+   Summer Sips
+  </div>
 
+  <div class="productGrid" id="productGrid92"></div>
+
+</div>
+
+
+<div id="productSection93" class="productSectionWithHeading">
+  
+  
+
+  <div class="productGrid" id="productGrid93"></div>
+
+</div>
 <div id="productSection2" class="productSectionWithHeading">
   
   <div class="sideHeading">
@@ -10556,6 +10573,8 @@ const productSection24 = document.getElementById("productSection24");
 const productSection25 = document.getElementById("productSection25");
 const productSection26 = document.getElementById("productSection26");
 const productSection27 = document.getElementById("productSection27");
+const productSection92 = document.getElementById("productSection92");
+const productSection93 = document.getElementById("productSection93");
 
 const productSection28 = document.getElementById("productSection28");
 
@@ -10658,6 +10677,8 @@ productSection88.style.display = "none";
 productSection89.style.display = "none";
 productSection90.style.display = "none";
 productSection91.style.display = "none";
+productSection92.style.display = "block";
+productSection93.style.display = "block";
 
 productSection83.style.display = "block";
 
@@ -10803,6 +10824,8 @@ freshItems4.style.display = "none";
 productSection85.style.display = "none";
 productSection86.style.display = "none";
 productSection87.style.display = "none";
+productSection92.style.display = "none";
+productSection93.style.display = "none";
 
 productSection48.style.display = "none";
 productSection49.style.display = "none";
@@ -10874,6 +10897,8 @@ productSection83.style.display = "none";
 productSection85.style.display = "none";
 productSection86.style.display = "none";
 productSection87.style.display = "none";
+productSection92.style.display = "none";
+productSection93.style.display = "none";
 
 dailyItems.style.display = "none";
 productSection3.style.display = "none";
@@ -10985,6 +11010,9 @@ dailyItems.style.display = "none";
 colldrinksec.style.display = "block";
 productSection3.style.display = "none";
 productSection4.style.display = "none";
+productSection92.style.display = "none";
+productSection93.style.display = "none";
+
 productSection5.style.display = "none";
 beautyItems.style.display = "none";
 houseItems.style.display = "none";
@@ -11081,6 +11109,9 @@ productSection91.style.display = "none";
   productSection8.style.display = "none";
 productSection9.style.display = "none";
   cool.style.display = "none";
+  productSection92.style.display = "none";
+productSection93.style.display = "none";
+
   skin.style.display = "block"; 
   productSection85.style.display = "none";
 productSection86.style.display = "none";
@@ -11187,6 +11218,9 @@ productSection91.style.display = "none";
    productSection10.style.display = "none";
   productSection8.style.display = "none";
   colldrinksec.style.display = "none";
+  productSection92.style.display = "none";
+productSection93.style.display = "none";
+
 productSection9.style.display = "none";
 productSection4.style.display = "none";
 productSection5.style.display = "none";
@@ -11296,6 +11330,8 @@ productSection91.style.display = "none";
   productSection85.style.display = "none";
 productSection86.style.display = "none";
 productSection87.style.display = "none";
+productSection92.style.display = "none";
+productSection93.style.display = "none";
 
    wholesalebrand.style.display = "none";
 productSection15.style.display = "none";
@@ -11405,6 +11441,9 @@ productSection90.style.display = "none";
 productSection91.style.display = "none";
 productSection4.style.display = "none";
 colldrinksec.style.display = "none";
+productSection92.style.display = "none";
+productSection93.style.display = "none";
+
 wholesaleFruits.style.display = "none";
 productSection85.style.display = "none";
 productSection86.style.display = "none";
@@ -11499,6 +11538,9 @@ productSection19.style.display = "none";
 productSection20.style.display = "none";
   fresh.style.display = "none";
   offer.style.display = "none";
+  productSection92.style.display = "none";
+productSection93.style.display = "none";
+
   productSection88.style.display = "none";
 productSection89.style.display = "none";
 productSection90.style.display = "none";
@@ -18687,6 +18729,228 @@ imgWrap.addEventListener("click", function(e){
 }
 
 loadProducts91();
+
+
+
+
+
+
+async function loadProducts92(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [26,25,24,80,79,78,74,73,62]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid92"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts92();
+
+
+
+
+
+
+async function loadProducts93(){
+
+  const { data } = await supabase
+    .from("cool_drinks_products")
+    .select("*")
+    .in("id", [2,23,22,21,20,19,18,3]);   // ✅ new IDs
+
+  const grid = document.getElementById("productGrid93"); // ✅ new grid
+  grid.innerHTML = "";
+
+  data.forEach(item => {
+
+  // ✅ ADD THIS LINE HERE
+  window.productMap = window.productMap || {};
+  window.productMap["cool_drinks_products_" + item.id] = item;
+
+    const card = document.createElement("div");
+    card.className = "productCard2";   // ✅ SAME UI
+
+    card.innerHTML = `
+      <div class="imgWrap2">
+        <img src="${item.image1}">
+       <div class="cartControl" 
+     data-id="${item.id}" 
+     data-table="cool_drinks_products">
+  <div class="addBtn2">+</div>
+</div>
+
+        <div class="qtyInside">
+          ${item.quantity} ${item.unit}
+        </div>
+      </div>
+
+      <div class="pName2">${item.name}</div>
+      <div class="brand2">${item.brand || ""}</div>
+
+      <div class="priceRow2">
+        <div class="pPrice2">
+          ₹${item.discount_price}
+          <span>₹${item.original_price}</span>
+        </div>
+
+        <div class="ratingGreen">
+          <i class="fa-solid fa-star"></i>
+          ${item.rating || "0"}
+        </div>
+      </div>
+    `;
+const addBtn = card.querySelector(".addBtn2");
+
+
+
+// 🔥 HALF AREA CONTROL (ONLY POPUP BLOCK)
+const imgWrap = addBtn.parentElement;
+
+imgWrap.addEventListener("click", function(e){
+
+  const rect = this.getBoundingClientRect();
+  const clickY = e.clientY - rect.top;
+
+  const half = rect.height / 2;
+
+  // ❌ TOP HALF → ONLY block popup (NOT everything)
+  if(clickY < half){
+
+    // IMPORTANT → DO NOT stop everything
+    // only prevent card click (popup)
+    if(e.target.closest(".addBtn2")){
+      return; // allow + button
+    }
+
+    e.stopPropagation();  // ❌ stops popup only
+  }
+
+});
+   card.addEventListener("click", function(e){
+
+      // ❌ block + button
+      if(e.target.closest(".cartControl")){
+        return;
+      }
+
+      const img = card.querySelector(".imgWrap2");
+      const rect = img.getBoundingClientRect();
+
+      const clickY = e.clientY - rect.top;
+      const half = rect.height / 2;
+
+      // 🔴 top half of image → no popup
+      if(clickY < half){
+        return;
+      }
+
+  openPopup({
+  ...item,
+  table: item.table || "cool_drinks_products"
+});
+});
+
+    grid.appendChild(card);
+  });
+  initAllUI();
+}
+
+loadProducts93();
 
 
 
