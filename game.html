@@ -1139,6 +1139,7 @@ let gameRunning = false;
 /* 15 SECOND TIMER */
 /* 15 SECOND TIMER */
 function startGameTimer(){
+  window.highestScore = 0;
 
   /* CLEAR OLD COUPON */
 
@@ -1607,8 +1608,16 @@ if(micStream){
       gameTimer.innerHTML =
         "0";
 
-      const finalScore =
-        Math.floor(score);
+      /* SAVE HIGHEST SCORE DURING 15 SECONDS */
+
+window.highestScore =
+  Math.max(
+    window.highestScore || 0,
+    Math.floor(score)
+  );
+
+const finalScore =
+  window.highestScore;
 
       /* HIDE GAME */
 
