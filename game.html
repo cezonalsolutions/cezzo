@@ -289,7 +289,181 @@ body{
   }
 
 }
+/* SCORE */
+/* MAIN SCORE */
+/* MAIN 3D SCORE */
 
+.score-text{
+  position:fixed;
+
+  left:50%;
+  top:17%;
+
+  transform:translateX(-50%);
+
+  font-size:72px;
+  font-weight:900;
+
+  z-index:50;
+
+  display:none;
+
+  color:#ffffff;
+
+  letter-spacing:2px;
+
+  /* 3D EFFECT */
+
+  text-shadow:
+    0 2px 0 #d9d9d9,
+    0 4px 0 #bfbfbf,
+    0 6px 0 #a6a6a6,
+    0 8px 0 #8c8c8c,
+    0 10px 18px rgba(0,0,0,0.45);
+
+  animation:scoreBounce 0.45s infinite;
+}
+
+/* LEFT FLOAT */
+
+.score-text::before{
+  content:"+12";
+
+  position:absolute;
+
+  left:-90px;
+  top:15px;
+
+  font-size:28px;
+  font-weight:bold;
+
+  color:#ffe600;
+
+  text-shadow:
+    0 0 10px rgba(255,230,0,0.7);
+
+  animation:floatLeft 1s infinite;
+}
+
+/* RIGHT FLOAT */
+
+.score-text::after{
+  content:"+25";
+
+  position:absolute;
+
+  right:-90px;
+  top:15px;
+
+  font-size:28px;
+  font-weight:bold;
+
+  color:#00ff99;
+
+  text-shadow:
+    0 0 10px rgba(0,255,150,0.7);
+
+  animation:floatRight 1s infinite;
+}
+
+/* TOP FLOAT */
+
+.score-text span{
+  position:absolute;
+
+  left:50%;
+  top:-50px;
+
+  transform:translateX(-50%);
+
+  font-size:30px;
+  font-weight:bold;
+
+  color:#ff4dff;
+
+  text-shadow:
+    0 0 12px rgba(255,77,255,0.8);
+
+  animation:floatTop 1s infinite;
+}
+
+/* MAIN BOUNCE */
+
+@keyframes scoreBounce{
+
+  0%{
+    transform:translateX(-50%) scale(1);
+  }
+
+  50%{
+    transform:translateX(-50%) scale(1.15);
+  }
+
+  100%{
+    transform:translateX(-50%) scale(1);
+  }
+
+}
+
+/* LEFT FLOAT */
+
+@keyframes floatLeft{
+
+  0%{
+    opacity:0;
+    transform:translateY(0px);
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+    transform:translateY(-35px);
+  }
+
+}
+
+/* RIGHT FLOAT */
+
+@keyframes floatRight{
+
+  0%{
+    opacity:0;
+    transform:translateY(0px);
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+    transform:translateY(-35px);
+  }
+
+}
+
+/* TOP FLOAT */
+
+@keyframes floatTop{
+
+  0%{
+    opacity:0;
+    transform:translateX(-50%) translateY(0px);
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+    transform:translateX(-50%) translateY(-35px);
+  }
+
+}
 </style>
 </head>
 
@@ -364,6 +538,10 @@ body{
   class="center-image"
   id="centerImage"
 >
+<div class="score-text" id="scoreText">
+  1%
+  <span>+50</span>
+</div>
 <script>
 
 /* FALLING FRUITS */
@@ -461,6 +639,7 @@ function startCountdown(){
 
 /* 15 SECOND TIMER */
 /* 15 SECOND TIMER */
+/* 15 SECOND TIMER */
 
 function startGameTimer(){
 
@@ -473,10 +652,116 @@ function startGameTimer(){
 
   });
 
-  /* SHOW CENTER IMAGE */
+  /* SHOW IMAGE */
 
   document.getElementById("centerImage")
   .style.display = "block";
+
+  /* SHOW SCORE */
+
+  const scoreText =
+    document.getElementById("scoreText");
+
+  scoreText.style.display = "block";
+
+  let score = 1;
+
+  scoreText.innerHTML = score;
+
+  /* MIC */
+
+  navigator.mediaDevices.getUserMedia({
+    audio:true
+  }).then(stream=>{
+
+    const audioContext =
+      new AudioContext();
+
+    const mic =
+      audioContext.createMediaStreamSource(stream);
+
+    const analyser =
+      audioContext.createAnalyser();
+
+    analyser.fftSize = 2048;
+
+    mic.connect(analyser);
+
+    const data =
+      new Uint8Array(analyser.frequencyBinCount);
+
+    function detectVoice(){
+
+      analyser.getByteFrequencyData(data);
+
+      let volume = 0;
+
+      for(let i=0;i<data.length;i++){
+
+        volume += data[i];
+
+      }
+
+      volume = volume / data.length;
+
+      /* ONLY REAL SHOUT */
+
+      if(volume > 80){
+
+        /* VERY LOUD SHOUT */
+
+        score += 2.8;
+
+      }
+
+      else if(volume > 68){
+
+        /* LOUD SHOUT */
+
+        score += 1.2;
+
+      }
+
+      else{
+
+        /* TALKING / NOISE */
+
+        score -= 1.8;
+
+      }
+
+      /* LIMIT */
+
+      if(score < 1){
+
+        score = 1;
+
+      }
+
+      if(score > 100){
+
+        score = 100;
+
+      }
+
+      /* UPDATE */
+
+      scoreText.innerHTML =
+        Math.floor(score);
+
+      requestAnimationFrame(detectVoice);
+
+    }
+
+    detectVoice();
+
+  })
+
+  .catch(err=>{
+
+    alert("Allow Microphone Permission");
+
+  });
 
   /* TIMER */
 
@@ -501,7 +786,29 @@ function startGameTimer(){
 
       gameTimer.innerHTML = "0";
 
-      alert("Time Over!");
+      /* HIDE GAME */
+
+      document.getElementById("centerImage")
+      .style.display = "none";
+
+      document.getElementById("scoreText")
+      .style.display = "none";
+
+      gameTimer.style.display = "none";
+
+      /* SHOW FRUITS AGAIN */
+
+      document.querySelectorAll(".fruit")
+      .forEach(fruit=>{
+
+        fruit.style.display = "block";
+
+      });
+
+      /* SHOW PLAY BUTTON */
+
+      document.querySelector(".play-btn")
+      .style.display = "block";
 
     }
 
