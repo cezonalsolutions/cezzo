@@ -1025,6 +1025,10 @@ function redeemCoupon(){
   alert("Coupon Saved!");
 
 }
+/* GLOBAL MIC */
+
+let micStream = null;
+let gameRunning = false;
 /* 15 SECOND TIMER */
 /* 15 SECOND TIMER */
 function startGameTimer(){
@@ -1080,12 +1084,18 @@ function startGameTimer(){
 
   /* MIC */
 
-  navigator.mediaDevices
-  .getUserMedia({
-    audio:true
-  })
+ navigator.mediaDevices
+.getUserMedia({
+  audio:true
+})
 
-  .then(stream=>{
+.then(stream=>{
+
+  /* SAVE MIC */
+
+  micStream = stream;
+
+  gameRunning = true;
 
     const audioContext =
       new AudioContext();
@@ -1112,7 +1122,11 @@ function startGameTimer(){
     let smoothVolume = 0;
 
     function detectVoice(){
+if(!gameRunning){
 
+  return;
+
+}
       analyser
       .getByteFrequencyData(data);
 
@@ -1258,9 +1272,23 @@ function startGameTimer(){
 
   .catch(err=>{
 
-    alert(
-      "Allow Microphone Permission"
-    );
+   alert(
+  "Microphone Not Working"
+);
+
+/* BACK HOME */
+
+document.getElementById(
+  "howScreen"
+).style.display = "none";
+
+document.getElementById(
+  "countdown"
+).style.display = "none";
+
+document.querySelector(
+  ".play-btn"
+).style.display = "block";
 
   });
 
@@ -1286,9 +1314,27 @@ function startGameTimer(){
 
     gameTimer.innerHTML =
       timeLeft;
+/* STOP GAME */
+
 
     if(timeLeft <= 0){
+/* STOP GAME */
 
+gameRunning = false;
+
+/* STOP MIC */
+
+if(micStream){
+
+  micStream
+  .getTracks()
+  .forEach(track=>{
+
+    track.stop();
+
+  });
+
+}
       clearInterval(
         gameInterval
       );
