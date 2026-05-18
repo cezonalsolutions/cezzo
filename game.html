@@ -658,6 +658,50 @@ body{
   font-size:22px;
   font-weight:bold;
 }
+/* FULL SCREEN WATER LAYER */
+
+.water-layer{
+  position:fixed;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,140,255,0.72),
+      rgba(0,200,255,0.38)
+    );
+
+  z-index:24;
+
+  pointer-events:none;
+
+  display:none;
+
+  transition:
+    clip-path 0.2s linear;
+
+  /* START FULL */
+clip-path:
+  polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    75% 94%,
+    55% 100%,
+    35% 92%,
+    15% 98%,
+    0% 94%
+  );
+
+  backdrop-filter:
+    blur(2px);
+}
+
 </style>
 </head>
 
@@ -725,8 +769,11 @@ body{
 <div class="game-timer" id="gameTimer">
   15
 </div>
-<!-- CENTER IMAGE -->
 
+<!-- CENTER IMAGE -->
+<!-- WATER LAYER -->
+
+<div class="water-layer" id="waterLayer"></div>
 <img
   src="cat/ice.png"
   class="center-image"
@@ -982,7 +1029,6 @@ function redeemCoupon(){
 }
 /* 15 SECOND TIMER */
 /* 15 SECOND TIMER */
-
 function startGameTimer(){
 
   /* HIDE FRUITS */
@@ -996,15 +1042,31 @@ function startGameTimer(){
 
   /* SHOW IMAGE */
 
-  document.getElementById("centerImage")
-  .style.display = "block";
+  document.getElementById(
+    "centerImage"
+  ).style.display = "block";
 
   /* SHOW SCORE */
 
   const scoreText =
-    document.getElementById("scoreText");
+    document.getElementById(
+      "scoreText"
+    );
 
   scoreText.style.display = "block";
+
+  /* WATER LAYER */
+
+  const waterLayer =
+    document.getElementById(
+      "waterLayer"
+    );
+
+  waterLayer.style.display =
+    "block";
+
+  waterLayer.style.clipPath =
+  "inset(0 0 0 0)";
 
   let score = 1;
 
@@ -1012,31 +1074,41 @@ function startGameTimer(){
 
   /* MIC */
 
-  navigator.mediaDevices.getUserMedia({
+  navigator.mediaDevices
+  .getUserMedia({
     audio:true
-  }).then(stream=>{
+  })
+
+  .then(stream=>{
 
     const audioContext =
       new AudioContext();
 
     const mic =
-      audioContext.createMediaStreamSource(stream);
+      audioContext
+      .createMediaStreamSource(
+        stream
+      );
 
     const analyser =
-      audioContext.createAnalyser();
+      audioContext
+      .createAnalyser();
 
     analyser.fftSize = 2048;
 
     mic.connect(analyser);
 
     const data =
-      new Uint8Array(analyser.frequencyBinCount);
+      new Uint8Array(
+        analyser.frequencyBinCount
+      );
 
     let smoothVolume = 0;
 
     function detectVoice(){
 
-      analyser.getByteFrequencyData(data);
+      analyser
+      .getByteFrequencyData(data);
 
       let volume = 0;
 
@@ -1046,9 +1118,10 @@ function startGameTimer(){
 
       }
 
-      volume = volume / data.length;
+      volume =
+        volume / data.length;
 
-      /* SMOOTH FILTER */
+      /* SMOOTH */
 
       smoothVolume =
         (smoothVolume * 0.88) +
@@ -1056,9 +1129,7 @@ function startGameTimer(){
 
       volume = smoothVolume;
 
-      /* LEVEL SYSTEM */
-
-      /* 1 - 40 EASY */
+      /* EASY */
 
       if(score < 40){
 
@@ -1074,64 +1145,53 @@ function startGameTimer(){
 
       }
 
-      /* 40 - 70 HARD */
-/* 40 - 70 HARD */
+      /* HARD */
 
-else if(score < 70){
+      else if(score < 70){
 
-  /* VERY LOUD SHOUT */
+        if(volume > 82){
 
-  if(volume > 82){
+          score += 1.4;
 
-    score += 1.4;
+        }
 
-  }
+        else if(volume > 72){
 
-  /* LOUD SHOUT */
+          score += 0.6;
 
-  else if(volume > 72){
+        }
 
-    score += 0.6;
+        else{
 
-  }
+          score -= 0.5;
 
-  else{
+        }
 
-    score -= 0.5;
+      }
 
-  }
+      /* VERY HARD */
 
-}
+      else{
 
-      /* 70 - 100 VERY HARD */
+        if(volume > 95){
 
-     /* 70 - 100 VERY HARD */
+          score += 1.1;
 
-else{
+        }
 
-  /* EXTREME SHOUT */
+        else if(volume > 85){
 
-  if(volume > 95){
+          score += 0.35;
 
-    score += 1.1;
+        }
 
-  }
+        else{
 
-  /* LOUD SHOUT */
+          score -= 0.8;
 
-  else if(volume > 85){
+        }
 
-    score += 0.35;
-
-  }
-
-  else{
-
-    score -= 0.8;
-
-  }
-
-}
+      }
 
       /* LIMIT */
 
@@ -1147,12 +1207,43 @@ else{
 
       }
 
-      /* UPDATE */
+      /* UPDATE SCORE */
 
       scoreText.innerHTML =
         Math.floor(score);
 
-      requestAnimationFrame(detectVoice);
+      /* UPDATE WATER */
+
+     /* REMOVE BLUE FROM DOWN */
+
+/* OPEN REVERSE FROM BOTTOM */
+
+const level = 100 - score;
+
+/* SLOW FLOATING WATER */
+
+const wave =
+  Math.sin(Date.now()*0.0015) * 2;
+
+waterLayer.style.clipPath =
+
+  "polygon(" +
+
+  "0% 0%, " +
+
+  "100% 0%, " +
+
+  "100% " + (level + wave) + "%, " +
+
+  "50% " + (level - 8 + wave) + "%, " +
+
+  "0% " + (level + wave) + "%)"
+
+;
+
+      requestAnimationFrame(
+        detectVoice
+      );
 
     }
 
@@ -1162,170 +1253,196 @@ else{
 
   .catch(err=>{
 
-    alert("Allow Microphone Permission");
+    alert(
+      "Allow Microphone Permission"
+    );
 
   });
 
   /* TIMER */
 
   const gameTimer =
-    document.getElementById("gameTimer");
+    document.getElementById(
+      "gameTimer"
+    );
 
-  gameTimer.style.display = "flex";
+  gameTimer.style.display =
+    "flex";
 
   let timeLeft = 15;
 
-  gameTimer.innerHTML = timeLeft;
+  gameTimer.innerHTML =
+    timeLeft;
 
-  const gameInterval = setInterval(()=>{
+  const gameInterval =
+    setInterval(()=>{
 
     timeLeft--;
 
-    gameTimer.innerHTML = timeLeft;
+    gameTimer.innerHTML =
+      timeLeft;
 
-if(timeLeft <= 0){
+    if(timeLeft <= 0){
 
-  clearInterval(gameInterval);
+      clearInterval(
+        gameInterval
+      );
 
-  gameTimer.innerHTML = "0";
+      gameTimer.innerHTML = "0";
 
-  /* SAVE HIGHEST */
+      /* FINAL SCORE */
 
-  const finalScore =
-    Math.floor(score);
+      const finalScore =
+        Math.floor(score);
 
-  let highest =
-    localStorage.getItem(
-      "highestScore"
-    ) || 0;
+      /* SAVE HIGHEST */
 
-  if(finalScore > highest){
+      let highest =
+        localStorage.getItem(
+          "highestScore"
+        ) || 0;
 
-    localStorage.setItem(
-      "highestScore",
-      finalScore
-    );
+      if(finalScore > highest){
 
-    highest = finalScore;
+        localStorage.setItem(
+          "highestScore",
+          finalScore
+        );
 
-  }
+        highest = finalScore;
 
-  /* HIDE GAME */
+      }
 
-  document.getElementById(
-    "centerImage"
-  ).style.display = "none";
-
-  document.getElementById(
-    "scoreText"
-  ).style.display = "none";
-
-  gameTimer.style.display = "none";
-
-  document.querySelector(
-    ".top-image"
-  ).style.display = "none";
-
-  /* HIDE FRUITS */
-
-  document.querySelectorAll(".fruit")
-  .forEach(fruit=>{
-
-    fruit.style.display = "none";
-
-  });
-
-  /* BLAST */
-
-  createBlast();
-
-  /* AFTER BLAST */
-
-  setTimeout(()=>{
-
-    /* SHOW RESULT SCREEN */
-
-    document.getElementById(
-      "finalResult"
-    ).style.display = "flex";
-
-    /* HIGHEST */
-/* BACK TO HOME AFTER 5 SEC */
-
-setTimeout(()=>{
-
-  /* HIDE RESULT */
-
-  document.getElementById(
-    "finalResult"
-  ).style.display = "none";
-
-  /* SHOW TOP IMAGE */
-
-  document.querySelector(
-    ".top-image"
-  ).style.display = "block";
-
-  /* SHOW FRUITS */
-
-  document.querySelectorAll(".fruit")
-  .forEach(fruit=>{
-
-    fruit.style.display = "block";
-
-  });
-
-  /* SHOW PLAY BUTTON */
-
-  document.querySelector(
-    ".play-btn"
-  ).style.display = "block";
-
-},5000);
-   document.getElementById(
-  "highestScore"
-).innerHTML =
-  "Highest Score : " +
-  highest;
-
-    /* BELOW 30 */
-
-    if(finalScore < 30){
+      /* HIDE GAME */
 
       document.getElementById(
-  "finalTitle"
-).innerHTML =
-  "Better Luck Next Time";
-
-      document.getElementById(
-        "couponBox"
+        "centerImage"
       ).style.display = "none";
 
+      document.getElementById(
+        "scoreText"
+      ).style.display = "none";
+
+      document.getElementById(
+        "waterLayer"
+      ).style.display = "none";
+
+      gameTimer.style.display =
+        "none";
+
+      document.querySelector(
+        ".top-image"
+      ).style.display = "none";
+
+      /* HIDE FRUITS */
+
+      document.querySelectorAll(
+        ".fruit"
+      )
+      .forEach(fruit=>{
+
+        fruit.style.display =
+          "none";
+
+      });
+
+      /* BLAST */
+
+      createBlast();
+
+      /* AFTER BLAST */
+
+      setTimeout(()=>{
+
+        document.getElementById(
+          "finalResult"
+        ).style.display =
+          "flex";
+
+        /* HIGHEST */
+
+        document.getElementById(
+          "highestScore"
+        ).innerHTML =
+
+          "Highest Score : " +
+          highest;
+
+        /* BELOW 30 */
+
+        if(finalScore < 30){
+
+          document.getElementById(
+            "finalTitle"
+          ).innerHTML =
+
+            "Better Luck Next Time";
+
+          document.getElementById(
+            "couponBox"
+          ).style.display =
+            "none";
+
+        }
+
+        /* ABOVE 30 */
+
+        else{
+
+          document.getElementById(
+            "finalTitle"
+          ).innerHTML =
+
+            "🎉 10% Discount Applied";
+
+          document.getElementById(
+            "couponBox"
+          ).style.display =
+            "block";
+
+          document.getElementById(
+            "couponCode"
+          ).innerHTML =
+
+            generateCoupon();
+
+        }
+
+        /* RETURN HOME */
+
+        setTimeout(()=>{
+
+          document.getElementById(
+            "finalResult"
+          ).style.display =
+            "none";
+
+          document.querySelector(
+            ".top-image"
+          ).style.display =
+            "block";
+
+          document.querySelector(
+            ".play-btn"
+          ).style.display =
+            "block";
+
+          document.querySelectorAll(
+            ".fruit"
+          )
+          .forEach(fruit=>{
+
+            fruit.style.display =
+              "block";
+
+          });
+
+        },5000);
+
+      },6000);
+
     }
 
-    /* ABOVE 30 */
-
-    else{
-
-      document.getElementById(
-        "finalTitle"
-      ).innerHTML =
-        "🎉 10% Discount Applied";
-
-      document.getElementById(
-        "couponBox"
-      ).style.display = "block";
-
-      document.getElementById(
-        "couponCode"
-      ).innerHTML =
-        generateCoupon();
-
-    }
-
-  },6000);
-
-}
   },1000);
 
 }
