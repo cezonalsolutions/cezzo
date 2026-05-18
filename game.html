@@ -564,6 +564,7 @@ body{
   text-align:center;
 
   padding:20px;
+  transition:0.5s;
 }
 
 /* TITLE */
@@ -1022,7 +1023,23 @@ function redeemCoupon(){
     code
   );
 
-  alert("Coupon Saved!");
+  /* SMOOTH CLOSE */
+
+  document.getElementById(
+    "finalResult"
+  ).style.opacity = "0";
+
+  document.getElementById(
+    "finalResult"
+  ).style.transition =
+    "0.5s";
+
+  setTimeout(()=>{
+
+    window.location.href =
+      "index.html";
+
+  },500);
 
 }
 /* GLOBAL MIC */
