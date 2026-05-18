@@ -480,7 +480,7 @@ body{
   z-index:500;
 
   animation:
-  burstAnim 6s cubic-bezier(.08,.82,.17,1) forwards;
+  burstAnim 1.2s cubic-bezier(.08,.82,.17,1) forwards;
 }
 
 .blast-item img{
@@ -491,7 +491,7 @@ body{
   object-fit:contain;
 
   animation:
-    spinAnim 6s linear forwards;
+    spinAnim 1.2s linear forwards;
 }
 
 /* BURST */
@@ -791,9 +791,7 @@ clip-path:
     Better Luck Next Time
   </div>
 
-  <div class="highest-score" id="highestScore">
-    Highest Score : 0%
-  </div>
+  
 
   <div class="coupon-box" id="couponBox">
 
@@ -981,7 +979,7 @@ function createBlast(){
 
       item.remove();
 
-    },6000);
+    },1200);
 
   }
 
@@ -1031,6 +1029,16 @@ function redeemCoupon(){
 /* 15 SECOND TIMER */
 function startGameTimer(){
 
+  /* CLEAR OLD COUPON */
+
+  localStorage.removeItem(
+    "savedCoupon"
+  );
+
+  localStorage.removeItem(
+    "discountValue"
+  );
+
   /* HIDE FRUITS */
 
   document.querySelectorAll(".fruit")
@@ -1053,9 +1061,10 @@ function startGameTimer(){
       "scoreText"
     );
 
-  scoreText.style.display = "block";
+  scoreText.style.display =
+    "block";
 
-  /* WATER LAYER */
+  /* WATER */
 
   const waterLayer =
     document.getElementById(
@@ -1064,9 +1073,6 @@ function startGameTimer(){
 
   waterLayer.style.display =
     "block";
-
-  waterLayer.style.clipPath =
-  "inset(0 0 0 0)";
 
   let score = 1;
 
@@ -1129,7 +1135,7 @@ function startGameTimer(){
 
       volume = smoothVolume;
 
-      /* EASY */
+      /* LEVELS */
 
       if(score < 40){
 
@@ -1144,8 +1150,6 @@ function startGameTimer(){
         }
 
       }
-
-      /* HARD */
 
       else if(score < 70){
 
@@ -1168,8 +1172,6 @@ function startGameTimer(){
         }
 
       }
-
-      /* VERY HARD */
 
       else{
 
@@ -1212,34 +1214,37 @@ function startGameTimer(){
       scoreText.innerHTML =
         Math.floor(score);
 
-      /* UPDATE WATER */
+      /* WATER LEVEL */
 
-     /* REMOVE BLUE FROM DOWN */
+      const level =
+        100 - score;
 
-/* OPEN REVERSE FROM BOTTOM */
+      const wave =
+        Math.sin(
+          Date.now()*0.0015
+        ) * 2;
 
-const level = 100 - score;
+      waterLayer.style.clipPath =
 
-/* SLOW FLOATING WATER */
+        "polygon(" +
 
-const wave =
-  Math.sin(Date.now()*0.0015) * 2;
+        "0% 0%, " +
 
-waterLayer.style.clipPath =
+        "100% 0%, " +
 
-  "polygon(" +
+        "100% " +
+        (level + wave) +
+        "%, " +
 
-  "0% 0%, " +
+        "50% " +
+        (level - 8 + wave) +
+        "%, " +
 
-  "100% 0%, " +
+        "0% " +
+        (level + wave) +
+        "%)"
 
-  "100% " + (level + wave) + "%, " +
-
-  "50% " + (level - 8 + wave) + "%, " +
-
-  "0% " + (level + wave) + "%)"
-
-;
+      ;
 
       requestAnimationFrame(
         detectVoice
@@ -1288,53 +1293,36 @@ waterLayer.style.clipPath =
         gameInterval
       );
 
-      gameTimer.innerHTML = "0";
-
-      /* FINAL SCORE */
+      gameTimer.innerHTML =
+        "0";
 
       const finalScore =
         Math.floor(score);
-
-      /* SAVE HIGHEST */
-
-      let highest =
-        localStorage.getItem(
-          "highestScore"
-        ) || 0;
-
-      if(finalScore > highest){
-
-        localStorage.setItem(
-          "highestScore",
-          finalScore
-        );
-
-        highest = finalScore;
-
-      }
 
       /* HIDE GAME */
 
       document.getElementById(
         "centerImage"
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
       document.getElementById(
         "scoreText"
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
       document.getElementById(
         "waterLayer"
-      ).style.display = "none";
+      ).style.display =
+        "none";
 
       gameTimer.style.display =
         "none";
 
       document.querySelector(
         ".top-image"
-      ).style.display = "none";
-
-      /* HIDE FRUITS */
+      ).style.display =
+        "none";
 
       document.querySelectorAll(
         ".fruit"
@@ -1359,18 +1347,14 @@ waterLayer.style.clipPath =
         ).style.display =
           "flex";
 
-        /* HIGHEST */
+        /* BELOW 50 */
 
-        document.getElementById(
-          "highestScore"
-        ).innerHTML =
+        if(finalScore < 50){
 
-          "Highest Score : " +
-          highest;
-
-        /* BELOW 30 */
-
-        if(finalScore < 30){
+          document.getElementById(
+            "finalTitle"
+          ).style.display =
+            "block";
 
           document.getElementById(
             "finalTitle"
@@ -1385,26 +1369,92 @@ waterLayer.style.clipPath =
 
         }
 
-        /* ABOVE 30 */
+        /* COUPON */
 
         else{
 
+          let discount = 10;
+
+          if(finalScore >= 100){
+
+            discount = 50;
+
+          }
+
+          else if(finalScore >= 90){
+
+            discount = 40;
+
+          }
+
+          else if(finalScore >= 80){
+
+            discount = 40;
+
+          }
+
+          else if(finalScore >= 70){
+
+            discount = 30;
+
+          }
+
+          else if(finalScore >= 60){
+
+            discount = 20;
+
+          }
+
+          else if(finalScore >= 50){
+
+            discount = 10;
+
+          }
+
+          /* HIDE TEXT */
+
           document.getElementById(
             "finalTitle"
-          ).innerHTML =
+          ).style.display =
+            "none";
 
-            "🎉 10% Discount Applied";
+          /* SHOW COUPON */
 
           document.getElementById(
             "couponBox"
           ).style.display =
             "block";
 
+          /* DISCOUNT */
+
+          document.querySelector(
+            ".coupon-text"
+          ).innerHTML =
+
+            discount +
+            "% Discount Code";
+
+          /* RANDOM CODE */
+
+          const couponCode =
+            generateCoupon();
+
           document.getElementById(
             "couponCode"
           ).innerHTML =
+            couponCode;
 
-            generateCoupon();
+          /* SAVE */
+
+          localStorage.setItem(
+            "savedCoupon",
+            couponCode
+          );
+
+          localStorage.setItem(
+            "discountValue",
+            discount
+          );
 
         }
 
@@ -1439,7 +1489,7 @@ waterLayer.style.clipPath =
 
         },5000);
 
-      },6000);
+      },1000);
 
     }
 
