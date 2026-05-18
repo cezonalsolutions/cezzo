@@ -195,12 +195,22 @@ body{
 
 .point-box{
   background:white;
-  padding:14px 18px;
+  padding:14px 12px;
+
   border-radius:16px;
-  font-size:18px;
+
+  font-size:16px;
+
   font-weight:bold;
+
   color:#555;
+
+  text-align:center;
+
+  white-space:nowrap;
+
   box-shadow:0 6px 16px rgba(0,0,0,0.08);
+
   border:2px solid rgba(255,180,0,0.25);
 }
 /* GAME TIMER */
@@ -551,7 +561,14 @@ body{
 
   inset:0;
 
-  background:white;
+  background:
+    linear-gradient(
+      to bottom,
+      #87e0ff,
+      #d4ffb2
+    );
+
+  overflow:hidden;
 
   z-index:9999;
 
@@ -564,9 +581,41 @@ body{
   text-align:center;
 
   padding:20px;
+
   transition:0.5s;
 }
+.final-result::before{
 
+  content:"🍎 🍌 🍇 🍉 🍒 🍍 🥝 🍑 🍓 🥥 🍋 🍊";
+
+  position:absolute;
+
+  inset:0;
+
+  font-size:42px;
+
+  opacity:0.12;
+
+  line-height:1.2;
+
+  word-spacing:25px;
+
+  overflow:hidden;
+
+  animation:fallBg 1.5s linear infinite;
+
+}
+@keyframes fallBg{
+
+  0%{
+    transform:translateY(-100px);
+  }
+
+  100%{
+    transform:translateY(100px);
+  }
+
+}
 /* TITLE */
 
 .final-title{
@@ -702,7 +751,36 @@ clip-path:
   backdrop-filter:
     blur(2px);
 }
+/* COUNTDOWN EFFECT */
 
+.countdown{
+
+  animation:
+    zoomPop 0.9s ease;
+}
+
+@keyframes zoomPop{
+
+  0%{
+    transform:scale(0.2) rotate(-20deg);
+    opacity:0;
+  }
+
+  40%{
+    transform:scale(1.4) rotate(10deg);
+    opacity:1;
+  }
+
+  70%{
+    transform:scale(0.9) rotate(-5deg);
+  }
+
+  100%{
+    transform:scale(1) rotate(0deg);
+    opacity:1;
+  }
+
+}
 </style>
 </head>
 
@@ -739,20 +817,21 @@ clip-path:
  <div class="points">
 
   <div class="point-box">
-    Shoot As You Can
-  </div>
+  Shout As You Can
+</div>
 
-  <div class="point-box">
-    Avoid Missing Fruits
-  </div>
+<div class="point-box">
+    Keep Voice Strong To Reach 100%
 
-  <div class="point-box">
-    Claim The Offer
-  </div>
+</div>
 
-  <div class="point-box">
-    Score More Points
-  </div>
+<div class="point-box">
+  Unlock Bigger Discount Coupons
+</div>
+
+<div class="point-box">
+  Reach 100% Before Time Ends
+</div>
 
 </div>
 
@@ -880,33 +959,44 @@ function startCountdown(){
   let number = 3;
 
   countdown.innerHTML = number;
+countdown.style.animation =
+  "none";
 
-  const timer = setInterval(()=>{
+countdown.offsetHeight;
 
-    number--;
+countdown.style.animation =
+  "zoomPop 0.9s ease";
+const timer = setInterval(()=>{
 
-    if(number > 0){
+  number--;
 
-      countdown.innerHTML = number;
+  if(number > 0){
 
-    }else{
+    countdown.innerHTML = number;
 
-      clearInterval(timer);
+    countdown.style.animation =
+      "none";
 
-      countdown.innerHTML = "1";
+    countdown.offsetWidth;
 
-      setTimeout(()=>{
+    countdown.style.animation =
+      "zoomPop 0.9s ease";
 
-        countdown.style.display = "none";
+  }else{
 
-        startGameTimer();
+    clearInterval(timer);
 
-      },1000);
+    setTimeout(()=>{
 
-    }
+      countdown.style.display = "none";
 
-  },1000);
+      startGameTimer();
 
+    },800);
+
+  }
+
+},1000);
 }
 /* GROCERY BLAST */
 
@@ -1160,71 +1250,116 @@ if(!gameRunning){
 
       /* SMOOTH */
 
-      smoothVolume =
-        (smoothVolume * 0.88) +
-        (volume * 0.12);
+      /* BETTER VOICE HOLD */
+
+if(volume > smoothVolume){
+
+  smoothVolume =
+    (smoothVolume * 0.82) +
+    (volume * 0.18);
+
+}else{
+
+  smoothVolume =
+    (smoothVolume * 0.96) +
+    (volume * 0.04);
+
+}
 
       volume = smoothVolume;
 
       /* LEVELS */
 
-      if(score < 40){
+/* LEVELS */
 
-        if(volume > 78){
+if(score < 40){
 
-          score += 1.5;
+  if(volume > 55){
 
-        }else{
+    score += 2.5;
 
-          score -= 0.3;
+  }else{
 
-        }
+    score -= 0.8;
 
-      }
+  }
 
-      else if(score < 70){
+}
 
-        if(volume > 82){
+/* MEDIUM */
 
-          score += 1.4;
+else if(score < 70){
 
-        }
+  if(volume > 65){
 
-        else if(volume > 72){
+    score += 2;
 
-          score += 0.6;
+  }
 
-        }
+  else if(volume > 50){
 
-        else{
+    score += 1;
 
-          score -= 0.5;
+  }
 
-        }
+  else{
 
-      }
+    score -= 0.12;
 
-      else{
+  }
 
-        if(volume > 95){
+}
 
-          score += 1.1;
+/* HARD */
 
-        }
+else if(score < 90){
 
-        else if(volume > 85){
+  if(volume > 75){
 
-          score += 0.35;
+    score += 1.5;
 
-        }
+  }
 
-        else{
+  else if(volume > 65){
 
-          score -= 0.8;
+    score += 0.7;
 
-        }
+  }
 
-      }
+  else{
+
+    score -= 0.18;
+
+  }
+
+}
+
+/* VERY HARD 90-100 */
+
+else{
+
+  if(volume > 90){
+
+    score += 1.2;
+
+  }
+
+  else if(volume > 82){
+
+    score += 0.4;
+
+  }
+
+  else{
+
+    score -= 0.25;
+
+  }
+
+}
+
+
+
 
       /* LIMIT */
 
@@ -1239,7 +1374,120 @@ if(!gameRunning){
         score = 100;
 
       }
+if(score >= 100){
 
+  score = 100;
+
+  gameRunning = false;
+
+  clearInterval(gameInterval);
+
+  gameTimer.innerHTML = "0";
+
+  /* STOP MIC */
+
+  if(micStream){
+
+    micStream
+    .getTracks()
+    .forEach(track=>{
+
+      track.stop();
+
+    });
+
+  }
+
+  /* HIDE GAME */
+
+  document.getElementById(
+    "centerImage"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "scoreText"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "waterLayer"
+  ).style.display =
+    "none";
+
+  gameTimer.style.display =
+    "none";
+
+  document.querySelector(
+    ".top-image"
+  ).style.display =
+    "none";
+
+  document.querySelectorAll(
+    ".fruit"
+  )
+  .forEach(fruit=>{
+
+    fruit.style.display =
+      "none";
+
+  });
+
+  /* BLAST */
+
+  createBlast();
+
+  /* SHOW RESULT FAST */
+
+  setTimeout(()=>{
+
+    document.getElementById(
+      "finalResult"
+    ).style.display =
+      "flex";
+
+    let discount = 50;
+
+    document.getElementById(
+      "finalTitle"
+    ).style.display =
+      "none";
+
+    document.getElementById(
+      "couponBox"
+    ).style.display =
+      "block";
+
+    document.querySelector(
+      ".coupon-text"
+    ).innerHTML =
+
+      discount +
+      "% Discount Code";
+
+    const couponCode =
+      generateCoupon();
+
+    document.getElementById(
+      "couponCode"
+    ).innerHTML =
+      couponCode;
+
+    localStorage.setItem(
+      "savedCoupon",
+      couponCode
+    );
+
+    localStorage.setItem(
+      "discountValue",
+      discount
+    );
+
+  },1000);
+
+  return;
+
+}
       /* UPDATE SCORE */
 
       scoreText.innerHTML =
