@@ -258,7 +258,37 @@ body{
   }
 
 }
+/* CENTER IMAGE */
 
+/* CENTER IMAGE */
+
+.center-image{
+  position:fixed;
+  left:50%;
+  top:76%;
+  transform:translate(-50%,-50%);
+
+  width:420px;
+  max-width:95vw;
+
+  z-index:20;
+
+  display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .center-image{
+
+    width:92vw;
+    max-width:none;
+
+    top:70%;
+  }
+
+}
 
 </style>
 </head>
@@ -327,6 +357,13 @@ body{
 <div class="game-timer" id="gameTimer">
   15
 </div>
+<!-- CENTER IMAGE -->
+
+<img
+  src="cat/ice.png"
+  class="center-image"
+  id="centerImage"
+>
 <script>
 
 /* FALLING FRUITS */
@@ -423,8 +460,25 @@ function startCountdown(){
 }
 
 /* 15 SECOND TIMER */
+/* 15 SECOND TIMER */
 
 function startGameTimer(){
+
+  /* HIDE FRUITS */
+
+  document.querySelectorAll(".fruit")
+  .forEach(fruit=>{
+
+    fruit.style.display = "none";
+
+  });
+
+  /* SHOW CENTER IMAGE */
+
+  document.getElementById("centerImage")
+  .style.display = "block";
+
+  /* TIMER */
 
   const gameTimer =
     document.getElementById("gameTimer");
