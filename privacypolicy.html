@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy</title>
+
+<style>
+/* BODY GAP */
+body {
+  margin: 0;
+  padding-top: 55px; /* increase gap */
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f8fa;
+}
+/* GLOBAL FIX */
+* {
+  box-sizing: border-box;
+}
+
+/* REMOVE HORIZONTAL SCROLL */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+/* NAVBAR */
+/* NAVBAR FIX */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  margin: 0 10px;
+  width: calc(100% - 20px); /* 🔥 prevents overflow */
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* CONTENT */
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+  line-height: 1.7;
+}
+
+h2 {
+  font-size: 16px;
+  margin-top: 20px;
+  border-left: 3px solid #ff7c24;
+  padding-left: 8px;
+}
+
+p { font-size: 14px; color: #444; }
+
+ul { padding-left: 18px; }
+
+.top-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div class="nav-left">
+    <div onclick="goBack()"><i class="fa-solid fa-chevron-left"></i></div>
+    <div class="title" id="navTitle">Privacy Policy</div>
+  </div>
+
+  <select id="langSelect" onchange="changeLang(this.value)">
+    <option value="en">EN</option>
+    <option value="te">తెలుగు</option>
+    <option value="hi">हिंदी</option>
+  </select>
+</div>
+
+<div class="container">
+
+<img src="cat/terms.webp" class="top-image">
+
+<p id="introText"></p>
+
+<h2 id="dataTitle"></h2>
+<ul id="dataList"></ul>
+
+<h2 id="useTitle"></h2>
+<ul id="useList"></ul>
+
+<h2 id="locationTitle"></h2>
+<p id="locationText"></p>
+
+<h2 id="sharingTitle"></h2>
+<ul id="sharingList"></ul>
+
+<h2 id="securityTitle"></h2>
+<p id="securityText"></p>
+
+<h2 id="rightsTitle"></h2>
+<ul id="rightsList"></ul>
+
+<h2 id="contactTitle"></h2>
+<p id="contactText"></p>
+
+</div>
+<script>
+const translations = {
+
+en: {
+  navTitle:"Privacy Policy",
+  intro:"This Privacy Policy explains how cezoo collects, uses, and protects your personal information.",
+
+  dataTitle:"1. Information We Collect",
+  dataList:[
+    "Full name and mobile number",
+    "Delivery address and location data",
+    "Order history and preferences",
+    "Device information and usage data",
+    "Payment data (processed securely via third parties)"
+  ],
+
+  useTitle:"2. How We Use Your Information",
+  useList:[
+    "To process and deliver orders",
+    "To improve services and recommendations",
+    "To provide customer support",
+    "To ensure app security and prevent fraud"
+  ],
+
+  locationTitle:"3. Location Data",
+  locationText:"We collect location data to enable accurate delivery services. You can disable location access anytime.",
+
+  sharingTitle:"4. Data Sharing",
+  sharingList:[
+    "Delivery partners for order fulfillment",
+    "Payment gateways for transactions",
+    "Service providers for app functionality"
+  ],
+
+  securityTitle:"5. Data Security",
+  securityText:"We implement industry-standard security measures to protect your data. However, no system is completely secure.",
+
+  rightsTitle:"6. User Rights",
+  rightsList:[
+    "Access your personal data",
+    "Request correction or deletion",
+    "Withdraw consent anytime"
+  ],
+
+  contactTitle:"7. Company Information",
+  contactText:"Cezonal Solution Private Limited, Tanuku, Andhra Pradesh (Opposite V Max). Email: hr@cezonalsolution.com"
+},
+
+te: {
+  navTitle:"గోప్యతా విధానం",
+  intro:"ఈ విధానం మీ వ్యక్తిగత డేటాను ఎలా సేకరిస్తాము మరియు ఉపయోగిస్తామో వివరిస్తుంది.",
+
+  dataTitle:"1. మేము సేకరించే సమాచారం",
+  dataList:[
+    "పేరు మరియు మొబైల్ నంబర్",
+    "చిరునామా మరియు లోకేషన్",
+    "ఆర్డర్ వివరాలు",
+    "డివైస్ సమాచారం",
+    "పేమెంట్ సమాచారం"
+  ],
+
+  useTitle:"2. డేటా ఉపయోగం",
+  useList:[
+    "ఆర్డర్ ప్రాసెస్",
+    "సేవలు మెరుగుపరచడం",
+    "సపోర్ట్ అందించడం",
+    "సెక్యూరిటీ కోసం"
+  ],
+
+  locationTitle:"3. లోకేషన్ డేటా",
+  locationText:"డెలివరీ కోసం లోకేషన్ డేటా ఉపయోగిస్తాము.",
+
+  sharingTitle:"4. డేటా షేరింగ్",
+  sharingList:[
+    "డెలివరీ భాగస్వాములు",
+    "పేమెంట్ గేట్వేలు",
+    "సర్వీస్ ప్రొవైడర్లు"
+  ],
+
+  securityTitle:"5. సెక్యూరిటీ",
+  securityText:"మీ డేటాను రక్షించడానికి మేము చర్యలు తీసుకుంటాము.",
+
+  rightsTitle:"6. మీ హక్కులు",
+  rightsList:[
+    "డేటా యాక్సెస్",
+    "డిలీట్ చేయడం",
+    "కన్సెంట్ తీసివేయడం"
+  ],
+
+  contactTitle:"7. కంపెనీ వివరాలు",
+  contactText:"Cezonal Solution Private Limited, Tanuku, Andhra Pradesh (Opposite V Max). Email: hr@cezonalsolution.com"
+},
+
+hi: {
+  navTitle:"गोपनीयता नीति",
+  intro:"यह नीति बताती है कि आपका डेटा कैसे एकत्र और उपयोग किया जाता है।",
+
+  dataTitle:"1. हम कौन सी जानकारी लेते हैं",
+  dataList:[
+    "नाम और मोबाइल नंबर",
+    "पता और लोकेशन",
+    "ऑर्डर जानकारी",
+    "डिवाइस डेटा",
+    "भुगतान जानकारी"
+  ],
+
+  useTitle:"2. डेटा उपयोग",
+  useList:[
+    "ऑर्डर प्रोसेस",
+    "सेवा सुधार",
+    "सपोर्ट",
+    "सुरक्षा"
+  ],
+
+  locationTitle:"3. लोकेशन डेटा",
+  locationText:"डिलीवरी के लिए लोकेशन का उपयोग होता है।",
+
+  sharingTitle:"4. डेटा साझा करना",
+  sharingList:[
+    "डिलीवरी पार्टनर",
+    "पेमेंट गेटवे",
+    "सर्विस प्रोवाइडर"
+  ],
+
+  securityTitle:"5. सुरक्षा",
+  securityText:"आपका डेटा सुरक्षित रखने के लिए उपाय किए जाते हैं।",
+
+  rightsTitle:"6. आपके अधिकार",
+  rightsList:[
+    "डेटा एक्सेस",
+    "डिलीट करना",
+    "सहमति हटाना"
+  ],
+
+  contactTitle:"7. कंपनी जानकारी",
+  contactText:"Cezonal Solution Private Limited, Tanuku, Andhra Pradesh (Opposite V Max). Email: hr@cezonalsolution.com"
+}
+
+};
+
+function setList(id, arr){
+  const ul=document.getElementById(id);
+  ul.innerHTML="";
+  arr.forEach(i=>{
+    let li=document.createElement("li");
+    li.innerText=i;
+    ul.appendChild(li);
+  });
+}
+
+function changeLang(lang){
+  const t=translations[lang];
+
+  document.getElementById("navTitle").innerText=t.navTitle;
+  document.getElementById("introText").innerText=t.intro;
+
+  document.getElementById("dataTitle").innerText=t.dataTitle;
+  setList("dataList",t.dataList);
+
+  document.getElementById("useTitle").innerText=t.useTitle;
+  setList("useList",t.useList);
+
+  document.getElementById("locationTitle").innerText=t.locationTitle;
+  document.getElementById("locationText").innerText=t.locationText;
+
+  document.getElementById("sharingTitle").innerText=t.sharingTitle;
+  setList("sharingList",t.sharingList);
+
+  document.getElementById("securityTitle").innerText=t.securityTitle;
+  document.getElementById("securityText").innerText=t.securityText;
+
+  document.getElementById("rightsTitle").innerText=t.rightsTitle;
+  setList("rightsList",t.rightsList);
+
+  document.getElementById("contactTitle").innerText=t.contactTitle;
+  document.getElementById("contactText").innerText=t.contactText;
+
+  localStorage.setItem("appLang",lang);
+}
+
+window.onload=()=>{
+  const lang=localStorage.getItem("appLang")||"en";
+  document.getElementById("langSelect").value=lang;
+  changeLang(lang);
+};
+
+function goBack(){ window.history.back(); }
+</script>
+
+</body>
+</html>
