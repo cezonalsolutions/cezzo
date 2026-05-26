@@ -24813,6 +24813,7 @@ const table = parts.join("_");          // rest = table
 
   initAllUI(); // keep sync
 }
+
 function waitAndLoadCart(){
 
   const cart = JSON.parse(localStorage.getItem("cart") || "{}");
@@ -24820,7 +24821,7 @@ function waitAndLoadCart(){
 
   const bar = document.getElementById("cartBar");
 
-  // 🔥 STEP 1: INSTANT PRELOAD (no productMap needed)
+  // 🔥 STEP 1: INSTANT PRELOAD
   if(keys.length > 0){
 
     bar.classList.remove("hidden");
@@ -24831,99 +24832,114 @@ function waitAndLoadCart(){
       totalItems += cart[k];
     });
 
-    // 🔥 show instantly
+    // ✅ KEEP ORIGINAL ITEM COUNT LOGIC
     document.getElementById("cartCount").innerText =
       totalItems === 1 ? "1 item" : totalItems + " items";
 
-document.getElementById("cartTotal").innerHTML = `
-<div style="
-display:flex;
-align-items:center;
-gap:10px;
-">
+    // ✅ EXACT SAME IMAGE POSITIONING LIKE REAL CART
+    document.getElementById("cartTotal").innerHTML = `
 
-  <div style="
-  position:relative;
-  width:50px;
-  height:28px;
-  ">
+    <div style="
+    display:flex;
+    align-items:center;
+    ">
 
-    <div class="sk1" style="
-    width:28px;
-    height:28px;
-    border-radius:10px;
-    background:#e5e5e5;
-    position:absolute;
-    left:0;
-    top:0;
-    border:2px solid #fff;
-    "></div>
+      <!-- images -->
+      <div style="
+      display:flex;
+      align-items:center;
+      margin-right:8px;
+      ">
 
-    <div class="sk2" style="
-    width:28px;
-    height:28px;
-    border-radius:10px;
-    background:#dcdcdc;
-    position:absolute;
-    left:18px;
-    top:0;
-    border:2px solid #fff;
-    "></div>
+        <div class="sk1" style="
+        width:28px;
+        height:28px;
+        background:#ececec;
+        border-radius:10px;
+        border:2px solid #fff;
+        box-shadow:0 2px 8px rgba(0,0,0,0.12);
+        "></div>
 
-  </div>
+        <div class="sk2" style="
+        width:28px;
+        height:28px;
+        background:#e2e2e2;
+        border-radius:10px;
+        border:2px solid #fff;
+        margin-left:-8px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.12);
+        "></div>
 
-  <div class="countSk" style="
-  width:60px;
-  height:14px;
-  border-radius:999px;
-  background:#e5e5e5;
-  "></div>
+      </div>
 
-</div>
-`;
+      <!-- shimmer text -->
+      <div class="countSk" style="
+      width:58px;
+      height:13px;
+      border-radius:999px;
+      background:#e7e7e7;
+      margin-left:2px;
+      "></div>
 
-["sk1","sk2","countSk"].forEach(cls => {
+    </div>
+    `;
 
-  document.querySelector("." + cls).animate(
-    [
-      { opacity: 0.4 },
-      { opacity: 1 },
-      { opacity: 0.4 }
-    ],
-    {
-      duration: 1200,
-      iterations: Infinity
-    }
-  );
+    // ✅ SMOOTH LIGHT SHIMMER
+    ["sk1","sk2","countSk"].forEach(cls => {
 
-});
+      const el = document.querySelector("." + cls);
+
+      if(el){
+
+        el.animate(
+          [
+            { opacity: 0.65 },
+            { opacity: 1 },
+            { opacity: 0.65 }
+          ],
+          {
+            duration: 1800,
+            iterations: Infinity,
+            easing:"ease-in-out"
+          }
+        );
+
+      }
+
+    });
+
   }
 
-  // 🔥 STEP 2: WAIT FOR productMap (your original logic)
+  // 🔥 STEP 2: WAIT FOR productMap
   if(window.productMap && Object.keys(window.productMap).length > 0){
 
     console.log("✅ productMap ready → loading full cart");
 
     const skel = document.getElementById("cartLoadingSkeleton");
+
     if(skel){
       skel.style.display = "none";
     }
 
+    // ✅ ORIGINAL LOGIC
     updateCartBar();
 
-if(window.cartBarAnim){
-  cartBarAnim();
-}   // 🔥 full update with price + images
+    if(window.cartBarAnim){
+      cartBarAnim();
+    }
+
     initAllUI();
 
   } else {
 
     console.log("⏳ still waiting for productMap...");
     setTimeout(waitAndLoadCart, 150);
+
   }
 }
 
 waitAndLoadCart();
+
 const viewBtn = document.getElementById("viewCartBtn");
 const cartPopup = document.getElementById("cartPopup");
 
