@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<title>Refund Policy</title>
+
+<style>
+
+/* BODY */
+body{
+  margin:0;
+  padding-top:55px;
+  font-family:"Segoe UI",sans-serif;
+  background:#f7f8fa;
+}
+
+/* GLOBAL */
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  overflow-x:hidden;
+  width:100%;
+}
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+
+  background:#fff;
+
+  margin:0 10px;
+
+  width:calc(100% - 20px);
+
+  border-radius:12px;
+
+  padding:12px 14px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  z-index:10;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.title{
+  font-weight:600;
+  font-size:15px;
+}
+
+/* CONTENT */
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px;
+  line-height:1.7;
+}
+#langSelect{
+
+  border:none;
+
+  background:#f3f4f6;
+
+  padding:8px 10px;
+
+  border-radius:10px;
+
+  font-size:13px;
+
+  outline:none;
+
+  max-width:90px;
+
+  appearance:none;
+  -webkit-appearance:none;
+
+  background-image:url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
+
+  background-repeat:no-repeat;
+
+  background-position:right 8px center;
+
+  background-size:14px;
+
+  padding-right:28px;
+
+}
+.navbar{
+  overflow:visible;
+}
+h2{
+  font-size:16px;
+  margin-top:20px;
+
+  border-left:3px solid #16a34a;
+
+  padding-left:8px;
+}
+
+p{
+  font-size:14px;
+  color:#444;
+}
+
+ul{
+  padding-left:18px;
+}
+
+.top-image{
+  width:100%;
+  height:160px;
+
+  object-fit:cover;
+
+  border-radius:12px;
+
+  margin-bottom:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+  <div class="nav-left">
+
+    <div onclick="goBack()">
+      <i class="fa-solid fa-chevron-left"></i>
+    </div>
+
+    <div class="title" id="navTitle">
+      Refund Policy
+    </div>
+
+  </div>
+
+  <select id="langSelect"
+  onchange="changeLang(this.value)">
+
+    <option value="en">EN</option>
+    <option value="te">తెలుగు</option>
+    <option value="hi">हिंदी</option>
+
+  </select>
+
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+<img src="refund.svg"
+class="top-image">
+
+<p id="introText"></p>
+
+<h2 id="eligibleTitle"></h2>
+<ul id="eligibleList"></ul>
+
+<h2 id="processTitle"></h2>
+<p id="processText"></p>
+
+<h2 id="methodTitle"></h2>
+<ul id="methodList"></ul>
+
+<h2 id="nonTitle"></h2>
+<ul id="nonList"></ul>
+
+<h2 id="cancelTitle"></h2>
+<p id="cancelText"></p>
+
+<h2 id="timeTitle"></h2>
+<p id="timeText"></p>
+
+<h2 id="abuseTitle"></h2>
+<p id="abuseText"></p>
+
+<h2 id="changeTitle"></h2>
+<p id="changeText"></p>
+
+<h2 id="contactTitle"></h2>
+<p id="contactText"></p>
+
+</div>
+
+<script>
+
+const translations = {
+
+en: {
+
+  navTitle:"Refund Policy",
+
+  intro:
+  "At Cezoo, customer satisfaction is our priority. If you face any issue with your order, we are here to help.",
+
+  eligibleTitle:
+  "1. Eligible Refund Cases",
+
+  eligibleList:[
+    "Damaged or spoiled products",
+    "Wrong item delivered",
+    "Missing items in order",
+    "Payment deducted but order failed",
+    "Order cancelled by our team"
+  ],
+
+  processTitle:
+  "2. Refund Process",
+
+  processText:
+  "Refund requests are reviewed by our support team. Approved refunds are processed within 3-7 business days.",
+
+  methodTitle:
+  "3. Refund Method",
+
+  methodList:[
+    "UPI payments → refunded to same account",
+    "Card payments → refunded to same bank/card",
+    "Cash on Delivery → refund via UPI or bank"
+  ],
+
+  nonTitle:
+  "4. Non-Refundable Cases",
+
+  nonList:[
+    "Incorrect address provided by user",
+    "Customer unavailable during delivery",
+    "Natural delays or weather issues",
+    "Minor packaging damage without product damage"
+  ],
+
+  cancelTitle:
+  "5. Cancellation Policy",
+
+  cancelText:
+  "Orders can only be cancelled before they are packed or dispatched.",
+
+  timeTitle:
+  "6. Refund Time",
+
+  timeText:
+  "Refund timing may vary depending on your payment provider or bank. Some refunds may take additional time during weekends or holidays.",
+
+  abuseTitle:
+  "7. Abuse & Fraud Prevention",
+
+  abuseText:
+  "Cezoo reserves the right to reject refund requests in cases of repeated misuse, suspicious activity, or fraudulent claims.",
+
+  changeTitle:
+  "8. Policy Updates",
+
+  changeText:
+  "We may update this Refund Policy from time to time to improve our services and comply with legal requirements.",
+
+  contactTitle:
+  "9. Contact Support",
+
+  contactText:
+  "For refund help, contact our support team through Help & Support inside the app."
+
+},
+
+te: {
+
+  navTitle:"రిఫండ్ విధానం",
+
+  intro:
+  "Cezoo లో కస్టమర్ సంతృప్తి మా ప్రధాన లక్ష్యం. మీ ఆర్డర్‌లో ఏదైనా సమస్య ఉంటే మేము సహాయం చేస్తాము.",
+
+  eligibleTitle:
+  "1. రిఫండ్ వచ్చే సందర్భాలు",
+
+  eligibleList:[
+    "పాడైన ఉత్పత్తులు",
+    "తప్పు ఉత్పత్తి డెలివరీ",
+    "మిస్సింగ్ ఐటమ్స్",
+    "పేమెంట్ కట్ అయ్యి ఆర్డర్ ఫెయిల్ అవ్వడం",
+    "మా టీమ్ ఆర్డర్ క్యాన్సిల్ చేయడం"
+  ],
+
+  processTitle:
+  "2. రిఫండ్ ప్రక్రియ",
+
+  processText:
+  "రిఫండ్ అభ్యర్థనలను మా సపోర్ట్ టీమ్ పరిశీలిస్తుంది. ఆమోదం తర్వాత 3-7 రోజుల్లో రిఫండ్ పంపబడుతుంది.",
+
+  methodTitle:
+  "3. రిఫండ్ విధానం",
+
+  methodList:[
+    "UPI → అదే ఖాతాకు",
+    "కార్డ్ పేమెంట్ → బ్యాంక్/కార్డ్‌కు",
+    "COD → UPI లేదా బ్యాంక్ ద్వారా"
+  ],
+
+  nonTitle:
+  "4. రిఫండ్ రాని సందర్భాలు",
+
+  nonList:[
+    "తప్పు చిరునామా ఇవ్వడం",
+    "డెలివరీ సమయంలో అందుబాటులో లేకపోవడం",
+    "వాతావరణ సమస్యలు",
+    "ప్రోడక్ట్ డ్యామేజ్ లేకుండా ప్యాకింగ్ డ్యామేజ్"
+  ],
+
+  cancelTitle:
+  "5. క్యాన్సిలేషన్ విధానం",
+
+  cancelText:
+  "ఆర్డర్ ప్యాక్ లేదా డిస్పాచ్ కాకముందే మాత్రమే క్యాన్సిల్ చేయవచ్చు.",
+
+  timeTitle:
+  "6. రిఫండ్ సమయం",
+
+  timeText:
+  "బ్యాంక్ లేదా పేమెంట్ ప్రొవైడర్ ఆధారంగా రిఫండ్ సమయం మారవచ్చు.",
+
+  abuseTitle:
+  "7. దుర్వినియోగం & మోసాల నివారణ",
+
+  abuseText:
+  "మోసపూరిత లేదా అనుమానాస్పద రిఫండ్ అభ్యర్థనలను Cezoo తిరస్కరించే హక్కు కలిగి ఉంటుంది.",
+
+  changeTitle:
+  "8. విధాన మార్పులు",
+
+  changeText:
+  "సేవలను మెరుగుపరచడానికి ఈ విధానాన్ని అవసరమైతే అప్డేట్ చేయవచ్చు.",
+
+  contactTitle:
+  "9. సపోర్ట్ సంప్రదింపు",
+
+  contactText:
+  "రిఫండ్ సహాయం కోసం యాప్‌లోని Help & Support ను సంప్రదించండి."
+
+},
+
+hi: {
+
+  navTitle:"रिफंड नीति",
+
+  intro:
+  "Cezoo में ग्राहक संतुष्टि हमारी प्राथमिकता है। यदि आपके ऑर्डर में कोई समस्या है तो हम सहायता करेंगे।",
+
+  eligibleTitle:
+  "1. रिफंड मिलने की स्थिति",
+
+  eligibleList:[
+    "खराब या डैमेज प्रोडक्ट",
+    "गलत प्रोडक्ट डिलीवरी",
+    "ऑर्डर में आइटम मिसिंग",
+    "पेमेंट कट गया लेकिन ऑर्डर फेल",
+    "हमारी टीम द्वारा ऑर्डर कैंसिल"
+  ],
+
+  processTitle:
+  "2. रिफंड प्रक्रिया",
+
+  processText:
+  "रिफंड अनुरोध हमारी टीम द्वारा जांचे जाते हैं। स्वीकृति के बाद 3-7 दिनों में रिफंड भेजा जाता है।",
+
+  methodTitle:
+  "3. रिफंड तरीका",
+
+  methodList:[
+    "UPI → उसी खाते में",
+    "कार्ड पेमेंट → बैंक/कार्ड में",
+    "COD → UPI या बैंक द्वारा"
+  ],
+
+  nonTitle:
+  "4. बिना रिफंड स्थिति",
+
+  nonList:[
+    "गलत पता देना",
+    "डिलीवरी समय उपलब्ध न होना",
+    "मौसम या प्राकृतिक देरी",
+    "सिर्फ पैकेजिंग डैमेज"
+  ],
+
+  cancelTitle:
+  "5. कैंसिलेशन नीति",
+
+  cancelText:
+  "ऑर्डर पैक या डिस्पैच होने से पहले ही कैंसिल किया जा सकता है।",
+
+  timeTitle:
+  "6. रिफंड समय",
+
+  timeText:
+  "बैंक या पेमेंट प्रोवाइडर के अनुसार रिफंड समय अलग हो सकता है।",
+
+  abuseTitle:
+  "7. धोखाधड़ी रोकथाम",
+
+  abuseText:
+  "Cezoo संदिग्ध या गलत रिफंड अनुरोधों को अस्वीकार करने का अधिकार रखता है।",
+
+  changeTitle:
+  "8. नीति अपडेट",
+
+  changeText:
+  "सेवाओं को बेहतर बनाने के लिए इस नीति को समय-समय पर अपडेट किया जा सकता है।",
+
+  contactTitle:
+  "9. सहायता संपर्क",
+
+  contactText:
+  "रिफंड सहायता के लिए ऐप में Help & Support का उपयोग करें।"
+
+}
+
+};
+
+function setList(id, arr){
+
+  const ul =
+    document.getElementById(id);
+
+  ul.innerHTML = "";
+
+  arr.forEach(i=>{
+
+    let li =
+      document.createElement("li");
+
+    li.innerText = i;
+
+    ul.appendChild(li);
+
+  });
+
+}
+
+function changeLang(lang){
+
+  const t =
+    translations[lang];
+
+  document.getElementById(
+    "navTitle"
+  ).innerText = t.navTitle;
+
+  document.getElementById(
+    "introText"
+  ).innerText = t.intro;
+
+  document.getElementById(
+    "eligibleTitle"
+  ).innerText = t.eligibleTitle;
+
+  setList(
+    "eligibleList",
+    t.eligibleList
+  );
+
+  document.getElementById(
+    "processTitle"
+  ).innerText = t.processTitle;
+
+  document.getElementById(
+    "processText"
+  ).innerText = t.processText;
+
+  document.getElementById(
+    "methodTitle"
+  ).innerText = t.methodTitle;
+
+  setList(
+    "methodList",
+    t.methodList
+  );
+
+  document.getElementById(
+    "nonTitle"
+  ).innerText = t.nonTitle;
+
+  setList(
+    "nonList",
+    t.nonList
+  );
+
+  document.getElementById(
+    "cancelTitle"
+  ).innerText = t.cancelTitle;
+
+  document.getElementById(
+    "cancelText"
+  ).innerText = t.cancelText;
+
+  document.getElementById(
+    "timeTitle"
+  ).innerText = t.timeTitle;
+
+  document.getElementById(
+    "timeText"
+  ).innerText = t.timeText;
+
+  document.getElementById(
+    "abuseTitle"
+  ).innerText = t.abuseTitle;
+
+  document.getElementById(
+    "abuseText"
+  ).innerText = t.abuseText;
+
+  document.getElementById(
+    "changeTitle"
+  ).innerText = t.changeTitle;
+
+  document.getElementById(
+    "changeText"
+  ).innerText = t.changeText;
+
+  document.getElementById(
+    "contactTitle"
+  ).innerText = t.contactTitle;
+
+  document.getElementById(
+    "contactText"
+  ).innerText = t.contactText;
+
+  localStorage.setItem(
+    "appLang",
+    lang
+  );
+
+}
+
+window.onload = ()=>{
+
+  const lang =
+    localStorage.getItem(
+      "appLang"
+    ) || "en";
+
+  document.getElementById(
+    "langSelect"
+  ).value = lang;
+
+  changeLang(lang);
+
+};
+
+function goBack(){
+
+  sessionStorage.setItem(
+    "skipIntro",
+    "true"
+  );
+
+  window.location.href =
+    "order.html";
+}
+
+</script>
+
+</body>
+</html>
