@@ -5,9 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 
 <title>Print Studio</title>
 
@@ -627,7 +626,100 @@ overflow:hidden;
 
   transform:scale(.97);
 }
+/* =========================
+SLIDE BOOK BUTTON
+========================= */
 
+.slideBookBtn{
+
+  position:relative;
+
+  width:100%;
+  height:58px;
+
+  border-radius:18px;
+
+  background:#111827;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 8px 24px rgba(0,0,0,.15);
+}
+
+/* TEXT */
+
+.slideBookText{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#fff;
+
+  font-size:15px;
+  font-weight:700;
+
+  letter-spacing:.3px;
+
+  transition:.25s ease;
+}
+
+/* THUMB */
+
+.slideThumb{
+
+  position:absolute;
+
+  left:5px;
+  top:5px;
+
+  width:48px;
+  height:48px;
+
+  border-radius:14px;
+
+  background:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:20px;
+
+  color:#111827;
+
+  z-index:2;
+
+  touch-action:none;
+
+  user-select:none;
+}
+
+.slideThumb i{
+
+  animation:arrowMove 1s infinite;
+}
+
+@keyframes arrowMove{
+
+  0%{
+    transform:translateX(0);
+  }
+
+  50%{
+    transform:translateX(3px);
+  }
+
+  100%{
+    transform:translateX(0);
+  }
+
+}
 </style>
 
 </head>
@@ -871,12 +963,26 @@ overflow:hidden;
  <div class="bottomBar"
      id="bottomBar">
 
-  <button class="addBtn"
-          id="addBtn">
+  <div class="slideBookBtn"
+       id="slideBookBtn">
 
-    Add
+    <!-- TEXT -->
+    <div class="slideBookText"
+         id="slideBookText">
 
-  </button>
+      Slide to Book
+
+    </div>
+
+    <!-- THUMB -->
+    <div class="slideThumb"
+         id="slideThumb">
+
+      <i class="fa-solid fa-angle-right"></i>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -1693,16 +1799,22 @@ function saveData(){
         ".fileSub"
       ).innerText;
 
-    const filePrice =
-      card.querySelector(
-        ".filePrice"
-      ).innerText;
+   const filePrice =
+  parseInt(
+    card.querySelector(
+      ".filePrice"
+    )
+    .innerText
+    .replace("₹","")
+  );
 
     const qty =
+    
       card.querySelector(
         ".qtyCount"
       ).innerText;
-
+const totalPrice =
+  filePrice * qty;
     const printTypeEl =
       card.querySelector(
         ".printType"
@@ -1746,7 +1858,8 @@ if(!isPhoto){
        pdfSrc,
       fileName,
       fileSub,
-      filePrice,
+      price:filePrice,
+      totalPrice,
       qty,
       printType,
       imageSrc
@@ -1759,6 +1872,12 @@ if(!isPhoto){
     "printStudio",
     JSON.stringify(data)
   );
+  
+
+localStorage.setItem(
+  "printCart",
+  JSON.stringify(data)
+);
 
 }
 function updateGrandTotal(){
@@ -1877,8 +1996,8 @@ div.dataset.pdf =
             </div>
 
             <div class="filePrice">
-              ${item.filePrice}
-            </div>
+  ₹${item.price}
+</div>
 
           </div>
 
@@ -1964,8 +2083,8 @@ div.dataset.pdf =
             </div>
 
             <div class="filePrice photoPrice">
-              ${item.filePrice}
-            </div>
+  ₹${item.price}
+</div>
 
           </div>
 
@@ -2044,6 +2163,153 @@ function goBackHome(){
   "index.html";
 
 }
+const slideBtn =
+document.getElementById(
+  "slideBookBtn"
+);
+
+const slideThumb =
+document.getElementById(
+  "slideThumb"
+);
+
+const slideText =
+document.getElementById(
+  "slideBookText"
+);
+
+let dragging = false;
+let startX = 0;
+
+const maxSlide =
+slideBtn.offsetWidth - 58;
+
+// START
+function startSlide(e){
+
+  dragging = true;
+
+  startX =
+  e.touches
+  ? e.touches[0].clientX
+  : e.clientX;
+
+}
+
+// MOVE
+function moveSlide(e){
+
+  if(!dragging) return;
+
+  const currentX =
+  e.touches
+  ? e.touches[0].clientX
+  : e.clientX;
+
+  let move =
+  currentX - startX;
+
+  if(move < 0){
+    move = 0;
+  }
+
+  if(move > maxSlide){
+    move = maxSlide;
+  }
+
+  slideThumb.style.transform =
+  `translateX(${move}px)`;
+
+  // TEXT FADE
+  slideText.style.opacity =
+  1 - (move / maxSlide) * 1.5;
+
+}
+
+// END
+function endSlide(){
+
+  if(!dragging) return;
+
+  dragging = false;
+
+  const moved =
+  parseInt(
+    slideThumb.style.transform
+      .replace("translateX(","")
+      .replace("px)","")
+  ) || 0;
+
+  // SUCCESS
+  if(moved > maxSlide - 60){
+
+    slideBtn.style.background =
+    "#16a34a";
+
+    slideText.innerHTML =
+    "Booked ✓";
+
+  }
+
+  // RESET
+  else{
+
+    slideThumb.style.transition =
+    ".25s ease";
+
+    slideText.style.transition =
+    ".25s ease";
+
+    slideThumb.style.transform =
+    "translateX(0px)";
+
+    slideText.style.opacity =
+    "1";
+
+    setTimeout(()=>{
+
+      slideThumb.style.transition =
+      "";
+
+      slideText.style.transition =
+      "";
+
+    },250);
+
+  }
+
+}
+
+// EVENTS
+slideThumb.addEventListener(
+  "touchstart",
+  startSlide
+);
+
+slideThumb.addEventListener(
+  "mousedown",
+  startSlide
+);
+
+document.addEventListener(
+  "touchmove",
+  moveSlide
+);
+
+document.addEventListener(
+  "mousemove",
+  moveSlide
+);
+
+document.addEventListener(
+  "touchend",
+  endSlide
+);
+
+document.addEventListener(
+  "mouseup",
+  endSlide
+);
 </script>
 
 </body>
