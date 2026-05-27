@@ -7,7 +7,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-
 <title>Print Studio</title>
 
 <link rel="stylesheet"
@@ -93,7 +92,7 @@ body{
 .mainScroll{
 
   padding:
-  18px 18px 76px;
+  18px 18px 10px;
 }
 
 /* =========================
@@ -626,30 +625,40 @@ overflow:hidden;
 
   transform:scale(.97);
 }
-/* =========================
-SLIDE BOOK BUTTON
-========================= */
+/* MAIN SLIDER */
 
-.slideBookBtn{
+/* MAIN SLIDER */
+/* MAIN SLIDER */
+
+.xeroxSlider{
 
   position:relative;
 
-  width:100%;
+  width:calc(100% - 16px); /* 🔥 gap both sides */
+
+  margin:0 auto; /* 🔥 center */
+
   height:58px;
 
-  border-radius:18px;
+  border-radius:20px;
 
-  background:#111827;
+  background:#111;
 
   overflow:hidden;
 
+  user-select:none;
+
+  box-sizing:border-box;
+
+  padding:6px;
+
   box-shadow:
-  0 8px 24px rgba(0,0,0,.15);
+  0 4px 18px rgba(0,0,0,.08);
 }
 
 /* TEXT */
 
-.slideBookText{
+.xeroxSliderText{
 
   position:absolute;
 
@@ -666,20 +675,22 @@ SLIDE BOOK BUTTON
 
   letter-spacing:.3px;
 
-  transition:.25s ease;
+  transition:.2s ease;
+
+  pointer-events:none;
 }
 
 /* THUMB */
 
-.slideThumb{
+.xeroxThumb{
 
   position:absolute;
 
-  left:5px;
-  top:5px;
+  left:6px;
+  top:6px;
 
-  width:48px;
-  height:48px;
+  width:46px;
+  height:46px;
 
   border-radius:14px;
 
@@ -689,21 +700,45 @@ SLIDE BOOK BUTTON
   align-items:center;
   justify-content:center;
 
-  font-size:20px;
-
-  color:#111827;
-
   z-index:2;
 
-  touch-action:none;
+  cursor:pointer;
 
-  user-select:none;
+  box-shadow:
+  0 2px 10px rgba(0,0,0,.12);
 }
 
-.slideThumb i{
+/* ICON */
+
+.xeroxThumb i{
+
+  font-size:20px;
+
+  color:#111;
 
   animation:arrowMove 1s infinite;
 }
+.iosSpinner{
+
+  width:22px;
+  height:22px;
+
+  border-radius:50%;
+
+  border:2.5px solid #d1d5db;
+  border-top:2.5px solid #111;
+
+  animation:iosSpin .7s linear infinite;
+}
+
+@keyframes iosSpin{
+
+  100%{
+    transform:rotate(360deg);
+  }
+
+}
+/* ARROW ANIMATION */
 
 @keyframes arrowMove{
 
@@ -712,11 +747,124 @@ SLIDE BOOK BUTTON
   }
 
   50%{
-    transform:translateX(3px);
+    transform:translateX(4px);
   }
 
   100%{
     transform:translateX(0);
+  }
+
+}
+/* SUCCESS POPUP */
+@keyframes sheetUp{
+
+  from{
+    transform:translateY(100%);
+  }
+
+  to{
+    transform:translateY(0);
+  }
+
+}
+#xeroxSuccessPopup{
+
+  position:fixed;
+  inset:0;
+
+  background:
+  rgba(255,255,255,.96);
+
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+
+  transition:.35s ease;
+}
+
+#xeroxSuccessPopup.show{
+
+  opacity:1;
+}
+
+.successCenter{
+
+  text-align:center;
+
+  transform:scale(.8);
+
+  opacity:0;
+
+  transition:.4s ease;
+}
+
+#xeroxSuccessPopup.show .successCenter{
+
+  transform:scale(1);
+
+  opacity:1;
+}
+
+.successTick{
+
+  width:96px;
+  height:96px;
+
+  margin:auto;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  animation:tickPop .45s ease;
+}
+
+.successTick i{
+
+  color:#fff;
+
+  font-size:42px;
+}
+
+.successTitle{
+
+  margin-top:22px;
+
+  font-size:28px;
+  font-weight:800;
+
+  color:#111;
+}
+
+.successSub{
+
+  margin-top:10px;
+
+  font-size:15px;
+
+  color:#6b7280;
+}
+
+@keyframes tickPop{
+
+  0%{
+    transform:scale(.3);
+  }
+
+  70%{
+    transform:scale(1.08);
+  }
+
+  100%{
+    transform:scale(1);
   }
 
 }
@@ -960,36 +1108,43 @@ SLIDE BOOK BUTTON
 
   <!-- BOTTOM -->
 
- <div class="bottomBar"
-     id="bottomBar">
+<!-- XEROX SLIDER -->
+<div class="xeroxSlider"
+     id="xeroxSlider">
 
-  <div class="slideBookBtn"
-       id="slideBookBtn">
+  <!-- TEXT -->
+  <div class="xeroxSliderText"
+       id="xeroxSliderText">
 
-    <!-- TEXT -->
-    <div class="slideBookText"
-         id="slideBookText">
+    Slide to Book
 
-      Slide to Book
+  </div>
 
-    </div>
+  <!-- THUMB -->
+  <div class="xeroxThumb"
+       id="xeroxThumb">
 
-    <!-- THUMB -->
-    <div class="slideThumb"
-         id="slideThumb">
-
-      <i class="fa-solid fa-angle-right"></i>
-
-    </div>
+    <i class="fa-solid fa-angle-right"></i>
 
   </div>
 
 </div>
 
 </div>
-
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script>
+const supabaseUrl =
+"https://izoipzriynkcjtwuzrfu.supabase.co";
 
+const supabaseKey =
+"sb_publishable_7ZRL1Y4JAppLTJonepuTIw_UQyGjVVw";
+
+window.supabaseClient =
+window.supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
 /* =========================
    MODE
 ========================= */
@@ -1936,7 +2091,10 @@ function updateGrandTotal(){
 
   grandTotal.innerHTML =
     "₹" + total;
-
+localStorage.setItem(
+  "xeroxTotal",
+  total
+);
 }
 /* =========================
    RESTORE DATA
@@ -2163,31 +2321,47 @@ function goBackHome(){
   "index.html";
 
 }
-const slideBtn =
+/* =======================================
+   XEROX SLIDER LOGIC
+======================================= */
+
+const slider =
 document.getElementById(
-  "slideBookBtn"
+"xeroxSlider"
 );
 
-const slideThumb =
+const thumb =
 document.getElementById(
-  "slideThumb"
+"xeroxThumb"
 );
 
-const slideText =
+const sliderText =
 document.getElementById(
-  "slideBookText"
+"xeroxSliderText"
 );
 
-let dragging = false;
+let isDragging = false;
+
 let startX = 0;
 
-const maxSlide =
-slideBtn.offsetWidth - 58;
+let currentX = 0;
 
-// START
-function startSlide(e){
+/* MAX */
 
-  dragging = true;
+function getMaxSlide(){
+
+  return (
+    slider.offsetWidth -
+    thumb.offsetWidth - 12
+  );
+
+}
+
+/* START */
+
+function startDrag(e){
+
+  isDragging = true;
 
   startX =
   e.touches
@@ -2196,120 +2370,568 @@ function startSlide(e){
 
 }
 
-// MOVE
-function moveSlide(e){
+/* MOVE */
 
-  if(!dragging) return;
+function moveDrag(e){
 
-  const currentX =
+  if(!isDragging) return;
+
+  const x =
   e.touches
   ? e.touches[0].clientX
   : e.clientX;
 
-  let move =
-  currentX - startX;
+  currentX = x - startX;
 
-  if(move < 0){
-    move = 0;
+  if(currentX < 0){
+    currentX = 0;
   }
 
-  if(move > maxSlide){
-    move = maxSlide;
+  if(currentX > getMaxSlide()){
+    currentX = getMaxSlide();
   }
 
-  slideThumb.style.transform =
-  `translateX(${move}px)`;
+  thumb.style.transform =
+  `translateX(${currentX}px)`;
 
-  // TEXT FADE
-  slideText.style.opacity =
-  1 - (move / maxSlide) * 1.5;
+  /* TEXT FADE */
+  sliderText.style.opacity =
+  1 - currentX / 120;
 
 }
 
-// END
-function endSlide(){
+/* END */
 
-  if(!dragging) return;
+async function endDrag(){
 
-  dragging = false;
+  if(!isDragging) return;
 
-  const moved =
-  parseInt(
-    slideThumb.style.transform
-      .replace("translateX(","")
-      .replace("px)","")
-  ) || 0;
+  isDragging = false;
 
-  // SUCCESS
-  if(moved > maxSlide - 60){
+  /* NOT FULL */
+  if(currentX < getMaxSlide() * 0.88){
 
-    slideBtn.style.background =
-    "#16a34a";
+    resetSlider();
 
-    slideText.innerHTML =
-    "Booked ✓";
+    return;
 
   }
 
-  // RESET
-  else{
+  /* FULL SLIDE */
+  thumb.style.transform =
+  `translateX(${getMaxSlide()}px)`;
 
-    slideThumb.style.transition =
-    ".25s ease";
+  /* ===================================
+     CHECK FILES
+  =================================== */
 
-    slideText.style.transition =
-    ".25s ease";
+  const items =
+JSON.parse(
+  localStorage.getItem(
+    "printStudio"
+  ) || "[]"
+);
 
-    slideThumb.style.transform =
-    "translateX(0px)";
+if(items.length === 0){
 
-    slideText.style.opacity =
-    "1";
+  resetSlider();
+
+  return;
+
+}
+
+  /* ===================================
+     LOGIN CHECK
+  =================================== */
+
+  const userName =
+  localStorage.getItem(
+    "userName"
+  );
+
+  const userMobile =
+  localStorage.getItem(
+    "userMobile"
+  );
+
+  if(!userName || !userMobile){
+
+    window.location.href =
+    "login.html";
+
+    return;
+
+  }
+
+  /* ===================================
+     LOADER
+  =================================== */
+
+  thumb.innerHTML = `
+<div class="iosSpinner"></div>
+`;
+
+  /* ===================================
+     PAYMENT
+  =================================== */
+
+  startRazorpayPayment();
+
+}
+
+/* RESET */
+
+function resetSlider(){
+
+  currentX = 0;
+
+  thumb.style.transition =
+  ".35s";
+
+  sliderText.style.transition =
+  ".35s";
+
+  thumb.style.transform =
+  `translateX(0px)`;
+
+  sliderText.style.opacity = 1;
+
+  setTimeout(()=>{
+
+    thumb.style.transition = "";
+
+    sliderText.style.transition = "";
+
+  },350);
+
+}
+
+/* EVENTS */
+
+thumb.addEventListener(
+"touchstart",
+startDrag
+);
+
+thumb.addEventListener(
+"mousedown",
+startDrag
+);
+
+document.addEventListener(
+"touchmove",
+moveDrag
+);
+
+document.addEventListener(
+"mousemove",
+moveDrag
+);
+
+document.addEventListener(
+"touchend",
+endDrag
+);
+
+document.addEventListener(
+"mouseup",
+endDrag
+);
+
+/* =======================================
+   RAZORPAY
+======================================= */
+async function startRazorpayPayment(){
+
+  try{
+
+    /* 🔥 TOTAL */
+    const total =
+    Number(
+      localStorage.getItem(
+        "xeroxTotal"
+      ) || 0
+    );
+
+    /* 🔥 HALF PAYMENT */
+    const advance =
+    Math.ceil(total / 2);
+
+    /* 🔥 CREATE ORDER */
+    const response =
+    await fetch(
+      "https://razropay.onrender.com/create-order",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+          amount: advance * 100
+
+        })
+      }
+    );
+
+    const data =
+    await response.json();
+
+    /* ❌ FAILED */
+    if(!data.success){
+
+      thumb.innerHTML = `
+        <i class="fa-solid fa-angle-right"></i>
+      `;
+
+      resetSlider();
+
+      return;
+
+    }
+
+    /* 🔥 RAZORPAY OPTIONS */
+    const options = {
+
+      key:
+      "rzp_live_SqrUSaPO5pA6gt",
+
+      amount:
+      data.order.amount,
+
+      currency:
+      data.order.currency,
+
+      order_id:
+      data.order.id,
+
+      name:
+      "CEZOO Xerox",
+
+      description:
+      "Advance Payment",
+
+      prefill:{
+
+        name:
+        localStorage.getItem(
+          "userName"
+        ) || "",
+
+        contact:
+        localStorage.getItem(
+          "userMobile"
+        ) || ""
+
+      },
+
+      theme:{
+        color:"#111"
+      },
+
+      modal:{
+
+        backdropclose:true,
+
+        escape:true,
+
+        handleback:true,
+
+        animation:true,
+
+        ondismiss:function(){
+
+          thumb.innerHTML = `
+            <i class="fa-solid fa-angle-right"></i>
+          `;
+
+          resetSlider();
+
+        }
+
+      },
+
+      /* ✅ PAYMENT SUCCESS */
+      handler:
+      async function(payment){
+
+        /* 🔥 SPINNER */
+        thumb.innerHTML = `
+          <div class="iosSpinner"></div>
+        `;
+
+        await saveXeroxOrder(
+          payment
+        );
+
+        /* 🔥 SUCCESS */
+        showSuccessPopup();
+
+        /* 🔥 RESET */
+        setTimeout(()=>{
+
+          resetSlider();
+
+          thumb.innerHTML = `
+            <i class="fa-solid fa-angle-right"></i>
+          `;
+
+        },800);
+
+      }
+
+    };
+
+    /* 🔥 CREATE INSTANCE */
+    const rzp =
+    new Razorpay(options);
+
+    /* ❌ PAYMENT FAILED */
+    rzp.on(
+      "payment.failed",
+      function(){
+
+        thumb.innerHTML = `
+          <i class="fa-solid fa-angle-right"></i>
+        `;
+
+        setTimeout(()=>{
+
+          resetSlider();
+
+        },150);
+
+      }
+    );
+
+    /* 🔥 OPEN */
+    rzp.open();
+
+    /* 🔥 OPEN LIKE SWIGGY SHEET */
+    setTimeout(()=>{
+
+      const modal =
+      document.querySelector(
+        ".razorpay-container"
+      );
+
+      if(modal){
+
+        modal.style.alignItems =
+        "flex-end";
+
+        const frame =
+        modal.querySelector(
+          ".razorpay-checkout-frame"
+        );
+
+        if(frame){
+
+          frame.style.borderTopLeftRadius =
+          "24px";
+
+          frame.style.borderTopRightRadius =
+          "24px";
+
+          frame.style.overflow =
+          "hidden";
+
+          frame.style.maxHeight =
+          "92vh";
+
+          frame.style.animation =
+          "sheetUp .28s ease";
+
+        }
+
+      }
+
+    },120);
+
+  }
+
+  catch(err){
+
+    console.log(err);
+
+    thumb.innerHTML = `
+      <i class="fa-solid fa-angle-right"></i>
+    `;
+
+    resetSlider();
+
+  }
+
+}
+/* =======================================
+   SAVE ORDER
+======================================= */
+async function saveXeroxOrder(payment){
+
+  /* ✅ GET REAL DATA */
+
+  const items =
+  JSON.parse(
+    localStorage.getItem(
+      "printStudio"
+    ) || "[]"
+  );
+
+  /* ✅ TOTAL */
+
+  let total = 0;
+
+  items.forEach(item => {
+
+    total += Number(
+      item.price || 0
+    );
+
+  });
+
+  const advance =
+  Math.ceil(total / 2);
+
+  /* ✅ INSERT */
+
+  const { error } =
+  await supabaseClient
+  .from("xerox_orders")
+  .insert([{
+
+    user_name:
+    localStorage.getItem(
+      "userName"
+    ),
+
+    mobile:
+    localStorage.getItem(
+      "userMobile"
+    ),
+
+    items: items,
+
+    total_amount: total,
+
+    advance_paid: advance,
+
+    payment_id:
+    payment
+    .razorpay_payment_id,
+
+    payment_status:
+    "Paid"
+
+  }]);
+
+  console.log(error);
+
+  if(error){
+
+    alert(error.message);
+
+    thumb.innerHTML = `
+      <i class="fa-solid fa-angle-right"></i>
+    `;
+
+    resetSlider();
+
+    return;
+
+  }
+
+  showSuccessPopup();
+
+}
+/* =======================================
+   SUCCESS POPUP
+======================================= */
+
+function showSuccessPopup(){
+
+  const popup =
+  document.createElement("div");
+
+  popup.id =
+  "xeroxSuccessPopup";
+
+  popup.innerHTML = `
+
+    <div class="successCenter">
+
+      <div class="successTick">
+
+        <i class="fa-solid fa-check"></i>
+
+      </div>
+
+      <div class="successTitle">
+
+        Order Placed
+
+      </div>
+
+      <div class="successSub">
+
+        Your order was booked successfully 🎉
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(
+    popup
+  );
+thumb.innerHTML = `
+<i class="fa-solid fa-angle-right"></i>
+`;
+
+resetSlider();
+
+  setTimeout(()=>{
+
+    popup.classList.add(
+      "show"
+    );
+
+  },50);
+
+  /* CLEAR STORAGE */
+
+  localStorage.removeItem(
+    "xeroxFiles"
+  );
+
+  localStorage.removeItem(
+    "passportPhotos"
+  );
+
+  localStorage.removeItem(
+    "xeroxTotal"
+  );
+
+  /* AUTO HIDE */
+
+  setTimeout(()=>{
+
+    popup.style.opacity = 0;
 
     setTimeout(()=>{
 
-      slideThumb.style.transition =
-      "";
+      popup.remove();
 
-      slideText.style.transition =
-      "";
+      window.location.href =
+      "index.html";
 
-    },250);
+    },400);
 
-  }
+  },3000);
 
 }
-
-// EVENTS
-slideThumb.addEventListener(
-  "touchstart",
-  startSlide
-);
-
-slideThumb.addEventListener(
-  "mousedown",
-  startSlide
-);
-
-document.addEventListener(
-  "touchmove",
-  moveSlide
-);
-
-document.addEventListener(
-  "mousemove",
-  moveSlide
-);
-
-document.addEventListener(
-  "touchend",
-  endSlide
-);
-
-document.addEventListener(
-  "mouseup",
-  endSlide
-);
 </script>
 
 </body>
