@@ -31,7 +31,21 @@ body{
   font-family:Inter,sans-serif;
   color:#111827;
 }
+body::after{
+  content:"";
 
+  position:fixed;
+
+  left:0;
+  bottom:-200px;
+
+  width:100%;
+  height:300px;
+
+  background:#ffffff;
+
+  z-index:-1;
+}
 /* =========================
    PAGE
 ========================= */
@@ -865,7 +879,29 @@ overflow:hidden;
   }
 
 }
+.iosSpinner{
 
+  width:20px;
+  height:20px;
+
+  border-radius:50%;
+
+  border:2.5px solid
+  rgba(37,99,235,.18);
+
+  border-top-color:#2563eb;
+
+  animation:iosSpin .7s linear infinite;
+
+}
+
+@keyframes iosSpin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
 </style>
 
 </head>
@@ -2923,7 +2959,7 @@ resetSlider();
       popup.remove();
 
       window.location.href =
-      "index.html";
+      "xerox.html";
 
     },400);
 
