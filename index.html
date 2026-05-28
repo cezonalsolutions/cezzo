@@ -14506,40 +14506,34 @@ function getLocation(){
       clearTimeout(locationTimeout);
 
       // ✅ API
-      const res = await fetch(
-      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&localityLanguage=en`
-      );
+     const res = await fetch(
+`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`
+);
 
-      const data = await res.json();
+const result = await res.json();
 
-      console.log(data);
+console.log(result);
 
-      // ✅ CITY
-      let city =
-      data.locality ||
-      data.city ||
-      data.principalSubdivision ||
-      "Your Location";
+let city =
+result.address.village ||
+result.address.hamlet ||
+result.address.town ||
+result.address.city ||
+"Your Location";
 
-      // ✅ CLEAN ADDRESS
-      let full = [
+let full = [
 
-  data.localityInfo?.administrative?.[2]?.name,
-
-  data.locality,
-
-  data.city,
-
-  data.principalSubdivision,
-
-  data.countryName
+result.address.village,
+result.address.hamlet,
+result.address.suburb,
+result.address.county,
+result.address.state,
+result.address.postcode,
+result.address.country
 
 ]
-
 .filter(Boolean)
-
 .join(", ");
-
       // ✅ FALLBACK
       if(!full){
 
@@ -14647,8 +14641,8 @@ if(!exists){
   },
 
   {
-    enableHighAccuracy:false,
-    timeout:15000,
+    enableHighAccuracy:true,
+    timeout:20000,
     maximumAge:0
   });
 
@@ -28604,25 +28598,24 @@ function selectAddress(index){
 }
 
 /* SEARCH VILLAGES */
+
+  /* SEARCH VILLAGES */
 villageInput.oninput = async function(){
 
   const q = this.value.trim();
 
-  // EMPTY
   if(q.length < 2){
 
     renderSavedAddresses();
-
     return;
 
   }
 
   try{
 
-    // 🔥 REAL SEARCH API
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}&countrycodes=in&limit=5`
-    );
+`https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(q)}&countrycodes=in&limit=10`
+);
 
     const data = await res.json();
 
@@ -28631,8 +28624,7 @@ villageInput.oninput = async function(){
     data.forEach((place,index)=>{
 
       const city =
-      place.display_name
-      .split(",")[0];
+      place.display_name.split(",")[0];
 
       html += `
 
@@ -28655,7 +28647,6 @@ villageInput.oninput = async function(){
 
     villageSuggestions.innerHTML = html;
 
-    // GLOBAL
     window.searchResults = data;
 
   }catch(err){
