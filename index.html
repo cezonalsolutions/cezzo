@@ -14469,8 +14469,12 @@ main.style.display = "none";
 home.style.display = "block";
 optionScreen.style.display = "none";
 
-// 🔥 Fetch location in background
-getLocation();
+// Ask after 2.5 sec
+setTimeout(() => {
+
+    getLocation();
+
+}, 2500);
 });
 
 let locationTimeout;
