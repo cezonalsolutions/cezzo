@@ -11660,20 +11660,7 @@ linear-gradient(
 <body>
 
 
-<div id="splash">
 
-  <div class="logo">
-    <span class="c">C</span>
-    <span class="rest">ezoo</span>
-  </div>
-
-  <div class="tagline">
-    <span>Delivery in</span> Minutes
-  </div>
-
-  <div class="loader"></div>
-
-</div>
 
 <!-- MAIN -->
 <div id="main">
@@ -14444,13 +14431,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     sessionStorage.removeItem("fromLogin");
 
-    splash.style.display = "none";
-
     main.style.display = "none";
-
     optionScreen.style.display = "none";
 
-    // ✅ directly home page
     home.style.display = "block";
 
     return;
@@ -14461,14 +14444,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     sessionStorage.removeItem("skipIntro");
 
-    splash.style.display = "none";
-
     main.style.display = "none";
+    home.style.display = "block";
 
-    home.style.display = "none";
-
-    // ✅ direct option screen
-home.style.display = "block";
     cityName.innerText =
     localStorage.getItem("savedCity") || "Your Location";
 
@@ -14484,28 +14462,17 @@ home.style.display = "block";
     return;
   }
 
-  // 🔥 FRESH OPEN
-  splash.style.display = "flex";
+  // 🔥 DIRECT OPEN MAIN
+ // 🔥 DIRECT OPEN HOME
+main.style.display = "none";
 
-  main.style.display = "none";
-  home.style.display = "none";
-  optionScreen.style.display = "none";
+home.style.display = "block";
+optionScreen.style.display = "none";
 
-  setTimeout(()=>{
-
-  // 🔥 SHOW MAIN FIRST
-  main.style.display = "flex";
-
-  showOnly("detecting");
-
-  getLocation();
-
-  // 🔥 INSTANT REMOVE SPLASH
-  splash.remove();
-
-},2600);
-
+// 🔥 Fetch location in background
+getLocation();
 });
+
 let locationTimeout;
 function getLocation(){
 
@@ -14560,41 +14527,37 @@ result.address.country
 
       }
 
-      // ✅ TEXT
-      addressText.innerText = full;
-
-      showOnly("success");
-
-      setTimeout(()=>{
-
-        main.style.display = "none";
-
-        home.style.display = "block";
+      
 
         // ✅ OPTION SCREEN
-        document.getElementById(
-          "optCityName"
-        ).innerText = city;
+        // ✅ OPTION SCREEN
+document.getElementById(
+  "optCityName"
+).innerText = city;
 
-        document.getElementById(
-          "optShortAddress"
-        ).innerText = full;
+document.getElementById(
+  "optShortAddress"
+).innerText = full;
 
-        // ✅ HOME
-        cityName.innerText = city;
+// ✅ HOME
+cityName.innerText = city;
 
-        shortAddress.innerText = full;
+shortAddress.innerText = full;
 
-        // ✅ STORAGE
-        localStorage.setItem(
-          "savedCity",
-          city
-        );
+// ✅ LOCATION SHEET
+document.getElementById("sheetCity").innerText = city;
+document.getElementById("sheetAddress").innerText = full;
 
-        localStorage.setItem(
-          "savedAddress",
-          full
-        );
+// ✅ STORAGE
+localStorage.setItem(
+  "savedCity",
+  city
+);
+
+localStorage.setItem(
+  "savedAddress",
+  full
+);
 /* ADD INITIAL GPS ADDRESS */
 
 let allAddresses =
@@ -14637,7 +14600,7 @@ if(!exists){
           pos.coords.longitude
         );
 
-      },500);
+      
 
     }catch(err){
 
@@ -14721,8 +14684,7 @@ document.getElementById("saveManual").onclick = function(){
   // ✅ VALID → continue
   addressText.innerText = val;
 
-  showOnly("success");
-
+  
   setTimeout(()=>{
     main.style.display="none";
     document.getElementById("optionScreen").style.display="flex";
