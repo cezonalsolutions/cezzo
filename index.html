@@ -2443,15 +2443,18 @@ transform:translateZ(0);
   width:24px;
   height:24px;
 
-  background:#0f5c5c;
-  color:#fff;
+  background:#fff;
+  color:#2563eb;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
+  border:1px solid #2563eb;
   border-radius:8px;
   font-size:18px;
+
+  margin:2px;
 }
 
 /* =========================
@@ -2908,7 +2911,7 @@ body.popup-open::-webkit-scrollbar{
 
   gap:4px;
 
-  height:24px;
+  height:28px;
   min-width:28px;
   border-radius:8px;
 
@@ -2920,14 +2923,17 @@ body.popup-open::-webkit-scrollbar{
 
 /* ✅ SHOW BOX ONLY WHEN ACTIVE */
 .cartControl.active{
-  background:#0f5c5c;
+  background:#2563eb;
   padding:0 6px;
+
+  border:1px solid #2563eb;
+  border-radius:8px;
 }
 
 /* ➕ ADD BUTTON */
 .cartControl .addBtn2{
-  width:24px;
-  height:24px;
+  width:30px;
+  height:30px;
 
   display:flex;
   align-items:center;
@@ -2935,14 +2941,16 @@ body.popup-open::-webkit-scrollbar{
 
   font-size:18px;
   font-weight:700;
+  line-height:1;
 
-  color:#fff;
-  background:#0f5c5c;
+  color:#2563eb;
+
   border-radius:8px;
 
   cursor:pointer;
 }
 
+/* ➖ / ➕ BUTTONS */
 /* ➖ / ➕ BUTTONS */
 .cartControl .minus,
 .cartControl .plus{
@@ -2956,10 +2964,10 @@ body.popup-open::-webkit-scrollbar{
   font-size:16px;
   font-weight:700;
 
-  color:#fff;
+  color:#ffffff;
   cursor:pointer;
 
-  line-height:1;        /* ✅ FIX alignment */
+  line-height:1;
 }
 
 /* 🔥 EXTRA FIX (for minus only) */
