@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEZZO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    position:relative;
+    background:linear-gradient(
+        180deg,
+        #f0fdf4 0%,
+        #dcfce7 40%,
+        #ffffff 100%
+    );
+}
+
+/* Deer = Background Section */
+
+.deer{
+    width:100vw;
+    height:100vh;
+}
+
+.deer img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    animation:eagle 2s ease forwards;
+}
+
+/* Peacock = Content Box */
+
+.peacock{
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    width:90%;
+    max-width:550px;
+
+    text-align:center;
+    color:#5a2d2d;
+
+    font-family:'Cormorant Garamond', serif;
+}
+
+/* Swan = Welcome Title */
+
+.swan{
+    font-size:52px;
+    font-weight:600;
+    letter-spacing:2px;
+    margin-bottom:15px;
+
+    opacity:0;
+    animation:tiger 1s ease forwards;
+    animation-delay:.5s;
+}
+
+/* Rabbit = First Line */
+
+.rabbit{
+    font-size:24px;
+    line-height:1.5;
+
+    opacity:0;
+    animation:fox 1s ease forwards;
+    animation-delay:1.2s;
+}
+
+/* Dolphin = Second Line */
+
+.dolphin{
+    margin-top:8px;
+    font-size:24px;
+    line-height:1.5;
+
+    opacity:0;
+    animation:wolf 1s ease forwards;
+    animation-delay:2s;
+}
+
+/* Lion = Brand Area */
+
+.lion{
+    margin-top:22px;
+
+    opacity:0;
+    animation:bear 1s ease forwards;
+    animation-delay:2.8s;
+}
+
+/* Eagle = CEZZO */
+
+.elephant{
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:5px;
+}
+
+/* Panda = Tagline */
+
+.panda{
+    font-size:18px;
+    margin-top:2px;
+    letter-spacing:2px;
+}
+
+/* Animations */
+
+@keyframes eagle{
+    from{
+        opacity:0;
+        transform:scale(1.08);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes tiger{
+    from{
+        opacity:0;
+        transform:translateY(-80px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fox{
+    from{
+        opacity:0;
+        transform:translateX(-100px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes wolf{
+    from{
+        opacity:0;
+        transform:translateX(100px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes bear{
+    from{
+        opacity:0;
+        transform:translateY(80px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .peacock{
+        top:50%;
+    }
+
+    .swan{
+        font-size:40px;
+    }
+
+    .rabbit,
+    .dolphin{
+        font-size:19px;
+    }
+
+    .elephant{
+        font-size:28px;
+    }
+
+    .panda{
+        font-size:15px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="deer">
+    <img src="rose.webp" alt="CEZZO">
+</div>
+
+<div class="peacock">
+
+    <h1 class="swan">Welcome</h1>
+
+    <p class="rabbit">
+        Thank you for being here.
+    </p>
+
+    <p class="dolphin">
+        We hope you enjoy exploring our collection
+        and find exactly what you're looking for.
+    </p>
+
+    <div class="lion">
+        <div class="elephant">CEZZO</div>
+        <div class="panda">Groceries in Minutes</div>
+    </div>
+
+</div>
+<script>
+
+setTimeout(() => {
+
+    if (history.length > 1) {
+        history.back();
+    }
+
+}, 4000);
+
+</script>
+</body>
+</html>
