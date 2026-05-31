@@ -11654,6 +11654,47 @@ linear-gradient(
 
   justify-content:space-between;
 }
+.imgShimmerWrap{
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.piguu{
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #ffffff 50%,
+    #f0f0f0 75%
+  );
+
+  background-size: 200% 100%;
+  animation: piguu 1.2s linear infinite;
+  z-index: 1;
+}
+
+.imgShimmerWrap img{
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+@keyframes piguu{
+  from{
+    background-position: 200% 0;
+  }
+  to{
+    background-position: -200% 0;
+  }
+}
 </style>
 </head>
 
@@ -12697,6 +12738,12 @@ Nature’s Best
   <div class="productGrid" id="productGrid11"></div>
 
 </div>
+
+
+
+
+
+
 <div class="midCategory" id="colldrinksec">
 
   <div class="midHeader">
@@ -16244,7 +16291,10 @@ async function loadProducts(){
 
     card.innerHTML = `
   <div class="imgWrap">
-    <img src="${item.image1}">
+     <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
 
     <!-- ✅ SAME AS loadProducts2 -->
     <div class="cartControl" 
@@ -16689,7 +16739,10 @@ async function loadProducts2(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="all_products">
@@ -16775,7 +16828,10 @@ async function loadProducts3(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
 
         <div class="cartControl" 
           data-id="${item.id}" 
@@ -16858,7 +16914,10 @@ async function loadProducts4(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="all_products">
@@ -16937,7 +16996,10 @@ async function loadProducts5(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
     data-table="all_products">
@@ -17050,7 +17112,10 @@ async function loadProducts7(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
         <div class="bottomShade"></div>
        <div class="cartControl" 
      data-id="${item.id}" 
@@ -17130,7 +17195,10 @@ async function loadProducts8(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -17209,7 +17277,10 @@ async function loadProducts9(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -17290,7 +17361,10 @@ async function loadProducts11(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17370,7 +17444,10 @@ async function loadProducts12(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17449,7 +17526,10 @@ async function loadProducts13(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17528,7 +17608,10 @@ async function loadProducts14(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17608,7 +17691,10 @@ async function loadProducts15(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17688,7 +17774,10 @@ async function loadProducts16(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17767,7 +17856,10 @@ async function loadProducts17(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17847,7 +17939,10 @@ async function loadProducts18(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -17931,7 +18026,10 @@ async function loadProducts19(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -18011,7 +18109,10 @@ async function loadProducts20(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
     data-table="cool_drinks_products">
@@ -18094,7 +18195,10 @@ async function loadProducts22(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -18174,7 +18278,10 @@ async function loadProducts23(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -18257,7 +18364,10 @@ async function loadProducts24(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -18341,7 +18451,10 @@ async function loadProducts26(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -18447,7 +18560,10 @@ async function loadProducts27(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -18550,7 +18666,10 @@ async function loadProducts28(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -18629,7 +18748,10 @@ async function loadProducts29(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -18731,7 +18853,10 @@ async function loadProducts30(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -18811,7 +18936,10 @@ async function loadProducts31(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -18894,7 +19022,10 @@ async function loadProducts41(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -18975,7 +19106,10 @@ async function loadProducts42(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -19056,7 +19190,10 @@ async function loadProducts43(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -19137,7 +19274,10 @@ async function loadProducts44(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -19218,7 +19358,10 @@ async function loadProducts45(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -19300,7 +19443,10 @@ async function loadProducts46(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -19383,7 +19529,10 @@ async function loadProducts47(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products"> // chnage
@@ -19492,7 +19641,10 @@ async function loadProducts81(){
 
       <div class="imgWrap2">
 
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
 
         <div class="cartControl"
           data-id="${item.id}"
@@ -19941,7 +20093,10 @@ async function loadProducts48(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20023,7 +20178,10 @@ async function loadProducts49(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20103,7 +20261,10 @@ async function loadProducts50(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20184,7 +20345,10 @@ async function loadProducts51(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20264,7 +20428,10 @@ async function loadProducts52(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20344,7 +20511,10 @@ async function loadProducts53(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20424,7 +20594,10 @@ async function loadProducts54(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20505,7 +20678,10 @@ async function loadProducts55(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="chocolate_products">
@@ -20587,7 +20763,10 @@ async function loadProducts56(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="skincare_products">
@@ -20668,7 +20847,10 @@ async function loadProducts32(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -20778,7 +20960,10 @@ async function loadProducts57(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -20888,7 +21073,10 @@ async function loadProducts58(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -20997,7 +21185,10 @@ async function loadProducts59(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -21108,7 +21299,10 @@ async function loadProducts60(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -21218,7 +21412,10 @@ async function loadProducts61(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -21326,7 +21523,10 @@ async function loadProducts62(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="grocery_products">
@@ -21435,7 +21635,10 @@ async function loadProducts63(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -21542,7 +21745,10 @@ async function loadProducts64(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -21647,7 +21853,10 @@ async function loadProducts65(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -21752,7 +21961,10 @@ async function loadProducts66(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -21857,7 +22069,10 @@ async function loadProducts67(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -21962,7 +22177,10 @@ async function loadProducts68(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -22067,7 +22285,10 @@ async function loadProducts69(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -22174,7 +22395,10 @@ async function loadProducts70(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="home_products">
@@ -22282,7 +22506,10 @@ async function loadProducts83(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -22390,7 +22617,10 @@ async function loadProducts85(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -22500,7 +22730,10 @@ async function loadProducts86(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -22611,7 +22844,10 @@ async function loadProducts87(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -22722,7 +22958,10 @@ async function loadProducts88(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -22830,7 +23069,10 @@ async function loadProducts89(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -22937,7 +23179,10 @@ async function loadProducts90(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -23044,7 +23289,10 @@ async function loadProducts91(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="fresh_products">
@@ -23155,7 +23403,10 @@ async function loadProducts92(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -23266,7 +23517,10 @@ async function loadProducts93(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -23372,7 +23626,10 @@ async function loadProducts94(){
 
     card.innerHTML = `
       <div class="imgWrap2">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
        <div class="cartControl" 
      data-id="${item.id}" 
      data-table="cool_drinks_products">
@@ -24300,7 +24557,10 @@ giftAdded = false;
 
     list.innerHTML += `
       <div class="cartItemRow">
-        <img src="${item.image1}">
+         <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
         
         <div class="cartItemInfo">
 
@@ -24510,7 +24770,10 @@ card.className="productCard2";
 
 card.innerHTML=`
 <div class="imgWrap2">
-<img src="${item.image1}">
+ <div class="imgShimmerWrap">
+      <div class="piguu"></div>
+      <img src="${item.image1}">
+    </div>
 
 <div class="cartControl"
 data-id="${item.id}"
@@ -28895,6 +29158,15 @@ setInterval(()=>{
   });
 
 },300);
+const img = card.querySelector(".imgShimmerWrap img");
+const shimmer = card.querySelector(".piguu");
+
+if (img.complete) {
+  shimmer?.remove();
+} else {
+  img.onload = () => shimmer?.remove();
+  img.onerror = () => shimmer?.remove();
+}
 </script>
 </body>
 </html>
