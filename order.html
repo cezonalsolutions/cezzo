@@ -362,100 +362,71 @@ body{
 }
 
 /* 🔥 FULL WIDTH */
-
 .flowLoader{
-
-  position:relative;
-
-  width:100vw;
-
-  height:90px;
-
-  overflow:hidden;
+    position:fixed;
+    inset:0;
+    background:#f5f5f7;
+    overflow-y:auto;
 }
 
-/* 🔥 ICON */
-
-.flowIcon{
-
-  position:absolute;
-
-  top:50%;
-
-  left:-60px;
-
-  transform:translateY(-50%);
-
-  font-size:34px;
-
-  color:#2874f0;
-
-  opacity:0;
-
-  text-shadow:
-  0 0 10px rgba(40,116,240,.35),
-  0 0 20px rgba(40,116,240,.2);
-
-  animation:
-  flowMove 1.1s linear infinite;
+.ordersSkeleton{
+    padding:20px;
 }
 
-/* 🔥 DELAYS */
-
-.flow2{
-  animation-delay:.25s;
+.skHeader{
+    width:220px;
+    height:30px;
+    border-radius:12px;
+    margin-bottom:24px;
+    background:#ececec;
+    position:relative;
+    overflow:hidden;
 }
 
-.flow3{
-  animation-delay:.5s;
+.skCard{
+    height:170px;
+    border-radius:28px;
+    background:#ececec;
+    margin-bottom:20px;
+    position:relative;
+    overflow:hidden;
 }
 
-.flow4{
-  animation-delay:.75s;
+.skHeader::after,
+.skCard::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-150%;
+
+    width:70%;
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.95),
+        transparent
+    );
+
+    animation:cezzoShimmer 1.1s linear infinite;
 }
 
-/* 🔥 FLOW */
+@keyframes cezzoShimmer{
 
-@keyframes flowMove{
+    0%{
+        left:-150%;
+    }
 
-  0%{
+    100%{
+        left:150%;
+    }
 
-    left:-60px;
-
-    opacity:0;
-
-    transform:
-    translateY(-50%)
-    scale(.65);
-  }
-
-  10%{
-    opacity:1;
-  }
-
-  50%{
-
-    opacity:1;
-
-    transform:
-    translateY(-50%)
-    scale(1);
-  }
-
-  90%{
-    opacity:1;
-  }
-
-  100%{
-
-    left:100%;
-
-    opacity:0;
-
-    transform:
-    translateY(-50%)
-    scale(.65);
-  }
 }
 
 .logoutWrap{
@@ -535,29 +506,19 @@ body{
 
   <div class="flowLoader">
 
-    <i class="
-      fa fa-shopping-bag
-      flowIcon
-      flow1
-    "></i>
+    <div class="ordersSkeleton">
 
-    <i class="
-      fa fa-bolt
-      flowIcon
-      flow2
-    "></i>
+      <div class="skHeader"></div>
 
-    <i class="
-      fa fa-truck
-      flowIcon
-      flow3
-    "></i>
+      <div class="skCard"></div>
 
-    <i class="
-      fa fa-gift
-      flowIcon
-      flow4
-    "></i>
+      <div class="skCard"></div>
+
+      <div class="skCard"></div>
+
+      <div class="skCard"></div>
+
+    </div>
 
   </div>
 
