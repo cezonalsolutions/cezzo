@@ -11657,6 +11657,104 @@ linear-gradient(
 
   justify-content:space-between;
 }
+
+
+.cartItemSkeleton{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px;
+    margin-bottom:12px;
+}
+
+.cartSkImg,
+.cartSkLine{
+    background:linear-gradient(
+      90deg,
+      #f3f3f3 25%,
+      #e8e8e8 50%,
+      #f3f3f3 75%
+    );
+    background-size:200% 100%;
+    animation:cartShimmer 1.2s linear infinite;
+}
+
+.cartSkImg{
+    width:70px;
+    height:70px;
+    border-radius:12px;
+    flex-shrink:0;
+}
+
+.cartSkInfo{
+    flex:1;
+}
+
+.cartSkLine{
+    height:12px;
+    border-radius:999px;
+    margin-bottom:8px;
+}
+
+.cartSkName{
+    width:80%;
+}
+
+.cartSkPrice{
+    width:50px;
+}
+
+.cartSkQty{
+    width:90px;
+}
+
+.cartSkBtn{
+    width:80px;
+    height:36px;
+    border-radius:10px;
+    background:#f0f0f0;
+}
+
+@keyframes cartShimmer{
+    from{background-position:200% 0;}
+    to{background-position:-200% 0;}
+}
+
+.billSk{
+    width:60px;
+    height:14px;
+    border-radius:999px;
+
+    background:linear-gradient(
+      90deg,
+      #f3f3f3 25%,
+      #e8e8e8 50%,
+      #f3f3f3 75%
+    );
+
+    background-size:200% 100%;
+    animation:billShimmer 1.2s linear infinite;
+}
+
+.billSkBig{
+    width:80px;
+    height:18px;
+}
+
+.billSkSmall{
+    width:110px;
+    height:12px;
+    margin-top:4px;
+}
+
+@keyframes billShimmer{
+    from{
+        background-position:200% 0;
+    }
+    to{
+        background-position:-200% 0;
+    }
+}
 </style>
 </head>
 
@@ -24289,14 +24387,60 @@ giftAdded = false;
   // 🟢 HAS ITEMS
   title.style.display = "block"; // 🔥 SHOW "Your Items" again
 
-  // 🔥 WAIT for productMap
-  if(!window.productMap || Object.keys(window.productMap).length === 0){
-    if(attempt < 5){
-      setTimeout(() => renderCartItems(attempt + 1), 100);
-    }
-    return;
+if(!window.productMap || Object.keys(window.productMap).length === 0){
+const billItems = document.getElementById("billItemsTotal");
+const billHandling = document.getElementById("billHandling");
+const billDelivery = document.getElementById("billDelivery");
+const billTotal = document.getElementById("billTotal");
+const savedText = document.getElementById("savedText");
+
+if(billItems) billItems.innerHTML = `<div class="billSk"></div>`;
+if(billHandling) billHandling.innerHTML = `<div class="billSk"></div>`;
+if(billDelivery) billDelivery.innerHTML = `<div class="billSk"></div>`;
+if(billTotal) billTotal.innerHTML = `<div class="billSk billSkBig"></div>`;
+if(savedText) savedText.innerHTML = `<div class="billSk billSkSmall"></div>`;
+  list.innerHTML = `
+<div class="cartItemSkeleton">
+  <div class="cartSkImg"></div>
+
+  <div class="cartSkInfo">
+    <div class="cartSkLine cartSkPrice"></div>
+    <div class="cartSkLine cartSkName"></div>
+    <div class="cartSkLine cartSkQty"></div>
+  </div>
+
+  <div class="cartSkBtn"></div>
+</div>
+
+<div class="cartItemSkeleton">
+  <div class="cartSkImg"></div>
+
+  <div class="cartSkInfo">
+    <div class="cartSkLine cartSkPrice"></div>
+    <div class="cartSkLine cartSkName"></div>
+    <div class="cartSkLine cartSkQty"></div>
+  </div>
+
+  <div class="cartSkBtn"></div>
+</div>
+`;
+
+  if(attempt < 20){
+    setTimeout(() => renderCartItems(attempt + 1), 150);
   }
 
+  return;
+}
+const readyItems = keys.filter(key => getProduct(key));
+
+if(readyItems.length !== keys.length){
+
+  if(attempt < 20){
+    setTimeout(() => renderCartItems(attempt + 1), 150);
+  }
+
+  return;
+}
   keys.forEach(key => {
 
     const item = getProduct(key);
@@ -28339,7 +28483,6 @@ function initOfferBar(){
         document.getElementById("splash");
 
         /* HIDE DURING SPLASH */
-
         if(
             splash &&
             getComputedStyle(splash).display !== "none"
@@ -28350,44 +28493,47 @@ function initOfferBar(){
             return;
         }
 
-        /* CART VISIBLE */
+        /* HIDE IMMEDIATELY IF CART HAS ITEMS */
+        const cart =
+        JSON.parse(
+            localStorage.getItem("cart") || "{}"
+        );
 
+        if(Object.keys(cart).length > 0){
+
+            offerBar.style.display = "none";
+
+            return;
+        }
+
+        /* NORMAL LOGIC */
         const cartVisible =
-
-            !cartBar.classList.contains("hidden");
+        !cartBar.classList.contains("hidden");
 
         offerBar.style.display =
-
-            cartVisible
-            ? "none"
-            : "block";
+        cartVisible
+        ? "none"
+        : "block";
     }
 
-    /* FIRST */
-
+    /* FIRST RUN */
     toggleOfferBar();
 
-    /* OBSERVE */
-
+    /* WATCH CART BAR */
     const observer =
     new MutationObserver(toggleOfferBar);
 
     observer.observe(cartBar,{
-
         attributes:true,
-
-        attributeFilter:[
-            "class"
-        ]
+        attributeFilter:["class"]
     });
 
 }
 
-/* START */
-
+/* START IMMEDIATELY */
 window.addEventListener("load",()=>{
 
-    setTimeout(initOfferBar,800);
+    initOfferBar();
 
 });
 document.addEventListener(
@@ -28774,43 +28920,6 @@ renderSavedAddresses();
 
 
 
-
-
-const delivery =
-document.querySelector(".deliveryTime");
-
-let num = 1;
-
-function startLoop(){
-
-  const interval = setInterval(()=>{
-
-    delivery.innerHTML = `
-      ${num}
-      <span>MIN</span>
-    `;
-
-    num++;
-
-    if(num > 15){
-
-      clearInterval(interval);
-
-      setTimeout(()=>{
-
-        num = 1;
-
-        startLoop();
-
-      },4000);
-
-    }
-
-  },150);
-
-}
-
-startLoop();
 
 
 
