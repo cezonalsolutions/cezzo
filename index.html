@@ -7,6 +7,7 @@
 <link
 href="https://fonts.googleapis.com/css2?family=Playwrite+NZ:wght@100..400&display=swap"
 rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -38,8 +39,11 @@ body{
   background:#ffffff;
 
   font-family:
+  Inter,
   system-ui,
   -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
   sans-serif;
 
   color:#111827;
@@ -3407,7 +3411,7 @@ left:130%;
 
 /* 🔥 ACTIVE STYLE (pill like cart bar) */
 .miniRow .cartControl.active{
-  background:#0f5c5c;
+  
   border-radius:999px;
 
   padding:4px 10px;
@@ -3643,7 +3647,7 @@ font-weight:600;
   align-items:center;
   gap:6px;
 
-  background:#0f5c5c;
+  
   color:#fff;
 
   border-radius:999px;
@@ -11755,6 +11759,48 @@ linear-gradient(
         background-position:-200% 0;
     }
 }
+.city.shimmer{
+    position:relative;
+    min-width:120px;
+    min-height:18px;
+    color:transparent;
+}
+
+.city.shimmer::after{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:120px;
+    height:18px;
+    border-radius:8px;
+    background:#e5e7eb;
+    overflow:hidden;
+}
+
+.city.shimmer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120px;
+    width:120px;
+    height:18px;
+    border-radius:8px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.8),
+        transparent
+    );
+    animation:cityShimmer 1.2s infinite;
+    z-index:2;
+}
+
+@keyframes cityShimmer{
+    100%{
+        left:120px;
+    }
+}
 </style>
 </head>
 
@@ -11970,6 +12016,7 @@ poster="cat/cezzo1.webp">
 
 </div>
 </div>     
+
  <div class="address" id="shortAddress"></div>
     </div>
   <div class="profile">
@@ -14578,6 +14625,8 @@ home.style.display = "block";
 optionScreen.style.display = "none";
 
 // Ask after 2.5 sec
+cityName.classList.add("shimmer");
+
 setTimeout(() => {
 
     getLocation();
@@ -14651,9 +14700,8 @@ document.getElementById(
   "optShortAddress"
 ).innerText = full;
 
-// ✅ HOME
+cityName.classList.remove("shimmer");
 cityName.innerText = city;
-
 shortAddress.innerText = full;
 
 // ✅ LOCATION SHEET
@@ -14812,6 +14860,7 @@ document.getElementById("saveManual").onclick = function(){
 
     // 🔥 HOME SCREEN
     cityName.innerText = city;
+    
     shortAddress.innerText = rest;
 
     // 🔥 STORAGE
@@ -24501,10 +24550,27 @@ if(totalItems > 10){
   handlingFee = Math.floor((totalItems - 1) / 10) * 10;
 }
 
-let deliveryFee = 20;
+let deliveryFee = 35;
 
-/* 🔥 FREE DELIVERY ENABLE */
-let freeDelivery = true;
+/* CHECK IF ANY PRODUCT >= 150 */
+let hasFreeDeliveryProduct = false;
+
+keys.forEach(key => {
+
+  const item = getProduct(key);
+
+  if(!item) return;
+
+  if(item.discount_price >= 150){
+    hasFreeDeliveryProduct = true;
+  }
+
+});
+
+/* FREE DELIVERY RULE */
+let freeDelivery =
+itemsTotal >= 150 ||
+hasFreeDeliveryProduct;
 
 total =
   itemsTotal +
@@ -27617,11 +27683,17 @@ async function startRazorpay(orderData){
       slideThumb.style.transform =
       `translateX(0px)`;
 
-      alert(
-      "Invalid Total Amount"
-      );
+     hideSlideLoader();
 
-      return;
+currentX = 0;
+
+slideThumb.style.transition =
+".35s ease";
+
+slideThumb.style.transform =
+"translateX(0px)";
+
+return;
 
     }
 
