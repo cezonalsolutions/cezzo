@@ -12075,9 +12075,9 @@ poster="cat/cezzo1.webp">
 
   <div class="catItem" data-color="#0f766e"> <!-- Home -->
     <div class="catIcon">
-      <img src="home.webp">
+      <img src="cat/gift.webp">
     </div>
-    <div class="catText">Home</div>
+    <div class="catText">Gift</div>
   </div>
 
  <div class="catItem" data-color="#4c6b2f">
@@ -15777,7 +15777,7 @@ productSection81.style.display = "none";
 
 }
 
-else if(text === "Home"){
+else if(text === "Gift"){
   content.style.display = "none";
   fresh.style.display = "none";
   
@@ -27613,17 +27613,36 @@ localStorage.getItem(
 };
 
     // COD
-    if(
-      paymentMode
-      .toLowerCase()
-      .includes("cash")
-    ){
+    // COD
+if(
+  paymentMode
+  .toLowerCase()
+  .includes("cash")
+){
 
-      saveOrderToSupabase(
-        orderData
-      );
+  if(
+    finalTotal <= 0
+  ){
 
-    }
+    hideSlideLoader();
+
+    currentX = 0;
+
+    slideThumb.style.transition =
+    ".35s ease";
+
+    slideThumb.style.transform =
+    "translateX(0px)";
+
+    return;
+
+  }
+
+  saveOrderToSupabase(
+    orderData
+  );
+
+}
 
     // UPI
     else{
@@ -29086,6 +29105,8 @@ setInterval(()=>{
   });
 
 },300);
+
+
 </script>
 </body>
 </html>
