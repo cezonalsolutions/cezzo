@@ -16394,6 +16394,47 @@ if(navVideo){
     navVideo.play();
   });
 }
+function normalizeIngredients(ingredients) {
+  if (!ingredients) return [];
+
+  // ✅ Case 1: jsonb OBJECT { key: value }
+  if (typeof ingredients === "object" && !Array.isArray(ingredients)) {
+    return Object.entries(ingredients); 
+    // → [ ["Energy","900 kcal"], ["Sodium","0 mg"], ... ]
+  }
+
+  // ✅ Case 2: jsonb ARRAY ["Energy","60 kcal", ...]
+  if (Array.isArray(ingredients)) {
+    const pairs = [];
+    for (let i = 0; i < ingredients.length; i += 2) {
+      pairs.push([ingredients[i], ingredients[i + 1]]);
+    }
+    return pairs;
+  }
+
+  // ✅ Case 3: string JSON
+  if (typeof ingredients === "string") {
+    try {
+      const parsed = JSON.parse(ingredients);
+
+      if (Array.isArray(parsed)) {
+        const pairs = [];
+        for (let i = 0; i < parsed.length; i += 2) {
+          pairs.push([parsed[i], parsed[i + 1]]);
+        }
+        return pairs;
+      }
+
+      if (typeof parsed === "object") {
+        return Object.entries(parsed);
+      }
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+}
 async function loadProducts(){
 
   const { data, error } = await supabase
@@ -16633,36 +16674,33 @@ document.body.style.touchAction = "none";
 
 </div>
       <!-- INGREDIENTS -->
-     <div class="box">
+    <div class="box">
   <b>Ingredients</b>
 
   <table class="ingTable">
     ${
       (() => {
-        let arr = [];
+        const arr = normalizeIngredients(item.ingredients);
 
-        try {
-          arr = JSON.parse(item.ingredients || "[]");
-        } catch(e) {
+        if (!arr.length) {
           return "<tr><td>-</td></tr>";
         }
 
         let rows = "";
 
-        for(let i = 0; i < arr.length; i += 2){
-          rows += `
-            <tr>
-              <td>${arr[i] || ""}</td>
-              <td>${arr[i+1] || ""}</td>
-            </tr>
-          `;
-        }
+        for (const [name, value] of arr) {
+  rows += `
+    <tr>
+      <td>${name || ""}</td>
+      <td>${value || ""}</td>
+    </tr>
+  `;
+}
 
         return rows;
       })()
     }
   </table>
-
 </div>
  
 
@@ -17379,7 +17417,7 @@ async function loadProducts100(){
   const { data } = await supabase
     .from("new_products")
     .select("*")
-    .in("id", [849,848,847,846,845,844]);   // ✅ new IDs
+    .in("id", [4,5,7,9,13,14,17]);   // ✅ new IDs
 
   const grid = document.getElementById("productGrid100"); // ✅ new grid
   grid.innerHTML = "";
