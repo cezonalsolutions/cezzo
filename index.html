@@ -13801,6 +13801,22 @@ defer>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  /* =========================
+   LOCATION FROM iOS APP
+   ========================= */
+
+function handleAppLocation(loc) {
+  console.log("📍 Location from app:", loc.latitude, loc.longitude);
+  handleLocation(loc.latitude, loc.longitude);
+}
+
+window.onAppLocationReceived = handleAppLocation;
+
+// ✅ If app sent location BEFORE JS loaded
+if (window.APP_LOCATION) {
+  handleAppLocation(window.APP_LOCATION);
+}
+
   var supabase = window.supabase.createClient(
   "https://izoipzriynkcjtwuzrfu.supabase.co",
   "sb_publishable_7ZRL1Y4JAppLTJonepuTIw_UQyGjVVw"
@@ -13861,159 +13877,90 @@ setTimeout(() => {
 });
 
 let locationTimeout;
-function getLocation(){
 
-  // 🔥 TIMER
-  locationTimeout = setTimeout(()=>{
+function getLocation() {
 
+  locationTimeout = setTimeout(() => {
     showOnly("locationError");
+  }, 5000);
 
-  },5000);
-
-  navigator.geolocation.getCurrentPosition(
-
-  async(pos)=>{
-
-    try{
-
-      clearTimeout(locationTimeout);
-
-      // ✅ API
-     const res = await fetch(
-`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`
-);
-
-const result = await res.json();
-
-console.log(result);
-
-let city =
-result.address.village ||
-result.address.hamlet ||
-result.address.town ||
-result.address.city ||
-"Your Location";
-
-let full = [
-
-result.address.village,
-result.address.hamlet,
-result.address.suburb,
-result.address.county,
-result.address.state,
-result.address.postcode,
-result.address.country
-
-]
-.filter(Boolean)
-.join(", ");
-      // ✅ FALLBACK
-      if(!full){
-
-        full = "Location found";
-
-      }
-
-      
-
-        // ✅ OPTION SCREEN
-        // ✅ OPTION SCREEN
-document.getElementById(
-  "optCityName"
-).innerText = city;
-
-document.getElementById(
-  "optShortAddress"
-).innerText = full;
-
-cityName.classList.remove("shimmer");
-cityName.innerText = city;
-shortAddress.innerText = full;
-
-// ✅ LOCATION SHEET
-document.getElementById("sheetCity").innerText = city;
-document.getElementById("sheetAddress").innerText = full;
-
-// ✅ STORAGE
-localStorage.setItem(
-  "savedCity",
-  city
-);
-
-localStorage.setItem(
-  "savedAddress",
-  full
-);
-/* ADD INITIAL GPS ADDRESS */
-
-let allAddresses =
-JSON.parse(
-  localStorage.getItem("allAddresses")
-) || [];
-
-/* CHECK EXISTS */
-const exists =
-allAddresses.some(item=>
-
-  item.city === city &&
-  item.address === full
-
-);
-
-if(!exists){
-
-  allAddresses.unshift({
-
-    city:city,
-
-    address:full
-
-  });
-
-  localStorage.setItem(
-    "allAddresses",
-    JSON.stringify(allAddresses)
-  );
-
+  // ✅ If inside iOS app → wait for native location
+  // ✅ If running inside iOS app, DO NOT ask browser permission
+if (window.APP_LOCATION || window.onAppLocationReceived) {
+  console.log("⏳ Waiting for iOS app location...");
+  return;
 }
-        localStorage.setItem(
-          "savedLat",
-          pos.coords.latitude
-        );
 
-        localStorage.setItem(
-          "savedLng",
+  // 🌐 Browser fallback (Safari / Chrome)
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        handleLocation(
+          pos.coords.latitude,
           pos.coords.longitude
         );
-
-      
-
-    }catch(err){
-
-      console.log(err);
-
-      clearTimeout(locationTimeout);
-
-      showOnly("locationError");
-
-    }
-
-  },
-
-  ()=>{
-
+      },
+      () => {
+        clearTimeout(locationTimeout);
+        showOnly("locationError");
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 0
+      }
+    );
+  }
+}
+async function handleLocation(lat, lng) {
+  try {
     clearTimeout(locationTimeout);
 
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+    );
+    const result = await res.json();
+
+    let city =
+      result.address.village ||
+      result.address.hamlet ||
+      result.address.town ||
+      result.address.city ||
+      "Your Location";
+
+    let full = [
+      result.address.village,
+      result.address.hamlet,
+      result.address.suburb,
+      result.address.county,
+      result.address.state,
+      result.address.postcode,
+      result.address.country
+    ].filter(Boolean).join(", ");
+
+    if (!full) full = "Location found";
+
+    // 🔁 UI (UNCHANGED)
+    document.getElementById("optCityName").innerText = city;
+    document.getElementById("optShortAddress").innerText = full;
+
+    cityName.classList.remove("shimmer");
+    cityName.innerText = city;
+    shortAddress.innerText = full;
+
+    document.getElementById("sheetCity").innerText = city;
+    document.getElementById("sheetAddress").innerText = full;
+
+    // 💾 STORAGE
+    localStorage.setItem("savedCity", city);
+    localStorage.setItem("savedAddress", full);
+    localStorage.setItem("savedLat", lat);
+    localStorage.setItem("savedLng", lng);
+
+  } catch (err) {
+    console.error(err);
     showOnly("locationError");
-
-  },
-
-  {
-    enableHighAccuracy:true,
-    timeout:20000,
-    maximumAge:0
-  });
-
+  }
 }
 function loadSavedLocation(){
 
