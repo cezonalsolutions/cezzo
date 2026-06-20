@@ -4,47 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Cezoo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link
 href="https://fonts.googleapis.com/css2?family=Playwrite+NZ:wght@100..400&display=swap"
 rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=B612:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Spectral+SC:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Orbitron:wght@600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet"
 href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-
   overflow-y:auto;
-
   background:#ffffff;
 
-  font-family:
-  Inter,
-  system-ui,
-  -apple-system,
-  BlinkMacSystemFont,
-  "Segoe UI",
-  sans-serif;
+   font-family: 'Inter', system-ui, sans-serif;
 
   color:#111827;
 }
@@ -2681,29 +2657,7 @@ transform:translateZ(0);
   margin:4px 0;
   color:#ccc;
 }
-.instaFooter{
-  background:#f3f3f3;
 
-  margin-left:-15px;
-  margin-right:-15px;
-  margin-bottom:-15px;   /* 🔥 REMOVE BOTTOM GAP */
-
-  padding:20px 15px 65px; /* keep space for bottom nav */
-}
-
-/* TEXT FIX */
-.instaFooter h2{
-  font-size:30px;
-  font-weight:700;
-  color:#bbb;
-  margin:0;
-}
-
-.instaFooter p{
-  font-size:14px;
-  color:#888;
-  margin:4px 0 0;
-}
 .fLocation{
   font-size:12px;
   color:#8ab9b9;
@@ -2717,6 +2671,44 @@ transform:translateZ(0);
   font-weight:600;
   letter-spacing:1px;   /* 🔥 important for this font */
   color:#ffffff;
+}
+.cz-footer{
+  background:#f5f6f7;
+  margin-left:-15px;
+  margin-right:-15px;
+  margin-bottom:-15px;
+  padding:0 20px 70px;      /* no top padding */
+  border-top:1px solid #e5e7eb;
+}
+
+/* BIG BRAND */
+.cz-brand{
+  margin-top:1px;
+  font-family:'Bungee', cursive;
+  font-size:50px;
+  letter-spacing:6px;
+  color:#9ca3af;
+  opacity:0.85;
+  user-select:none;
+}
+
+/* META TEXT */
+.cz-meta{
+  margin-top:6px;
+  font-size:14px;
+  color:#6b7280;
+}
+
+.cz-meta span{
+  color:#374151;
+  font-weight:600;
+}
+
+/* LOCATION */
+.cz-place{
+  margin-top:4px;
+  font-size:13px;
+  color:#9ca3af;
 }
 
 /* SUB TEXT */
@@ -6546,13 +6538,11 @@ h6{
   margin:0;
   padding:0;
 
-  font-family:"Plus Jakarta Sans", "Inter", sans-serif;
-  font-size:18px;
+  font-family: 'Inter', sans-serif;
+  font-size:15px;
   font-weight:700;
-  line-height:1;
-
-  color:#374151; /* softer dark gray */
-  letter-spacing:-0.5px;
+  color:#111;
+  margin-bottom:8px;
 }
 
 /* 🔥 emoji */
@@ -13025,12 +13015,17 @@ Bite Delight Hub
 
 </div>
 
-<div class="instaFooter">
-  <h2>Cezoo</h2>
-  <p>Crafted with 💙 in India</p>
-  <p class="fLocation">Tanuku, Andhra Pradesh, India</p>
-</div>
+<div class="cz-footer">
+  <div class="cz-brand">CEZOO</div>
 
+  <div class="cz-meta">
+    Crafted by <span>Cezonal Solutions Pvt Ltd</span>
+  </div>
+
+  <div class="cz-place">
+    Tanuku, Andhra Pradesh, India
+  </div>
+</div>
 <div class="bottomNav">
 
   <div class="navItem active" onclick="location.href='gretting.html'">
