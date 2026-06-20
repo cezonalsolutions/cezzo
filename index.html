@@ -27870,6 +27870,119 @@ setInterval(()=>{
 
 },300);
 
+/* ======================================
+   LOCATION DENIED BOTTOM SHEET
+   ONE SCRIPT ONLY
+   ====================================== */
+
+(function () {
+  if (document.getElementById("locationDeniedSheet")) return;
+
+  /* ---------- CSS ---------- */
+  const style = document.createElement("style");
+  style.innerHTML = `
+  #locationDeniedSheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -100%;
+    background: #ffffff;
+    padding: 22px 20px 28px;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -12px 30px rgba(0,0,0,.12);
+    transition: bottom .35s ease;
+    z-index: 99999;
+  }
+
+  #locationDeniedSheet.show {
+    bottom: 0;
+  }
+
+  #locationDeniedSheet .sheetHandle {
+    width: 42px;
+    height: 5px;
+    background: #ddd;
+    border-radius: 999px;
+    margin: 0 auto 14px;
+  }
+
+  #locationDeniedSheet h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  #locationDeniedSheet p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  #locationDeniedSheet .steps {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #444;
+    background: #f5f6f7;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  `;
+  document.head.appendChild(style);
+
+  /* ---------- HTML ---------- */
+  const sheet = document.createElement("div");
+  sheet.id = "locationDeniedSheet";
+  sheet.innerHTML = `
+    <div class="sheetHandle"></div>
+
+    <h3>Location access is turned off</h3>
+
+    <p>
+      To continue, enable location access in Settings.
+    </p>
+
+    <div class="steps">
+      Open Settings → Privacy & Security → Location Services → Enable<br>
+      Then allow location for this app
+    </div>
+  `;
+  document.body.appendChild(sheet);
+
+  /* ---------- SHOW / HIDE ---------- */
+  window.showLocationDeniedSheet = function () {
+    sheet.classList.add("show");
+  };
+
+  window.hideLocationDeniedSheet = function () {
+    sheet.classList.remove("show");
+  };
+
+  /* ---------- TAP → OPEN APP SETTINGS ---------- */
+  /* ---------- TAP → OPEN SETTINGS ---------- */
+sheet.addEventListener("click", function (e) {
+  e.stopPropagation(); // prevent outside click trigger
+
+  if (window.webkit?.messageHandlers?.openLocationSettings) {
+    window.webkit.messageHandlers.openLocationSettings.postMessage(null);
+  }
+});
+
+/* ---------- TAP OUTSIDE → HIDE ---------- */
+document.addEventListener("click", function (e) {
+  const el = document.getElementById("locationDeniedSheet");
+
+  if (!el) return;
+
+  if (el.classList.contains("show")) {
+    // if click is outside sheet
+    if (!el.contains(e.target)) {
+      el.classList.remove("show");
+    }
+  }
+});
+
+})();
 
 </script>
 </body>
