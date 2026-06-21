@@ -26785,7 +26785,152 @@ window.APP_LOCATION = data;
   });
 
 })();
+/* =========================
+   LOCATION STATUS
+   ========================= */
+(function () {
 
+  /* ---------- HTML ---------- */
+
+  const bar = document.createElement("div");
+  bar.id = "locationStatus";
+  bar.innerText = "📍 Waiting for location from app…";
+
+  document.body.appendChild(bar);
+
+  /* ---------- CSS ---------- */
+
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+    #locationStatus{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      background:#111;
+      color:#fff;
+      padding:10px 14px;
+      font-size:13px;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      z-index:99999;
+      box-shadow:0 -2px 6px rgba(0,0,0,.25);
+      transition:background .2s ease;
+      word-break:break-word;
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  /* ---------- HELPERS ---------- */
+
+  let locationReceived = false;
+
+  function show(msg, color = "#111") {
+    bar.style.background = color;
+    bar.textContent = msg;
+  }
+
+  // Called directly from iOS if permission denied
+  window.showLocationError = function (message) {
+
+    locationReceived = false;
+
+    show(`❌ ${message}`, "#dc2626");
+  };
+
+  /* ---------- APP CALLBACK ---------- */
+
+  window.onAppLocationReceived = function (loc) {
+
+    try {
+
+      if (
+        !loc ||
+        typeof loc.latitude !== "number" ||
+        typeof loc.longitude !== "number"
+      ) {
+
+        show(
+          "❌ Invalid location data received from app",
+          "#dc2626"
+        );
+
+        return;
+      }
+
+      console.log(
+        "📍 Location from app:",
+        loc.latitude,
+        loc.longitude
+      );
+
+      locationReceived = true;
+
+      show(
+        `✅ Location received (${loc.latitude.toFixed(5)}, ${loc.longitude.toFixed(5)})`,
+        "#16a34a"
+      );
+
+      // Keep your existing flow
+      if (typeof handleLocation === "function") {
+        handleLocation(loc.latitude, loc.longitude);
+      }
+
+    } catch (err) {
+
+      console.error(err);
+
+      show(
+        "❌ JavaScript error while processing location",
+        "#dc2626"
+      );
+    }
+  };
+
+  /* ---------- APP SENT BEFORE JS LOADED ---------- */
+
+  if (window.APP_LOCATION) {
+    window.onAppLocationReceived(window.APP_LOCATION);
+  }
+
+  /* ---------- CHECK EVERY 5 SECONDS ---------- */
+
+  setInterval(() => {
+
+    if (locationReceived) {
+
+      show(
+        "✅ Location received from app",
+        "#16a34a"
+      );
+
+    } else {
+
+      show(
+        "❌ Location not received from app (permission denied or app not sending)",
+        "#dc2626"
+      );
+    }
+
+  }, 5000);
+
+  /* ---------- GLOBAL JS ERRORS ---------- */
+
+  window.addEventListener("error", function (event) {
+
+    console.error(event.error || event.message);
+
+    if (!locationReceived) {
+
+      show(
+        "❌ JavaScript error detected before location loaded",
+        "#dc2626"
+      );
+    }
+  });
+
+})();
 
 
 </script>
