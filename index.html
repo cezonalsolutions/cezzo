@@ -13713,20 +13713,33 @@ defer>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  /* =========================
+/* =========================
    LOCATION FROM iOS APP
    ========================= */
 
-function handleAppLocation(loc) {
-  console.log("📍 Location from app:", loc.latitude, loc.longitude);
+window.onAppLocationReceived = function (loc) {
+
+  console.log("📍 Location from iOS:", loc.latitude, loc.longitude);
+
+  // ✅ Mark received (sheet logic)
+  window.locationReceived = true;
+
+  if (window.locationTimeout) {
+    clearTimeout(window.locationTimeout);
+    window.locationTimeout = null;
+  }
+
+  if (window.hideLocationDeniedSheet) {
+    window.hideLocationDeniedSheet();
+  }
+
+  // ✅ Forward to main app logic
   handleLocation(loc.latitude, loc.longitude);
-}
+};
 
-window.onAppLocationReceived = handleAppLocation;
 
-// ✅ If app sent location BEFORE JS loaded
-if (window.APP_LOCATION) {
-  handleAppLocation(window.APP_LOCATION);
+if (window.APP_LOCATION && window.onAppLocationReceived) {
+  window.onAppLocationReceived(window.APP_LOCATION);
 }
 
   var supabase = window.supabase.createClient(
@@ -13796,9 +13809,7 @@ function getLocation() {
     showOnly("locationError");
   }, 5000);
 
-  // ✅ If inside iOS app → wait for native location
-  // ✅ If running inside iOS app, DO NOT ask browser permission
-if (window.APP_LOCATION || window.onAppLocationReceived) {
+if (window.webkit && window.webkit.messageHandlers) {
   console.log("⏳ Waiting for iOS app location...");
   return;
 }
