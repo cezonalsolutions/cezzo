@@ -13788,127 +13788,6 @@ setTimeout(() => {
 }, 2500);
 });
 
-/* =========================
-   LOCATION DEBUG ALERTS
-   ========================= */
-
-const locationAlert = document.createElement("div");
-
-locationAlert.style.cssText = `
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #2563eb;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  z-index: 999999;
-  box-shadow: 0 8px 24px rgba(0,0,0,.2);
-  max-width: 90%;
-  text-align: center;
-  display: none;
-`;
-
-document.body.appendChild(locationAlert);
-
-let locationAlertTimer;
-let locationWatchdog;
-
-function showLocationAlert(message, type = "info") {
-
-  const colors = {
-    info: "#2563eb",
-    success: "#16a34a",
-    warning: "#ea580c",
-    error: "#dc2626"
-  };
-
-  locationAlert.style.background =
-    colors[type] || colors.info;
-
-  locationAlert.textContent = message;
-  locationAlert.style.display = "block";
-
-  clearTimeout(locationAlertTimer);
-
-  locationAlertTimer = setTimeout(() => {
-    locationAlert.style.display = "none";
-  }, 4000);
-}
-
-/* =========================
-   iOS APP LOCATION
-   ========================= */
-
-function handleAppLocation(loc) {
-
-  clearTimeout(locationWatchdog);
-
-  console.log(
-    "📍 Location from app:",
-    loc.latitude,
-    loc.longitude
-  );
-
-  showLocationAlert(
-    `✅ Location received: ${loc.latitude.toFixed(5)}, ${loc.longitude.toFixed(5)}`,
-    "success"
-  );
-
-  handleLocation(loc.latitude, loc.longitude);
-}
-
-window.onAppLocationReceived = handleAppLocation;
-
-// App sent location before JS loaded
-if (window.APP_LOCATION) {
-  handleAppLocation(window.APP_LOCATION);
-}
-
-/* =========================
-   WRAP EXISTING getLocation
-   ========================= */
-
-const originalGetLocation = getLocation;
-
-getLocation = function () {
-
-  showLocationAlert(
-    "⏳ Waiting for location...",
-    "info"
-  );
-
-  clearTimeout(locationWatchdog);
-
-  locationWatchdog = setTimeout(() => {
-
-    showLocationAlert(
-      "⚠️ Location not received within 10 seconds",
-      "warning"
-    );
-
-  }, 10000);
-
-  originalGetLocation();
-};
-
-/* =========================
-   GLOBAL ERROR HELPER
-   ========================= */
-
-window.showLocationError = function(message) {
-
-  clearTimeout(locationWatchdog);
-
-  showLocationAlert(
-    `❌ ${message}`,
-    "error"
-  );
-};
-
 let locationTimeout;
 
 function getLocation() {
@@ -13933,18 +13812,10 @@ if (window.APP_LOCATION || window.onAppLocationReceived) {
           pos.coords.longitude
         );
       },
-      (err) => {
-
-  clearTimeout(locationTimeout);
-
-  if (err.code === 1) {
-    showLocationError("Location permission denied");
-  } else {
-    showLocationError("Unable to get location");
-  }
-
-  showOnly("locationError");
-},
+      () => {
+        clearTimeout(locationTimeout);
+        showOnly("locationError");
+      },
       {
         enableHighAccuracy: true,
         timeout: 20000,
@@ -13999,15 +13870,9 @@ async function handleLocation(lat, lng) {
     localStorage.setItem("savedLng", lng);
 
   } catch (err) {
-
-  console.error(err);
-
-  showLocationError(
-    "Error processing location"
-  );
-
-  showOnly("locationError");
-}
+    console.error(err);
+    showOnly("locationError");
+  }
 }
 function loadSavedLocation(){
 
@@ -26911,6 +26776,156 @@ setInterval(()=>{
   });
 
 })();
+
+
+
+/* =========================
+   LOCATION STATUS
+   ========================= */
+(function () {
+
+  /* ---------- HTML ---------- */
+
+  const bar = document.createElement("div");
+  bar.id = "locationStatus";
+  bar.innerText = "📍 Waiting for location from app…";
+
+  document.body.appendChild(bar);
+
+  /* ---------- CSS ---------- */
+
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+    #locationStatus{
+      position:fixed;
+      bottom:0;
+      left:0;
+      width:100%;
+      background:#111;
+      color:#fff;
+      padding:10px 14px;
+      font-size:13px;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      z-index:99999;
+      box-shadow:0 -2px 6px rgba(0,0,0,.25);
+      transition:background .2s ease;
+      word-break:break-word;
+    }
+  `;
+
+  document.head.appendChild(style);
+
+  /* ---------- HELPERS ---------- */
+
+  let locationReceived = false;
+
+  function show(msg, color = "#111") {
+    bar.style.background = color;
+    bar.textContent = msg;
+  }
+
+  // Called directly from iOS if permission denied
+  window.showLocationError = function (message) {
+
+    locationReceived = false;
+
+    show(`❌ ${message}`, "#dc2626");
+  };
+
+  /* ---------- APP CALLBACK ---------- */
+
+  window.onAppLocationReceived = function (loc) {
+
+    try {
+
+      if (
+        !loc ||
+        typeof loc.latitude !== "number" ||
+        typeof loc.longitude !== "number"
+      ) {
+
+        show(
+          "❌ Invalid location data received from app",
+          "#dc2626"
+        );
+
+        return;
+      }
+
+      console.log(
+        "📍 Location from app:",
+        loc.latitude,
+        loc.longitude
+      );
+
+      locationReceived = true;
+
+      show(
+        `✅ Location received (${loc.latitude.toFixed(5)}, ${loc.longitude.toFixed(5)})`,
+        "#16a34a"
+      );
+
+      // Keep your existing flow
+      if (typeof handleLocation === "function") {
+        handleLocation(loc.latitude, loc.longitude);
+      }
+
+    } catch (err) {
+
+      console.error(err);
+
+      show(
+        "❌ JavaScript error while processing location",
+        "#dc2626"
+      );
+    }
+  };
+
+  /* ---------- APP SENT BEFORE JS LOADED ---------- */
+
+  if (window.APP_LOCATION) {
+    window.onAppLocationReceived(window.APP_LOCATION);
+  }
+
+  /* ---------- CHECK EVERY 5 SECONDS ---------- */
+
+  setInterval(() => {
+
+    if (locationReceived) {
+
+      show(
+        "✅ Location received from app",
+        "#16a34a"
+      );
+
+    } else {
+
+      show(
+        "❌ Location not received from app (permission denied or app not sending)",
+        "#dc2626"
+      );
+    }
+
+  }, 5000);
+
+  /* ---------- GLOBAL JS ERRORS ---------- */
+
+  window.addEventListener("error", function (event) {
+
+    console.error(event.error || event.message);
+
+    if (!locationReceived) {
+
+      show(
+        "❌ JavaScript error detected before location loaded",
+        "#dc2626"
+      );
+    }
+  });
+
+})();
+
 
 </script>
 </body>
