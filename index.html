@@ -13788,6 +13788,127 @@ setTimeout(() => {
 }, 2500);
 });
 
+/* =========================
+   LOCATION DEBUG ALERTS
+   ========================= */
+
+const locationAlert = document.createElement("div");
+
+locationAlert.style.cssText = `
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 999999;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  max-width: 90%;
+  text-align: center;
+  display: none;
+`;
+
+document.body.appendChild(locationAlert);
+
+let locationAlertTimer;
+let locationWatchdog;
+
+function showLocationAlert(message, type = "info") {
+
+  const colors = {
+    info: "#2563eb",
+    success: "#16a34a",
+    warning: "#ea580c",
+    error: "#dc2626"
+  };
+
+  locationAlert.style.background =
+    colors[type] || colors.info;
+
+  locationAlert.textContent = message;
+  locationAlert.style.display = "block";
+
+  clearTimeout(locationAlertTimer);
+
+  locationAlertTimer = setTimeout(() => {
+    locationAlert.style.display = "none";
+  }, 4000);
+}
+
+/* =========================
+   iOS APP LOCATION
+   ========================= */
+
+function handleAppLocation(loc) {
+
+  clearTimeout(locationWatchdog);
+
+  console.log(
+    "📍 Location from app:",
+    loc.latitude,
+    loc.longitude
+  );
+
+  showLocationAlert(
+    `✅ Location received: ${loc.latitude.toFixed(5)}, ${loc.longitude.toFixed(5)}`,
+    "success"
+  );
+
+  handleLocation(loc.latitude, loc.longitude);
+}
+
+window.onAppLocationReceived = handleAppLocation;
+
+// App sent location before JS loaded
+if (window.APP_LOCATION) {
+  handleAppLocation(window.APP_LOCATION);
+}
+
+/* =========================
+   WRAP EXISTING getLocation
+   ========================= */
+
+const originalGetLocation = getLocation;
+
+getLocation = function () {
+
+  showLocationAlert(
+    "⏳ Waiting for location...",
+    "info"
+  );
+
+  clearTimeout(locationWatchdog);
+
+  locationWatchdog = setTimeout(() => {
+
+    showLocationAlert(
+      "⚠️ Location not received within 10 seconds",
+      "warning"
+    );
+
+  }, 10000);
+
+  originalGetLocation();
+};
+
+/* =========================
+   GLOBAL ERROR HELPER
+   ========================= */
+
+window.showLocationError = function(message) {
+
+  clearTimeout(locationWatchdog);
+
+  showLocationAlert(
+    `❌ ${message}`,
+    "error"
+  );
+};
+
 let locationTimeout;
 
 function getLocation() {
@@ -13812,10 +13933,18 @@ if (window.APP_LOCATION || window.onAppLocationReceived) {
           pos.coords.longitude
         );
       },
-      () => {
-        clearTimeout(locationTimeout);
-        showOnly("locationError");
-      },
+      (err) => {
+
+  clearTimeout(locationTimeout);
+
+  if (err.code === 1) {
+    showLocationError("Location permission denied");
+  } else {
+    showLocationError("Unable to get location");
+  }
+
+  showOnly("locationError");
+},
       {
         enableHighAccuracy: true,
         timeout: 20000,
@@ -13870,9 +13999,15 @@ async function handleLocation(lat, lng) {
     localStorage.setItem("savedLng", lng);
 
   } catch (err) {
-    console.error(err);
-    showOnly("locationError");
-  }
+
+  console.error(err);
+
+  showLocationError(
+    "Error processing location"
+  );
+
+  showOnly("locationError");
+}
 }
 function loadSavedLocation(){
 
