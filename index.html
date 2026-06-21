@@ -11483,7 +11483,7 @@ poster="cat/cezzo1.webp">
       <p>Pastries</p>
     </div>
  <div class="midItem"><img src="bannernew/choclates.webp"><p>Chocolates</p></div>
-  <div class="midItem"><img src="bannernew/lays packets.webp"><p>Lays Packets</p></div>
+  <div class="midItem"><img src="bannernew/lays.webp"><p>Lays Packets</p></div>
   <div class="midItem"><img src="bannernew/instant foods.webp"><p>Instant Foods</p></div>
   <div class="midItem"><img src="baners/snacks.webp"><p>Snacks</p></div>
 
@@ -26635,7 +26635,7 @@ setInterval(()=>{
   return;
 }
   window.locationTimeout = null;
-
+window.locationReceived = !!window.APP_LOCATION;
   const TIMEOUT_MS = 6000;
 
   /* ---------- CSS ---------- */
@@ -26708,10 +26708,14 @@ setInterval(()=>{
   document.body.appendChild(sheet);
 
   /* ---------- SHOW / HIDE ---------- */
-  window.showLocationDeniedSheet = function () {
-    sheet.classList.add("show");
-  };
+ window.showLocationDeniedSheet = function () {
 
+  if (window.locationReceived || window.APP_LOCATION) {
+    return;
+  }
+
+  sheet.classList.add("show");
+};
   window.hideLocationDeniedSheet = function () {
     sheet.classList.remove("show");
   };
@@ -26719,35 +26723,38 @@ setInterval(()=>{
   /* ---------- RESET WATCH (SAFE) ---------- */
   function resetWatch() {
 
-    window.locationReceived = false;
-
-    if (window.locationTimeout) {
-      clearTimeout(window.locationTimeout);
-      window.locationTimeout = null;
-    }
-
-    window.locationTimeout = setTimeout(() => {
-
-      if (!window.locationReceived) {
-        window.showLocationDeniedSheet();
-      }
-
-    }, TIMEOUT_MS);
+  if (window.locationReceived || window.APP_LOCATION) {
+    window.hideLocationDeniedSheet();
+    return;
   }
 
-  /* ---------- RECEIVE FROM SWIFT ---------- */
-  window.onAppLocationReceived = function (data) {
-window.APP_LOCATION = data;
-    window.locationReceived = true;
+  if (window.locationTimeout) {
+    clearTimeout(window.locationTimeout);
+    window.locationTimeout = null;
+  }
 
-    if (window.locationTimeout) {
-      clearTimeout(window.locationTimeout);
-      window.locationTimeout = null;
+  window.locationTimeout = setTimeout(() => {
+
+    if (!window.locationReceived && !window.APP_LOCATION) {
+      window.showLocationDeniedSheet();
     }
 
-    window.hideLocationDeniedSheet();
-  };
+  }, TIMEOUT_MS);
+}
 
+  /* ---------- RECEIVE FROM SWIFT ---------- */
+window.onAppLocationReceived = function (data) {
+
+  window.APP_LOCATION = data;
+  window.locationReceived = true;
+
+  if (window.locationTimeout) {
+    clearTimeout(window.locationTimeout);
+    window.locationTimeout = null;
+  }
+
+  sheet.classList.remove("show");
+};
   /* ---------- APP START ---------- */
   resetWatch();
 
@@ -26784,6 +26791,9 @@ window.APP_LOCATION = data;
   });
 
 })();
+
+
+
 /* =========================
    LOCATION STATUS
    ========================= */
