@@ -1340,37 +1340,6 @@ clip-path:
 
 /* FALLING FRUITS */
 
-const fruits = [
-'🍎','🍌','🍇','🍉',
-'🍒','🍍','🥝','🍑',
-'🍓','🥥','🍋','🍊'
-];
-
-for(let i=0;i<120;i++){
-
-  const fruit =
-    document.createElement("div");
-
-  fruit.classList.add("fruit");
-
-  fruit.innerHTML =
-    fruits[Math.floor(Math.random()*fruits.length)];
-
-  fruit.style.left =
-    Math.random()*95 + "vw";
-
-  fruit.style.fontSize =
-    (Math.random()*35 + 25) + "px";
-
-  fruit.style.animationDuration =
-    (Math.random()*5 + 3) + "s";
-
-  fruit.style.animationDelay =
-    (Math.random()*5) + "s";
-
-  document.body.appendChild(fruit);
-
-}
 
 /* OPEN HOW SCREEN */
 
